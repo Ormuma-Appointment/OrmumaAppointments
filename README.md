@@ -1,3 +1,6 @@
+# Getting started with TypeScript
+https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html 
+
 # Turborepo starter
 
 This is an official pnpm starter turborepo.

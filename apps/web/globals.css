@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: var(--base-font-family);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --base-font-family: "Open Sans", sans-serif;
+  --base-font-size: 1rem; /* 16px */
+  --medium-font-size: 0.875rem; /* 14px */
+  --small-font-size: 0.75rem; /* 12px */
+  --xsmall-font-size: 0.625rem; /* 10px */
+  --border-radius: 12px;
+  --primary-font: #152028;
+  --secondary-font: #4e42d4;
+  --light-font: #ffffff;
+  --background: #f8f9f9;
+  --background-white: #ffffff;
+  --primary: #4e42d4;
+  --secondary: #68baa6;
+  --success: #1d7c00;
+  --danger: #e52733;
+  --box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+  --box-shadow-hover: 5px 5px 6px rgba(0, 0, 0, 0.25);
+  --icon-filter: invert(22%) sepia(76%) saturate(3039%) hue-rotate(240deg)
+    brightness(87%) contrast(90%);
+}
+
+/*Here general roles for the font - the size should no change but the color can*/
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color-font);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color-font);
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  font-size: 1rem;
+}

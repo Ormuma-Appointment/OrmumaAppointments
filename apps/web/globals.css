@@ -31,7 +31,7 @@
     brightness(87%) contrast(90%);
 }
 
-/*Here general roles for the font - the size should no change but the color can*/
+/*Here general roles for the font - the size should not change but the color can*/
 h1 {
   font-size: 2rem;
   font-weight: bold;

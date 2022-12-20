@@ -1,0 +1,7 @@
+.container {
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+.inner_container {
+  padding: 32px;
+}

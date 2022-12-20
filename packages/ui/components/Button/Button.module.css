@@ -1,24 +1,30 @@
 .button {
   font-family: var(--base-font);
-  border: 2px solid rgba(255, 255, 255, 0);
+  border: 1.5px solid rgba(255, 255, 255, 0);
   color: white;
-  padding: 8px 24px;
   text-align: center;
-  text-decoration: none;
-  border-radius: 20px;
+  border-radius: 30px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
-.medium_button {
-  padding: 8px 24px;
-  font-size: var(--medium-font-size);
+.icon {
+  padding-right: 8px;
+  height: var(--medium-font);
+  filter: var(--icon-filter-white);
 }
-.small_button {
-  padding: 6px 20px;
-  font-size: var(--small-font-size);
+.medium {
+  padding: 12px 40px;
+  font-size: var(--medium-font);
 }
-.large_button {
-  padding: 10px 26px;
-  font-size: var(--base-font-size);
+.small {
+  padding: 8px 40px;
+  font-size: var(--medium-font);
+}
+
+.xsmall {
+  padding: 2px 12px;
+  font-size: var(--xsmall-font);
 }
 
 .primary {
@@ -26,32 +32,61 @@
 }
 .primary:hover {
   background-color: white;
-  border: 2px solid var(--primary);
-  color: black;
+  border: 1.5px solid var(--primary);
+  color: var(--blackish);
+}
+
+.primary:hover .icon {
+  filter: var(--icon-filter);
 }
 .secondary {
   background-color: white;
-  border: 2px solid var(--primary);
-  color: black;
+  border: 1.5px solid var(--primary);
+  color: var(--blackish);
+}
+.secondary .icon {
+  filter: var(--icon-filter);
 }
 .secondary:hover {
   background-color: var(--primary);
   color: white;
 }
+.secondary:hover .icon {
+  filter: var(--icon-filter-white);
+}
+
 .success {
   background-color: var(--success);
 }
 .success:hover {
   background-color: white;
-  border: 2px solid var(--success);
-  color: black;
+  border: 1.5px solid var(--success);
+  color: var(--blackish);
 }
-
+.success:hover .icon {
+  filter: var(--icon-filter-blackish);
+}
 .danger {
   background-color: var(--danger);
 }
 .danger:hover {
   background-color: white;
-  border: 2px solid var(--danger);
-  color: black;
+  border: 1.5px solid var(--danger);
+  color: var(--blackish);
+}
+.danger:hover .icon {
+  filter: var(--icon-filter-blackish);
+}
+
+.invisible {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--blackish);
+}
+.invisible .icon {
+  filter: var(--icon-filter-blackish);
+}
+.invisible:hover {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1.5px solid var(--blackish);
+  color: var(--blackish);
 }

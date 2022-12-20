@@ -7,7 +7,8 @@ export default {
   component: Button,
   args: {
     children: "button",
-    size: "medium_button",
+    size: "medium",
+    icon: "",
   },
 };
 
@@ -32,4 +33,8 @@ Success.args = {
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
+};
+export const Invisible = Template.bind({});
+Invisible.args = {
+  variant: "invisible",
 };

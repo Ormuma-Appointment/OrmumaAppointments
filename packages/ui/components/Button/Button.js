@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./Button.module.css";
-import "../../App.css";
+import "../../../../apps/web/globals.css";
 import * as PropTypes from "prop-types";
 
 function Button(props) {
   const {
     variant = "primary",
-    size = "medium_button",
+    size = "medium",
     children,
+    icon,
     ...rest
   } = props;
 
@@ -16,13 +17,14 @@ function Button(props) {
       className={`${styles.button} ${styles[variant]} ${styles[size]}`}
       {...rest}
     >
+      {icon && <img src={icon} alt="icon" className={styles.icon} />}
       {children}
     </button>
   );
 }
 
 Button.propTypes = {
-  size: PropTypes.oneOf(["small_button", "medium_button", "large_button"]),
+  size: PropTypes.oneOf(["xsmall", "small", "medium"]),
 };
 
 export default Button;

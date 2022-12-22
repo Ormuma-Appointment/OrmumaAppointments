@@ -1,15 +1,10 @@
 .link {
   background-color: white;
-  color: var(--primary);
+  color: var(--primary-color);
   cursor: pointer;
   font-weight: lighter;
+  font-size: var(--base-font-size);
 }
-.small {
-  font-size: var(--small-font);
-}
-.medium {
-  font-size: var(--medium-font);
-}
-.large {
-  font-size: var(--large-font);
+.link:hover {
+  font-weight: 500;
 }

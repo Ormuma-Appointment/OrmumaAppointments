@@ -62,7 +62,7 @@ importers:
       next: 13.0.0_672uxklweod7ene3nqtsh262ca
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      ui: link:../../packages/ui
+      ui: link:ui
     devDependencies:
       '@babel/core': 7.20.5
       '@types/node': 17.0.45
@@ -145,56 +145,6 @@ importers:
 
   packages/tsconfig:
     specifiers: {}
-
-  packages/ui:
-    specifiers:
-      '@babel/core': ^7.20.5
-      '@mdx-js/react': ^2.1.5
-      '@storybook/addon-actions': ^6.5.14
-      '@storybook/addon-essentials': ^6.5.14
-      '@storybook/addon-interactions': ^6.5.14
-      '@storybook/addon-links': ^6.5.14
-      '@storybook/builder-webpack4': ^6.5.14
-      '@storybook/builder-webpack5': ^6.5.14
-      '@storybook/manager-webpack4': ^6.5.14
-      '@storybook/manager-webpack5': ^6.5.14
-      '@storybook/react': ^6.5.14
-      '@storybook/testing-library': ^0.0.13
-      '@types/react': ^18.0.17
-      '@types/react-dom': ^18.0.6
-      babel-loader: ^8.3.0
-      eslint: ^7.32.0
-      eslint-config-custom: workspace:*
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      require-from-string: ^2.0.2
-      tsconfig: workspace:*
-      typescript: ^4.5.2
-      webpack: ^5.75.0
-    devDependencies:
-      '@babel/core': 7.20.5
-      '@mdx-js/react': 2.2.1_react@18.2.0
-      '@storybook/addon-actions': 6.5.14_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addon-essentials': 6.5.14_ctgjr32emwx2xmsw6rhxxvby3y
-      '@storybook/addon-interactions': 6.5.14_s7nr35ooxuxnbwrlcynw6t6nty
-      '@storybook/addon-links': 6.5.14_biqbaboplfbrettd7655fr4n2y
-      '@storybook/builder-webpack4': 6.5.14_gx5nmzcckj6uccw7lz6m7gptrm
-      '@storybook/builder-webpack5': 6.5.14_gx5nmzcckj6uccw7lz6m7gptrm
-      '@storybook/manager-webpack4': 6.5.14_gx5nmzcckj6uccw7lz6m7gptrm
-      '@storybook/manager-webpack5': 6.5.14_gx5nmzcckj6uccw7lz6m7gptrm
-      '@storybook/react': 6.5.14_mki7ithafmmvylhwnyaxxf3z6q
-      '@storybook/testing-library': 0.0.13_biqbaboplfbrettd7655fr4n2y
-      '@types/react': 18.0.26
-      '@types/react-dom': 18.0.9
-      babel-loader: 8.3.0_ztqwsvkb6z73luspkai6ilstpu
-      eslint: 7.32.0
-      eslint-config-custom: link:../eslint-config-custom
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      require-from-string: 2.0.2
-      tsconfig: link:../tsconfig
-      typescript: 4.9.4
-      webpack: 5.75.0
 
 packages:
 

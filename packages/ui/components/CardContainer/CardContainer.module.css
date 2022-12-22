@@ -1,8 +1,0 @@
-.container {
-  box-shadow: var(--box-shadow);
-  border-radius: var(--border-radius);
-  margin-bottom: 1rem;
-}
-.inner_container {
-  padding: 32px 16px;
-}

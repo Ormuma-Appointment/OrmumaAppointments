@@ -1,0 +1,15 @@
+.link {
+  background-color: white;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: lighter;
+}
+.small {
+  font-size: var(--small-font);
+}
+.medium {
+  font-size: var(--medium-font);
+}
+.large {
+  font-size: var(--large-font);
+}

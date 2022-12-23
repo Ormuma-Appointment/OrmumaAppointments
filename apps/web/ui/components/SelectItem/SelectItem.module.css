@@ -34,13 +34,16 @@
 }
 .servicePrice {
   margin-bottom: 8px;
+  font-size: var(--small-font-size);
 }
 .serviceDuration {
   color: rgba(0, 0, 0, 0.4);
   font-weight: lighter;
+  font-size: var(--small-font-size);
 }
 .addImage {
   width: 1rem;
   filter: var(--icon-filter);
   justify-self: flex-end;
+  margin-left: 1rem;
 }

@@ -1,11 +1,12 @@
 import React from "react";
-
 import styles from "./SelectItem.module.css";
 
 function SelectItem(props) {
-  const { title, price, duration, icon, ...rest } = props;
+  const { title, price, duration, icon, selected, ...rest } = props;
   return (
-    <div className={styles.service_container}>
+    <div
+      className={`${styles.service_container} ${selected && styles.selected}`}
+    >
       <div className={styles.serviceName}>{title}</div>
       <div className={price ? styles.serviceRight : styles.rightIconOnly}>
         {price && (

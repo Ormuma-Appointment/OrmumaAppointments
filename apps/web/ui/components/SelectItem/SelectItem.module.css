@@ -11,6 +11,13 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+.selected {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.selected:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .serviceName {
   align-self: center;
 }

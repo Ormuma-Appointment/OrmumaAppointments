@@ -3,10 +3,11 @@ import plusIcon from "../assets/plus.svg";
 import editIcon from "../assets/edit.svg";
 
 export default {
-  title: "Components/SelectItem", // should be unique in the whole project
+  title: "Components/SelectItem",
   component: SelectItem,
   args: {
     title: "Waschen, Schneiden, Stylen",
+    selected: false,
   },
 };
 

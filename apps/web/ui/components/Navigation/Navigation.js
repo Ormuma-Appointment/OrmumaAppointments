@@ -1,9 +1,10 @@
 import React from "react";
+import Image from "next/image";
 import styles from "./Navigation.module.css";
-import logout from "../assets/logout.svg";
-import account from "../assets/account.svg";
-import calendar from "../assets/calendar.svg";
 import logo from "../assets/placeholderLogo.png";
+import Logout from "../assets/logout.svg";
+import AccountIcon from "../assets/account.svg";
+import Calendar from "../assets/calendar.svg";
 
 function Navigation(props) {
   const {
@@ -18,14 +19,20 @@ function Navigation(props) {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <img src={logo} alt="logo" className={styles.logoImage} />
+        <Image
+          src={logo}
+          alt="logo"
+          className={styles.logoImage}
+          height={50}
+          width={50}
+        />
       </div>
       <div className={styles.right}>
         <div className={styles.buttons}>
           <button> Add Appointment </button>
-          <img src={calendar} alt="calendar" className={styles.icon} />
-          <img src={account} alt="account" className={styles.icon} />
-          <img src={logout} alt="logout" className={styles.icon} />
+          <Calendar className={styles.icon} />
+          <AccountIcon className={styles.icon} />
+          <Logout className={styles.icon} />
         </div>
       </div>
     </div>

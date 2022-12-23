@@ -1,11 +1,11 @@
-import { Button } from "ui";
+import { PrimaryLink } from "../ui/components/Link/Link.stories";
 
 export default function Web() {
   return (
     <div>
       <h1>Web</h1>
-      <Button />
-      <p className="text-3xl text-red-700 underline">Hello World!</p>
+      <p>Hello World!</p>
+      <PrimaryLink>HEY there it's a text</PrimaryLink>
     </div>
   );
 }

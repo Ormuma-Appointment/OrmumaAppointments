@@ -4,16 +4,19 @@ export default {
   title: "Components/SelectItem", // should be unique in the whole project
   component: SelectItem,
   args: {
-    name: "Waschen, Schneiden, Stylen",
-    price: "59,00 €",
-    duration: "45 mins",
+    title: "Waschen, Schneiden, Stylen",
   },
 };
 
 const Template = (args) => <SelectItem {...args} />;
-export const Service = Template.bind({});
-// Service.args = {
-//   name: "Waschen, Schneiden, Stylen",
-//   price: "59,00€",
-//   duration: "45 mins",
-// };
+export const ServicePriceDurationPlus = Template.bind({});
+ServicePriceDurationPlus.args = {
+  price: "59,00€",
+  duration: "45 mins",
+  plus: true,
+};
+
+export const ServicePlusIcon = Template.bind({});
+ServicePlusIcon.args = {
+  plus: true,
+};

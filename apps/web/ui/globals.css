@@ -24,7 +24,7 @@
   --danger-color: #e52733;
   --background: #f8f9f9;
   --background-white: #ffffff;
-  --hover-color: #f5f5f5;
+  --hover-color: rgba(0, 0, 0, 0.05);
   --light-font: #ffffff;
   --primary-font: var(--base-color);
   --secondary-font: var(--primary-color);

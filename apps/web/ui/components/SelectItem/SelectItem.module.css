@@ -3,12 +3,12 @@
   justify-content: space-between;
   align-items: center;
   max-width: 400px;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: var(--border-radius);
 }
 .service_container:hover {
-  background-color: var(--hover-color);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .serviceName {
@@ -17,7 +17,7 @@
 .serviceRight {
   width: 30%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 .serviceDetails {
@@ -35,4 +35,5 @@
 .addImage {
   width: 1rem;
   filter: var(--icon-filter);
+  justify-self: flex-end;
 }

@@ -9,7 +9,7 @@
   height: 100%;
 }
 .logoImage {
-  height: 100%;
+  height: auto;
   border-radius: 50%;
   cursor: pointer;
 }

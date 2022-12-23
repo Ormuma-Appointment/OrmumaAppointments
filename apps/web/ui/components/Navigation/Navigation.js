@@ -29,7 +29,7 @@ function Navigation(props) {
       </div>
       <div className={styles.right}>
         <div className={styles.buttons}>
-          <button> Add Appointment </button>
+          <button>Add Appointment</button>
           <Calendar className={styles.icon} />
           <AccountIcon className={styles.icon} />
           <Logout className={styles.icon} />

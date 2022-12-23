@@ -5,7 +5,16 @@ import account from "../assets/account.svg";
 import calendar from "../assets/calendar.svg";
 import logo from "../assets/placeholderLogo.png";
 
-function Navigation() {
+function Navigation(props) {
+  const {
+    addAppointment,
+    calendar,
+    account,
+    login,
+    logout,
+    createAccount,
+    ...rest
+  } = props;
   return (
     <div className={styles.container}>
       <div className={styles.logo}>

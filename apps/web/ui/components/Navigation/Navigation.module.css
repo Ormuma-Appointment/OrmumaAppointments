@@ -2,6 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 3rem;
+}
+.logo {
+  height: 100%;
+}
+.logoImage {
+  height: 100%;
+  border-radius: 50%;
 }
 .right {
   display: flex;
@@ -13,5 +21,6 @@
 
 .icon {
   height: 1.5rem;
-  padding-left: 1rem;
+  padding-left: 1.5rem;
+  filter: var(--icon-filter);
 }

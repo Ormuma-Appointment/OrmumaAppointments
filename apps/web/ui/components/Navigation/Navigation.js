@@ -8,12 +8,10 @@ import Calendar from "../assets/calendar.svg";
 
 function Navigation(props) {
   const {
-    addAppointment,
-    calendar,
-    account,
-    login,
-    logout,
-    createAccount,
+    customer_logged_out,
+    customer_logged_in,
+    admin_logged_in,
+    admin_logged_out,
     ...rest
   } = props;
   return (
@@ -27,14 +25,26 @@ function Navigation(props) {
           width={50}
         />
       </div>
-      <div className={styles.right}>
-        <div className={styles.buttons}>
-          <button>Add Appointment</button>
-          <Calendar className={styles.icon} />
+      {(admin_logged_in || customer_logged_in) && (
+        <div className={styles.right}>
+          {admin_logged_in && (
+            <>
+              <button>Add Appointment</button>
+              <Calendar className={styles.icon} />
+            </>
+          )}
           <AccountIcon className={styles.icon} />
           <Logout className={styles.icon} />
         </div>
-      </div>
+      )}
+
+      {(customer_logged_out || admin_logged_out) && (
+        <div className={styles.loggedOut}>
+          <button>Login</button>
+          {customer_logged_out && <button>Registrieren</button>}
+          {admin_logged_out && <button>Salon Registrieren</button>}
+        </div>
+      )}
     </div>
   );
 }

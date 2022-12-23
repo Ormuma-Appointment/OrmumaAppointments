@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Button.module.css";
 import * as PropTypes from "prop-types";
-import Calendar from "../assets/calendar.svg";
+import CalendarAdd from "../assets/calendar_add.svg";
 
 function Button(props) {
   const {
@@ -17,7 +17,7 @@ function Button(props) {
       className={`${styles.button} ${styles[variant]} ${styles[size]}`}
       {...rest}
     >
-      {icon && <Calendar className={styles.icon} />}
+      {icon && <CalendarAdd className={styles.icon} />}
       {children}
     </button>
   );

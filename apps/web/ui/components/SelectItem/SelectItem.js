@@ -1,9 +1,9 @@
 import React from "react";
-import plusIcon from "../assets/plus.svg";
+
 import styles from "./SelectItem.module.css";
 
 function SelectItem(props) {
-  const { title, price, duration, plus, ...rest } = props;
+  const { title, price, duration, icon, ...rest } = props;
   return (
     <div className={styles.service_container}>
       <div className={styles.serviceName}>{title}</div>
@@ -14,9 +14,9 @@ function SelectItem(props) {
             <p className={styles.serviceDuration}>{duration}</p>
           </div>
         )}
-        {plus && (
+        {icon && (
           <div className={styles.addImage}>
-            <img src={plusIcon} alt="add" />
+            <img src={icon} alt="add" />
           </div>
         )}
       </div>

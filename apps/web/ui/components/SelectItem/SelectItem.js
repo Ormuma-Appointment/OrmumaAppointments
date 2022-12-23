@@ -1,5 +1,5 @@
 import React from "react";
-import plus from "../../assets/plus.svg";
+import plus from "../assets/plus.svg";
 import styles from "./SelectItem.module.css";
 
 function SelectItem(props) {
@@ -14,8 +14,8 @@ function SelectItem(props) {
       <div className={styles.serviceName}>{name}</div>
       <div className={styles.serviceRight}>
         <div className={styles.serviceDetails}>
-          <div className={styles.servicePrice}>{price}</div>
-          <div className={styles.serviceDuration}>{duration}</div>
+          <p className={styles.servicePrice}>{price}</p>
+          <p className={styles.serviceDuration}>{duration}</p>
         </div>
         <div className={styles.addImage}>
           <img src={plus} alt="add" />

@@ -3,11 +3,16 @@
   justify-content: space-between;
   align-items: center;
   max-width: 400px;
-  padding: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius);
 }
+.service_container:hover {
+  background-color: var(--hover-color);
+}
+
 .serviceName {
-  align-self: flex-start;
+  align-self: center;
 }
 .serviceRight {
   width: 30%;
@@ -28,6 +33,6 @@
   font-weight: lighter;
 }
 .addImage {
-  width: 16px;
+  width: 1rem;
   filter: var(--icon-filter);
 }

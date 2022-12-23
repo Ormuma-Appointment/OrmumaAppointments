@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  height: 5rem;
+}
+.logo {
+  height: 100%;
+}
+.logoImage {
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.right {
+  display: flex;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  height: 1.5rem;
+  padding-left: 1.5rem;
+  filter: var(--icon-filter);
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 # Getting started with TypeScript
-https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html 
+
+https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html
 
 # Turborepo starter
 
@@ -74,3 +75,52 @@ Learn more about the power of Turborepo:
 - [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
 - [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
 - [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+
+# How to solve issues loading images in local and Storybook
+
+To optimize images it is relevant to use the Image component delivered by Next JS. Using it created issues with Storybook and the use of svg images so this is a small tutorial on how to selve the issue.
+
+1. De-Optimize Image component for Storybook:
+
+- https://www.youtube.com/watch?v=i5tvZ9f7gJw&t=843s / https://www.youtube.com/watch?v=i5tvZ9f7gJw&t=843s
+- add this to your .storybook/preview.js file
+
+```
+// .storybook/preview.js
+ import * as NextImage from "next/image";
+
+ const OriginalNextImage = NextImage.default;
+ Object.defineProperty(NextImage, "default", {
+  configurable: true,
+  value: (props) => (
+      <OriginalNextImage
+      {...props}
+      unoptimized
+      />
+      ),
+  });
+```
+
+2. import .svg files as React component using @svgr/webpack
+
+- https://stackoverflow.com/questions/61498644/storybook-failed-to-execute-createelement-on-svg-files-using-svgr-webpack / https://www.npmjs.com/package/@svgr/webpack
+- in the web folder run `pnpm install @svgr/webpack --save-dev`
+- add this to your .storybook/main.js file within the module.exports
+
+```
+webpackFinal: (config) => {
+    // Default rule for images /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
+    const fileLoaderRule = config.module.rules.find(
+      (rule) => rule.test && rule.test.test(".svg")
+    );
+    fileLoaderRule.exclude = /\.svg$/;
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      enforce: "pre",
+      loader: require.resolve("@svgr/webpack"),
+    });
+
+    return config;
+  },
+```

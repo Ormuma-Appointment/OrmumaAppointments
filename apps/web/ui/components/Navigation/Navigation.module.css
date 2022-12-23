@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right {
+  display: flex;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  height: 1.5rem;
+  padding-left: 1rem;
+}

@@ -9,17 +9,17 @@ function InfoElement(props) {
   const { infoHl, email, phone, internet, infoDetail, ...rest } = props;
 
   return (
-    <div className={`${styles.info} `} {...rest}>
+    <div className={`${styles.container} `} {...rest}>
       <div className={styles.contact}>
-        {email && <Email />}
-        {phone && <Phone />}
-        {internet && <Internet />}
+        {email && <Email className={styles.icon} />}
+        {phone && <Phone className={styles.icon} />}
+        {internet && <Internet className={styles.icon} />}
         <div>
           <div className={styles.info_hl}>{infoHl}</div>
           <div className={styles.info_detail}>{infoDetail}</div>
         </div>
       </div>
-      <Right />
+      <Right className={styles.arrow_icon} />
     </div>
   );
 }

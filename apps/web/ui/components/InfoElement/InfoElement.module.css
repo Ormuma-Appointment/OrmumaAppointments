@@ -1,25 +1,32 @@
-.info {
+.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 300px;
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+.container:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .contact {
   display: flex;
   align-items: center;
 }
-.info img {
-  height: 20px;
-  margin: 16px;
+.icon {
+  height: 1.5rem;
+  padding-right: 1rem;
   filter: var(--icon-filter);
 }
-
+.arrow_icon {
+  height: 1rem;
+}
 .info_hl {
-  font-size: var(--large-font);
-  margin-bottom: 8px;
+  font-size: var(--base-font-size);
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 .info_detail {
-  font-size: var(--medium-font);
+  font-size: var(--base-font-size);
   font-weight: lighter;
 }

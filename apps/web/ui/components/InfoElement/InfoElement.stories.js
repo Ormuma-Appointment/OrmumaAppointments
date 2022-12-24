@@ -23,4 +23,6 @@ WebsiteContact.args = {
 export const PhoneContact = Template.bind({});
 PhoneContact.args = {
   phone: true,
+  infoHl: "Telefon",
+  infoDetail: "+49 1577 37384273",
 };

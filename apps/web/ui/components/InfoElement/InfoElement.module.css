@@ -1,0 +1,25 @@
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 300px;
+}
+.contact {
+  display: flex;
+  align-items: center;
+}
+.info img {
+  height: 20px;
+  margin: 16px;
+  filter: var(--icon-filter);
+}
+
+.info_hl {
+  font-size: var(--large-font);
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.info_detail {
+  font-size: var(--medium-font);
+  font-weight: lighter;
+}

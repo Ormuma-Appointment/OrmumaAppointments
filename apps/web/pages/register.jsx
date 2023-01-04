@@ -24,14 +24,12 @@ function register() {
           id="name"
           placeholder="Vorname"
         />
-
         <input
           className={styles.input}
           type="email"
           id="email"
           placeholder="Email-Adresse"
         />
-
         <input
           className={styles.input}
           type="text"

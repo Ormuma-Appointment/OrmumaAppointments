@@ -5,6 +5,7 @@ import logo from "../assets/placeholderLogo.png";
 import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Calendar from "../assets/calendar.svg";
+import Button from "../Button/Button";
 
 function Navigation(props) {
   const {
@@ -29,7 +30,9 @@ function Navigation(props) {
         <div className={styles.right}>
           {admin_logged_in && (
             <>
-              <button>Add Appointment</button>
+              <Button icon size="small" variant="secondary">
+                Termin buchen
+              </Button>
               <Calendar className={styles.icon} />
             </>
           )}
@@ -40,9 +43,19 @@ function Navigation(props) {
 
       {(customer_logged_out || admin_logged_out) && (
         <div className={styles.loggedOut}>
-          <button>Login</button>
-          {customer_logged_out && <button>Registrieren</button>}
-          {admin_logged_out && <button>Salon Registrieren</button>}
+          <Button size="small" variant="secondary">
+            Login
+          </Button>
+          {customer_logged_out && (
+            <Button size="small" variant="primary">
+              Registrieren
+            </Button>
+          )}
+          {admin_logged_out && (
+            <Button size="small" variant="primary">
+              Salon Registrieren
+            </Button>
+          )}
         </div>
       )}
     </div>

@@ -10,7 +10,7 @@
   justify-content: center;
 }
 .pagewidth {
-  width: 80vw;
+  width: 100vw;
 }
 .pagewidth,
 .pagewidth div {
@@ -20,10 +20,16 @@
 }
 .link,
 .icon {
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .icon {
-  width: 2rem;
+  width: 1.5rem;
   filter: var(--icon-filter-white);
+}
+
+@media screen and (min-width: 760px) {
+  .pagewidth {
+    width: 80vw;
+  }
 }

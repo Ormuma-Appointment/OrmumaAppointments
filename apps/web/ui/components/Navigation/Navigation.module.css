@@ -26,6 +26,7 @@
 .loggedOut {
   display: flex;
 }
+
 .loggedOut button {
   margin: 0 0.5rem;
 }

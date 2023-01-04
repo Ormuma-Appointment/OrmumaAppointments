@@ -1,0 +1,92 @@
+.button {
+  font-family: var(--base-font-size);
+  border: 1.5px solid rgba(255, 255, 255, 0);
+  color: white;
+  text-align: center;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.icon {
+  padding-right: 8px;
+  height: var(--medium-font-size);
+  filter: var(--icon-filter-white);
+}
+.medium {
+  padding: 0.75rem 40px;
+  font-size: var(--medium-font-size);
+}
+.small {
+  padding: 0.5rem 1.5rem;
+  font-size: var(--medium-font-size);
+}
+
+.xsmall {
+  padding: 2px 12px;
+  font-size: var(--xsmall-font-size);
+}
+
+.primary {
+  background-color: var(--primary-color);
+}
+.primary:hover {
+  background-color: white;
+  border: 1.5px solid var(--primary-color);
+  color: var(--base-color);
+}
+
+.primary:hover .icon {
+  filter: var(--icon-filter);
+}
+.secondary {
+  background-color: white;
+  border: 1.5px solid var(--primary-color);
+  color: var(--base-color);
+}
+.secondary .icon {
+  filter: var(--icon-filter);
+}
+.secondary:hover {
+  background-color: var(--primary-color);
+  color: var(--light-font);
+}
+.secondary:hover .icon {
+  filter: var(--icon-filter-white);
+}
+
+.success {
+  background-color: var(--success-color);
+}
+.success:hover {
+  background-color: white;
+  border: 1.5px solid var(--success-color);
+  color: var(--base-color);
+}
+.success:hover .icon {
+  filter: var(--icon-filter-blackish);
+}
+.danger {
+  background-color: var(--danger-color);
+}
+.danger:hover {
+  background-color: white;
+  border: 1.5px solid var(--danger-color);
+  color: var(--base-color);
+}
+.danger:hover .icon {
+  filter: var(--icon-filter-blackish);
+}
+
+.invisible {
+  background-color: rgba(255, 255, 255, 0);
+  color: var(--base-color);
+}
+.invisible .icon {
+  filter: var(--icon-filter-blackish);
+}
+.invisible:hover {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1.5px solid var(--base-color);
+  color: var(--base-color);
+}

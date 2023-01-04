@@ -1,0 +1,29 @@
+.input {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.input:hover {
+  border: 1px solid #4e42d4;
+}
+
+.icon {
+  height: 1.5rem;
+  padding-right: 1rem;
+}
+
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.small_input {
+  width: 30%;
+  font-size: var(--medium-font);
+}
+.medium_input {
+  width: 600px;
+  font-size: var(--medium-font);
+}

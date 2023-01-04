@@ -17,14 +17,17 @@
   display: flex;
   align-items: center;
 }
-.buttons {
-  display: flex;
-  align-items: center;
-}
 
 .icon {
   height: 1.5rem;
   padding-left: 1.5rem;
   filter: var(--icon-filter);
   cursor: pointer;
+}
+.loggedOut {
+  display: flex;
+}
+
+.loggedOut button {
+  margin: 0 0.5rem;
 }

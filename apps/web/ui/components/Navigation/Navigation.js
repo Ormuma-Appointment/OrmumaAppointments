@@ -43,9 +43,19 @@ function Navigation(props) {
 
       {(customer_logged_out || admin_logged_out) && (
         <div className={styles.loggedOut}>
-          <button>Login</button>
-          {customer_logged_out && <button>Registrieren</button>}
-          {admin_logged_out && <button>Salon Registrieren</button>}
+          <Button size="small" variant="secondary">
+            Login
+          </Button>
+          {customer_logged_out && (
+            <Button size="small" variant="primary">
+              Registrieren
+            </Button>
+          )}
+          {admin_logged_out && (
+            <Button size="small" variant="primary">
+              Salon Registrieren
+            </Button>
+          )}
         </div>
       )}
     </div>

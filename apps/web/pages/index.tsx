@@ -5,9 +5,9 @@ export default function Web() {
   return (
     <div>
       <Navigation admin_logged_in />
-      <Navigation admin_logged_out />
-      <Navigation customer_logged_in />
-      <Navigation customer_logged_out />
+      <Button icon size="medium" variant="primary">
+        Termin buchen
+      </Button>
       <h1>Web</h1>
       <p>Hello World!</p>
       <div>

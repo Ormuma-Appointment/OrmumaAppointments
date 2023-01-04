@@ -124,3 +124,7 @@ webpackFinal: (config) => {
     return config;
   },
 ```
+
+# Icons from this collection
+
+https://www.svgrepo.com/collection/teenyicons-outlined-icons/7

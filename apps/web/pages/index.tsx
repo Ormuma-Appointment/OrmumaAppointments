@@ -1,5 +1,6 @@
 import Navigation from "../ui/components/Navigation/Navigation";
 import InfoElement from "../ui/components/InfoElement/InfoElement";
+import Button from "../ui/components/Button/Button";
 
 export default function Web() {
   return (

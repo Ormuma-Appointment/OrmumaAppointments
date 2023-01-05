@@ -5,7 +5,6 @@ import AddressCard from "./AddressCard";
 export default {
   title: "Components/AddressCard", // should be unique in the whole project
   component: AddressCard,
-  args: {},
 };
 
 const Template = (args) => <AddressCard {...args} />;

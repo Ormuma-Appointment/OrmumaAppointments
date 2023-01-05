@@ -27,8 +27,6 @@ function AddressCard(props) {
           {postalCode} {city}
           <br />
           {country}
-          <br />
-          Telefon: {telephone}
         </div>
         <div className={styles.map}>
           <Map

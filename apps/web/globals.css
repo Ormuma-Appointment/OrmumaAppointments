@@ -8,6 +8,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: var(--background);
+}
 
 :root {
   --base-font-family: "Open Sans", sans-serif;

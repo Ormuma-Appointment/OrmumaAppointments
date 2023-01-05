@@ -3,16 +3,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.5rem;
+  padding: 2rem 1.5rem 3rem 1.5rem;
 }
 .address {
   width: 100%;
-  padding: 0 1.5rem;
+  margin-bottom: 1rem;
 }
 .map {
   height: 35vh;
   width: 100%;
-  padding: 1rem 1.5rem;
 }
 .map div {
   height: 100%;

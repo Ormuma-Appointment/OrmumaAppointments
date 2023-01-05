@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./AddressCard.module.css";
 import CardContainer from "../CardContainer/CardContainer";
+import Map from "../Map/Map";
 
 function AddressCard(props) {
   const {
@@ -17,7 +18,7 @@ function AddressCard(props) {
     <CardContainer>
       <div className={styles.container}>
         <div className={styles.address}>
-          Adresse
+          <h3>Adresse</h3>
           <br />
           <b>{name}</b>
           <br />
@@ -27,10 +28,17 @@ function AddressCard(props) {
           <br />
           {country}
           <br />
-          {telephone}
+          Telefon: {telephone}
         </div>
         <div className={styles.map}>
-          <div></div>
+          <Map
+            name={name}
+            street={street}
+            number={number}
+            postalCode={postalCode}
+            city={city}
+            country={country}
+          />
         </div>
       </div>
     </CardContainer>

@@ -16,7 +16,14 @@ export default function Web() {
           internet
         />
         <InfoElement infoDetail="+49 1577 37384273" infoHl="Telefon" phone />
-        <AddressCard />
+        <AddressCard
+          name="Naturfriseur Aachen"
+          street="Habsburgerallee"
+          number={11}
+          postalCode="52064"
+          city="Aachen"
+          country="Deutschland"
+        />
       </div>
     </div>
   );

@@ -1,14 +1,12 @@
 import Navigation from "../ui/components/Navigation/Navigation";
 import InfoElement from "../ui/components/InfoElement/InfoElement";
-import Button from "../ui/components/Button/Button";
+import Contact from "../ui/components/Contact/Contact";
 
 export default function Web() {
   return (
     <div>
       <Navigation admin_logged_in />
-      <Button icon size="medium" variant="primary">
-        Termin buchen
-      </Button>
+
       <h1>Web</h1>
       <p>Hello World!</p>
       <div>
@@ -19,6 +17,7 @@ export default function Web() {
           internet
         />
         <InfoElement infoDetail="+49 1577 37384273" infoHl="Telefon" phone />
+        <Contact />
       </div>
     </div>
   );

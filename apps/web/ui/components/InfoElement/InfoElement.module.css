@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 500px;
   padding: 1rem;
   border-radius: var(--border-radius);
+  margin-bottom: 1rem;
 }
 .container:hover {
   background-color: rgba(0, 0, 0, 0.05);

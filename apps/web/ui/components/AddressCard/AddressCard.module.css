@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.address {
+  width: 100%;
+  padding: 0 1rem;
+}
+.map {
+  height: 35vh;
+  width: 100%;
+  background-color: gray;
+  padding: 1rem;
+}
+.map div {
+  height: 100%;
+  width: auto;
+  background-color: blue;
+}

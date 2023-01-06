@@ -8,7 +8,13 @@ function RadioSelectElement({ labels }) {
         return (
           <div key={index} className={styles.radio_element}>
             <label htmlFor={el}>{el}</label>
-            <input type="radio" id={el} value={el} className={styles.input} />
+            <input
+              type="radio"
+              id={el}
+              value={labels}
+              name="select"
+              className={styles.input}
+            />
           </div>
         );
       })}

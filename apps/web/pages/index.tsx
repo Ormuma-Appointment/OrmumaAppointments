@@ -19,6 +19,7 @@ export default function Web() {
         <SelectElement
           labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
           multiselect
+          type="checkbox"
         />
       </div>
       <Footer />

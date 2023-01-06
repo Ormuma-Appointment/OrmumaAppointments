@@ -16,9 +16,3 @@ HorizontalCheckbox.args = {
   labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
   type: "checkbox",
 };
-
-export const VerticalRadio = Template.bind({});
-VerticalRadio.args = {
-  labels: ["ja", "nein"],
-  type: "radio",
-};

@@ -1,15 +1,15 @@
 import React from "react";
-import SelectElement from "./SelectElement";
+import CheckboxSelectElement from "./CheckboxSelectElement";
 
 export default {
-  title: "Elements/SelectElement",
-  component: SelectElement,
+  title: "Elements/CheckboxSelectElement",
+  component: CheckboxSelectElement,
   args: {
     labels: ["hi", "bye"],
   },
 };
 
-const Template = (args) => <SelectElement {...args} />;
+const Template = (args) => <CheckboxSelectElement {...args} />;
 
 export const HorizontalCheckbox = Template.bind({});
 HorizontalCheckbox.args = {

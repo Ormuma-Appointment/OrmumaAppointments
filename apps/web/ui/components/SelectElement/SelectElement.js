@@ -1,18 +1,19 @@
 import React from "react";
 import styles from "./SelectElement.module.css";
 
-function SelectElement({ labels, multiselect }) {
+function SelectElement({ labels, type }) {
   return (
     <div className={styles.container}>
       {labels.map((el, index) => {
         return (
           <div key={index} className={styles.radio_element}>
-            <label for={el}>{el}</label>
+            <label htmlFor={el}>{el}</label>
             <input
-              type="checkbox"
+              type={type}
               id={el}
-              name={multiselect ? `${el}` : "single"}
+              name="single"
               value={el}
+              className={styles.input}
             />
           </div>
         );

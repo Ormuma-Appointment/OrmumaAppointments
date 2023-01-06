@@ -1,9 +1,8 @@
 import React from "react";
 import Button from "./Button";
-//component story format
 
 export default {
-  title: "Elements/Button", // should be unique in the whole project
+  title: "Elements/Button",
   component: Button,
   args: {
     children: "button",

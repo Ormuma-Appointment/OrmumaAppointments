@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+}
+.radio_element {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+input {
+}

@@ -4,15 +4,21 @@ import SelectElement from "./SelectElement";
 export default {
   title: "Elements/SelectElement",
   component: SelectElement,
+  args: {
+    labels: ["hi", "bye"],
+  },
 };
 
 const Template = (args) => <SelectElement {...args} />;
 
-export const HorizontalRadio = Template.bind({});
-HorizontalRadio.args = {
+export const HorizontalCheckbox = Template.bind({});
+HorizontalCheckbox.args = {
   labels: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
-  multiselect: true,
+  type: "checkbox",
 };
 
-// export const VerticalRadio = Template.bind({});
-// VerticalRadioSecondary.args = {};
+export const VerticalRadio = Template.bind({});
+VerticalRadio.args = {
+  labels: ["ja", "nein"],
+  type: "radio",
+};

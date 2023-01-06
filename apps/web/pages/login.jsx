@@ -7,8 +7,9 @@ function login() {
   const [salonName, setSalonName] = useState("Natur Friseur");
   function handleLoginSubmit(e) {
     e.preventDefault();
-    let email = e.target[0].value;
-    let password = e.target[1].value;
+    let email = e.target.email.value;
+    let password = e.target.password.value;
+    console.log(password);
   }
 
   return (
@@ -22,12 +23,14 @@ function login() {
           className={styles.input}
           type="email"
           id="email"
+          name="email"
           placeholder="Email-Adresse"
         />
         <input
           className={styles.input}
           type="text"
           id="password"
+          name="password"
           placeholder="Passwort"
         />
         <Button size="medium" variant="primary">

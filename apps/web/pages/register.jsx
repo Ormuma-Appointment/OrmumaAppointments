@@ -8,7 +8,7 @@ import { auth, db } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, collection } from "firebase/firestore";
 
-function register() {
+function Register() {
   const router = useRouter();
   const [err, setErr] = useState(false);
 
@@ -94,4 +94,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;

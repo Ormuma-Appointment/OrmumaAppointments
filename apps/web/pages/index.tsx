@@ -1,6 +1,6 @@
 import Navigation from "../ui/components/Navigation/Navigation";
 import InfoElement from "../ui/components/InfoElement/InfoElement";
-import Contact from "../ui/components/Contact/Contact";
+import ContactCard from "../ui/components/ContactCard/ContactCard";
 
 export default function Web() {
   return (
@@ -17,7 +17,7 @@ export default function Web() {
           internet
         />
         <InfoElement infoDetail="+49 1577 37384273" infoHl="Telefon" phone />
-        <Contact />
+        <ContactCard />
       </div>
     </div>
   );

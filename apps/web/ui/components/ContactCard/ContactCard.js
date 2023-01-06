@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Contact.module.css";
+import styles from "./ContactCard.module.css";
 import CardContainer from "../CardContainer/CardContainer";
 import InfoElement from "../InfoElement/InfoElement";
 
-function Contact({
+function ContactCard({
   email = "naturfriseur@gmail.com",
   website = "www.naturfriseur-aachen.de",
   telephone = "+49 1577 37384273",
@@ -19,4 +19,4 @@ function Contact({
   );
 }
 
-export default Contact;
+export default ContactCard;

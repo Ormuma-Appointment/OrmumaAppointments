@@ -6,7 +6,7 @@ import styles from "../ui/page_styles/Register.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 function Register() {
   const router = useRouter();
@@ -87,7 +87,7 @@ function Register() {
         <Button size="medium" variant="primary">
           Konto erstellen
         </Button>
-        <span>{err && "something is wrong"}</span>
+        <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
       <Link>Du hast bereits einen Account?</Link>
     </div>

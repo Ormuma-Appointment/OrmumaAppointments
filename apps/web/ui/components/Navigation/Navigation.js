@@ -6,8 +6,11 @@ import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Calendar from "../assets/calendar.svg";
 import Button from "../Button/Button";
+import { useAuthContext } from "../../../context/AuthContext";
+import { auth } from "../../../firebase/firebase";
 
 function Navigation(props) {
+  const { logOut } = useAuthContext();
   const {
     customer_logged_out,
     customer_logged_in,
@@ -37,7 +40,9 @@ function Navigation(props) {
             </>
           )}
           <AccountIcon className={styles.icon} />
-          <Logout className={styles.icon} />
+          <button onClick={() => logOut(auth)}>
+            <Logout className={styles.icon} />
+          </button>
         </div>
       )}
 

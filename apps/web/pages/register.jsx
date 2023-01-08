@@ -7,10 +7,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 function Register() {
   const router = useRouter();
   const [err, setErr] = useState(false);
+  const { register } = useAuthContext();
 
   const [salonName, setSalonName] = useState("Natur Friseur");
   // a function checks if both passwords are the same

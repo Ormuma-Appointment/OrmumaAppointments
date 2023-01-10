@@ -1,7 +1,7 @@
 import InfoElement from "./InfoElement";
 
 export default {
-  title: "Components/InfoElement", // should be unique in the whole project
+  title: "Components/InfoElement",
   component: InfoElement,
   args: {},
 };

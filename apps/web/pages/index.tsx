@@ -19,6 +19,7 @@ export default function Web() {
         <InfoElement infoDetail="+49 1577 37384273" infoHl="Telefon" phone />
         <ContactCard />
       </div>
+      <Footer />
     </div>
   );
 }

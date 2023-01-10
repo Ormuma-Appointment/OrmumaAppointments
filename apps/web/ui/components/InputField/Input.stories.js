@@ -22,7 +22,7 @@ StandardInput.args = {
   size: "medium_input",
 };
 
-export const IconInput = Template.bind({});
-StandardInput.args = {
-  icon: true,
-};
+//export const IconInput = Template.bind({});
+//StandardInput.args = {
+//  icon: true,
+//};

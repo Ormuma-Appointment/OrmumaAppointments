@@ -8,9 +8,17 @@ function Input(props) {
       type="text"
       className={`${styles.input} ${styles[size]}`}
       {...rest}
-      placeholder={size && <User className={styles.icon} />}
+      placeholder={size}
     />
   );
 }
 
 export default Input;
+
+// Test icon input not working
+//<input
+//  type="text"
+//  className={`${styles.input} ${styles[size]}`}
+//  {...rest}
+//  placeholder={size && <User className={styles.icon} />}
+///>;

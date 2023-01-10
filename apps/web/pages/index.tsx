@@ -1,6 +1,6 @@
 import Navigation from "../ui/components/Navigation/Navigation";
 import InfoElement from "../ui/components/InfoElement/InfoElement";
-import Footer from "../ui/components/Footer/Footer";
+import AddressCard from "../ui/components/AddressCard/AddressCard";
 
 export default function Web() {
   return (
@@ -15,6 +15,14 @@ export default function Web() {
           internet
         />
         <InfoElement infoDetail="+49 1577 37384273" infoHl="Telefon" phone />
+        <AddressCard
+          name="Naturfriseur Aachen"
+          street="Habsburgerallee"
+          number={11}
+          postalCode="52064"
+          city="Aachen"
+          country="Deutschland"
+        />
       </div>
       <Footer />
     </div>

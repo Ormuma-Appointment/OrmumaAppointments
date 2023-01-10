@@ -1,9 +1,8 @@
 import React from "react";
 import CardContainer from "./CardContainer";
-//component story format
 
 export default {
-  title: "Elements/CardContainer", // should be unique in the whole project
+  title: "Elements/CardContainer",
   component: CardContainer,
   args: {
     children: "Hello",

@@ -25,6 +25,7 @@ export default function Web() {
           country="Deutschland"
         />
       </div>
+      <Footer />
     </div>
   );
 }

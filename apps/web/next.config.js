@@ -19,5 +19,9 @@ const nextConfig = {
     return config;
   },
 };
-
+module.exports = {
+  env: {
+    customKey: "my-value",
+  },
+};
 module.exports = nextConfig;

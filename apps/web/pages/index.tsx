@@ -7,36 +7,6 @@ export default function Web() {
   return (
     <div>
       <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
-      <p>Hello World!</p>
       <div>
         <InfoElement email infoDetail="naturfriseur@gmail.com" infoHl="Email" />
         <InfoElement

@@ -8,9 +8,13 @@ import Footer from "../ui/components/Footer/Footer";
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Navigation customer_logged_out />
-      <Component {...pageProps} />
-      <Footer />
+      <div className="grid_main_wrapper">
+        <Navigation customer_logged_out />
+        <Component {...pageProps} />
+      </div>
+      <div className="grid_footer">
+        <Footer />
+      </div>
     </>
   );
 }

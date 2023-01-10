@@ -32,6 +32,8 @@
     "require-from-string": "^2.0.2",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2",
-    "webpack": "^5.75.0"
-  }
+    "webpack": "^5.75.0",
+    "prop-types": "^15.8.1"
+  },
+  "dependencies": {}
 }

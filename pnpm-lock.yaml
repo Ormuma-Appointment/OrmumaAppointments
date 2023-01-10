@@ -9,7 +9,7 @@ importers:
       turbo: latest
     devDependencies:
       eslint-config-custom: link:packages/eslint-config-custom
-      prettier: 2.8.1
+      prettier: 2.8.2
       turbo: 1.6.3
 
   apps/backend:
@@ -107,6 +107,7 @@ importers:
       babel-loader: ^8.3.0
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
+      prop-types: ^15.8.1
       react: ^18.2.0
       react-dom: ^18.2.0
       require-from-string: ^2.0.2
@@ -131,6 +132,7 @@ importers:
       babel-loader: 8.3.0_ztqwsvkb6z73luspkai6ilstpu
       eslint: 7.32.0
       eslint-config-custom: link:../../../packages/eslint-config-custom
+      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       require-from-string: 2.0.2
@@ -10651,8 +10653,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier/2.8.1:
-    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
+  /prettier/2.8.2:
+    resolution: {integrity: sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true

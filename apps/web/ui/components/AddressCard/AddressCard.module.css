@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+}
+.address {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.map {
+  height: 35vh;
+  width: 100%;
+}
+.map div {
+  height: 100%;
+  width: auto;
+}
+
+@media screen and (min-width: 760px) {
+  .container {
+    flex-direction: row;
+    height: 50vh;
+  }
+  .address {
+    flex-basis: 30rem;
+  }
+  .map {
+    height: 100%;
+  }
+}

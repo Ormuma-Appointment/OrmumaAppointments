@@ -6,7 +6,36 @@ import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/Checkb
 export default function Web() {
   return (
     <div>
-      <h1>Web</h1>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
+      <p>Hello World!</p>
       <p>Hello World!</p>
       <div>
         <InfoElement email infoDetail="naturfriseur@gmail.com" infoHl="Email" />

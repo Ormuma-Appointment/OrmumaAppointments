@@ -5,6 +5,7 @@ import Logo from "../ui/components/assets/placeholderLogo.png";
 import OpeningHours from "../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../ui/components/ContactCard/ContactCard";
 import AddressCard from "../ui/components/AddressCard/AddressCard";
+import calendar from "../ui/components/assets/calendar_add.svg";
 
 export default function Web() {
   function handleBookingClick(e) {
@@ -17,7 +18,7 @@ export default function Web() {
         <h1>Wir lieben Natürlichkeit</h1>
         <RoundImage alt="Nice Image" image={Logo} initialWidth={200} />
         <Button
-          icon=""
+          icon={calendar}
           size="medium"
           variant="primary"
           onClick={handleBookingClick}

@@ -78,6 +78,11 @@ p {
 }
 @media screen and (min-width: 760px) {
   .page_wrapper {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 1060px) {
+  .page_wrapper {
     width: 70%;
   }
 }

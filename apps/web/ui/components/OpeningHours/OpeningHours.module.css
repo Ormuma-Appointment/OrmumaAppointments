@@ -1,4 +1,15 @@
 .container {
-  margin: 1rem 1rem;
-  margin-bottom: 2rem;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+}
+.container h3 {
+  margin-bottom: 1rem;
+}
+.day {
+  display: flex;
+  justify-content: space-between;
+}
+.day div {
+  display: flex;
+  justify-content: space-between;
+  width: 7rem;
 }

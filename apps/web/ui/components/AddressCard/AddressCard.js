@@ -5,13 +5,13 @@ import Map from "../Map/Map";
 
 function AddressCard(props) {
   const {
-    name = "Naturfriseur Aachen",
-    street = "Habsburgerallee",
-    number = 11,
-    postalCode = "52064",
-    city = "Aachen",
-    country = "Deutschland",
-    telephone = "0241 / 70 98 99",
+    name,
+    street,
+    number,
+    postalCode,
+    city,
+    country,
+    telephone,
     ...rest
   } = props;
   return (

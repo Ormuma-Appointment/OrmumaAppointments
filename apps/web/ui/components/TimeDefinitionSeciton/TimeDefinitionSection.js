@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./TimeDefinitionSection.module.css";
-import Input from "../InputField/Input";
+import SelectElement from "../SelectElement/SelectElement";
 
 function TimeDefinitionSection({
   openDays = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"],
@@ -11,10 +11,10 @@ function TimeDefinitionSection({
         return (
           <div key={index}>
             <div className={styles.input_group}>
-              {el} <Input placeholder="Start" /> <Input placeholder="Ende" />
-            </div>
-            <div className={styles.input_group}>
-              Pause <Input placeholder="Start" /> <Input placeholder="Ende" />
+              <p>{el}</p> <SelectElement placeholder="Start" />
+              <SelectElement minute placeholder="Ende" />
+              <p>Pause</p> <SelectElement placeholder="Start" />
+              <SelectElement minute placeholder="Ende" />
             </div>
           </div>
         );

@@ -23,9 +23,8 @@ function Register() {
     e.preventDefault();
     let Vorname = e.target.name.value;
     let email = e.target.email.value;
-    let password = e.target.password.value;
-    let passwordPconfirm = e.target[3].value;
-    console.log(Vorname, email, password);
+    let password = e.target.passwordP.value;
+    let passwordPconfirm = e.target.passwordrepeat.value;
 
     try {
       //if not the same password
@@ -72,14 +71,14 @@ function Register() {
         <Input
           type="password"
           id="password"
-          name="password"
+          name="passwordP"
           placeholder="Password"
           password
         />
         <Input
           type="password"
           id="password"
-          name="password_repeat"
+          name="passwordrepeat"
           placeholder="Password wiederholen"
           password
         />

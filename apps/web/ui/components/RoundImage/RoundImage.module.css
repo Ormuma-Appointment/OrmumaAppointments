@@ -1,0 +1,8 @@
+.logo {
+  aspect-ratio: 1/1;
+}
+.logoImage {
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+}

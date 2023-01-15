@@ -1,5 +1,5 @@
 import styles from "./Input.module.css";
-import User from "../assets/user.svg";
+import User from "../assets/account1.svg";
 import Email from "../assets/email.svg";
 import Password from "../assets/password.svg";
 

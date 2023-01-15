@@ -4,20 +4,21 @@ import Button from "../ui/components/Button/Button";
 import Logo from "../ui/components/assets/placeholderLogo.png";
 import OpeningHours from "../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../ui/components/ContactCard/ContactCard";
+import AddressCard from "../ui/components/AddressCard/AddressCard";
 
 export default function Web() {
   return (
-    <div>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.welcome}>
         <h1>Wir lieben Natürlichkeit</h1>
         <RoundImage alt="Nice Image" image={Logo} initialWidth={200} />
         <Button icon="" size="medium" variant="primary">
           Termin buchen
         </Button>
       </div>
-      <div>
+      <div className={styles.info}>
         <h2>Mehr über uns</h2>
-        <div className={styles.info_top}>
+        <div className={styles.info_row}>
           <ContactCard
             email="naturfriseur@gmail.com"
             telephone="+49 1577 37384273"
@@ -56,6 +57,17 @@ export default function Web() {
                 start: "08:00",
               },
             ]}
+          />
+        </div>
+        <div className={styles.info_row}>
+          <AddressCard
+            city="Aachen"
+            country="Deutschland"
+            name="Naturfriseur Aachen"
+            number={11}
+            postalCode="52064"
+            street="Habsburgerallee"
+            telephone="0241 / 70 98 99"
           />
         </div>
       </div>

@@ -2,13 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 500px;
   padding: 1rem;
   border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  width: 100%;
 }
 .container:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+
 .contact {
   display: flex;
   align-items: center;
@@ -21,6 +23,10 @@
 .arrow_icon {
   height: 1rem;
   filter: var(--icon-filter);
+}
+.container:hover .arrow_icon {
+  width: 1.3rem;
+  height: 1.3rem;
 }
 .info_hl {
   font-size: var(--base-font-size);

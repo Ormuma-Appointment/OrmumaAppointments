@@ -7,12 +7,21 @@ import ContactCard from "../ui/components/ContactCard/ContactCard";
 import AddressCard from "../ui/components/AddressCard/AddressCard";
 
 export default function Web() {
+  function handleBookingClick(e) {
+    e.preventDefault();
+    console.log("I should go to the booking process");
+  }
   return (
     <div className={styles.container}>
       <div className={styles.welcome}>
         <h1>Wir lieben Natürlichkeit</h1>
         <RoundImage alt="Nice Image" image={Logo} initialWidth={200} />
-        <Button icon="" size="medium" variant="primary">
+        <Button
+          icon=""
+          size="medium"
+          variant="primary"
+          onClick={handleBookingClick}
+        >
           Termin buchen
         </Button>
       </div>

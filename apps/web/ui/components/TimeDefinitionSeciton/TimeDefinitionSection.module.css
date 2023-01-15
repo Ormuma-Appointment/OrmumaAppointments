@@ -1,0 +1,19 @@
+.container {
+  min-width: 580px;
+}
+.container div {
+  display: flex;
+}
+.input_group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30rem;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.input_group input {
+  width: 5rem;
+  margin-left: 1rem;
+}

@@ -23,7 +23,7 @@ function Register() {
     e.preventDefault();
     let Vorname = e.target.name.value;
     let email = e.target.email.value;
-    let password = e.target[2].value;
+    let password = e.target.password.value;
     let passwordPconfirm = e.target[3].value;
     console.log(Vorname, email, password);
 

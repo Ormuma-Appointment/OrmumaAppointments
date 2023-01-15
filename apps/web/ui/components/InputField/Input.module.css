@@ -18,7 +18,7 @@
   border-radius: 5px;
 }
 .noicon {
-  padding: 14px 12px 14px 12px;
+  padding: 14px 12px 14px 1rem;
 }
 
 .input:hover {
@@ -26,7 +26,6 @@
 }
 .iconfield {
   margin-right: -3rem;
-  display: flex;
 }
 .icon {
   outline: none;

@@ -4,7 +4,7 @@ import SelectElement from "./SelectElement";
 export default {
   title: "Elements/SelectElement",
   component: SelectElement,
-  args: { hour: true },
+  args: { minute: false },
 };
 
 const Template = (args) => <SelectElement {...args} />;
@@ -12,5 +12,5 @@ export const HourSelect = Template.bind({});
 
 export const MinuteSelect = Template.bind({});
 MinuteSelect.args = {
-  hour: false,
+  minute: true,
 };

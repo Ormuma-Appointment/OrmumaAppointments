@@ -19,14 +19,16 @@ function AddressCard(props) {
       <div className={styles.container}>
         <div className={styles.address}>
           <h3>Adresse</h3>
-          <br />
-          <b>{name}</b>
-          <br />
-          {street} {number}
-          <br />
-          {postalCode} {city}
-          <br />
-          {country}
+          <ul>
+            <li>{name}</li>
+            <li>
+              {street} {number}
+            </li>
+            <li>
+              {postalCode} {city}
+            </li>
+            <li>{country}</li>
+          </ul>
         </div>
         <div className={styles.map}>
           <Map

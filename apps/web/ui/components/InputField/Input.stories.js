@@ -21,3 +21,14 @@ AccountInput.args = {
   placeholder: "What's your name?",
   user: true,
 };
+
+export const EmailInput = Template.bind({});
+EmailInput.args = {
+  placeholder: "What's your email?",
+  email: true,
+};
+export const PasswordInput = Template.bind({});
+PasswordInput.args = {
+  placeholder: "What's your password?",
+  password: true,
+};

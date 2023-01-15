@@ -11,8 +11,16 @@
 body {
   background-color: var(--background);
 }
+
 .grid_main_wrapper {
   min-height: calc(100vh - 4rem);
+}
+.page_wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 4rem auto;
 }
 .grid_footer {
   height: 4rem;

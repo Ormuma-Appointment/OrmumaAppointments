@@ -27,31 +27,31 @@ function Register() {
     let passwordPconfirm = e.target[3].value;
     console.log(Vorname, email, password);
 
-    // try {
-    //   //if not the same password
-    //   if (!isPasswordConfirmed(password, passwordPconfirm)) {
-    //     // password is not matching, throws error
-    //     setErr(true);
+    try {
+      //if not the same password
+      if (!isPasswordConfirmed(password, passwordPconfirm)) {
+        // password is not matching, throws error
+        setErr(true);
 
-    //     console.error("passwords not matching ");
-    //   } else {
-    //     // otherwise a new userr is created
-    //     setErr(false);
-    //     const res = await createUserWithEmailAndPassword(auth, email, password);
-    //     console.log(res);
-    //     // a new user inside the users collection
-    //     await setDoc(doc(db, "users", res.user.uid), {
-    //       uid: res.user.uid,
-    //       Vorname,
-    //       email,
-    //     });
-    //     // the user is redirected to the home page once the registration form is submited
-    //     // using the useRouter hook from next as oppose to the useNavigate from react router dom
-    //     router.push("/");
-    //   }
-    // } catch (e) {
-    //   setErr(true);
-    // }
+        console.error("passwords not matching ");
+      } else {
+        // otherwise a new userr is created
+        setErr(false);
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        console.log(res);
+        // a new user inside the users collection
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          Vorname,
+          email,
+        });
+        // the user is redirected to the home page once the registration form is submited
+        // using the useRouter hook from next as oppose to the useNavigate from react router dom
+        router.push("/");
+      }
+    } catch (e) {
+      setErr(true);
+    }
   };
 
   return (
@@ -70,23 +70,18 @@ function Register() {
           email
         />
         <Input
-          type="text"
+          type="password"
           id="password"
           name="password"
           placeholder="Password"
           password
         />
-        <input
-          className={styles.input}
+        <Input
           type="password"
           id="password"
-          placeholder="Passwort"
-        />
-        <input
-          className={styles.input}
-          type="password"
-          id="password"
-          placeholder="Passwort wiederholen"
+          name="password_repeat"
+          placeholder="Password wiederholen"
+          password
         />
         <Button size="medium" variant="primary">
           Konto erstellen

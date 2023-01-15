@@ -11,6 +11,12 @@
 body {
   background-color: var(--background);
 }
+.grid_main_wrapper {
+  min-height: calc(100vh - 4rem);
+}
+.grid_footer {
+  height: 4rem;
+}
 
 :root {
   --base-font-family: "Open Sans", sans-serif;

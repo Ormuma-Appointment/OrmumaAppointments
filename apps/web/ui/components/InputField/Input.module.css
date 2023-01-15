@@ -1,29 +1,39 @@
+.container {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
 .input {
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: var(--medium-font);
+  appearance: none;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  margin: 0px;
+  padding: 14px 12px 14px 3rem;
+  border-color: #c0cad5;
+  font-size: 16px;
   border-radius: 5px;
-  margin: 0.5rem;
-  padding: 0.5rem 1rem;
+}
+.noicon {
+  padding: 14px 12px 14px 12px;
 }
 
 .input:hover {
   border: 1px solid #4e42d4;
 }
-
+.iconfield {
+  margin-right: -3rem;
+  display: flex;
+}
 .icon {
-  height: 1.5rem;
-  padding-right: 1rem;
-}
-
-.input::placeholder {
-  color: rgba(0, 0, 0, 0.4);
-}
-
-.small_input {
-  width: 30%;
-  font-size: var(--medium-font);
-}
-.medium_input {
-  width: 600px;
-  font-size: var(--medium-font);
+  outline: none;
+  line-height: 1;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 1.25rem;
+  aspect-ratio: 1/1;
+  opacity: 0.5;
 }

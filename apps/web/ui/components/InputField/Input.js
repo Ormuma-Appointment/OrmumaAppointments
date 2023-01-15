@@ -1,24 +1,31 @@
 import styles from "./Input.module.css";
 import User from "../assets/user.svg";
+import Email from "../assets/email.svg";
+import Password from "../assets/password.svg";
 
 function Input(props) {
-  const { size = "medium_input", icon, ...rest } = props;
+  const { user = true, password, email, placeholder, ...rest } = props;
   return (
-    <input
-      type="text"
-      className={`${styles.input} ${styles[size]}`}
-      {...rest}
-      placeholder={size}
-    />
+    <div className={styles.container}>
+      {(user || email || password) && (
+        <div className={styles.iconfield}>
+          {user && <User className={styles.icon} />}
+          {email && <Email className={styles.icon} />}
+          {password && <Password className={styles.icon} />}
+        </div>
+      )}
+      <input
+        type="text"
+        className={
+          user || email || password
+            ? `${styles.input}`
+            : `{${styles.input} ${styles.noicon}}`
+        }
+        {...rest}
+        placeholder={placeholder}
+      />
+    </div>
   );
 }
 
 export default Input;
-
-// Test icon input not working
-//<input
-//  type="text"
-//  className={`${styles.input} ${styles[size]}`}
-//  {...rest}
-//  placeholder={size && <User className={styles.icon} />}
-///>;

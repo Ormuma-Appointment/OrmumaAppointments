@@ -5,14 +5,7 @@ import Person from "../assets/account.svg";
 import Cut from "../assets/scissors.svg";
 import Button from "../Button/Button";
 
-function AppointmentCard({
-  date = "03.01.2023",
-  time = "11:30-12:00",
-  stylist = "Jochen Lambatz",
-  customer = "Andrea Berg",
-  service = "Haar kurz, schneiden, waschen",
-  cancel,
-}) {
+function AppointmentCard({ date, time, stylist, customer, service, cancel }) {
   return (
     <CardContainer>
       <div className={styles.container}>

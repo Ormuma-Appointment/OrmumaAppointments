@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.input {
+  font-size: var(--medium-font);
+  appearance: none;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  border-width: 1px;
+  border-style: solid;
+  margin: 0px;
+  padding: 14px 12px 14px 3rem;
+  border-color: #c0cad5;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.noicon {
+  padding: 14px 12px 14px 1rem;
+}
+
+.input:hover {
+  border: 1px solid #4e42d4;
+}
+.iconfield {
+  margin-right: -3rem;
+}
+.icon {
+  outline: none;
+  line-height: 1;
+  margin-top: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 1.25rem;
+  aspect-ratio: 1/1;
+  opacity: 0.5;
+}

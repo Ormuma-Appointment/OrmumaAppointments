@@ -1,0 +1,44 @@
+.setUpForm {
+  width: 80%;
+  margin: auto;
+}
+
+.setUpForm label {
+  color: var(--primary-color);
+}
+
+.col30,
+.col70,
+.col50 {
+  float: none;
+  width: 100%;
+  margin-top: 0;
+}
+
+.setUpOpenings {
+  margin-top: 1rem;
+}
+
+@media screen and (min-width: 760px) {
+  .col30 {
+    float: left;
+    width: 20%;
+    margin-top: 6px;
+  }
+
+  .col70 {
+    float: left;
+    width: 80%;
+    margin-top: 6px;
+  }
+
+  .col50 {
+    float: left;
+    width: 49%;
+    margin-top: 6px;
+  }
+
+  .col50:first-child {
+    margin-right: 2%;
+  }
+}

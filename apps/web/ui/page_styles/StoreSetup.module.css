@@ -14,7 +14,8 @@
   align-items: center;
 }
 
-.adresse {
+.adresse,
+.opening {
   display: flex;
   align-items: flex-start;
 }
@@ -24,11 +25,22 @@
 .col50 {
   float: none;
   width: 100%;
-  margin-top: 6px;
+  margin-top: 2rem;
+}
+
+.setUpInfos {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0 5rem;
 }
 
 .setUpOpenings {
   margin-top: 1rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8rem;
 }
 
 @media screen and (min-width: 760px) {
@@ -38,19 +50,19 @@
   .col30 {
     float: left;
     width: 20%;
-    margin-top: 6px;
+    margin-top: 1rem;
   }
 
   .col70 {
     float: left;
     width: 80%;
-    margin-top: 6px;
+    margin-top: 1rem;
   }
 
   .col50 {
     float: left;
     width: 49%;
-    margin-top: 6px;
+    margin-top: 1rem;
   }
 
   .col50:first-child {

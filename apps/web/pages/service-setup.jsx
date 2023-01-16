@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
 import Button from "../ui/components/Button/Button";
-import SelectElement from "../ui/components/SelectElement/SelectElement";
 import styles from "../ui/page_styles/ServiceSetup.module.css";
 import Minus from "../ui/components/assets/minus.svg";
 
@@ -21,7 +20,10 @@ function ServiceSetup() {
     e.preventDefault();
     setServices((prev) => [...prev, e.target.service.value]);
   }
-
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    console.log(Number(e.target.input[1].value));
+  }
   useEffect(() => {
     console.log(services);
   }, [services]);
@@ -81,53 +83,58 @@ function ServiceSetup() {
                 <div className={styles.heading}>Wartezeit</div>
                 <div className={styles.heading}>Preis</div>
               </div>
-              {services.map((el, index) => {
-                return (
-                  <div className={styles.group} key={index}>
-                    <div>{el}</div>
-                    <select
-                      name={`${index}category`}
-                      id="category"
-                      className={styles.select_category}
-                    >
-                      {categories.map((elem, i) => {
-                        return (
-                          <option key={i} value={elem}>
-                            {elem}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <select
-                      name={`${index}duration`}
-                      id="duration"
-                      className={styles.select_things}
-                    >
-                      {[15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
-                        return (
-                          <option key={i} value={elem}>
-                            {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <select
-                      name={`${index}waiting`}
-                      id="duration"
-                      className={styles.select_things}
-                    >
-                      {[0, 15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
-                        return (
-                          <option key={i} value={elem}>
-                            {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <Input></Input>
-                  </div>
-                );
-              })}
+              <form action="" onSubmit={handleFormSubmit}>
+                {services.map((el, index) => {
+                  return (
+                    <div className={styles.group} key={index}>
+                      <div>{el}</div>
+                      <select
+                        name={`${index}category`}
+                        id="category"
+                        className={styles.select_category}
+                      >
+                        {categories.map((elem, i) => {
+                          return (
+                            <option key={i} value={elem}>
+                              {elem}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <select
+                        name={`${index}duration`}
+                        id="duration"
+                        className={styles.select_things}
+                      >
+                        {[15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
+                          return (
+                            <option key={i} value={elem}>
+                              {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <select
+                        name={`${index}waiting`}
+                        id="duration"
+                        className={styles.select_things}
+                      >
+                        {[0, 15, 30, 45, 60, 75, 90, 105, 120].map(
+                          (elem, i) => {
+                            return (
+                              <option key={i} value={elem}>
+                                {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
+                              </option>
+                            );
+                          }
+                        )}
+                      </select>
+                      <Input name={`input`}></Input>
+                    </div>
+                  );
+                })}
+                <button>submit</button>
+              </form>
             </div>
           </div>
           <div className={styles.footer}>

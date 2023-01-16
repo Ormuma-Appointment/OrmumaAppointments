@@ -5,6 +5,8 @@ import Input from "../ui/components/InputField/Input";
 import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
+import Link from "next/link";
+
 const StoreSetup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,34 +18,42 @@ const StoreSetup = () => {
   };
   return (
     <div>
+      <div className={styles.breadcrumb}>
+        <span className={styles.current_breadcrumb}>
+          Store Setup <span className={styles.arrows}> &#9654;</span>{" "}
+        </span>
+        <Link href="/service-setup">Services Konfgurieren </Link>{" "}
+        <span className={styles.arrows}>&#9654;</span> Team konfigurieren{" "}
+        <span className={styles.arrows}>&#9654;</span>
+      </div>
       <h1>Store Setup</h1>
       <CardContainer>
         <form className={styles.setUpForm} onSubmit={(e) => handleSubmit(e)}>
           <div className={styles.setUpInfos}>
             <div className={styles.row}>
               <div className={styles.col30}>
-                <label>Salon name*</label>
+                <label>Salon Name:*</label>
               </div>
               <div className={styles.col70}>
                 <Input
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Salon name"
+                  placeholder="Salon Name"
                   required
                 />
               </div>
             </div>
             <div className={`${styles.row} ${styles.adresse}`}>
               <div className={styles.col30}>
-                <label>Adresse*</label>
+                <label>Adresse:*</label>
               </div>
               <div className={styles.col70}>
                 <Input
                   type="text"
                   name="street"
                   id="street"
-                  placeholder="street, number"
+                  placeholder="Straße, Nummer"
                   required
                 />
                 <div className={`${styles.row} ${styles.city}`}>
@@ -52,7 +62,7 @@ const StoreSetup = () => {
                       type="text"
                       name="postalCode"
                       id="postalCode"
-                      placeholder="postal code"
+                      placeholder="Postleitzahl"
                       required
                     />
                   </div>
@@ -61,7 +71,7 @@ const StoreSetup = () => {
                       type="text"
                       name="city"
                       id="city"
-                      placeholder="city"
+                      placeholder="Stadt"
                       required
                     />
                   </div>
@@ -70,21 +80,21 @@ const StoreSetup = () => {
             </div>
             <div className={styles.row}>
               <div className={styles.col30}>
-                <label>Phone*</label>
+                <label>Telefon:*</label>
               </div>
               <div className={styles.col70}>
                 <Input
                   type="text"
                   name="phone"
                   id="phone"
-                  placeholder="telephone number"
+                  placeholder="Telefonnummer"
                   required
                 />
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.col30}>
-                <label>Logo*</label>
+                <label>Logo:*</label>
               </div>
               <div className={styles.col70}>
                 <Input type="file" name="logo" id="logo" required />
@@ -95,7 +105,7 @@ const StoreSetup = () => {
           <div className={styles.setUpOpenings}>
             <div className={`${styles.row} ${styles.opening}`}>
               <div className={styles.col30}>
-                <label>Opening Days*</label>
+                <label>Öffnungstage:*</label>
               </div>
               <div className={styles.col70}>
                 <CheckboxSelectElement
@@ -105,7 +115,7 @@ const StoreSetup = () => {
             </div>
             <div className={`${styles.row} ${styles.opening}`}>
               <div className={styles.col30}>
-                <label>Opening Days*</label>
+                <label>Öffnungszeiten:*</label>
               </div>
               <div className={styles.col70}>
                 <TimeDefinitionSection />
@@ -114,7 +124,7 @@ const StoreSetup = () => {
           </div>
           <div className={styles.buttonContainer}>
             <Button icon="" size="medium" variant="primary">
-              primary button
+              Weiter
             </Button>
           </div>
         </form>

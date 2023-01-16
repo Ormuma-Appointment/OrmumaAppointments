@@ -1,15 +1,31 @@
+.container {
+  padding: 3rem 1.5rem 3rem 1.5rem;
+  overflow-y: hidden;
+}
+.breadcrumb {
+  margin-bottom: 1rem;
+}
+.arrows {
+  font-size: 0.75rem;
+}
+.current_breadcrumb {
+  color: var(--primary-color);
+  font-weight: bold;
+}
 .intro {
-  padding: 2rem 1.5rem 3rem 1.5rem;
+  margin-bottom: 3rem;
 }
 .intro ol {
   margin-top: 1rem;
-  padding-left: 4rem;
+  padding-left: 2rem;
 }
 .intro li {
   list-style: decimal;
 }
 .service_cat {
-  padding: 2rem 1.5rem 3rem 1.5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 .service_cat h3 {
   color: var(--primary-color);
@@ -37,11 +53,25 @@
   border-radius: 30px;
   margin: 0.5rem;
 }
-
 .icon {
   width: 1rem;
   margin-left: 1rem;
   display: inline;
   filter: invert(12%) sepia(98%) saturate(5906%) hue-rotate(356deg)
     brightness(99%) contrast(119%);
+  cursor: pointer;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (min-width: 760px) {
+  .container {
+    width: 80%;
+    margin: auto;
+    padding: 4rem;
+  }
+  .intro ol {
+    padding-left: 4rem;
+  }
 }

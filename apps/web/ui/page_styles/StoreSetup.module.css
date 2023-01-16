@@ -1,7 +1,5 @@
 .setUpForm {
-  width: 80%;
-  margin: auto;
-  padding: 2rem;
+  padding: 3rem 1.5rem 3rem 1.5rem;
 }
 
 .setUpForm label {
@@ -30,7 +28,7 @@
 
 .setUpInfos {
   border-bottom: 1px solid #ccc;
-  padding: 1rem 0 5rem;
+  padding: 0 0 5rem;
 }
 
 .setUpOpenings {
@@ -40,10 +38,25 @@
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 8rem;
+  margin-top: 5rem;
+}
+.breadcrumb {
+  margin-bottom: 1rem;
+}
+.arrows {
+  font-size: 0.75rem;
+}
+.current_breadcrumb {
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 @media screen and (min-width: 760px) {
+  .setUpForm {
+    width: 80%;
+    margin: auto;
+    padding: 4rem;
+  }
   .row {
     flex-direction: row;
   }

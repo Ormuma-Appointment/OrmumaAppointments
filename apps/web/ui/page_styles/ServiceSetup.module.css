@@ -1,0 +1,22 @@
+.intro {
+  padding: 2rem 1.5rem 3rem 1.5rem;
+}
+.intro ol {
+  margin-top: 1rem;
+  padding-left: 4rem;
+}
+.intro li {
+  list-style: decimal;
+}
+.service_cat {
+  padding: 2rem 1.5rem 3rem 1.5rem;
+}
+.service_cat h3 {
+  color: var(--primary-color);
+  text-align: center;
+}
+.input_group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

@@ -1,0 +1,25 @@
+.bookingContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.bookingContainer > * {
+  width: 100%;
+  padding: 1rem;
+}
+
+/*Tablet */
+@media screen and (min-width: 700px) {
+  .bookingContainer {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .bookingContainer > * {
+    width: 48.5%;
+  }
+}
+
+/*Desktop menu*/
+@media screen and (min-width: 960px) {
+}

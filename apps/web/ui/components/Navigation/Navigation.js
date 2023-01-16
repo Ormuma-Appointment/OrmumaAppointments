@@ -6,6 +6,7 @@ import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Calendar from "../assets/calendar.svg";
 import Button from "../Button/Button";
+import Link from "next/link";
 
 function Navigation(props) {
   const {
@@ -17,7 +18,7 @@ function Navigation(props) {
   } = props;
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
+      <Link href="/" className={styles.logo}>
         <Image
           src={logo}
           alt="logo"
@@ -25,7 +26,7 @@ function Navigation(props) {
           height={50}
           width={50}
         />
-      </div>
+      </Link>
       {(admin_logged_in || customer_logged_in) && (
         <div className={styles.right}>
           {admin_logged_in && (

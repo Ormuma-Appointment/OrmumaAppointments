@@ -16,6 +16,17 @@
   padding: 1rem;
 }
 
+.bookingContainer .selectItemText {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /*Tablet */
 @media screen and (min-width: 700px) {
   .bookingContainer {

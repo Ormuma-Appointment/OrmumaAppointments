@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./ServiceAdd.module.css";
 import Input from "../InputField/Input";
 import Button from "../Button/Button";
+import Minus from "../assets/minus.svg";
+import Trash from "../assets/trash.svg";
 
 function ServiceAdd({ setData, services, setServices, categories }) {
   function handleServiceSubmit(e) {
@@ -15,7 +17,7 @@ function ServiceAdd({ setData, services, setServices, categories }) {
       return (serviceData = [
         ...serviceData,
         {
-          name: el,
+          service: el,
           category: e.target.category[index].value,
           duration: Number(e.target.duration[index].value),
           waiting: Number(e.target.waiting[index].value),
@@ -24,6 +26,9 @@ function ServiceAdd({ setData, services, setServices, categories }) {
       ]);
     });
     setData(serviceData);
+  }
+  function handleRemoveClick(el) {
+    setServices((prev) => prev.filter((elem) => elem !== el));
   }
   return (
     <>
@@ -42,6 +47,9 @@ function ServiceAdd({ setData, services, setServices, categories }) {
             <div className={styles.heading}>Dauer</div>
             <div className={styles.heading}>Wartezeit</div>
             <div className={styles.heading}>Preis</div>
+            <div className={styles.delete}>
+              <Trash className={styles.icon} />
+            </div>
           </div>
           <form action="" onSubmit={handleFormSubmit}>
             {services.map((el, index) => {
@@ -88,6 +96,12 @@ function ServiceAdd({ setData, services, setServices, categories }) {
                     })}
                   </select>
                   <Input name="price"></Input>
+                  <div className={styles.delete}>
+                    <Minus
+                      className={styles.icon}
+                      onClick={() => handleRemoveClick(el)}
+                    />
+                  </div>
                 </div>
               );
             })}

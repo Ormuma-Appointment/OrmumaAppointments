@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 95%;
-  margin: 4rem auto;
+  margin: 3rem auto;
 }
 .grid_footer {
   height: 4rem;

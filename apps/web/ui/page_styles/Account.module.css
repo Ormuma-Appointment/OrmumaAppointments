@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.box {
+  height: 20vh;
+  width: 100%;
+  background-color: bisque;
+  margin-bottom: 1rem;
+}
+.appointments {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+
+  gap: 1rem;
+}
+.appointment_box {
+  width: 100%;
+}

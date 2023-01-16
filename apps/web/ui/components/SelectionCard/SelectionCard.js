@@ -70,7 +70,7 @@ const SelectionCard = (props) => {
 
             {selected && (
               <Button icon="" size="medium" variant="primary">
-                <Link href="/">Next step</Link>
+                <Link href="/booking-calendar">Next step</Link>
               </Button>
             )}
           </div>

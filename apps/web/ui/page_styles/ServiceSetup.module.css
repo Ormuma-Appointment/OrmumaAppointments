@@ -1,14 +1,13 @@
 .container {
-  width: 80%;
-  margin: auto;
-  padding: 2rem;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+  overflow-y: hidden;
 }
 .intro {
   margin-bottom: 3rem;
 }
 .intro ol {
   margin-top: 1rem;
-  padding-left: 4rem;
+  padding-left: 2rem;
 }
 .intro li {
   list-style: decimal;
@@ -55,4 +54,14 @@
 .footer {
   display: flex;
   justify-content: space-between;
+}
+@media screen and (min-width: 760px) {
+  .container {
+    width: 80%;
+    margin: auto;
+    padding: 2rem;
+  }
+  .intro ol {
+    padding-left: 4rem;
+  }
 }

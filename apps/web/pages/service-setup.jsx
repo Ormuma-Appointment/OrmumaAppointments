@@ -48,7 +48,7 @@ function ServiceSetup() {
             {categories.map((el, index) => {
               return (
                 <div className={styles.pill}>
-                  {el}{" "}
+                  {el}
                   <Minus
                     className={styles.icon}
                     onClick={() => handleRemoveClick(el)}

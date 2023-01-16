@@ -7,9 +7,23 @@ import Minus from "../assets/minus.svg";
 function SelectItem(props) {
   const { title, minus, price, duration, plus, edit, selected, ...rest } =
     props;
+
+  const { setSelectedService } = props;
   return (
     <div
       className={`${styles.service_container} ${selected && styles.selected}`}
+      onClick={() =>
+        setSelectedService({
+          title,
+          minus,
+          price,
+          duration,
+          plus,
+          edit,
+          selected,
+          ...rest,
+        })
+      }
     >
       <div className={styles.serviceName}>{title}</div>
       <div className={price ? styles.serviceRight : styles.rightIconOnly}>

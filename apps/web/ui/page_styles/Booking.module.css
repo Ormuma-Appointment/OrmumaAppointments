@@ -27,6 +27,16 @@
   justify-content: space-evenly;
 }
 
+.uniqueContainer {
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+}
+
+.center {
+  text-align: center;
+}
+
 /*Tablet */
 @media screen and (min-width: 700px) {
   .bookingContainer {
@@ -35,6 +45,10 @@
   }
   .bookingContainer > * {
     width: 48.5%;
+  }
+
+  .uniqueContainer {
+    width: 100%;
   }
 }
 

@@ -44,53 +44,15 @@
   border-radius: 30px;
   margin: 0.5rem;
 }
-
 .icon {
   width: 1rem;
   margin-left: 1rem;
   display: inline;
   filter: invert(12%) sepia(98%) saturate(5906%) hue-rotate(356deg)
     brightness(99%) contrast(119%);
+  cursor: pointer;
 }
 .footer {
   display: flex;
   justify-content: space-between;
-}
-.group {
-  width: 100%;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(8, 1fr);
-  border-bottom: 1px solid #ccc;
-  padding: 0.5rem;
-  align-items: center;
-}
-.select_things,
-.group input,
-.heading {
-  width: 5rem;
-}
-.group input {
-  height: 2.7rem;
-}
-.group div:first-child {
-  grid-column: 1 / span 3;
-}
-.group select {
-  font-size: var(--medium-font);
-  display: block;
-  background-color: white;
-  border-width: 1px;
-  border-style: solid;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-color: #c0cad5;
-  font-size: 16px;
-  border-radius: 5px;
-}
-.select_category {
-  width: 8rem;
-  grid-column: 4 / span 2;
-}
-.heading {
 }

@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.box {
+  height: 20vh;
+  width: 100%;
+  background-color: bisque;
+  margin-bottom: 1rem;
+}
+.appointments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.appointment_box {
+  width: 100%;
+}
+.appointment_box h3 {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 760px) {
+  .appointments {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+  }
+}

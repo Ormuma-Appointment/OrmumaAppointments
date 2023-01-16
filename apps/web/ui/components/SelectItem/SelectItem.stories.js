@@ -16,12 +16,21 @@ export const ServicePlusIcon = Template.bind({});
 ServicePlusIcon.args = {
   plus: true,
 };
-
+export const ServiceMinusIcon = Template.bind({});
+ServiceMinusIcon.args = {
+  minus: true,
+};
 export const ServicePriceDurationPlus = Template.bind({});
 ServicePriceDurationPlus.args = {
   price: "59,00€",
   duration: "45 mins",
   plus: true,
+};
+export const ServicePriceDurationMinus = Template.bind({});
+ServicePriceDurationMinus.args = {
+  price: "59,00€",
+  duration: "45 mins",
+  minus: true,
 };
 
 export const ServiceEditIcon = Template.bind({});

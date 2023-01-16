@@ -43,6 +43,7 @@ h2 {
 h3 {
   font-size: 1.125rem;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 p {
@@ -60,6 +61,7 @@ p {
   /* colors */
   --base-color: #152028;
   --primary-color: #4e42d4;
+  --primary-color-light: #8a80fb;
   --success-color: #1d7c00;
   --danger-color: #e52733;
   --background: #f8f9f9;

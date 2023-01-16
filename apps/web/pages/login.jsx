@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import styles from "../ui/page_styles/Register.module.css";
 import Button from "../ui/components/Button/Button";
 import Link from "../ui/components/Link/Link";
-import styles from "../ui/page_styles/Register.module.css";
+import Input from "../ui/components/InputField/Input";
 
 function login() {
   const [salonName, setSalonName] = useState("Natur Friseur");
@@ -19,22 +20,23 @@ function login() {
         <p>Logge dich ein, um alle Funktionen nutzen zu können</p>
       </div>
       <form className={styles.form} onSubmit={handleLoginSubmit}>
-        <input
-          className={styles.input}
+        <Input
           type="email"
           id="email"
           name="email"
           placeholder="Email-Adresse"
+          email
         />
-        <input
-          className={styles.input}
-          type="text"
+        <Input
+          type="password"
           id="password"
           name="password"
-          placeholder="Passwort"
+          placeholder="Password"
+          password
         />
+
         <Button size="medium" variant="primary">
-          Konto erstellen
+          Anmelden
         </Button>
       </form>
       <Link>Du hast noch keinen Account?</Link>

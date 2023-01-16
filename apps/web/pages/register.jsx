@@ -62,7 +62,7 @@ function Register() {
       <form className={styles.form} onSubmit={handleRegistrationSubmit}>
         <Input type="text" id="name" name="name" placeholder="Vorname" user />
         <Input
-          type="text"
+          type="email"
           id="email"
           name="email"
           placeholder="Email-Adresse"

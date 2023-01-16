@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export const AuthContext = createContext();
 //created a context hook that we can import  anywhere
@@ -14,6 +15,8 @@ export function useAuthContext() {
 }
 
 export const AuthContextProvider = ({ children }) => {
+  const router = useRouter();
+
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
@@ -34,10 +37,16 @@ export const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = async () => {
-    setCurrentUser(null);
-    // the sign out function returns a promise
-    await signOut(auth);
+  const logOut = (a) => {
+    signOut(a)
+      .then(() => {
+        setCurrentUser(null);
+        console.log("looged out");
+        router.push("/");
+      })
+      .catch((err) => {
+        console.error("erroor");
+      });
   };
 
   return (

@@ -14,7 +14,7 @@ function login() {
   const [err, setErr] = useState(false);
   const router = useRouter();
 
-  const { currentUser } = useAuthContext();
+  const { currentUser, logOut } = useAuthContext();
   console.log(currentUser, "current user from use context");
 
   const handleLoginSubmit = async (e) => {
@@ -24,22 +24,24 @@ function login() {
     console.log(password);
 
     try {
-      if (currentUser) {
-        setErr(false);
-        const res = await signInWithEmailAndPassword(auth, email, password);
-        router.push("/");
-        // Signed in
-        const user = res.userCredential.user;
-        // console.log(user);
-        // . . .
-      }
+      // if (currentUser) {
+      setErr(false);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      router.push("/");
+      // Signed in
+      const user = res.userCredential.user;
+      currentUser = user;
+
+      // console.log(user);
+      // . . .
+      // }
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ");
       // console.log("errrrroorrr");
     }
   };
-
+  console.log(logOut, "logout func");
   return (
     <div className={styles.container}>
       <div className={styles.title}>

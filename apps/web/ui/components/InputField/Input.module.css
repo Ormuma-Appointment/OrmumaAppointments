@@ -21,6 +21,7 @@
 }
 .noicon {
   padding: 14px 12px 14px 1rem;
+  margin-left: -1.8rem;
 }
 
 .input:hover {

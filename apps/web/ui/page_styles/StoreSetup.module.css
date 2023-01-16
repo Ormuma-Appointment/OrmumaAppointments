@@ -1,0 +1,71 @@
+.setUpForm {
+  width: 80%;
+  margin: auto;
+  padding: 2rem;
+}
+
+.setUpForm label {
+  color: var(--primary-color);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.adresse,
+.opening {
+  display: flex;
+  align-items: flex-start;
+}
+
+.col30,
+.col70,
+.col50 {
+  float: none;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.setUpInfos {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0 5rem;
+}
+
+.setUpOpenings {
+  margin-top: 1rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8rem;
+}
+
+@media screen and (min-width: 760px) {
+  .row {
+    flex-direction: row;
+  }
+  .col30 {
+    float: left;
+    width: 20%;
+    margin-top: 1rem;
+  }
+
+  .col70 {
+    float: left;
+    width: 80%;
+    margin-top: 1rem;
+  }
+
+  .col50 {
+    float: left;
+    width: 49%;
+    margin-top: 1rem;
+  }
+
+  .col50:first-child {
+    margin-right: 2%;
+  }
+}

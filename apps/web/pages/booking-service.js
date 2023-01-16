@@ -6,9 +6,9 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
-  const [selectedService, setSelectedService] = useState(undefined);
+  const [selected, setSelected] = useState(undefined);
 
-  console.log("selectedService", selectedService);
+  console.log("selectedService", selected);
 
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = () => {
@@ -35,7 +35,7 @@ const BookingService = () => {
     },
   ];
   return (
-    <div>
+    <div className={styles.pageContainer}>
       <h1>Unsere Service</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
@@ -54,8 +54,8 @@ const BookingService = () => {
                         price={el.price}
                         title={el.style}
                         key={id}
-                        setSelectedService={setSelectedService}
-                        onClick={() => setSelectedService(id)}
+                        setSelected={setSelected}
+                        onClick={() => setSelected(id)}
                       />
                     )
                   );
@@ -66,8 +66,8 @@ const BookingService = () => {
         </CardContainer>
         <CardContainer>
           <SelectionCard
-            selectedService={selectedService}
-            setSelectedService={setSelectedService}
+            selected={selected}
+            setSelected={setSelected}
             step="service"
           />
         </CardContainer>

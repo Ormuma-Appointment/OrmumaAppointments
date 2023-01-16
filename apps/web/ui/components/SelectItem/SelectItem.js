@@ -8,12 +8,12 @@ function SelectItem(props) {
   const { title, minus, price, duration, plus, edit, selected, ...rest } =
     props;
 
-  const { setSelectedService } = props;
+  const { setSelected } = props;
   return (
     <div
       className={`${styles.service_container} ${selected && styles.selected}`}
       onClick={() =>
-        setSelectedService({
+        setSelected({
           title,
           minus,
           price,

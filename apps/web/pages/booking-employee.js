@@ -5,7 +5,7 @@ import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 
 const BookingEmployee = () => {
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selected, setSelected] = useState(null);
 
   let service = { style: "style 1", price: "45€", time: "30min" };
   let employees = [
@@ -26,7 +26,7 @@ const BookingEmployee = () => {
     },
   ];
   return (
-    <div className="page-container">
+    <div className={styles.pageContainer}>
       <h1>Unsere Mitarbeiter</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
@@ -37,15 +37,15 @@ const BookingEmployee = () => {
                 plus
                 title={employee.name}
                 key={id}
-                setSelectedEmployee={setSelectedEmployee}
+                setSelected={setSelected}
               />
             );
           })}
         </CardContainer>
         <CardContainer>
           <SelectionCard
-            selectedEmployee={selectedEmployee}
-            setSelectedEmployee={setSelectedEmployee}
+            selected={selected}
+            setSelected={setSelected}
             service={service}
             step="employee"
           />

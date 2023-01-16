@@ -74,11 +74,22 @@ function ServiceSetup() {
               </Button>
             </form>
             <div className={styles.service_list}>
+              <div className={styles.group}>
+                <div>Name</div>
+                <div className={styles.select_category}>Kategorie</div>
+                <div className={styles.heading}>Dauer</div>
+                <div className={styles.heading}>Wartezeit</div>
+                <div className={styles.heading}>Preis</div>
+              </div>
               {services.map((el, index) => {
                 return (
                   <div className={styles.group} key={index}>
                     <div>{el}</div>
-                    <SelectElement name={`${index}category`} id="category">
+                    <select
+                      name={`${index}category`}
+                      id="category"
+                      className={styles.select_category}
+                    >
                       {categories.map((elem, i) => {
                         return (
                           <option key={i} value={elem}>
@@ -86,8 +97,12 @@ function ServiceSetup() {
                           </option>
                         );
                       })}
-                    </SelectElement>
-                    <SelectElement name={`${index}duration`} id="duration">
+                    </select>
+                    <select
+                      name={`${index}duration`}
+                      id="duration"
+                      className={styles.select_things}
+                    >
                       {[15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
                         return (
                           <option key={i} value={elem}>
@@ -95,8 +110,12 @@ function ServiceSetup() {
                           </option>
                         );
                       })}
-                    </SelectElement>
-                    <SelectElement name={`${index}waiting`} id="duration">
+                    </select>
+                    <select
+                      name={`${index}waiting`}
+                      id="duration"
+                      className={styles.select_things}
+                    >
                       {[0, 15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
                         return (
                           <option key={i} value={elem}>
@@ -104,7 +123,7 @@ function ServiceSetup() {
                           </option>
                         );
                       })}
-                    </SelectElement>
+                    </select>
                     <Input></Input>
                   </div>
                 );

@@ -47,13 +47,13 @@ const SelectionCard = (props) => {
       {step === "employee" && (
         <>
           <div>
-            <ServiceItem service={service} />
+            <SelectItem service={service} />
             {!selectedEmployee && (
               <p className={styles.selectItemText}>Select a employee</p>
             )}
             <div onClick={() => setSelectedEmployee(null)}>
               {selectedEmployee && (
-                <EmployeeItem
+                <SelectItem
                   employee={selectedEmployee}
                   icon="fa-solid fa-circle-minus"
                   danger="danger"

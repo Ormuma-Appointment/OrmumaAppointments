@@ -4,10 +4,12 @@ import Input from "../ui/components/InputField/Input";
 import Button from "../ui/components/Button/Button";
 import styles from "../ui/page_styles/ServiceSetup.module.css";
 import Minus from "../ui/components/assets/minus.svg";
+import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
+  const [data, setData] = useState([]);
   function handleCatSubmit(e) {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
@@ -15,21 +17,11 @@ function ServiceSetup() {
   function handleRemoveClick(el) {
     setCategories((prev) => prev.filter((elem) => elem !== el));
   }
-  function handleServiceSubmit(e) {
-    e.preventDefault();
-    setServices((prev) => [...prev, e.target.service.value]);
-  }
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    console.log(services[1]);
-    console.log(e.target.category[1].value);
-    console.log(Number(e.target.duration[1].value));
-    console.log(Number(e.target.waiting[1].value));
-    console.log(Number(e.target.price[1].value));
-  }
+
   useEffect(() => {
-    console.log(services);
-  }, [services]);
+    console.log(data);
+  }, [data]);
+
   return (
     <div>
       <h1>Services Konfigurieren</h1>
@@ -52,7 +44,7 @@ function ServiceSetup() {
             <h3>1. Service Kategorien erstellen</h3>
             <form className={styles.input_group} onSubmit={handleCatSubmit}>
               <Input placeholder="Kategorie hinzufügen ..." name="category" />{" "}
-              <Button icon="" size="medium" variant="primary">
+              <Button icon="" size="medium" variant="secondary">
                 + hinzufügen
               </Button>
             </form>
@@ -70,76 +62,12 @@ function ServiceSetup() {
               })}
             </div>
           </div>
-          <div className={styles.service_cat}>
-            <h3>2. Services erstellen</h3>
-            <form className={styles.input_group} onSubmit={handleServiceSubmit}>
-              <Input placeholder="Service hinzufügen ..." name="service" />{" "}
-              <Button icon="" size="medium" variant="primary">
-                + hinzufügen
-              </Button>
-            </form>
-            <div className={styles.service_list}>
-              <div className={styles.group}>
-                <div>Name</div>
-                <div className={styles.select_category}>Kategorie</div>
-                <div className={styles.heading}>Dauer</div>
-                <div className={styles.heading}>Wartezeit</div>
-                <div className={styles.heading}>Preis</div>
-              </div>
-              <form action="" onSubmit={handleFormSubmit}>
-                {services.map((el, index) => {
-                  return (
-                    <div className={styles.group} key={index}>
-                      <div>{el}</div>
-                      <select
-                        name={`category`}
-                        id="category"
-                        className={styles.select_category}
-                      >
-                        {categories.map((elem, i) => {
-                          return (
-                            <option key={i} value={elem}>
-                              {elem}
-                            </option>
-                          );
-                        })}
-                      </select>
-                      <select
-                        name="duration"
-                        id="duration"
-                        className={styles.select_things}
-                      >
-                        {[15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
-                          return (
-                            <option key={i} value={elem}>
-                              {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
-                            </option>
-                          );
-                        })}
-                      </select>
-                      <select
-                        name="waiting"
-                        id="waiting"
-                        className={styles.select_things}
-                      >
-                        {[0, 15, 30, 45, 60, 75, 90, 105, 120].map(
-                          (elem, i) => {
-                            return (
-                              <option key={i} value={elem}>
-                                {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
-                              </option>
-                            );
-                          }
-                        )}
-                      </select>
-                      <Input name="price"></Input>
-                    </div>
-                  );
-                })}
-                <button>submit</button>
-              </form>
-            </div>
-          </div>
+          <ServiceAdd
+            setData={setData}
+            services={services}
+            setServices={setServices}
+            categories={categories}
+          />
           <div className={styles.footer}>
             <Button size="medium" variant="danger">
               zurück

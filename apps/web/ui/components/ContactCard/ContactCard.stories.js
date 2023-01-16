@@ -5,7 +5,11 @@ import ContactCard from "./ContactCard";
 export default {
   title: "Components/ContactCard", // should be unique in the whole project
   component: ContactCard,
-  args: {},
+  args: {
+    email: "naturfriseur@gmail.com",
+    website: "www.naturfriseur-aachen.de",
+    telephone: "+49 1577 37384273",
+  },
 };
 
 const Template = (args) => <ContactCard {...args} />;

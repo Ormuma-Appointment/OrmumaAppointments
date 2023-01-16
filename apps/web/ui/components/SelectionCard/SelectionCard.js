@@ -6,10 +6,9 @@ import Button from "../Button/Button";
 
 const SelectionCard = (props) => {
   const step = props.step;
-  const selectedService = props.selectedService;
-  const setSelectedService = props.setSelectedService;
-  const selectedEmployee = props.selectedEmployee;
-  const setSelectedEmployee = props.setSelectedEmployee;
+  const selected = props.selected;
+  const setSelected = props.setSelected;
+
   const service = props.service;
   return (
     <div>
@@ -17,16 +16,16 @@ const SelectionCard = (props) => {
       {step === "service" && (
         <>
           <div>
-            {!selectedService && (
+            {!selected && (
               <p className={styles.selectItemText}>Select a service</p>
             )}
-            <div onClick={() => setSelectedService(null)}>
-              {selectedService && (
+            <div onClick={() => setSelected(null)}>
+              {selected && (
                 <SelectItem
-                  duration={selectedService.duration}
+                  duration={selected.duration}
                   minus
-                  price={selectedService.price}
-                  title={selectedService.title}
+                  price={selected.price}
+                  title={selected.title}
                 />
               )}
             </div>
@@ -36,7 +35,7 @@ const SelectionCard = (props) => {
               <Link href="/">Go back</Link>
             </Button>
 
-            {selectedService && (
+            {selected && (
               <Button icon="" size="medium" variant="primary">
                 <Link href="/booking-employee">Next step</Link>
               </Button>
@@ -47,26 +46,29 @@ const SelectionCard = (props) => {
       {step === "employee" && (
         <>
           <div>
-            <ServiceItem service={service} />
-            {!selectedEmployee && (
+            <SelectItem
+              duration={service.time}
+              price={service.price}
+              title={service.style}
+            />
+            {!selected && (
               <p className={styles.selectItemText}>Select a employee</p>
             )}
-            <div onClick={() => setSelectedEmployee(null)}>
-              {selectedEmployee && (
-                <EmployeeItem
-                  employee={selectedEmployee}
-                  icon="fa-solid fa-circle-minus"
-                  danger="danger"
-                />
-              )}
+            <div onClick={() => setSelected(null)}>
+              {selected && <SelectItem title={selected.title} minus />}
             </div>
           </div>
           <div className={styles.buttonsContainer}>
-            <Button icon="" size="medium" variant="danger">
-              <Link href="/">Go back</Link>
+            <Button
+              href="/booking-service"
+              icon=""
+              size="medium"
+              variant="danger"
+            >
+              <Link href="/booking-service">Go back</Link>
             </Button>
 
-            {selectedEmployee && (
+            {selected && (
               <Button icon="" size="medium" variant="primary">
                 <Link href="/">Next step</Link>
               </Button>

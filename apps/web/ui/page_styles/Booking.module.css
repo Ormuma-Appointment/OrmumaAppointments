@@ -1,3 +1,10 @@
+.pageContainer {
+  width: 80%;
+  margin: auto;
+  padding: 3rem 0 10rem;
+  min-height: 87vh;
+}
+
 .bookingContainer {
   display: flex;
   justify-content: space-between;

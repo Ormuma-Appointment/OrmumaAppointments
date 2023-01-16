@@ -1,5 +1,10 @@
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 2rem;
+}
 .intro {
-  padding: 2rem 1.5rem 3rem 1.5rem;
+  margin-bottom: 3rem;
 }
 .intro ol {
   margin-top: 1rem;
@@ -9,7 +14,9 @@
   list-style: decimal;
 }
 .service_cat {
-  padding: 2rem 1.5rem 3rem 1.5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 .service_cat h3 {
   color: var(--primary-color);
@@ -44,4 +51,26 @@
   display: inline;
   filter: invert(12%) sepia(98%) saturate(5906%) hue-rotate(356deg)
     brightness(99%) contrast(119%);
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+.group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem;
+  align-items: center;
+}
+.group select,
+.group input {
+  width: 5rem;
+}
+.group input {
+  height: 2.9rem;
+}
+.group div:first-child {
+  grid-column: 1 / span 3;
 }

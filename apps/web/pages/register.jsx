@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Button from "../ui/components/Button/Button";
+import Input from "../ui/components/InputField/Input";
 import Link from "../ui/components/Link/Link";
 import styles from "../ui/page_styles/Register.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,11 +21,10 @@ function Register() {
   };
   const handleRegistrationSubmit = async (e) => {
     e.preventDefault();
-    let Vorname = e.target[0].value;
-    let email = e.target[1].value;
-    let password = e.target[2].value;
-    let passwordPconfirm = e.target[3].value;
-    console.log(Vorname, email, password);
+    let Vorname = e.target.name.value;
+    let email = e.target.email.value;
+    let password = e.target.passwordP.value;
+    let passwordPconfirm = e.target.passwordrepeat.value;
 
     try {
       //if not the same password
@@ -60,29 +60,27 @@ function Register() {
         <p>Registriere dich, um alle Funktionen nutzen zu können</p>
       </div>
       <form className={styles.form} onSubmit={handleRegistrationSubmit}>
-        <input
-          className={styles.input}
-          type="text"
-          id="name"
-          placeholder="Vorname"
-        />
-        <input
-          className={styles.input}
+        <Input type="text" id="name" name="name" placeholder="Vorname" user />
+        <Input
           type="email"
           id="email"
+          name="email"
           placeholder="Email-Adresse"
+          email
         />
-        <input
-          className={styles.input}
+        <Input
           type="password"
           id="password"
-          placeholder="Passwort"
+          name="passwordP"
+          placeholder="Password"
+          password
         />
-        <input
-          className={styles.input}
+        <Input
           type="password"
           id="password"
-          placeholder="Passwort wiederholen"
+          name="passwordrepeat"
+          placeholder="Password wiederholen"
+          password
         />
         <Button size="medium" variant="primary">
           Konto erstellen

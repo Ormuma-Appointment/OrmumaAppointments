@@ -2,6 +2,8 @@
   display: flex;
   -webkit-box-align: center;
   align-items: center;
+  margin-left: 1.8rem;
+  width: 100%;
 }
 .input {
   font-size: var(--medium-font);
@@ -12,7 +14,7 @@
   border-width: 1px;
   border-style: solid;
   margin: 0px;
-  padding: 14px 12px 14px 3rem;
+  padding: 12px 12px 12px 3rem;
   border-color: #c0cad5;
   font-size: 16px;
   border-radius: 5px;

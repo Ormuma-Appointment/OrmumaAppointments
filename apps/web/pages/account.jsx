@@ -6,6 +6,15 @@ import AccountCard from "../ui/components/AccountCard/AccountCard";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 
 function account() {
+  const pastAppointments = [
+    {
+      customer: "Andrea Berg",
+      date: "03.01.2023",
+      service: "Haar kurz, schneiden, waschen",
+      stylist: "Jochen Lambatz",
+      time: "11:30-12:00",
+    },
+  ];
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -33,27 +42,17 @@ function account() {
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
-            <AppointmentCard
-              customer="Andrea Berg"
-              date="03.01.2023"
-              service="Haar kurz, schneiden, waschen"
-              stylist="Jochen Lambatz"
-              time="11:30-12:00"
-            />
-            <AppointmentCard
-              customer="Andrea Berg"
-              date="03.01.2023"
-              service="Haar kurz, schneiden, waschen"
-              stylist="Jochen Lambatz"
-              time="11:30-12:00"
-            />
-            <AppointmentCard
-              customer="Andrea Berg"
-              date="03.01.2023"
-              service="Haar kurz, schneiden, waschen"
-              stylist="Jochen Lambatz"
-              time="11:30-12:00"
-            />
+            {pastAppointments.map((el, index) => {
+              return (
+                <AppointmentCard
+                  customer={el.name}
+                  date={el.date}
+                  service={el.service}
+                  stylist={el.stylist}
+                  time={el.time}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

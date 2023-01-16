@@ -3,8 +3,8 @@ import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
 import Button from "../ui/components/Button/Button";
 import styles from "../ui/page_styles/ServiceSetup.module.css";
-import Minus from "../ui/components/assets/minus.svg";
 import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
+import Minus from "../ui/components/assets/minus.svg";
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
@@ -24,6 +24,13 @@ function ServiceSetup() {
 
   return (
     <div>
+      <div className={styles.breadcrumb}>
+        Store Setup <span className={styles.arrows}>&#9654;</span>{" "}
+        <span className={styles.current_breadcrumb}>
+          Services Konfgurieren <span className={styles.arrows}>&#9654;</span>{" "}
+        </span>
+        Team konfigurieren <span className={styles.arrows}>&#9654;</span>
+      </div>
       <h1>Services Konfigurieren</h1>
       <CardContainer>
         <div className={styles.container}>

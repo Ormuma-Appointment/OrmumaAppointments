@@ -43,7 +43,7 @@ function Register() {
         // a new user inside the users collection
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
-          Vorname,
+          displayName: Vorname,
           email,
         });
         // the user is redirected to the home page once the registration form is submited

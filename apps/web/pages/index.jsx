@@ -6,8 +6,9 @@ import OpeningHours from "../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../ui/components/ContactCard/ContactCard";
 import AddressCard from "../ui/components/AddressCard/AddressCard";
 import calendar from "../ui/components/assets/calendar_add.svg";
-
+import { useAuthContext } from "../context/AuthContext";
 export default function Web() {
+  const { currentUser } = useAuthContext();
   const contact = {
     email: "naturfriseur@gmail.com",
     telephone: "+49 1577 37384273",
@@ -55,7 +56,11 @@ export default function Web() {
       start: "08:00",
     },
   ];
-
+  if (currentUser) {
+    console.log(currentUser, "current user logged in");
+  } else {
+    console.log("not logged in ");
+  }
   function handleBookingClick(e) {
     e.preventDefault();
     console.log("I should go to the booking process");

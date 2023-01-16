@@ -3,6 +3,7 @@ import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
 import calendar from "../ui/components/assets/calendar.svg";
 import AccountCard from "../ui/components/AccountCard/AccountCard";
+import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 
 function account() {
   return (
@@ -20,11 +21,40 @@ function account() {
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>
           <h3>Mein nächster Termin</h3>
-          <div className={styles.box}></div>
+          <AppointmentCard
+            cancel
+            customer="Andrea Berg"
+            date="03.01.2023"
+            service="Haar kurz, schneiden, waschen"
+            stylist="Jochen Lambatz"
+            time="11:30-12:00"
+          />
         </div>
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
-          <div className={styles.box}></div>
+          <div>
+            <AppointmentCard
+              customer="Andrea Berg"
+              date="03.01.2023"
+              service="Haar kurz, schneiden, waschen"
+              stylist="Jochen Lambatz"
+              time="11:30-12:00"
+            />
+            <AppointmentCard
+              customer="Andrea Berg"
+              date="03.01.2023"
+              service="Haar kurz, schneiden, waschen"
+              stylist="Jochen Lambatz"
+              time="11:30-12:00"
+            />
+            <AppointmentCard
+              customer="Andrea Berg"
+              date="03.01.2023"
+              service="Haar kurz, schneiden, waschen"
+              stylist="Jochen Lambatz"
+              time="11:30-12:00"
+            />
+          </div>
         </div>
       </div>
     </div>

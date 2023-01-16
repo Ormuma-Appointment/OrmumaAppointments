@@ -42,9 +42,7 @@ const BookingCalendar = () => {
             </Button>
 
             <Button icon="" size="medium" variant="primary">
-              <Link href="/booking-confirmation" className="btn btn-primary">
-                Next step
-              </Link>
+              <Link href="/booking-confirmation">Next step</Link>
             </Button>
           </div>
         </CardContainer>

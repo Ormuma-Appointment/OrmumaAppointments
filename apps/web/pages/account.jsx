@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
 import calendar from "../ui/components/assets/calendar.svg";
+import AccountCard from "../ui/components/AccountCard/AccountCard";
 
 function account() {
   return (
@@ -14,7 +15,7 @@ function account() {
       </div>
       <div>
         <h3>Meine Daten</h3>
-        <div className={styles.box}></div>
+        <AccountCard className={styles.box}></AccountCard>
       </div>
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>

@@ -9,7 +9,6 @@ function login() {
     e.preventDefault();
     let email = e.target.email.value;
     let password = e.target.password.value;
-    console.log(password);
   }
 
   return (

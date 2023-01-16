@@ -11,6 +11,10 @@ function ServiceSetup() {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
   }
+  function handleRemoveClick(el) {
+    console.log(el);
+    setCategories((prev) => prev.filter((elem) => elem !== el));
+  }
 
   useEffect(() => {
     console.log(categories);
@@ -44,7 +48,11 @@ function ServiceSetup() {
             {categories.map((el, index) => {
               return (
                 <div className={styles.pill}>
-                  {el} <Minus className={styles.icon} />
+                  {el}{" "}
+                  <Minus
+                    className={styles.icon}
+                    onClick={() => handleRemoveClick(el)}
+                  />
                 </div>
               );
             })}

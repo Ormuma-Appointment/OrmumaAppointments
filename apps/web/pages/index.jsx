@@ -6,6 +6,7 @@ import OpeningHours from "../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../ui/components/ContactCard/ContactCard";
 import AddressCard from "../ui/components/AddressCard/AddressCard";
 import calendar from "../ui/components/assets/calendar_add.svg";
+import Link from "next/link";
 
 export default function Web() {
   const contact = {
@@ -65,13 +66,14 @@ export default function Web() {
       <div className={styles.welcome}>
         <h1>Wir lieben Natürlichkeit</h1>
         <RoundImage alt="Nice Image" image={Logo} initialWidth={200} />
+
         <Button
           icon={calendar}
           size="medium"
           variant="primary"
           onClick={handleBookingClick}
         >
-          Termin buchen
+          <Link href="/booking-service">Termin buchen</Link>
         </Button>
       </div>
       <div className={styles.info}>

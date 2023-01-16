@@ -6,6 +6,7 @@
   padding: 1.5rem 2rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: var(--border-radius);
+  margin: 1rem;
 }
 .service_container:hover {
   background-color: rgba(0, 0, 0, 0.05);

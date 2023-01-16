@@ -3,7 +3,6 @@
   -webkit-box-align: center;
   align-items: center;
 }
-
 .input {
   font-size: var(--medium-font);
   appearance: none;

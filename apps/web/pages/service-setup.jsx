@@ -13,7 +13,6 @@ function ServiceSetup() {
     setCategories((prev) => [...prev, e.target.category.value]);
   }
   function handleRemoveClick(el) {
-    console.log(el);
     setCategories((prev) => prev.filter((elem) => elem !== el));
   }
   function handleServiceSubmit(e) {
@@ -22,7 +21,11 @@ function ServiceSetup() {
   }
   function handleFormSubmit(e) {
     e.preventDefault();
-    console.log(Number(e.target.input[1].value));
+    console.log(services[1]);
+    console.log(e.target.category[1].value);
+    console.log(Number(e.target.duration[1].value));
+    console.log(Number(e.target.waiting[1].value));
+    console.log(Number(e.target.price[1].value));
   }
   useEffect(() => {
     console.log(services);
@@ -89,7 +92,7 @@ function ServiceSetup() {
                     <div className={styles.group} key={index}>
                       <div>{el}</div>
                       <select
-                        name={`${index}category`}
+                        name={`category`}
                         id="category"
                         className={styles.select_category}
                       >
@@ -102,7 +105,7 @@ function ServiceSetup() {
                         })}
                       </select>
                       <select
-                        name={`${index}duration`}
+                        name="duration"
                         id="duration"
                         className={styles.select_things}
                       >
@@ -115,8 +118,8 @@ function ServiceSetup() {
                         })}
                       </select>
                       <select
-                        name={`${index}waiting`}
-                        id="duration"
+                        name="waiting"
+                        id="waiting"
                         className={styles.select_things}
                       >
                         {[0, 15, 30, 45, 60, 75, 90, 105, 120].map(
@@ -129,7 +132,7 @@ function ServiceSetup() {
                           }
                         )}
                       </select>
-                      <Input name={`input`}></Input>
+                      <Input name="price"></Input>
                     </div>
                   );
                 })}

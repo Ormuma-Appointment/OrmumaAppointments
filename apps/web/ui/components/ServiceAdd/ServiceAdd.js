@@ -27,8 +27,8 @@ function ServiceAdd({ setData, services, setServices, categories }) {
     });
     setData(serviceData);
   }
-  function handleRemoveClick(el) {
-    setServices((prev) => prev.filter((elem) => elem !== el));
+  function handleRemoveClick(index) {
+    setServices((prev) => prev.filter((elem, i) => i !== index));
   }
   return (
     <>
@@ -99,7 +99,7 @@ function ServiceAdd({ setData, services, setServices, categories }) {
                   <div className={styles.delete}>
                     <Minus
                       className={styles.icon}
-                      onClick={() => handleRemoveClick(el)}
+                      onClick={() => handleRemoveClick(index)}
                     />
                   </div>
                 </div>

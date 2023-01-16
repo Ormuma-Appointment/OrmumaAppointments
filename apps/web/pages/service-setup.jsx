@@ -14,8 +14,8 @@ function ServiceSetup() {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
   }
-  function handleRemoveClick(el) {
-    setCategories((prev) => prev.filter((elem) => elem !== el));
+  function handleRemoveClick(index) {
+    setCategories((prev) => prev.filter((elem, i) => i !== index));
   }
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function ServiceSetup() {
                     {el}
                     <Minus
                       className={styles.icon}
-                      onClick={() => handleRemoveClick(el)}
+                      onClick={() => handleRemoveClick(index)}
                     />
                   </div>
                 );

@@ -1,10 +1,22 @@
 .setUpForm {
   width: 80%;
   margin: auto;
+  padding: 2rem;
 }
 
 .setUpForm label {
   color: var(--primary-color);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.adresse {
+  display: flex;
+  align-items: flex-start;
 }
 
 .col30,
@@ -12,7 +24,7 @@
 .col50 {
   float: none;
   width: 100%;
-  margin-top: 0;
+  margin-top: 6px;
 }
 
 .setUpOpenings {
@@ -20,6 +32,9 @@
 }
 
 @media screen and (min-width: 760px) {
+  .row {
+    flex-direction: row;
+  }
   .col30 {
     float: left;
     width: 20%;

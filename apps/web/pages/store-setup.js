@@ -23,7 +23,7 @@ const StoreSetup = () => {
               />
             </div>
           </div>
-          <div className={styles.row}>
+          <div className={`${styles.row} ${styles.adresse}`}>
             <div className={styles.col30}>
               <label>Adresse*</label>
             </div>
@@ -35,7 +35,7 @@ const StoreSetup = () => {
                 placeholder="street, number"
                 required
               />
-              <div className={styles.row}>
+              <div className={`${styles.row} ${styles.city}`}>
                 <div className={styles.col50}>
                   <Input
                     type="text"

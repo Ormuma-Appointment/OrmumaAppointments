@@ -5,6 +5,7 @@ import Button from "../ui/components/Button/Button";
 import styles from "../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../ui/components/assets/minus.svg";
+import Link from "next/link";
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
@@ -25,7 +26,8 @@ function ServiceSetup() {
   return (
     <div>
       <div className={styles.breadcrumb}>
-        Store Setup <span className={styles.arrows}>&#9654;</span>{" "}
+        <Link href="/store-setup">Store Setup</Link>{" "}
+        <span className={styles.arrows}>&#9654;</span>{" "}
         <span className={styles.current_breadcrumb}>
           Services Konfgurieren <span className={styles.arrows}>&#9654;</span>{" "}
         </span>

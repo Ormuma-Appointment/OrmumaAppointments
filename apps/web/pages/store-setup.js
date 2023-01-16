@@ -5,6 +5,8 @@ import Input from "../ui/components/InputField/Input";
 import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
+import Link from "next/link";
+
 const StoreSetup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +18,14 @@ const StoreSetup = () => {
   };
   return (
     <div>
+      <div className={styles.breadcrumb}>
+        <span className={styles.current_breadcrumb}>
+          Store Setup <span className={styles.arrows}> &#9654;</span>{" "}
+        </span>
+        <Link href="/service-setup">Services Konfgurieren </Link>{" "}
+        <span className={styles.arrows}>&#9654;</span> Team konfigurieren{" "}
+        <span className={styles.arrows}>&#9654;</span>
+      </div>
       <h1>Store Setup</h1>
       <CardContainer>
         <form className={styles.setUpForm} onSubmit={(e) => handleSubmit(e)}>

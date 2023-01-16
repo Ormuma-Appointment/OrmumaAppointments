@@ -10,7 +10,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <div className="grid_main_wrapper">
         <Navigation customer_logged_out />
-        <Component {...pageProps} />
+        <div className="page_wrapper">
+          <Component {...pageProps} />
+        </div>
       </div>
       <div className="grid_footer">
         <Footer />

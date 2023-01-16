@@ -11,11 +11,40 @@
 body {
   background-color: var(--background);
 }
+
 .grid_main_wrapper {
   min-height: calc(100vh - 4rem);
 }
+.page_wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 4rem auto;
+}
 .grid_footer {
   height: 4rem;
+}
+
+/*Here general roles for the font - the size should not change but the color can*/
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color-font);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color-font);
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  font-size: 1rem;
 }
 
 :root {
@@ -47,24 +76,13 @@ body {
   --icon-filter-blackish: invert(8%) sepia(13%) saturate(1770%)
     hue-rotate(163deg) brightness(96%) contrast(92%);
 }
-
-/*Here general roles for the font - the size should not change but the color can*/
-h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--primary-color-font);
+@media screen and (min-width: 760px) {
+  .page_wrapper {
+    width: 90%;
+  }
 }
-
-h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color-font);
-}
-
-h3 {
-  font-size: 1.125rem;
-}
-
-p {
-  font-size: 1rem;
+@media screen and (min-width: 1060px) {
+  .page_wrapper {
+    width: 70%;
+  }
 }

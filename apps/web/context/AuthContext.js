@@ -6,6 +6,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { db } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 
 export const AuthContext = createContext();
@@ -17,24 +19,23 @@ export function useAuthContext() {
 export const AuthContextProvider = ({ children }) => {
   const router = useRouter();
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      //   console.log(user);
+      // console.log(user);
     });
 
     return () => {
       unsub();
     };
   }, []);
-
-  const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const isLoggedIn = (currentUser) => {
+    if (currentUser) {
+      return true;
+    }
+    return false;
   };
 
   const logOut = (a) => {
@@ -50,7 +51,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, register, login, logOut }}>
+    <AuthContext.Provider value={{ currentUser, setCurrentUser, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );

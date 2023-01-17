@@ -8,16 +8,19 @@ import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDe
 import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 import Minus from "../ui/components/assets/minus.svg";
+import StylistCard from "../ui/components/StylistCard/StylistCard";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
   let dummyservices = ["Long", "Short", "Bold", "Style"];
-  const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
-  const [yesno] = useState(["ja", "nein"]);
-  const [allEmployees, setAllEmployees] = useState([
+  let dummyemployees = [
     { name: "Kasper Schneiderlein", photo: null },
     { name: "Juli Katter", photo: null },
-  ]);
+    { name: "Kyle Superwow", photo: null },
+  ];
+  const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
+  const [yesno] = useState(["ja", "nein"]);
+  const [allEmployees, setAllEmployees] = useState(dummyemployees);
 
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
 
@@ -210,6 +213,11 @@ function TeamSetup() {
               Person speichern
             </Button>
           </form>
+          <div className={styles.employees}>
+            {allEmployees.map((el, index) => {
+              return <StylistCard key={index} name={el.name} />;
+            })}
+          </div>
         </div>
       </CardContainer>
     </div>

@@ -90,6 +90,17 @@
 .small_label {
   margin-top: 3rem;
 }
+.employees {
+  border-top: 1px solid #ccc;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.employees > div {
+  margin-bottom: 1rem;
+}
 @media screen and (min-width: 760px) {
   .container {
     width: 80%;
@@ -120,5 +131,17 @@
   }
   .col50:first-child {
     margin-right: 2%;
+  }
+  .employees {
+    border-top: 1px solid #ccc;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .employees > div {
+    margin-right: 1rem;
   }
 }

@@ -1,6 +1,5 @@
 .container {
   padding: 3rem 1.5rem 3rem 1.5rem;
-  overflow-y: hidden;
 }
 .breadcrumb {
   margin-bottom: 1rem;
@@ -37,7 +36,6 @@
   margin-bottom: 1rem;
 }
 .cat_box {
-  width: 100%;
   background-color: white;
   border-width: 1px;
   border-style: solid;

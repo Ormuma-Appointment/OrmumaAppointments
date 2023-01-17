@@ -73,6 +73,8 @@ const admin = {
 };
 
 //to see if it's have to be separete or in admin collection
+// openings are created from the working time of the employee :
+//I don't really know if we should already cut them in slot or if we should start with 30 min slots
 
 let openings = [
   {
@@ -81,6 +83,7 @@ let openings = [
   },
 ];
 
+// when there in a appointment booked it's creating an event and delete the slot from the employee - add event to the user
 const events = [
   {
     kind: "booking",

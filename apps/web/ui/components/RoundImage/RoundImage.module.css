@@ -1,9 +1,8 @@
-.logo {
-  aspect-ratio: 1/1;
+.container {
+  height: 100%;
 }
-.logoImage {
+.image {
   height: 100%;
   width: 100%;
   border-radius: 50%;
-  cursor: pointer;
 }

@@ -2,8 +2,10 @@ import React from "react";
 import CardContainer from "../CardContainer/CardContainer";
 import styles from "./AccountCard.module.css";
 import Edit from "../assets/edit.svg";
+import { useAuthContext } from "../../../context/AuthContext";
 
 function AccountCard({ name = "Andrea Hallo", email = "testtest@test.de" }) {
+  const { currentUser, userData } = useAuthContext();
   return (
     <CardContainer>
       <div className={styles.container}>

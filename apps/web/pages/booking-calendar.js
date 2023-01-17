@@ -18,7 +18,7 @@ const BookingCalendar = () => {
   };
 
   return (
-    <div className="page-container">
+    <div className={styles.pageContainer}>
       <h1>Unsere calandar</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>

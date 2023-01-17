@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./TimeDefinitionSection.module.css";
 import SelectElement from "../SelectElement/SelectElement";
 
-function TimeDefinitionSection({
-  openDays = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"],
-}) {
+function TimeDefinitionSection({ openDays }) {
   return (
     <div className={styles.container}>
       {openDays.map((el, index) => {

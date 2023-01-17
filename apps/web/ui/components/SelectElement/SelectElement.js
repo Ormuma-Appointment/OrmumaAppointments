@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import styles from "./SelectElement.module.css";
 import Down from "../assets/down.svg";
 
-function SelectElement({ minute }) {
+function SelectElement({ minute, day }) {
   const [data, setData] = useState([0, 2]);
   useEffect(() => {
     if (!minute) {
@@ -20,7 +20,7 @@ function SelectElement({ minute }) {
         <Down className={styles.icon} />
       </div>
       <select
-        name={!minute ? "hour" : "minute"}
+        name={!minute ? `${day}hour` : `${day} minute`}
         id="time"
         className={styles.input}
       >

@@ -21,6 +21,7 @@ function TeamSetup() {
   const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
   const [yesno] = useState(["ja", "nein"]);
   const [allEmployees, setAllEmployees] = useState(dummyemployees);
+  const [times, setTimes] = useState(undefined);
 
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
 
@@ -34,6 +35,7 @@ function TeamSetup() {
       phone: e.target.phone.value,
       photo: e.target.photo.value,
       services: services,
+      times: times,
     };
 
     console.log(obj);
@@ -163,7 +165,10 @@ function TeamSetup() {
                   <label>Arbeitszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <TimeDefinitionSection openDays={openDays} />
+                  <TimeDefinitionSection
+                    openDays={openDays}
+                    setTimes={setTimes}
+                  />
                 </div>
               </div>
             </div>

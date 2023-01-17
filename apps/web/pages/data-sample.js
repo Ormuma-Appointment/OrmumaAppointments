@@ -9,7 +9,7 @@ const weekday = {
   6: "Saturday",
 };
 
-let users = [
+export const users = [
   {
     id: 1,
     firstName: "John",
@@ -19,7 +19,7 @@ let users = [
   },
 ];
 
-const admin = {
+export const admin = {
   name: "Natur frisseur",
   logo: "",
   contact: {

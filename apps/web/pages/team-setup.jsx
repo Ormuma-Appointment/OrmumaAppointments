@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
@@ -7,11 +7,21 @@ import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/Checkb
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
+import Minus from "../ui/components/assets/minus.svg";
+import { useEffect } from "react";
 
 function TeamSetup() {
+  const [showServices, setShowServices] = useState(false);
+  const [services, setServices] = useState(["Long", "Short", "Bold", "Style"]); // will need to get the services from the page before or from firebase directly
+  const [yesno] = useState(["ja", "nein"]);
   function handleFormSubmit(e) {
     e.preventDefault();
-    console.log(e.target.ja.value);
+    let name = e.target.name.value;
+    console.log(name);
+  }
+
+  function handleRemoveClick(index) {
+    setServices((prev) => prev.filter((elem, i) => i !== index));
   }
   return (
     <div>
@@ -54,7 +64,7 @@ function TeamSetup() {
                 </div>
                 <div className={`${styles.row} ${styles.adresse}`}>
                   <div className={styles.col30}>
-                    <label>Adresse:*</label>
+                    <label>Adresse:</label>
                   </div>
                   <div className={styles.col70}>
                     <Input
@@ -85,7 +95,7 @@ function TeamSetup() {
                 </div>
                 <div className={styles.row}>
                   <div className={styles.col30}>
-                    <label>Telefon:*</label>
+                    <label>Telefon:</label>
                   </div>
                   <div className={styles.col70}>
                     <Input
@@ -98,7 +108,7 @@ function TeamSetup() {
                 </div>
                 <div className={styles.row}>
                   <div className={styles.col30}>
-                    <label>Stylist*Innenfoto:*</label>
+                    <label>Stylist*Innenfoto:</label>
                   </div>
                   <div className={styles.col70}>
                     <Input type="file" name="logo" id="logo" />
@@ -134,10 +144,26 @@ function TeamSetup() {
                 <div className={styles.col70}>
                   <RadioSelectElement
                     name="services_done"
-                    labels={["ja", "nein"]}
+                    labels={yesno}
+                    setShowServices={setShowServices}
                   />
                 </div>
               </div>
+              {showServices && (
+                <div className={styles.cat_box}>
+                  {services.map((el, index) => {
+                    return (
+                      <div key={index} className={styles.pill}>
+                        {el}
+                        <Minus
+                          className={styles.icon}
+                          onClick={() => handleRemoveClick(index)}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <Button icon="" size="medium" variant="primary">
               Person speichern

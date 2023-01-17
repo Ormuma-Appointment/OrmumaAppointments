@@ -11,17 +11,17 @@ const weekday = {
 
 let users = [
   {
+    id: 1,
     firstName: "John",
     lastName: "Doe",
     email: "john@example.com",
     birthDate: "1993-30-04",
-    nextAppointments: [],
-    lastAppointments: [],
   },
 ];
 
 const admin = {
   name: "Natur frisseur",
+  logo: "",
   contact: {
     email: "naturfriseur@gmail.com",
     telephone: "+49 1577 37384273",
@@ -38,6 +38,7 @@ const admin = {
   openingHours: [
     {
       day: 0,
+      label: "Sun",
       start: "0800",
       breakStart: "1200",
       breakEnd: "1300",
@@ -45,6 +46,7 @@ const admin = {
     },
     {
       day: 1,
+      label: "Mon",
       start: "0800",
       breakStart: "1200",
       breakEnd: "1300",
@@ -52,6 +54,7 @@ const admin = {
     },
     {
       day: 2,
+      label: "Tue",
       start: "0800",
       breakStart: "1200",
       breakEnd: "1300",
@@ -59,6 +62,7 @@ const admin = {
     },
     {
       day: 3,
+      label: "Wed",
       start: "0800",
       breakStart: "1200",
       breakEnd: "1300",
@@ -66,6 +70,7 @@ const admin = {
     },
     {
       day: 4,
+      label: "Thu",
       start: "0800",
       breakStart: "1200",
       breakEnd: "1300",
@@ -73,6 +78,7 @@ const admin = {
     },
     {
       day: 5,
+      label: "Fri",
       start: "0800",
       breakStart: "1200",
       breakEnd: "1300",
@@ -91,6 +97,9 @@ const admin = {
   employees: [
     {
       name: "Marie",
+      description: "",
+      phone: "123",
+      image: "",
       adress: {
         city: "Aachen",
         country: "Deutschland",
@@ -98,9 +107,16 @@ const admin = {
         postalCode: "52064",
         street: "legiendammm",
       },
-      phone: "123",
-      image: "",
-      services: ["blabla", "ddddd"],
+      services: {
+        categorie: "Cutting & Styling",
+        services: [
+          { service: "style 1", price: "45€", duration: "30min" },
+          { service: "style 2", price: "30€", duration: "30min" },
+          { service: "style 3", price: "25€", duration: "30min" },
+          { service: "style 4", price: "45€", duration: "30min" },
+          { service: "style 5", price: "455€", duration: "30min" },
+        ],
+      },
       workingTime: [
         {
           day: 1,
@@ -123,22 +139,29 @@ const events = [
     kind: "booking",
     start: "timestamp", //for the cards the timestamp can be tranforme to date and hours
     end: "timestamp",
-    employee: "name",
-    customer: "",
-    style: "",
+    employee: 1, //employee_id
+    customer: 1, //user_id
+    service: "",
+    duration: 45,
   },
 ];
 
-// when booking add slot in appointments - it's not possible to book there anymore
+//1. booking-service : it display the services from the admin datas
+// The user select 1 service
+// service added to a new object in events collection (array of objects)
+//2. booking-employee : it filter in the admin data the employees and display the employees how can do the selected service
+// the user select 1 of the filtered employees
+// service added to the event object in the events collection
+//3. booking-calendar: Propose the calendar the date available for these employees
+//look inside the appointments of the employees if free or not
+//display avaibilities possible with the duration of the event
+// user select avaibilities, add start time and end time to the event object.
+// add the appointment to the appointments the employee
+
+// when booking add slot in appointments - it's not possible to book this slot anymore
 //to see if it's have to be separete or in admin collection
 // openings are created from the working time of the employee :
-//I don't really know if we should already cut them in slot or if we should start with 30 min slots
-// appointment should be integrate inside admin when we will have the logic
 
-//1. The user select 1 service and it filter in the admin employee the employees how can do this service
-//2. The use can choose one of the filtered employee.
-//3. Propose the calendar the date available for these employees -> look inside the appointments of the employees if free or not
-//4. Add the appointment to the appointms of the employee
 import React from "react";
 
 const Datas = () => {

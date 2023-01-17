@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
@@ -8,21 +8,40 @@ import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDe
 import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 import Minus from "../ui/components/assets/minus.svg";
-import { useEffect } from "react";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
-  const [services, setServices] = useState(["Long", "Short", "Bold", "Style"]); // will need to get the services from the page before or from firebase directly
+  let dummyservices = ["Long", "Short", "Bold", "Style"];
+  const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
   const [yesno] = useState(["ja", "nein"]);
+
+  const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
+
   function handleFormSubmit(e) {
     e.preventDefault();
     let name = e.target.name.value;
-    console.log(name);
+    let street = e.target.street.value;
+    let postalCode = e.target.postalCode.value;
+    let city = e.target.city.value;
+    let phone = e.target.phone.value;
+    let logo = e.target.logo.value;
+
+    console.log(logo);
   }
 
   function handleRemoveClick(index) {
     setServices((prev) => prev.filter((elem, i) => i !== index));
   }
+
+  function handleCancelClick(e) {
+    e.preventDefault();
+    setServices(dummyservices);
+  }
+
+  useEffect(() => {
+    console.log(openDays);
+  }, [openDays]);
+
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -124,6 +143,8 @@ function TeamSetup() {
                 <div className={styles.col70}>
                   <CheckboxSelectElement
                     labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                    setOpenDays={setOpenDays}
+                    openDays={openDays}
                   />
                 </div>
               </div>
@@ -132,7 +153,7 @@ function TeamSetup() {
                   <label>Arbeitszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <TimeDefinitionSection />
+                  <TimeDefinitionSection openDays={openDays} />
                 </div>
               </div>
             </div>
@@ -150,19 +171,32 @@ function TeamSetup() {
                 </div>
               </div>
               {showServices && (
-                <div className={styles.cat_box}>
-                  {services.map((el, index) => {
-                    return (
-                      <div key={index} className={styles.pill}>
-                        {el}
-                        <Minus
-                          className={styles.icon}
-                          onClick={() => handleRemoveClick(index)}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
+                <>
+                  <label className={styles.small_label} htmlFor="all_service">
+                    Lösche Services, die von dieser Person nicht angeboten
+                    werden?
+                  </label>
+                  <div className={styles.cat_box}>
+                    {services.map((el, index) => {
+                      return (
+                        <div key={index} className={styles.pill}>
+                          {el}
+                          <Minus
+                            className={styles.icon}
+                            onClick={() => handleRemoveClick(index)}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <Button
+                    size="xsmall"
+                    variant="invisible"
+                    onClick={handleCancelClick}
+                  >
+                    Änderungen abbrechen
+                  </Button>
+                </>
               )}
             </div>
             <Button icon="" size="medium" variant="primary">

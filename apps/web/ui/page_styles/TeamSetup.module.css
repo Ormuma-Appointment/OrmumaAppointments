@@ -55,7 +55,6 @@
 .employee_services {
   margin-top: 1rem;
   padding: 0 0 5rem;
-  border-bottom: 1px solid #ccc;
   display: flex;
   flex-direction: column;
 }
@@ -85,7 +84,12 @@
     brightness(99%) contrast(119%);
   cursor: pointer;
 }
-
+.employee_services button {
+  align-self: flex-end;
+}
+.small_label {
+  margin-top: 1rem;
+}
 @media screen and (min-width: 760px) {
   .container {
     width: 80%;

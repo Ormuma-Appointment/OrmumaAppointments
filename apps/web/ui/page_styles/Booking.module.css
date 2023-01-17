@@ -1,0 +1,57 @@
+.bookingContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.bookingContainer > * {
+  width: 100%;
+  padding: 1rem;
+}
+
+.bookingContainer .selectItemText {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.uniqueContainer {
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+}
+
+.center {
+  text-align: center;
+}
+
+/*Tablet */
+@media screen and (min-width: 700px) {
+  .bookingContainer {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .bookingContainer > * {
+    width: 48.5%;
+  }
+
+  .uniqueContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1320px) {
+  .pageContainer {
+    width: 80%;
+    margin: auto;
+    padding: 3rem 0 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

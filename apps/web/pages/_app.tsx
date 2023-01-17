@@ -4,16 +4,12 @@ import "../globals.css";
 import { AuthContextProvider } from "../context/AuthContext";
 import Navigation from "../ui/components/Navigation/Navigation";
 import Footer from "../ui/components/Footer/Footer";
-import { useAuthContext } from "../context/AuthContext";
-import { useRouter } from "next/router";
-import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import PageOverviewTemp from "../ui/components/PageOverviewTemp/PageOverviewTemp";
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }: AppProps) {
   // const { currentUser } = useAuthContext();
 
-  const router = useRouter();
   console.log(pageProps);
   return (
     <AuthContextProvider>
@@ -24,6 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <div className="page_wrapper">
           <Component {...pageProps} />
         </div>
+        <PageOverviewTemp />
       </div>
       <div className="grid_footer">
         <Footer />

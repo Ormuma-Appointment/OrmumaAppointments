@@ -40,7 +40,7 @@ const account = ({ name }) => {
   // };
   // getData();
   // }, []);
-  console.log(isLoggedIn(currentUser));
+  console.log(currentUser);
   // const datadata = getData();
   // console.log(datadata, "gggg");
 

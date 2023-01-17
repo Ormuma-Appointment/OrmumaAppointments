@@ -19,17 +19,23 @@
   flex-direction: column;
   margin: 0 auto;
 }
+
 .info h2 {
   text-align: center;
   margin-bottom: 1rem;
 }
-
+.info_row {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
 @media screen and (min-width: 760px) {
   .welcome div {
     width: 20vw;
   }
   .info_row {
     display: flex;
+    flex-direction: row;
     gap: 1rem;
   }
   .info_row > div {

@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: hidden;
+}
+.container div {
+  display: flex;
+  justify-content: flex-end;
+}
+.input_group {
+  width: 515px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 0;
+  margin-bottom: 0.5rem;
+}
+.input_group p {
+  margin-left: 1rem;
+}
+.input_group div {
+  margin-left: 0.5rem;
+}

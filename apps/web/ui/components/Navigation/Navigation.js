@@ -10,6 +10,7 @@ import { useAuthContext } from "../../../context/AuthContext";
 import { auth } from "../../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Navigation(props) {
   const router = useRouter();
@@ -24,7 +25,7 @@ function Navigation(props) {
   } = props;
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
+      <Link href="/" className={styles.logo}>
         <Image
           src={logo}
           alt="logo"
@@ -32,7 +33,7 @@ function Navigation(props) {
           height={50}
           width={50}
         />
-      </div>
+      </Link>
       {(admin_logged_in || customer_logged_in) && (
         <div className={styles.right}>
           {admin_logged_in && (

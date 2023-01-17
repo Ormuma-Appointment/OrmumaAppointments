@@ -3,9 +3,39 @@
   justify-content: center;
   align-items: center;
   padding: 2rem 1.5rem 3rem 1.5rem;
-  height: 20rem;
-  object-fit: contain;
+  max-height: 20rem;
 }
 .image {
   height: 100%;
+  max-height: 15rem;
+  aspect-ratio: 1/1;
+}
+.info {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.name {
+  color: var(--primary-color);
+}
+@media screen and (min-width: 760px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 15rem;
+    max-height: none;
+  }
+  .image {
+    width: 100%;
+  }
+  .info {
+    margin: 0;
+    margin-top: 2rem;
+    align-items: center;
+    text-align: center;
+  }
 }

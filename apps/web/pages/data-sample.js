@@ -89,8 +89,10 @@ const admin = {
       phone: "123",
       image: "",
       services: ["blabla", "ddddd"],
-      workingTime: [{ day: "saturday", start: "0800", end: "1500" }],
-      appointments: { date: ["timestamps", "timestamps", "timestamps"] },
+      workingTime: [{ day: 1, start: "0800", end: "1500" }],
+      appointments: {
+        date: ["timestampStart-timestampEnd", "timestamps", "timestamps"],
+      },
     },
   ],
 };
@@ -99,8 +101,8 @@ const admin = {
 const events = [
   {
     kind: "booking",
-    start: "2020-01-03 12:00",
-    end: "2020-01-03 12:30",
+    start: "timestamp", //for the cards the timestamp can be tranforme to date and hours
+    end: "timestamp",
     employee: "name",
     customer: "",
     style: "",

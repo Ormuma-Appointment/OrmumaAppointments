@@ -27,6 +27,9 @@ function PageOverviewTemp() {
       <Link style={divStyle} href="/service-setup">
         Service Setup
       </Link>
+      <Link style={divStyle} href="/team-setup">
+        Team Setup
+      </Link>
       <Link style={divStyle} href="/booking-calendar">
         Booking Calendar
       </Link>

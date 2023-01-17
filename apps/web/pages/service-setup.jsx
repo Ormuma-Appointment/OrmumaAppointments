@@ -27,11 +27,13 @@ function ServiceSetup() {
     <div>
       <div className={styles.breadcrumb}>
         <Link href="/store-setup">Store Setup</Link>{" "}
-        <span className={styles.arrows}>&#9654;</span>{" "}
+        <span className={styles.arrows}> &#9654;</span>{" "}
         <span className={styles.current_breadcrumb}>
-          Services Konfgurieren <span className={styles.arrows}>&#9654;</span>{" "}
-        </span>
-        Team konfigurieren <span className={styles.arrows}>&#9654;</span>
+          <Link href="/service-setup">Services Konfgurieren </Link>{" "}
+        </span>{" "}
+        <span className={styles.arrows}>&#9654;</span>{" "}
+        <Link href="/team-setup">Team konfigurieren </Link>
+        <span className={styles.arrows}>&#9654;</span>
       </div>
       <h1>Services Konfigurieren</h1>
       <CardContainer>

@@ -20,10 +20,12 @@ const StoreSetup = () => {
     <div>
       <div className={styles.breadcrumb}>
         <span className={styles.current_breadcrumb}>
-          Store Setup <span className={styles.arrows}> &#9654;</span>{" "}
-        </span>
+          <Link href="/store-setup">Store Setup</Link>{" "}
+        </span>{" "}
+        <span className={styles.arrows}> &#9654;</span>{" "}
         <Link href="/service-setup">Services Konfgurieren </Link>{" "}
-        <span className={styles.arrows}>&#9654;</span> Team konfigurieren{" "}
+        <span className={styles.arrows}>&#9654;</span>{" "}
+        <Link href="/team-setup">Team konfigurieren </Link>
         <span className={styles.arrows}>&#9654;</span>
       </div>
       <h1>Store Setup</h1>

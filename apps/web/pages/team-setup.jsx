@@ -213,10 +213,13 @@ function TeamSetup() {
               Person speichern
             </Button>
           </form>
-          <div className={styles.employees}>
-            {allEmployees.map((el, index) => {
-              return <StylistCard key={index} name={el.name} />;
-            })}
+          <div className={styles.employee_container}>
+            <h2>Alle Mitarbeiter</h2>
+            <div className={styles.employees}>
+              {allEmployees.map((el, index) => {
+                return <StylistCard key={index} name={el.name} />;
+              })}
+            </div>
           </div>
         </div>
       </CardContainer>

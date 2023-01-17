@@ -88,7 +88,7 @@
   align-self: flex-end;
 }
 .small_label {
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 @media screen and (min-width: 760px) {
   .container {
@@ -99,6 +99,11 @@
     flex-direction: row;
   }
   .col30 {
+    float: left;
+    width: 20%;
+    margin-top: 1rem;
+  }
+  .col50 {
     float: left;
     width: 20%;
     margin-top: 1rem;

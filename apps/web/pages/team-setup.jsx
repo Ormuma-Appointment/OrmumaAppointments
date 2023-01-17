@@ -14,19 +14,26 @@ function TeamSetup() {
   let dummyservices = ["Long", "Short", "Bold", "Style"];
   const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
   const [yesno] = useState(["ja", "nein"]);
+  const [allEmployees, setAllEmployees] = useState([
+    { name: "Kasper Schneiderlein", photo: null },
+    { name: "Juli Katter", photo: null },
+  ]);
 
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    let name = e.target.name.value;
-    let street = e.target.street.value;
-    let postalCode = e.target.postalCode.value;
-    let city = e.target.city.value;
-    let phone = e.target.phone.value;
-    let logo = e.target.logo.value;
+    let obj = {
+      name: e.target.name.value,
+      street: e.target.street.value,
+      postalCode: e.target.postalCode.value,
+      city: e.target.city.value,
+      phone: e.target.phone.value,
+      photo: e.target.photo.value,
+      services: services,
+    };
 
-    console.log(logo);
+    console.log(obj);
   }
 
   function handleRemoveClick(index) {
@@ -76,7 +83,7 @@ function TeamSetup() {
                       type="text"
                       name="name"
                       id="name"
-                      placeholder="Salon Name"
+                      placeholder="Name"
                       required
                     />
                   </div>
@@ -130,7 +137,7 @@ function TeamSetup() {
                     <label>Stylist*Innenfoto:</label>
                   </div>
                   <div className={styles.col70}>
-                    <Input type="file" name="logo" id="logo" />
+                    <Input type="file" name="photo" id="logo" />
                   </div>
                 </div>
               </div>
@@ -159,10 +166,10 @@ function TeamSetup() {
             </div>
             <div className={styles.employee_services}>
               <div>
-                <label className={styles.col30} htmlFor="all_service">
+                <label className={styles.col50} htmlFor="all_service">
                   Bietet diese Person alle Services an?
                 </label>
-                <div className={styles.col70}>
+                <div className={styles.col50}>
                   <RadioSelectElement
                     name="services_done"
                     labels={yesno}
@@ -174,7 +181,7 @@ function TeamSetup() {
                 <>
                   <label className={styles.small_label} htmlFor="all_service">
                     Lösche Services, die von dieser Person nicht angeboten
-                    werden?
+                    werden. Sie werden nur für diese Person gelöscht.
                   </label>
                   <div className={styles.cat_box}>
                     {services.map((el, index) => {
@@ -194,7 +201,7 @@ function TeamSetup() {
                     variant="invisible"
                     onClick={handleCancelClick}
                   >
-                    Änderungen abbrechen
+                    Änderungen rückgängig machen
                   </Button>
                 </>
               )}

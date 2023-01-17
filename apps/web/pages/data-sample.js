@@ -71,7 +71,7 @@ const admin = {
     {
       service: "",
       categorie: "",
-      duration: "in timeStamps",
+      duration: 30,
       waitingtime: "",
       price: "",
     },
@@ -121,6 +121,11 @@ import React from "react";
 
 const Datas = () => {
   //transform working hours to timeStamps from one working date
+
+  //here with 15 min, but could be with service duration
+  const minToMilliseconds = 15 * 60 * 1000; //900000
+  console.log("minToMilliseconds", minToMilliseconds);
+
   const workingHoursToTimestamp = (array) => {
     //new Date(year, monthIndex, day, hours, minutes)
     console.log("appointment", array);

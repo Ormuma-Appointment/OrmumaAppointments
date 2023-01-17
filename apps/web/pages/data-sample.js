@@ -9,7 +9,7 @@ const weekday = {
   6: "Saturday",
 };
 
-let users = [
+const users = [
   {
     id: 1,
     firstName: "John",
@@ -87,11 +87,24 @@ const admin = {
   ],
   services: [
     {
-      service: "",
-      categorie: "",
-      duration: 30,
-      waitingtime: "",
-      price: "",
+      categorie: "Cutting & Styling",
+      services: [
+        { service: "style 1", price: "45€", duration: "30min" },
+        { service: "style 2", price: "30€", duration: "30min" },
+        { service: "style 3", price: "25€", duration: "30min" },
+        { service: "style 4", price: "45€", duration: "30min" },
+        { service: "style 5", price: "455€", duration: "30min" },
+      ],
+    },
+    {
+      categorie: "Colors",
+      services: [
+        { service: "style 1", price: "45€", duration: "30min" },
+        { service: "style 2", price: "30€", duration: "30min" },
+        { service: "style 3", price: "25€", duration: "30min" },
+        { service: "style 4", price: "45€", duration: "30min" },
+        { service: "style 5", price: "455€", duration: "30min" },
+      ],
     },
   ],
   employees: [
@@ -107,16 +120,55 @@ const admin = {
         postalCode: "52064",
         street: "legiendammm",
       },
-      services: {
-        categorie: "Cutting & Styling",
-        services: [
-          { service: "style 1", price: "45€", duration: "30min" },
-          { service: "style 2", price: "30€", duration: "30min" },
-          { service: "style 3", price: "25€", duration: "30min" },
-          { service: "style 4", price: "45€", duration: "30min" },
-          { service: "style 5", price: "455€", duration: "30min" },
-        ],
+      services: [
+        {
+          categorie: "Cutting & Styling",
+          services: [{ service: "style 1" }, { service: "style 2" }],
+        },
+        {
+          categorie: "Colors",
+          services: [
+            { service: "style 3" },
+            { service: "style 4" },
+            { service: "style 5" },
+          ],
+        },
+      ],
+      workingTime: [
+        {
+          day: 1,
+          start: "0800",
+          breakStart: "1200",
+          breakEnd: "1300",
+          end: "1500",
+        },
+      ],
+      appointments: {
+        date: ["timestampStart-timestampEnd", "timestamps", "timestamps"],
       },
+    },
+    {
+      name: "John",
+      description: "",
+      phone: "123",
+      image: "",
+      adress: {
+        city: "Aachen",
+        country: "Deutschland",
+        number: 11,
+        postalCode: "52064",
+        street: "legiendammm",
+      },
+      services: [
+        {
+          categorie: "Cutting & Styling",
+          services: [{ service: "style 4" }, { service: "style 2" }],
+        },
+        {
+          categorie: "Colors",
+          services: [{ service: "style 1" }, { service: "style 2" }],
+        },
+      ],
       workingTime: [
         {
           day: 1,

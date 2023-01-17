@@ -6,9 +6,16 @@ import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Calendar from "../assets/calendar.svg";
 import Button from "../Button/Button";
+import { useAuthContext } from "../../../context/AuthContext";
+import { auth } from "../../../firebase/firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Navigation(props) {
+  const router = useRouter();
+
+  const { logOut, currentUser } = useAuthContext();
   const {
     customer_logged_out,
     customer_logged_in,
@@ -38,7 +45,17 @@ function Navigation(props) {
             </>
           )}
           <AccountIcon className={styles.icon} />
-          <Logout className={styles.icon} />
+          <button
+            onClick={() =>
+              signOut(auth).then(() => {
+                router.push("/login");
+                console.log("signed out");
+                console.log(currentUser);
+              })
+            }
+          >
+            <Logout className={styles.icon} />
+          </button>
         </div>
       )}
 

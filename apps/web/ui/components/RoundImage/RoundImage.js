@@ -4,11 +4,11 @@ import styles from "./RoundImage.module.css";
 
 function RoundImage({ alt, image, initialWidth }) {
   return (
-    <div className={styles.logo}>
+    <div className={styles.container}>
       <Image
         src={image}
         alt={alt}
-        className={styles.logoImage}
+        className={styles.image}
         width={initialWidth ? initialWidth : ""}
         height={initialWidth ? initialWidth : ""}
       />

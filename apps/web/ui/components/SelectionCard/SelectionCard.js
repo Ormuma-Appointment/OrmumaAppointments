@@ -10,6 +10,7 @@ const SelectionCard = (props) => {
   const setSelected = props.setSelected;
 
   const service = props.service;
+
   return (
     <div>
       <h4>Ihre Auswahl</h4>

@@ -18,9 +18,68 @@ function TeamSetup() {
     { name: "Juli Katter", photo: null },
     { name: "Kyle Superwow", photo: null },
   ];
+  let days_times = [
+    {
+      weekday: "Mo",
+      index: 1,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+    {
+      weekday: "Di",
+      index: 2,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+    {
+      weekday: "Mi",
+      index: 3,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+    {
+      weekday: "Do",
+      index: 4,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+    {
+      weekday: "Fr",
+      index: 5,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+    {
+      weekday: "Sa",
+      index: 6,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+    {
+      weekday: "So",
+      index: 0,
+      start: null,
+      end: null,
+      pause_start: null,
+      pause_end: null,
+    },
+  ];
   const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
   const [yesno] = useState(["ja", "nein"]);
   const [allEmployees, setAllEmployees] = useState(dummyemployees);
+  const [times, setTimes] = useState(days_times);
 
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
 
@@ -34,6 +93,7 @@ function TeamSetup() {
       phone: e.target.phone.value,
       photo: e.target.photo.value,
       services: services,
+      times: times,
     };
 
     console.log(obj);
@@ -49,8 +109,8 @@ function TeamSetup() {
   }
 
   useEffect(() => {
-    console.log(openDays);
-  }, [openDays]);
+    console.log(times);
+  }, [times]);
 
   return (
     <div>
@@ -163,7 +223,11 @@ function TeamSetup() {
                   <label>Arbeitszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <TimeDefinitionSection openDays={openDays} />
+                  <TimeDefinitionSection
+                    openDays={openDays}
+                    setTimes={setTimes}
+                    times={times}
+                  />
                 </div>
               </div>
             </div>
@@ -213,10 +277,13 @@ function TeamSetup() {
               Person speichern
             </Button>
           </form>
-          <div className={styles.employees}>
-            {allEmployees.map((el, index) => {
-              return <StylistCard key={index} name={el.name} />;
-            })}
+          <div className={styles.employee_container}>
+            <h2>Alle Mitarbeiter</h2>
+            <div className={styles.employees}>
+              {allEmployees.map((el, index) => {
+                return <StylistCard key={index} name={el.name} />;
+              })}
+            </div>
           </div>
         </div>
       </CardContainer>

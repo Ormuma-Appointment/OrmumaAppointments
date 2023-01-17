@@ -9,7 +9,7 @@ const weekday = {
   6: "Saturday",
 };
 
-let users = [
+const users = [
   {
     id: 1,
     firstName: "John",

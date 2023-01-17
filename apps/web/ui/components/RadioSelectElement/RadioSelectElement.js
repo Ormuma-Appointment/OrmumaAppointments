@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./RadioSelectElement.module.css";
 
-function RadioSelectElement({ labels }) {
+function RadioSelectElement({ labels, name }) {
   return (
     <div className={styles.container}>
       {labels.map((el, index) => {
@@ -11,8 +11,8 @@ function RadioSelectElement({ labels }) {
             <input
               type="radio"
               id={el}
-              value={labels}
-              name="select"
+              value={el}
+              name={name}
               className={styles.input}
             />
           </div>

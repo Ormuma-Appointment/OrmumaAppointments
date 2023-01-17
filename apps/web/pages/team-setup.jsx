@@ -6,8 +6,13 @@ import Input from "../ui/components/InputField/Input";
 import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
+import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 
 function TeamSetup() {
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    console.log(e.target.ja.value);
+  }
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -20,14 +25,16 @@ function TeamSetup() {
         </span>{" "}
         <span className={styles.arrows}>&#9654;</span>
       </div>
-      <h1>Store Setup</h1>
+      <h1>Team Konfigurieren</h1>
       <CardContainer>
         <div className={styles.container}>
-          <form action="">
+          <form action="" onSubmit={handleFormSubmit}>
             <div className={styles.intro}>
-              To add a salon employee fill out the fields below and click on
-              add. The employee will appear below. None of the personal
-              information will be visible to the customers.
+              Um eine Person hinzuzufügen, füllen Sie bitte die unten stehenden
+              Felder aus. Sobald Sie auf "Person speichern" klicken, wird diese
+              unten auftauchen. Keine persönlichen Daten, werden für Kund*Innen
+              sichtbar sein. <br />
+              Klicken Sie auf "Prozess beenden", um alle Daten zu speichern.
             </div>
             <div className={styles.form}>
               <div className={styles.setUpInfos}>
@@ -91,10 +98,10 @@ function TeamSetup() {
                 </div>
                 <div className={styles.row}>
                   <div className={styles.col30}>
-                    <label>Stylistenfoto:*</label>
+                    <label>Stylist*Innenfoto:*</label>
                   </div>
                   <div className={styles.col70}>
-                    <Input type="file" name="logo" id="logo" required />
+                    <Input type="file" name="logo" id="logo" />
                   </div>
                 </div>
               </div>
@@ -102,7 +109,7 @@ function TeamSetup() {
             <div className={styles.setUpOpenings}>
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
-                  <label>Öffnungstage:*</label>
+                  <label>Arbeitstage:*</label>
                 </div>
                 <div className={styles.col70}>
                   <CheckboxSelectElement
@@ -112,13 +119,29 @@ function TeamSetup() {
               </div>
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
-                  <label>Öffnungszeiten:*</label>
+                  <label>Arbeitszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
                   <TimeDefinitionSection />
                 </div>
               </div>
             </div>
+            <div className={styles.employee_services}>
+              <div>
+                <label className={styles.col30} htmlFor="all_service">
+                  Bietet diese Person alle Services an?
+                </label>
+                <div className={styles.col70}>
+                  <RadioSelectElement
+                    name="services_done"
+                    labels={["ja", "nein"]}
+                  />
+                </div>
+              </div>
+            </div>
+            <Button icon="" size="medium" variant="primary">
+              Person speichern
+            </Button>
           </form>
         </div>
       </CardContainer>

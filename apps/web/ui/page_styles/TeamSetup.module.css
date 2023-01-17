@@ -52,6 +52,11 @@
   justify-content: flex-end;
   margin-top: 5rem;
 }
+.employee_services {
+  margin-top: 1rem;
+  padding: 0 0 5rem;
+  border-bottom: 1px solid #ccc;
+}
 
 @media screen and (min-width: 760px) {
   .container {

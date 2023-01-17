@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+  height: 20rem;
+  object-fit: contain;
+}
+.image {
+  height: 100%;
+}

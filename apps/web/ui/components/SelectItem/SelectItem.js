@@ -9,21 +9,18 @@ function SelectItem(props) {
     props;
 
   const { setSelected } = props;
+
+  const handleSelected = () => {
+    setSelected({
+      title,
+      price,
+      duration,
+    });
+  };
   return (
     <div
       className={`${styles.service_container} ${selected && styles.selected}`}
-      onClick={() =>
-        setSelected({
-          title,
-          minus,
-          price,
-          duration,
-          plus,
-          edit,
-          selected,
-          ...rest,
-        })
-      }
+      onClick={handleSelected}
     >
       <div className={styles.serviceName}>{title}</div>
       <div className={price ? styles.serviceRight : styles.rightIconOnly}>

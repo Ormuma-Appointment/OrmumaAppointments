@@ -12,9 +12,9 @@ function TimeDefinitionSection({
           <div key={index}>
             <div className={styles.input_group}>
               <p>{el}</p> <SelectElement placeholder="Start" />
-              <SelectElement minute placeholder="Ende" />
+              <SelectElement placeholder="Ende" />
               <p>Pause</p> <SelectElement placeholder="Start" />
-              <SelectElement minute placeholder="Ende" />
+              <SelectElement placeholder="Ende" />
             </div>
           </div>
         );

@@ -1,0 +1,10 @@
+.breadcrumb {
+  margin-bottom: 1rem;
+}
+.arrows {
+  font-size: 0.75rem;
+}
+.current_breadcrumb {
+  color: var(--primary-color);
+  font-weight: bold;
+}

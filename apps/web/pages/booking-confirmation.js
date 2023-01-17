@@ -21,7 +21,7 @@ const BookingConfirmation = () => {
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   };
   return (
-    <div className="page-container">
+    <div className={styles.pageContainer}>
       <h1 className={styles.center}>Your booking confirmation</h1>
       {confirmed ? (
         <>
@@ -58,7 +58,7 @@ const BookingConfirmation = () => {
             </div>
             <div className={styles.buttonsContainer}>
               <Button icon="" size="medium" variant="danger">
-                <Link href="/booking-canlendar">Go back</Link>
+                <Link href="/booking-calendar">Go back</Link>
               </Button>
               <Button icon="" size="medium" variant="primary">
                 <Link

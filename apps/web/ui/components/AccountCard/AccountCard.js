@@ -11,8 +11,8 @@ function AccountCard({ name = "Andrea Hallo", email = "testtest@test.de" }) {
       <div className={styles.container}>
         <div className={styles.round}></div>
         <div className={styles.info}>
-          <div>{currentUser?.displayName || "undefined"}</div>
-          <div>{currentUser?.email}</div>
+          <div>{name}</div>
+          <div>{email}</div>
         </div>
         <Edit className={styles.icon} />
       </div>

@@ -2,12 +2,25 @@ import React from "react";
 import styles from "./SelectItem.module.css";
 import Plus from "../assets/plus.svg";
 import Edit from "../assets/edit.svg";
+import Minus from "../assets/minus.svg";
 
 function SelectItem(props) {
-  const { title, price, duration, plus, edit, selected, ...rest } = props;
+  const { title, minus, price, duration, plus, edit, selected, ...rest } =
+    props;
+
+  const { setSelected } = props;
+
+  const handleSelected = () => {
+    setSelected({
+      title,
+      price,
+      duration,
+    });
+  };
   return (
     <div
       className={`${styles.service_container} ${selected && styles.selected}`}
+      onClick={handleSelected}
     >
       <div className={styles.serviceName}>{title}</div>
       <div className={price ? styles.serviceRight : styles.rightIconOnly}>
@@ -25,6 +38,11 @@ function SelectItem(props) {
         {edit && (
           <div className={styles.addImage}>
             <Edit />
+          </div>
+        )}
+        {minus && (
+          <div className={styles.addImage}>
+            <Minus />
           </div>
         )}
       </div>

@@ -3,4 +3,9 @@
   border-radius: var(--border-radius);
   margin-bottom: 1rem;
   background-color: var(--background-white);
+  display: inline-block;
+}
+
+.container:hover {
+  box-shadow: var(--box-shadow-hover);
 }

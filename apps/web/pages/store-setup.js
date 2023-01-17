@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
@@ -8,6 +8,7 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 
 const StoreSetup = () => {
+  const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const handleSubmit = (e) => {
     e.preventDefault();
     let email = e.target.email.value;
@@ -107,20 +108,22 @@ const StoreSetup = () => {
           <div className={styles.setUpOpenings}>
             <div className={`${styles.row} ${styles.opening}`}>
               <div className={styles.col30}>
-                <label>Öffnungstage:*</label>
+                <label>Arbeitstage:*</label>
               </div>
               <div className={styles.col70}>
                 <CheckboxSelectElement
                   labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                  setOpenDays={setOpenDays}
+                  openDays={openDays}
                 />
               </div>
             </div>
             <div className={`${styles.row} ${styles.opening}`}>
               <div className={styles.col30}>
-                <label>Öffnungszeiten:*</label>
+                <label>Arbeitszeiten:*</label>
               </div>
               <div className={styles.col70}>
-                <TimeDefinitionSection />
+                <TimeDefinitionSection openDays={openDays} />
               </div>
             </div>
           </div>

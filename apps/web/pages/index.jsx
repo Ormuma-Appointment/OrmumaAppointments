@@ -58,7 +58,7 @@ export default function Web() {
   ];
   if (currentUser) {
     console.log(currentUser, "current user logged in");
-  } else {
+  } else if (currentUser === null) {
     console.log("not logged in ");
   }
   function handleBookingClick(e) {

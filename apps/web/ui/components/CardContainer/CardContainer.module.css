@@ -4,3 +4,7 @@
   margin-bottom: 1rem;
   background-color: var(--background-white);
 }
+
+.container:hover {
+  box-shadow: var(--box-shadow-hover);
+}

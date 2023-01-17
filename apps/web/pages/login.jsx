@@ -1,16 +1,44 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { auth, db } from "../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import styles from "../ui/page_styles/Register.module.css";
 import Button from "../ui/components/Button/Button";
 import Link from "../ui/components/Link/Link";
 import Input from "../ui/components/InputField/Input";
+import { useAuthContext } from "../context/AuthContext";
 
-function login() {
+function Login() {
   const [salonName, setSalonName] = useState("Natur Friseur");
-  function handleLoginSubmit(e) {
+  const [err, setErr] = useState(false);
+  const router = useRouter();
+
+  const { currentUser, setCurrentUser } = useAuthContext();
+  console.log(currentUser, "current user from use context");
+
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    let email = e.target.email.value;
-    let password = e.target.password.value;
-  }
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(password);
+
+    try {
+      // if (currentUser) {
+      setErr(false);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      // Signed in
+      router.push("/account");
+      const user = res.userCredential.user;
+      setCurrentUser(user);
+
+      console.log(currentUser, "logout func");
+    } catch (e) {
+      setErr(true);
+      console.error("somthing is wrong ");
+      // console.log("errrrroorrr");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -43,4 +71,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

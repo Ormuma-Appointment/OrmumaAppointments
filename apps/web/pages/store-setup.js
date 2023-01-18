@@ -205,7 +205,7 @@ const StoreSetup = () => {
             </div>
             <div className={styles.buttonContainer}>
               <Button icon="" size="medium" variant="primary">
-                Weiter
+                speichern & weiter
               </Button>
             </div>
           </form>

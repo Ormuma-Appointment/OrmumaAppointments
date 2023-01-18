@@ -8,15 +8,81 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 
 const StoreSetup = () => {
+  let days_times = [
+    {
+      label: "Mo",
+      day: 1,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Di",
+      day: 2,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Mi",
+      day: 3,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Do",
+      day: 4,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Fr",
+      day: 5,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Sa",
+      day: 6,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "So",
+      day: 0,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+  ];
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
+  const [times, setTimes] = useState(days_times);
   const handleSubmit = (e) => {
     e.preventDefault();
-    let email = e.target.email.value;
-    let password = e.target.password.value;
-    let passwordConfirmation = e.target.passwordConfirmation.value;
+    let storeObj = {
+      name: e.target.name.value,
+      street: e.target.street.value,
+      postalCode: e.target.postalCode.value,
+      city: e.target.city.value,
+      phone: e.target.phone.value,
+      photo: e.target.photo.value,
+      times: times,
+    };
 
-    console.log(email, password, passwordConfirmation);
+    console.log(storeObj);
   };
+
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -106,7 +172,7 @@ const StoreSetup = () => {
                   <label>Logo:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <Input type="file" name="logo" id="logo" required />
+                  <Input type="file" name="photo" id="logo" />
                 </div>
               </div>
             </div>
@@ -129,7 +195,11 @@ const StoreSetup = () => {
                   <label>Arbeitszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <TimeDefinitionSection openDays={openDays} />
+                  <TimeDefinitionSection
+                    openDays={openDays}
+                    setTimes={setTimes}
+                    times={times}
+                  />
                 </div>
               </div>
             </div>

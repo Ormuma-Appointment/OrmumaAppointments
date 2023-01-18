@@ -29,41 +29,6 @@ function ServiceAdd({ setData, services, setServices, categories }) {
     setData(newServices);
   }
 
-  // function handleFormSubmit(e) {
-  //   e.preventDefault();
-  //   let serviceData = [];
-  //   services.map((el, index) => {
-  //     return (serviceData = [
-  //       ...serviceData,
-  //       {
-  //         service: el,
-  //         category: e.target.category[index].value,
-  //         duration: Number(e.target.duration[index].value),
-  //         waiting: Number(e.target.waiting[index].value),
-  //         price: Number(e.target.price[index].value),
-  //       },
-  //     ]);
-  //   });
-
-  //   let newServices = serviceData.reduce((result, service) => {
-  //     let category = service.category;
-  //     if (!result[category]) {
-  //       result[category] = {
-  //         category: category,
-  //         services: [],
-  //       };
-  //     }
-  //     result[category].services.push({
-  //       service: service.service,
-  //       price: service.price,
-  //       duration: service.duration,
-  //       waiting: service.waiting,
-  //     });
-  //     return result;
-  //   }, {});
-
-  //   setData(Object.values(newServices));
-  // }
   function handleRemoveClick(index) {
     setServices((prev) => prev.filter((elem, i) => i !== index));
   }

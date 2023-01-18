@@ -95,14 +95,7 @@
   padding-top: 3rem;
   border-top: 1px solid #ccc;
 }
-.employees {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-.employees > div {
-  margin-bottom: 1rem;
-}
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -138,14 +131,5 @@
   }
   .col50:first-child {
     margin-right: 2%;
-  }
-
-  .employees {
-    margin-top: 2rem;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-  .employees > div {
-    margin-right: 1rem;
   }
 }

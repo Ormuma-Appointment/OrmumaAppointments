@@ -4,12 +4,18 @@
 }
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .edit {
   display: flex;
   color: var(--primary-color);
   font-size: 0.75rem;
+  margin-left: 1rem;
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+.edit:hover {
+  font-weight: bold;
 }
 .container_box {
   width: 100%;

@@ -3,7 +3,7 @@ import styles from "../ui/page_styles/AccountAdmin.module.css";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import InfoElement from "../ui/components/InfoElement/InfoElement";
-import Button from "../ui/components/Button/Button";
+import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 
@@ -78,10 +78,10 @@ const AccountAdmin = () => {
         <div className={styles.column}>
           <div className={styles.header}>
             <h3>Salon Übersicht </h3>{" "}
-            <div className={styles.edit}>
+            <Link href="/store-setup" className={styles.edit}>
               <Edit className={styles.icon} />
               bearbeiten
-            </div>
+            </Link>
           </div>
 
           <CardContainer>
@@ -139,18 +139,15 @@ const AccountAdmin = () => {
       <div className={styles.employee_container}>
         <div className={styles.header}>
           <h3>Salon Mitarbeiter*Innen</h3>
-          <Button icon="" size="xsmall" variant="invisible">
+          <Link href="/team-setup" className={styles.edit}>
+            <Edit className={styles.icon} />
             bearbeiten
-          </Button>
+          </Link>
         </div>
-        <Button icon="" size="xsmall" variant="invisible">
-          bearbeiten
-        </Button>
         <EmployeeOverview employees={salon.employees} />
       </div>
     </div>
   );
-  // }
 };
 
 export default AccountAdmin;

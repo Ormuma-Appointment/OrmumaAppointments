@@ -1,12 +1,10 @@
 .container {
-  padding: 3rem 1.5rem 3rem 1.5rem;
-  overflow-y: hidden;
-  width: 100%;
+  padding: 3rem 1.5rem;
+  width: 95vw;
 }
 
 .setUpForm {
   width: 100%;
-  padding: 3rem 1.5rem 3rem 1.5rem;
 }
 
 .setUpForm label {
@@ -59,7 +57,7 @@
 
 @media screen and (min-width: 760px) {
   .container {
-    width: 80%;
+    width: 90vw;
     margin: auto;
     padding: 4rem;
   }
@@ -89,5 +87,10 @@
 
   .col50:first-child {
     margin-right: 2%;
+  }
+}
+@media screen and (min-width: 1060px) {
+  .container {
+    width: 70vw;
   }
 }

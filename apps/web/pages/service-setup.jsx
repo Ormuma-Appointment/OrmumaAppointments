@@ -18,11 +18,11 @@ function ServiceSetup() {
   function handleRemoveClick(index) {
     setCategories((prev) => prev.filter((elem, i) => i !== index));
   }
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
+  function handleSaveClick(e) {
+    e.preventDefault();
+    let serviceObj = data;
+    console.log(serviceObj);
+  }
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -83,8 +83,8 @@ function ServiceSetup() {
             <Button size="medium" variant="danger">
               zurück
             </Button>
-            <Button size="medium" variant="primary">
-              weiter
+            <Button size="medium" variant="primary" onClick={handleSaveClick}>
+              speichern & weiter
             </Button>
           </div>
         </div>

@@ -2,6 +2,15 @@
   padding: 3rem 1.5rem;
   width: 95vw;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.edit {
+  display: flex;
+  color: var(--primary-color);
+  font-size: 0.75rem;
+}
 .container_box {
   width: 100%;
   padding: 3rem 2rem;
@@ -27,8 +36,8 @@
   font-weight: bold;
 }
 .icon {
-  width: 1rem;
-  margin-left: 1rem;
+  width: 0.8rem;
+  margin-right: 0.25rem;
   filter: var(--icon-filter);
   cursor: pointer;
   align-self: flex-start;

@@ -137,13 +137,24 @@ const StoreSetup = () => {
                   <label>Adresse:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <Input
-                    type="text"
-                    name="street"
-                    id="street"
-                    placeholder="Straße, Nummer"
-                    required
-                  />
+                  <div className={`${styles.row} ${styles.city}`}>
+                    <div className={styles.col70}>
+                      <Input
+                        type="text"
+                        name="street"
+                        id="street"
+                        placeholder="Straße"
+                      />
+                    </div>{" "}
+                    <div className={styles.col30}>
+                      <Input
+                        type="number"
+                        name="number"
+                        id="number"
+                        placeholder="Nummer"
+                      />
+                    </div>{" "}
+                  </div>
                   <div className={`${styles.row} ${styles.city}`}>
                     <div className={styles.col50}>
                       <Input
@@ -172,7 +183,7 @@ const StoreSetup = () => {
                 </div>
                 <div className={styles.col70}>
                   <Input
-                    type="text"
+                    type="tel"
                     name="telephone"
                     id="telephone"
                     placeholder="Telefonnummer"

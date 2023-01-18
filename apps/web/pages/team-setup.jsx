@@ -86,18 +86,21 @@ function TeamSetup() {
   const router = useRouter();
   function handleFormSubmit(e) {
     e.preventDefault();
-    let teamObj = {
+    let employee = {
       name: e.target.name.value,
-      street: e.target.street.value,
-      postalCode: e.target.postalCode.value,
-      city: e.target.city.value,
+      adress: {
+        street: e.target.street.value,
+        number: e.target.number.value,
+        postalCode: e.target.postalCode.value,
+        city: e.target.city.value,
+      },
       telephone: e.target.telephone.value,
       photo: e.target.photo.value,
       services: services,
       times: times,
     };
 
-    console.log(teamObj);
+    console.log(employee);
   }
   function handleBackClick(e, path) {
     e.preventDefault();
@@ -156,12 +159,24 @@ function TeamSetup() {
                     <label>Adresse:</label>
                   </div>
                   <div className={styles.col70}>
-                    <Input
-                      type="text"
-                      name="street"
-                      id="street"
-                      placeholder="Straße, Nummer"
-                    />
+                    <div className={`${styles.row} ${styles.city}`}>
+                      <div className={styles.col70}>
+                        <Input
+                          type="text"
+                          name="street"
+                          id="street"
+                          placeholder="Straße"
+                        />
+                      </div>{" "}
+                      <div className={styles.col30}>
+                        <Input
+                          type="number"
+                          name="number"
+                          id="number"
+                          placeholder="Nummer"
+                        />
+                      </div>{" "}
+                    </div>
                     <div className={`${styles.row} ${styles.city}`}>
                       <div className={styles.col50}>
                         <Input
@@ -188,7 +203,7 @@ function TeamSetup() {
                   </div>
                   <div className={styles.col70}>
                     <Input
-                      type="text"
+                      type="tel"
                       name="telephone"
                       id="telephone"
                       placeholder="Telefonnummer"

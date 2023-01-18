@@ -10,6 +10,8 @@
 }
 .pagewidth {
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 .pagewidth,
 .pagewidth div {
@@ -48,5 +50,6 @@
 @media screen and (min-width: 1060px) {
   .pagewidth {
     width: 70vw;
+    flex-direction: row;
   }
 }

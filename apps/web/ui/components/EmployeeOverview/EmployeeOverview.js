@@ -6,7 +6,13 @@ function EmployeeOverview({ employees }) {
   return (
     <div className={styles.employees}>
       {employees.map((el, index) => {
-        return <StylistCard key={index} name={el.name} />;
+        return (
+          <StylistCard
+            key={index}
+            name={el.name}
+            description={el.description}
+          />
+        );
       })}
     </div>
   );

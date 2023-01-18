@@ -83,7 +83,7 @@ function Register() {
         />
         <Input
           type="password"
-          id="password"
+          id="passwordrepeat"
           name="passwordrepeat"
           placeholder="Password wiederholen"
           password

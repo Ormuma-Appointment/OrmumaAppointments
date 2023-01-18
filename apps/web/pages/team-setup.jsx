@@ -10,6 +10,7 @@ import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectE
 import Minus from "../ui/components/assets/minus.svg";
 import StylistCard from "../ui/components/StylistCard/StylistCard";
 import { useRouter } from "next/router";
+import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
@@ -287,11 +288,7 @@ function TeamSetup() {
           </form>
           <div className={styles.employee_container}>
             <h2>Alle Mitarbeiter</h2>
-            <div className={styles.employees}>
-              {allEmployees.map((el, index) => {
-                return <StylistCard key={index} name={el.name} />;
-              })}
-            </div>
+            <EmployeeOverview employees={allEmployees} />
           </div>
         </div>
       </CardContainer>

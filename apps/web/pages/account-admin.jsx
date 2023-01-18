@@ -18,9 +18,21 @@ const AccountAdmin = () => {
     website: "www.naturfriseur-aachen.de",
     phone: "+49 1577 37384273",
     employees: [
-      { name: "Kasper Schneiderlein", photo: null },
-      { name: "Juli Katter", photo: null },
-      { name: "Kyle Superwow", photo: null },
+      {
+        name: "Kasper Schneiderlein",
+        photo: null,
+        description: "Balayage, vibrant color Spezialist",
+      },
+      {
+        name: "Juli Katter",
+        photo: null,
+        description: "Layers, Bobs, Fringes",
+      },
+      {
+        name: "Kyle Superwow",
+        photo: null,
+        description: "Razers, Beards, Nails",
+      },
     ],
   };
   const todaysAppointments = [

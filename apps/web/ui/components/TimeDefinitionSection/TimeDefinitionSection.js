@@ -41,7 +41,6 @@ function TimeDefinitionSection({ openDays, setTimes }) {
             start: e.target.value,
           };
         } else if (start_end === "end") {
-          console.log("END");
           return {
             ...time,
             end: e.target.value,

@@ -16,9 +16,17 @@ function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
   let dummyservices = ["Long", "Short", "Bold", "Style"];
   let dummyemployees = [
-    { name: "Kasper Schneiderlein", photo: null },
-    { name: "Juli Katter", photo: null },
-    { name: "Kyle Superwow", photo: null },
+    {
+      name: "Kasper Schneiderlein",
+      photo: null,
+      description: "Balayage, vibrant color Spezialist",
+    },
+    { name: "Juli Katter", photo: null, description: "Layers, Bobs, Fringes" },
+    {
+      name: "Kyle Superwow",
+      photo: null,
+      description: "Razers, Beards, Nails",
+    },
   ];
   let days_times = [
     {
@@ -86,18 +94,22 @@ function TeamSetup() {
   const router = useRouter();
   function handleFormSubmit(e) {
     e.preventDefault();
-    let teamObj = {
+    let employee = {
       name: e.target.name.value,
-      street: e.target.street.value,
-      postalCode: e.target.postalCode.value,
-      city: e.target.city.value,
-      phone: e.target.phone.value,
+      adress: {
+        street: e.target.street.value,
+        number: e.target.number.value,
+        postalCode: e.target.postalCode.value,
+        city: e.target.city.value,
+        country: "Deutschland", //prefilled
+      },
+      telephone: e.target.telephone.value,
       photo: e.target.photo.value,
       services: services,
-      times: times,
+      workingTime: times,
     };
 
-    console.log(teamObj);
+    console.log(times);
   }
   function handleBackClick(e, path) {
     e.preventDefault();
@@ -156,12 +168,24 @@ function TeamSetup() {
                     <label>Adresse:</label>
                   </div>
                   <div className={styles.col70}>
-                    <Input
-                      type="text"
-                      name="street"
-                      id="street"
-                      placeholder="Straße, Nummer"
-                    />
+                    <div className={`${styles.row} ${styles.city}`}>
+                      <div className={styles.col70}>
+                        <Input
+                          type="text"
+                          name="street"
+                          id="street"
+                          placeholder="Straße"
+                        />
+                      </div>{" "}
+                      <div className={styles.col30}>
+                        <Input
+                          type="number"
+                          name="number"
+                          id="number"
+                          placeholder="Nummer"
+                        />
+                      </div>{" "}
+                    </div>
                     <div className={`${styles.row} ${styles.city}`}>
                       <div className={styles.col50}>
                         <Input
@@ -188,10 +212,23 @@ function TeamSetup() {
                   </div>
                   <div className={styles.col70}>
                     <Input
-                      type="text"
-                      name="phone"
-                      id="phone"
+                      type="tel"
+                      name="telephone"
+                      id="telephone"
                       placeholder="Telefonnummer"
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Beschreibung:</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="text"
+                      name="description"
+                      id="description"
+                      placeholder="z.B. Farbspezialistin, Balayage, ... "
                     />
                   </div>
                 </div>

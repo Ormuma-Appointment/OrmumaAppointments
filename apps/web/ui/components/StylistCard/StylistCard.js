@@ -4,7 +4,7 @@ import CardContainer from "../CardContainer/CardContainer";
 import RoundImage from "../RoundImage/RoundImage";
 import placeHolder from "../assets/placeholder-profile.jpeg";
 
-function StylistCard({ image = placeHolder, name, text }) {
+function StylistCard({ image = placeHolder, name, description }) {
   return (
     <CardContainer>
       <div className={styles.container}>
@@ -13,7 +13,7 @@ function StylistCard({ image = placeHolder, name, text }) {
         </div>
         <div className={styles.info}>
           <h3 className={styles.name}>{name}</h3>
-          <div className={styles.text}>{text}</div>
+          <div className={styles.text}>{description}</div>
         </div>
       </div>
     </CardContainer>

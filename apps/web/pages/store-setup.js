@@ -9,6 +9,7 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 
 const StoreSetup = () => {
+  const email = "dummyaddress@test.de";
   let days_times = [
     {
       label: "Mo",
@@ -74,12 +75,18 @@ const StoreSetup = () => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
-      street: e.target.street.value,
-      postalCode: e.target.postalCode.value,
-      city: e.target.city.value,
-      phone: e.target.phone.value,
       photo: e.target.photo.value,
-      times: times,
+      contact: {
+        email: email, // maybe we can remove it from here if this is already stored
+        telephone: e.target.telephone.value,
+        website: e.target.website.value,
+      },
+      address: {
+        street: e.target.street.value,
+        postalCode: e.target.postalCode.value,
+        city: e.target.city.value,
+      },
+      openingHours: times,
     };
 
     console.log(storeObj);
@@ -166,10 +173,23 @@ const StoreSetup = () => {
                 <div className={styles.col70}>
                   <Input
                     type="text"
-                    name="phone"
-                    id="phone"
+                    name="telephone"
+                    id="telephone"
                     placeholder="Telefonnummer"
                     required
+                  />
+                </div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.col30}>
+                  <label>Webseite:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <Input
+                    type="text"
+                    name="website"
+                    id="website"
+                    placeholder="Webseite"
                   />
                 </div>
               </div>

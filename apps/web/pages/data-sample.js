@@ -137,6 +137,7 @@ const admin = {
       workingTime: [
         {
           day: 1,
+          label: "Mo",
           start: "0800",
           breakStart: "1200",
           breakEnd: "1300",
@@ -172,6 +173,7 @@ const admin = {
       workingTime: [
         {
           day: 1,
+          label: "Mo",
           start: "0800",
           breakStart: "1200",
           breakEnd: "1300",

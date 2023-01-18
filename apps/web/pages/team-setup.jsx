@@ -16,9 +16,17 @@ function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
   let dummyservices = ["Long", "Short", "Bold", "Style"];
   let dummyemployees = [
-    { name: "Kasper Schneiderlein", photo: null },
-    { name: "Juli Katter", photo: null },
-    { name: "Kyle Superwow", photo: null },
+    {
+      name: "Kasper Schneiderlein",
+      photo: null,
+      description: "Balayage, vibrant color Spezialist",
+    },
+    { name: "Juli Katter", photo: null, description: "Layers, Bobs, Fringes" },
+    {
+      name: "Kyle Superwow",
+      photo: null,
+      description: "Razers, Beards, Nails",
+    },
   ];
   let days_times = [
     {
@@ -93,14 +101,15 @@ function TeamSetup() {
         number: e.target.number.value,
         postalCode: e.target.postalCode.value,
         city: e.target.city.value,
+        country: "Deutschland", //prefilled
       },
       telephone: e.target.telephone.value,
       photo: e.target.photo.value,
       services: services,
-      times: times,
+      workingTime: times,
     };
 
-    console.log(employee);
+    console.log(times);
   }
   function handleBackClick(e, path) {
     e.preventDefault();

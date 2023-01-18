@@ -9,8 +9,8 @@
   font-weight: bold;
 }
 .container {
-  padding: 3rem 1.5rem 3rem 1.5rem;
-  overflow-y: hidden;
+  padding: 3rem 1.5rem;
+  width: 95vw;
 }
 
 .container label {
@@ -105,8 +105,9 @@
 }
 @media screen and (min-width: 760px) {
   .container {
-    width: 80%;
+    width: 100%;
     margin: auto;
+    padding: 4rem;
   }
   .row {
     flex-direction: row;

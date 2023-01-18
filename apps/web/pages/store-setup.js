@@ -33,7 +33,9 @@ const StoreSetup = () => {
       <CardContainer>
         <div className={styles.container}>
           <div className={styles.intro}>
-            Erstellen Sie Ihren Service Katalog in 2 einfachen Schritten:
+            Geben Sie hier die Daten für Ihren Salon ein. Mit der Adresse können
+            wir Ihre Position auf einer Karte anzeigen und die Öffnungszeiten
+            Ihren Kunden auf ihrer Homepage anzeigen.
           </div>
           <form className={styles.setUpForm} onSubmit={(e) => handleSubmit(e)}>
             <div className={styles.setUpInfos}>

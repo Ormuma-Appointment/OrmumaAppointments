@@ -83,8 +83,10 @@ const StoreSetup = () => {
       },
       address: {
         street: e.target.street.value,
+        number: e.target.number.value,
         postalCode: e.target.postalCode.value,
         city: e.target.city.value,
+        country: "Deutschland", //prefilled
       },
       openingHours: times,
     };

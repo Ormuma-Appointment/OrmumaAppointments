@@ -1,5 +1,6 @@
 .container {
   padding: 3rem 1.5rem 3rem 1.5rem;
+  width: 95vw;
 }
 .breadcrumb {
   margin-bottom: 1rem;

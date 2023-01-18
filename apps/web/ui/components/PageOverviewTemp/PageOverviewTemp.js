@@ -8,7 +8,14 @@ function PageOverviewTemp() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        maxWidth: "95vw",
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+      }}
+    >
       <Link style={divStyle} href="/">
         Home
       </Link>

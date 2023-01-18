@@ -69,7 +69,12 @@ function LoginAdmin() {
           Anmelden
         </Button>
       </form>
-      <Link href="/register-admin">Du hast noch keinen Account?</Link>
+      <Link className={styles.link} href="/register-admin">
+        Du hast noch keinen Account?
+      </Link>
+      <Link className={styles.link} href="/register">
+        Du bist Kunde und hast keinen Salon?
+      </Link>
     </div>
   );
 }

@@ -66,7 +66,9 @@ function Login() {
           Anmelden
         </Button>
       </form>
-      <Link href="/register">Du hast noch keinen Account?</Link>
+      <Link className={styles.link} href="/register">
+        Du hast noch keinen Account?
+      </Link>
     </div>
   );
 }

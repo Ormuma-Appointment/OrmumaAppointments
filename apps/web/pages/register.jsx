@@ -93,7 +93,9 @@ function Register() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
-      <Link href="/login">Du hast bereits einen Account?</Link>
+      <Link className={styles.link} href="/login">
+        Du hast bereits einen Account?
+      </Link>
     </div>
   );
 }

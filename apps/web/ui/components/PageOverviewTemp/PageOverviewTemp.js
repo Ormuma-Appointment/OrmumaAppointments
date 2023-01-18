@@ -10,6 +10,7 @@ function PageOverviewTemp() {
   return (
     <div
       style={{
+        height: "4rem",
         maxWidth: "95vw",
         display: "flex",
         justifyContent: "center",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Button from "../ui/components/Button/Button";
 import Input from "../ui/components/InputField/Input";
-import StyledLink from "../ui/components/Link/Link";
+import Link from "next/link";
 import styles from "../ui/page_styles/Register.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase/firebase";
@@ -63,7 +63,7 @@ function RegisterAdmin() {
     <div className={styles.container}>
       <div className={styles.title}>
         <h1>Willkommen bei {salonName}</h1>
-        <p>Registriere dich, um alle Funktionen nutzen zu können</p>
+        <p>Registriere dich, um Kund*Innen online Termine buchen zu lassen.</p>
       </div>
       <form className={styles.form} onSubmit={handleRegistrationSubmit}>
         <Input type="text" id="name" name="name" placeholder="Vorname" user />
@@ -93,9 +93,12 @@ function RegisterAdmin() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
-      <StyledLink href="/login-admin">
+      <Link className={styles.link} href="/login-admin">
         Du hast bereits einen Admin-Account?
-      </StyledLink>
+      </Link>
+      <Link className={styles.link} href="/login">
+        Du bist Kunde und hast keinen Salon?
+      </Link>
     </div>
   );
 }

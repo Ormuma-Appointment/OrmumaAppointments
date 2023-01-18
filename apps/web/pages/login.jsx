@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import styles from "../ui/page_styles/Register.module.css";
 import Button from "../ui/components/Button/Button";
-import StyledLink from "../ui/components/Link/Link";
+import Link from "next/link";
 import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
 
@@ -66,7 +66,9 @@ function Login() {
           Anmelden
         </Button>
       </form>
-      <StyledLink href="/register">Du hast noch keinen Account?</StyledLink>
+      <Link className={styles.link} href="/register">
+        Du hast noch keinen Account?
+      </Link>
     </div>
   );
 }

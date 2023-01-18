@@ -9,6 +9,7 @@ import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 import Minus from "../ui/components/assets/minus.svg";
 import StylistCard from "../ui/components/StylistCard/StylistCard";
+import { useRouter } from "next/router";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
@@ -80,9 +81,8 @@ function TeamSetup() {
   const [yesno] = useState(["ja", "nein"]);
   const [allEmployees, setAllEmployees] = useState(dummyemployees);
   const [times, setTimes] = useState(days_times);
-
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
-
+  const router = useRouter();
   function handleFormSubmit(e) {
     e.preventDefault();
     let teamObj = {
@@ -98,7 +98,10 @@ function TeamSetup() {
 
     console.log(teamObj);
   }
-
+  function handleBackClick(e, path) {
+    e.preventDefault();
+    router.push(path);
+  }
   function handleRemoveClick(index) {
     setServices((prev) => prev.filter((elem, i) => i !== index));
   }
@@ -107,10 +110,6 @@ function TeamSetup() {
     e.preventDefault();
     setServices(dummyservices);
   }
-
-  useEffect(() => {
-    console.log(times);
-  }, [times]);
 
   return (
     <div>
@@ -273,9 +272,18 @@ function TeamSetup() {
                 </>
               )}
             </div>
-            <Button icon="" size="medium" variant="primary">
-              Person speichern
-            </Button>
+            <div className={styles.footer}>
+              <Button
+                size="medium"
+                variant="danger"
+                onClick={(e) => handleBackClick(e, "service-setup")}
+              >
+                zurück
+              </Button>
+              <Button icon="" size="medium" variant="primary">
+                Person speichern
+              </Button>
+            </div>
           </form>
           <div className={styles.employee_container}>
             <h2>Alle Mitarbeiter</h2>

@@ -103,6 +103,10 @@
 .employees > div {
   margin-bottom: 1rem;
 }
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
 @media screen and (min-width: 760px) {
   .container {
     width: 100%;

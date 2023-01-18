@@ -10,7 +10,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 // import { useSession } from "next-auth/client ";
 
-const account = ({ name }) => {
+const Account = ({ name }) => {
   const { currentUser, isLoggedIn } = useAuthContext();
   const [userData, setUserData] = useState({});
 
@@ -91,4 +91,4 @@ const account = ({ name }) => {
   // }
 };
 
-export default account;
+export default Account;

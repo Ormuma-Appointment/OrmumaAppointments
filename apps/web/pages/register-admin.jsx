@@ -10,7 +10,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
-function Register() {
+function RegisterAdmin() {
   const router = useRouter();
   const [err, setErr] = useState(false);
   const { register } = useAuthContext();
@@ -93,9 +93,11 @@ function Register() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
-      <StyledLink href="/login">Du hast bereits einen Account?</StyledLink>
+      <StyledLink href="/login-admin">
+        Du hast bereits einen Admin-Account?
+      </StyledLink>
     </div>
   );
 }
 
-export default Register;
+export default RegisterAdmin;

@@ -1,13 +1,13 @@
 import React from "react";
-import Link from "./Link";
+import StyledLink from "./Link";
 
 export default {
-  title: "Elements/Link",
-  component: Link,
+  title: "Elements/StyledLink",
+  component: StyledLink,
   args: {
     children: "this is a text",
   },
 };
 
-const Template = (args) => <Link {...args} />;
+const Template = (args) => <StyledLink {...args} />;
 export const PrimaryLink = Template.bind({});

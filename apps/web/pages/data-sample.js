@@ -111,7 +111,7 @@ const admin = {
     {
       name: "Marie",
       description: "",
-      phone: "123",
+      telephone: "123",
       image: "",
       adress: {
         city: "Aachen",
@@ -150,7 +150,7 @@ const admin = {
     {
       name: "John",
       description: "",
-      phone: "123",
+      telephone: "123",
       image: "",
       adress: {
         city: "Aachen",

@@ -85,7 +85,7 @@ function TeamSetup() {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    let obj = {
+    let teamObj = {
       name: e.target.name.value,
       street: e.target.street.value,
       postalCode: e.target.postalCode.value,
@@ -96,7 +96,7 @@ function TeamSetup() {
       times: times,
     };
 
-    console.log(obj);
+    console.log(teamObj);
   }
 
   function handleRemoveClick(index) {

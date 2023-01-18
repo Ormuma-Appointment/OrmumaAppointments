@@ -17,7 +17,7 @@ function ServiceSetup() {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
   }
-  function handleRemoveClick(index) {
+  function handleRemoveCatClick(index) {
     setCategories((prev) => prev.filter((elem, i) => i !== index));
   }
 
@@ -78,7 +78,7 @@ function ServiceSetup() {
                     {el}
                     <Minus
                       className={styles.icon}
-                      onClick={() => handleRemoveClick(index)}
+                      onClick={() => handleRemoveCatClick(index)}
                     />
                   </div>
                 );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Button from "../ui/components/Button/Button";
 import Input from "../ui/components/InputField/Input";
-import StyledLink from "../ui/components/Link/Link";
+import Link from "next/link";
 import styles from "../ui/page_styles/Register.module.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase/firebase";
@@ -93,9 +93,7 @@ function RegisterAdmin() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
-      <StyledLink href="/login-admin">
-        Du hast bereits einen Admin-Account?
-      </StyledLink>
+      <Link href="/login-admin">Du hast bereits einen Admin-Account?</Link>
     </div>
   );
 }

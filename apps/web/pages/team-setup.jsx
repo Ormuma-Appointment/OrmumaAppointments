@@ -91,7 +91,7 @@ function TeamSetup() {
       street: e.target.street.value,
       postalCode: e.target.postalCode.value,
       city: e.target.city.value,
-      phone: e.target.phone.value,
+      telephone: e.target.telephone.value,
       photo: e.target.photo.value,
       services: services,
       times: times,
@@ -189,9 +189,22 @@ function TeamSetup() {
                   <div className={styles.col70}>
                     <Input
                       type="text"
-                      name="phone"
-                      id="phone"
+                      name="telephone"
+                      id="telephone"
                       placeholder="Telefonnummer"
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Beschreibung:</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="text"
+                      name="description"
+                      id="description"
+                      placeholder="z.B. Farbspezialistin, Balayage, ... "
                     />
                   </div>
                 </div>

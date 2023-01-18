@@ -3,7 +3,7 @@ import styles from "../ui/page_styles/AccountAdmin.module.css";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import InfoElement from "../ui/components/InfoElement/InfoElement";
-import StylistCard from "../ui/components/StylistCard/StylistCard";
+import Button from "../ui/components/Button/Button";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 
@@ -76,7 +76,14 @@ const AccountAdmin = () => {
       </div>
       <div className={styles.row}>
         <div className={styles.column}>
-          <h3>Salon Übersicht</h3>
+          <div className={styles.header}>
+            <h3>Salon Übersicht </h3>{" "}
+            <div className={styles.edit}>
+              <Edit className={styles.icon} />
+              bearbeiten
+            </div>
+          </div>
+
           <CardContainer>
             <div className={styles.container_box}>
               <div className={styles.address_container}>
@@ -88,7 +95,6 @@ const AccountAdmin = () => {
                   </li>
                   <li>{salon.country}</li>
                 </ul>
-                <Edit className={styles.icon} />
               </div>
               <div className={styles.contact_container}>
                 <InfoElement email infoDetail={salon.email} infoHl="Email" />
@@ -131,7 +137,15 @@ const AccountAdmin = () => {
         </div>
       </div>
       <div className={styles.employee_container}>
-        <h3>Salon Mitarbeiter*Innen</h3>
+        <div className={styles.header}>
+          <h3>Salon Mitarbeiter*Innen</h3>
+          <Button icon="" size="xsmall" variant="invisible">
+            bearbeiten
+          </Button>
+        </div>
+        <Button icon="" size="xsmall" variant="invisible">
+          bearbeiten
+        </Button>
         <EmployeeOverview employees={salon.employees} />
       </div>
     </div>

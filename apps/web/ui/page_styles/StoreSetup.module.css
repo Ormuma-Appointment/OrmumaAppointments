@@ -62,7 +62,7 @@
     padding: 4rem;
   }
   .setUpForm {
-    padding: 4rem;
+    padding: 4rem auto;
   }
   .row {
     flex-direction: row;

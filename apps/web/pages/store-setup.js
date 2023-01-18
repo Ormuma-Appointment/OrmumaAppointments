@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
@@ -68,7 +69,8 @@ const StoreSetup = () => {
   ];
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const [times, setTimes] = useState(days_times);
-  const handleSubmit = (e) => {
+  const router = useRouter();
+  const handleSubmit = (e, path) => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
@@ -81,6 +83,7 @@ const StoreSetup = () => {
     };
 
     console.log(storeObj);
+    router.push(path);
   };
 
   return (
@@ -103,7 +106,10 @@ const StoreSetup = () => {
             wir Ihre Position auf einer Karte anzeigen und die Öffnungszeiten
             Ihren Kunden auf ihrer Homepage anzeigen.
           </div>
-          <form className={styles.setUpForm} onSubmit={(e) => handleSubmit(e)}>
+          <form
+            className={styles.setUpForm}
+            onSubmit={(e) => handleSubmit(e, "/service-setup")}
+          >
             <div className={styles.setUpInfos}>
               <div className={styles.row}>
                 <div className={styles.col30}>

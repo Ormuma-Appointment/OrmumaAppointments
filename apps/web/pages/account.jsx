@@ -5,13 +5,14 @@ import calendar from "../ui/components/assets/calendar.svg";
 import AccountCard from "../ui/components/AccountCard/AccountCard";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import { useAuthContext } from "../context/AuthContext";
-import { db } from "../firebase/firebase";
+import { db, auth } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { WithAuth } from "../route/route";
 
 // import { useSession } from "next-auth/client ";
 
-const account = ({ name }) => {
-  const { currentUser, isLoggedIn } = useAuthContext();
+const Account = () => {
+  const { currentUser, isLoggedIn, logOut } = useAuthContext();
   const [userData, setUserData] = useState({});
 
   const pastAppointments = [
@@ -69,6 +70,7 @@ const account = ({ name }) => {
             time="11:30-12:00"
           />
         </div>
+        <button onClick={() => logOut(auth)}>Logout</button>
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
@@ -91,4 +93,4 @@ const account = ({ name }) => {
   // }
 };
 
-export default account;
+export default WithAuth(Account);

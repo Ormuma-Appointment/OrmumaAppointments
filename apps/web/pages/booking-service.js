@@ -69,7 +69,6 @@ const BookingService = () => {
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
-            onClick={() => setSelected(undefined)}
             step="service"
           />
         </CardContainer>

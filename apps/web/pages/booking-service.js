@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -8,12 +8,13 @@ const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(undefined);
 
-  console.log("selectedService", selected);
-
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = () => {
     setIsOpenStyle(!isOpenStyle);
   };
+  useEffect(() => {
+    console.log("selectedService", selected);
+  }, [selected]);
   let services = [
     {
       name: "Cutting & Styling",

@@ -11,11 +11,13 @@ function SelectItem(props) {
   const { setSelected } = props;
 
   const handleSelected = () => {
-    setSelected({
-      title,
-      price,
-      duration,
-    });
+    if (plus) {
+      setSelected({
+        title,
+        price,
+        duration,
+      });
+    }
   };
   return (
     <div

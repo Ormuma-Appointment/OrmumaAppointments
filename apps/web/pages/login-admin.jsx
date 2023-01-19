@@ -73,7 +73,7 @@ function LoginAdmin() {
         Du hast noch keinen Account?
       </Link>
       <Link className={styles.link} href="/register">
-        Du bist Kunde und hast keinen Salon?
+        Kein Admin? Hier entlang zum Kundenportal!
       </Link>
     </div>
   );

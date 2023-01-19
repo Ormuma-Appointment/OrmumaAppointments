@@ -4,6 +4,8 @@ import Button from "../ui/components/Button/Button";
 import calendar from "../ui/components/assets/calendar.svg";
 import AccountCard from "../ui/components/AccountCard/AccountCard";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
+import Link from "next/link";
+import Edit from "../ui/components/assets/edit.svg";
 import { useAuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
@@ -54,7 +56,13 @@ const Account = ({ name }) => {
         </Button>
       </div>
       <div className={styles.row}>
-        <h3>Meine Daten</h3>
+        <div className={styles.header_small}>
+          <h3>Meine Daten</h3>
+          <Link href="/store-setup" className={styles.edit}>
+            <Edit className={styles.icon} />
+            bearbeiten
+          </Link>
+        </div>
         <AccountCard className={styles.box} />
       </div>
       <div className={styles.appointments}>

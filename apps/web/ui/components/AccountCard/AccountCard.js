@@ -1,20 +1,26 @@
 import React from "react";
 import CardContainer from "../CardContainer/CardContainer";
+import RoundImage from "../RoundImage/RoundImage";
 import styles from "./AccountCard.module.css";
-import Edit from "../assets/edit.svg";
 import { useAuthContext } from "../../../context/AuthContext";
+import placeHolder from "../assets/placeholder-profile.jpeg";
 
-function AccountCard({ name = "Andrea Hallo", email = "testtest@test.de" }) {
+function AccountCard({
+  name = "Andrea Hallo",
+  email = "testtest@test.de",
+  image = placeHolder,
+}) {
   // const { currentUser, userData } = useAuthContext();
   return (
     <CardContainer>
       <div className={styles.container}>
-        <div className={styles.round}></div>
+        <div className={styles.image}>
+          <RoundImage alt={name} image={image} initialWidth={100} />
+        </div>
         <div className={styles.info}>
           <div>{name}</div>
           <div>{email}</div>
         </div>
-        <Edit className={styles.icon} />
       </div>
     </CardContainer>
   );

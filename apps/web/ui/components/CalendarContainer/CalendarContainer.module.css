@@ -4,17 +4,19 @@
   width: 100%;
 }
 
-.selected-date {
-  margin: 0 auto;
-}
-
 .times button {
   display: block;
-  background-color: #6f48eb;
+  background-color: var(--primary-color-light);
   color: white;
   margin-top: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.times button:hover {
+  background-color: var(--primary-color);
+}
+
+.times button:focus {
+  background-color: var(--primary-color);
 }

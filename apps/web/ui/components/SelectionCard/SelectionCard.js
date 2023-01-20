@@ -26,7 +26,7 @@ const SelectionCard = (props) => {
                   duration={selected.duration}
                   minus
                   price={selected.price}
-                  title={selected.title}
+                  service={selected.service}
                 />
               )}
             </div>
@@ -50,13 +50,13 @@ const SelectionCard = (props) => {
             <SelectItem
               duration={service.time}
               price={service.price}
-              title={service.style}
+              employee={service.style}
             />
             {!selected && (
               <p className={styles.selectItemText}>Select a employee</p>
             )}
             <div onClick={() => setSelected(null)}>
-              {selected && <SelectItem title={selected.title} minus />}
+              {selected && <SelectItem employee={selected.employee} minus />}
             </div>
           </div>
           <div className={styles.buttonsContainer}>

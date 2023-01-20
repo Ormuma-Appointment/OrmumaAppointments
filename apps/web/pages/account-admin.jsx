@@ -140,7 +140,6 @@ const AccountAdmin = () => {
     },
   ];
 
-  // query salon info
   const [salonData, setSalonData] = useState(salon);
   async function getData() {
     const docRef = doc(db, "stores", "one");
@@ -149,14 +148,12 @@ const AccountAdmin = () => {
       console.log("Document data:", docSnap.data());
       setSalonData(docSnap.data());
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   }
   useEffect(() => {
     getData();
   }, []);
-  // query opening hours
 
   return (
     <div className={styles.page_container}>

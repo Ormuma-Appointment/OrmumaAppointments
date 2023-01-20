@@ -2,7 +2,6 @@ import { useState } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
-import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import AppointmentConfirmation from "../ui/components/AppointmentConfirmation/AppointmentConfirmation";

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
 import Button from "../ui/components/Button/Button";
@@ -11,18 +12,29 @@ function ServiceSetup() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
+
   function handleCatSubmit(e) {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
   }
-  function handleRemoveClick(index) {
+  function handleRemoveCatClick(index) {
     setCategories((prev) => prev.filter((elem, i) => i !== index));
   }
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
+  // handle continue and save button click
+  const router = useRouter();
+  function handleContinueClick(e, path) {
+    e.preventDefault();
+    let serviceObj = data;
+    // here we need to add to push data either in a context or to firebase
+    console.log(serviceObj);
+    router.push(path);
+  }
+  // handle back button click
+  function handleBackClick(e, path) {
+    e.preventDefault();
+    router.push(path);
+  }
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -66,7 +78,7 @@ function ServiceSetup() {
                     {el}
                     <Minus
                       className={styles.icon}
-                      onClick={() => handleRemoveClick(index)}
+                      onClick={() => handleRemoveCatClick(index)}
                     />
                   </div>
                 );
@@ -80,11 +92,19 @@ function ServiceSetup() {
             categories={categories}
           />
           <div className={styles.footer}>
-            <Button size="medium" variant="danger">
+            <Button
+              size="medium"
+              variant="danger"
+              onClick={(e) => handleBackClick(e, "store-setup")}
+            >
               zurück
             </Button>
-            <Button size="medium" variant="primary">
-              weiter
+            <Button
+              size="medium"
+              variant="primary"
+              onClick={(e) => handleContinueClick(e, "/team-setup")}
+            >
+              speichern & weiter
             </Button>
           </div>
         </div>

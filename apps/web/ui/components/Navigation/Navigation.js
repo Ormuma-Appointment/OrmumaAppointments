@@ -61,18 +61,39 @@ function Navigation(props) {
 
       {(customer_logged_out || admin_logged_out) && (
         <div className={styles.loggedOut}>
-          <Button size="small" variant="secondary">
+          <Button
+            size="small"
+            variant="invisible"
+            onClick={() => router.push("/login")}
+          >
             Login
           </Button>
           {customer_logged_out && (
-            <Button size="small" variant="primary">
+            <Button
+              size="small"
+              variant="secondary"
+              onClick={() => router.push("/register")}
+            >
               Registrieren
             </Button>
           )}
           {admin_logged_out && (
-            <Button size="small" variant="primary">
-              Salon Registrieren
-            </Button>
+            <>
+              <Button
+                size="small"
+                variant="invisible"
+                onClick={() => router.push("/login-admin")}
+              >
+                Login
+              </Button>
+              <Button
+                size="small"
+                variant="secondary"
+                onClick={() => router.push("/register-admin")}
+              >
+                Salon Registrieren
+              </Button>
+            </>
           )}
         </div>
       )}

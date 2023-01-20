@@ -33,7 +33,7 @@ function TimeDefinitionSection({ openDays, setTimes }) {
     //find day using index and correct timeslot to paste  selected input in
     setTimes((prev) =>
       prev.map((time) => {
-        if (time.index !== index) {
+        if (time.day !== index) {
           return time;
         } else if (start_end === "start") {
           return {
@@ -41,7 +41,6 @@ function TimeDefinitionSection({ openDays, setTimes }) {
             start: e.target.value,
           };
         } else if (start_end === "end") {
-          console.log("END");
           return {
             ...time,
             end: e.target.value,
@@ -49,12 +48,12 @@ function TimeDefinitionSection({ openDays, setTimes }) {
         } else if (start_end === "pausestart") {
           return {
             ...time,
-            pause_start: e.target.value,
+            breakStart: e.target.value,
           };
         } else if (start_end === "pauseend") {
           return {
             ...time,
-            pause_end: e.target.value,
+            breakEnd: e.target.value,
           };
         }
       })

@@ -20,54 +20,6 @@ const AccountAdmin = () => {
         day: 1,
         breakEnd: null,
       },
-      {
-        end: null,
-        breakStart: null,
-        label: "Di",
-        start: null,
-        breakEnd: null,
-        day: 2,
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        day: 3,
-        start: null,
-        label: "Mi",
-        end: null,
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        start: null,
-        day: 4,
-        end: null,
-        label: "Do",
-      },
-      {
-        day: 5,
-        end: null,
-        start: null,
-        breakStart: null,
-        breakEnd: null,
-        label: "Fr",
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        label: "Sa",
-        end: null,
-        start: null,
-        day: 6,
-      },
-      {
-        breakStart: null,
-        label: "So",
-        start: null,
-        end: null,
-        breakEnd: null,
-        day: 0,
-      },
     ],
     photo: "",
     contact: {
@@ -88,16 +40,6 @@ const AccountAdmin = () => {
         name: "Kasper Schneiderlein",
         photo: null,
         description: "Balayage, vibrant color Spezialist",
-      },
-      {
-        name: "Juli Katter",
-        photo: null,
-        description: "Layers, Bobs, Fringes",
-      },
-      {
-        name: "Kyle Superwow",
-        photo: null,
-        description: "Razers, Beards, Nails",
       },
     ],
   };
@@ -145,7 +87,7 @@ const AccountAdmin = () => {
     const docRef = doc(db, "stores", "one");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      //console.log("Document data:", docSnap.data());
       setSalonData(docSnap.data());
     } else {
       console.log("No such document!");
@@ -172,9 +114,6 @@ const AccountAdmin = () => {
   useEffect(() => {
     getEmployeeData();
   }, []);
-  useEffect(() => {
-    console.log(salonEmployees);
-  }, [salonEmployees]);
 
   return (
     <div className={styles.page_container}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -24,6 +24,10 @@ const BookingService = () => {
   //push event to array of event database now or later - but find a way to import the event object to booking employee
 
   //console.log("Event", event);
+  useEffect(() => {
+    console.log("selectedService", selected);
+  }, [selected]);
+
   return (
     <div className={styles.pageContainer}>
       <h1>Unsere Service</h1>
@@ -45,7 +49,7 @@ const BookingService = () => {
                         title={el.service}
                         key={id}
                         setSelected={setSelected}
-                        onClick={() => setSelected({price, title, duration})}
+                        onClick={() => setSelected({ price, title, duration })}
                       />
                     )
                   );

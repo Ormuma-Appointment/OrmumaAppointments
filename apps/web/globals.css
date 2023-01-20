@@ -13,17 +13,17 @@ body {
 }
 
 .grid_main_wrapper {
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 7rem);
 }
 .page_wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 95vw;
   margin: 3rem auto;
 }
 .grid_footer {
-  height: 4rem;
+  height: 7rem;
 }
 
 /*Here general roles for the font - the size should not change but the color can*/
@@ -88,11 +88,11 @@ p {
 }
 @media screen and (min-width: 760px) {
   .page_wrapper {
-    width: 90%;
+    width: 90vw;
   }
 }
 @media screen and (min-width: 1060px) {
   .page_wrapper {
-    width: 70%;
+    width: 70vw;
   }
 }

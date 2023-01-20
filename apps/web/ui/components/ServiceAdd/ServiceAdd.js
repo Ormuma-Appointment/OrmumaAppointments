@@ -12,21 +12,23 @@ function ServiceAdd({ setData, services, setServices, categories }) {
   }
   function handleFormSubmit(e) {
     e.preventDefault();
-    let serviceData = [];
-    services.map((el, index) => {
-      return (serviceData = [
-        ...serviceData,
-        {
-          service: el,
-          category: e.target.category[index].value,
-          duration: Number(e.target.duration[index].value),
-          waiting: Number(e.target.waiting[index].value),
-          price: Number(e.target.price[index].value),
-        },
-      ]);
-    });
-    setData(serviceData);
+    let newServices = services.reduce((result, service, index) => {
+      let category = e.target.category[index].value;
+      let duration = Number(e.target.duration[index].value);
+      let waiting = Number(e.target.waiting[index].value);
+      let price = Number(e.target.price[index].value);
+      let serviceData = { service, price, duration, waiting };
+      let categoryData = result.find((cat) => cat.category === category);
+      if (!categoryData) {
+        categoryData = { category, services: [] };
+        result.push(categoryData);
+      }
+      categoryData.services.push(serviceData);
+      return result;
+    }, []);
+    setData(newServices);
   }
+
   function handleRemoveClick(index) {
     setServices((prev) => prev.filter((elem, i) => i !== index));
   }

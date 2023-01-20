@@ -10,7 +10,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
-function Register() {
+function RegisterAdmin() {
   const router = useRouter();
   const [err, setErr] = useState(false);
   const { register } = useAuthContext();
@@ -63,7 +63,7 @@ function Register() {
     <div className={styles.container}>
       <div className={styles.title}>
         <h1>Willkommen bei {salonName}</h1>
-        <p>Registriere dich, um alle Funktionen nutzen zu können</p>
+        <p>Registriere dich, um Kund*Innen online Termine buchen zu lassen.</p>
       </div>
       <form className={styles.form} onSubmit={handleRegistrationSubmit}>
         <Input type="text" id="name" name="name" placeholder="Vorname" user />
@@ -93,11 +93,14 @@ function Register() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
+      <Link className={styles.link} href="/login-admin">
+        Du hast bereits einen Admin-Account?
+      </Link>
       <Link className={styles.link} href="/login">
-        Du hast bereits einen Account?
+        Du bist Kunde und hast keinen Salon?
       </Link>
     </div>
   );
 }
 
-export default Register;
+export default RegisterAdmin;

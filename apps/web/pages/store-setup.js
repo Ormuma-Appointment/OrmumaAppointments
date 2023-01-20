@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
@@ -8,15 +9,92 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 
 const StoreSetup = () => {
+  const email = "dummyaddress@test.de";
+  let days_times = [
+    {
+      label: "Mo",
+      day: 1,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Di",
+      day: 2,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Mi",
+      day: 3,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Do",
+      day: 4,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Fr",
+      day: 5,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "Sa",
+      day: 6,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+    {
+      label: "So",
+      day: 0,
+      start: null,
+      end: null,
+      breakStart: null,
+      breakEnd: null,
+    },
+  ];
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
-  const handleSubmit = (e) => {
+  const [times, setTimes] = useState(days_times);
+  const router = useRouter();
+  const handleSubmit = (e, path) => {
     e.preventDefault();
-    let email = e.target.email.value;
-    let password = e.target.password.value;
-    let passwordConfirmation = e.target.passwordConfirmation.value;
+    let storeObj = {
+      name: e.target.name.value,
+      photo: e.target.photo.value,
+      contact: {
+        email: email, // maybe we can remove it from here if this is already stored
+        telephone: e.target.telephone.value,
+        website: e.target.website.value,
+      },
+      address: {
+        street: e.target.street.value,
+        number: e.target.number.value,
+        postalCode: e.target.postalCode.value,
+        city: e.target.city.value,
+        country: "Deutschland", //prefilled
+      },
+      openingHours: times,
+    };
 
-    console.log(email, password, passwordConfirmation);
+    console.log(storeObj);
+    router.push(path);
   };
+
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -31,108 +109,146 @@ const StoreSetup = () => {
       </div>
       <h1>Store Setup</h1>
       <CardContainer>
-        <form className={styles.setUpForm} onSubmit={(e) => handleSubmit(e)}>
-          <div className={styles.setUpInfos}>
-            <div className={styles.row}>
-              <div className={styles.col30}>
-                <label>Salon Name:*</label>
+        <div className={styles.container}>
+          <div className={styles.intro}>
+            Geben Sie hier die Daten für Ihren Salon ein. Mit der Adresse können
+            wir Ihre Position auf einer Karte anzeigen und die Öffnungszeiten
+            Ihren Kunden auf ihrer Homepage anzeigen.
+          </div>
+          <form
+            className={styles.setUpForm}
+            onSubmit={(e) => handleSubmit(e, "/service-setup")}
+          >
+            <div className={styles.setUpInfos}>
+              <div className={styles.row}>
+                <div className={styles.col30}>
+                  <label>Salon Name:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Salon Name"
+                    required
+                  />
+                </div>
               </div>
-              <div className={styles.col70}>
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Salon Name"
-                  required
-                />
-              </div>
-            </div>
-            <div className={`${styles.row} ${styles.adresse}`}>
-              <div className={styles.col30}>
-                <label>Adresse:*</label>
-              </div>
-              <div className={styles.col70}>
-                <Input
-                  type="text"
-                  name="street"
-                  id="street"
-                  placeholder="Straße, Nummer"
-                  required
-                />
-                <div className={`${styles.row} ${styles.city}`}>
-                  <div className={styles.col50}>
-                    <Input
-                      type="text"
-                      name="postalCode"
-                      id="postalCode"
-                      placeholder="Postleitzahl"
-                      required
-                    />
+              <div className={`${styles.row} ${styles.adresse}`}>
+                <div className={styles.col30}>
+                  <label>Adresse:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <div className={`${styles.row} ${styles.city}`}>
+                    <div className={styles.col70}>
+                      <Input
+                        type="text"
+                        name="street"
+                        id="street"
+                        placeholder="Straße"
+                      />
+                    </div>{" "}
+                    <div className={styles.col30}>
+                      <Input
+                        type="number"
+                        name="number"
+                        id="number"
+                        placeholder="Nummer"
+                      />
+                    </div>{" "}
                   </div>
-                  <div className={styles.col50}>
-                    <Input
-                      type="text"
-                      name="city"
-                      id="city"
-                      placeholder="Stadt"
-                      required
-                    />
+                  <div className={`${styles.row} ${styles.city}`}>
+                    <div className={styles.col50}>
+                      <Input
+                        type="text"
+                        name="postalCode"
+                        id="postalCode"
+                        placeholder="Postleitzahl"
+                        required
+                      />
+                    </div>
+                    <div className={styles.col50}>
+                      <Input
+                        type="text"
+                        name="city"
+                        id="city"
+                        placeholder="Stadt"
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className={styles.row}>
+                <div className={styles.col30}>
+                  <label>Telefon:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <Input
+                    type="tel"
+                    name="telephone"
+                    id="telephone"
+                    placeholder="Telefonnummer"
+                    required
+                  />
+                </div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.col30}>
+                  <label>Webseite:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <Input
+                    type="text"
+                    name="website"
+                    id="website"
+                    placeholder="Webseite"
+                  />
+                </div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.col30}>
+                  <label>Logo:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <Input type="file" name="photo" id="logo" />
+                </div>
+              </div>
             </div>
-            <div className={styles.row}>
-              <div className={styles.col30}>
-                <label>Telefon:*</label>
-              </div>
-              <div className={styles.col70}>
-                <Input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  placeholder="Telefonnummer"
-                  required
-                />
-              </div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.col30}>
-                <label>Logo:*</label>
-              </div>
-              <div className={styles.col70}>
-                <Input type="file" name="logo" id="logo" required />
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.setUpOpenings}>
-            <div className={`${styles.row} ${styles.opening}`}>
-              <div className={styles.col30}>
-                <label>Arbeitstage:*</label>
+            <div className={styles.setUpOpenings}>
+              <div className={`${styles.row} ${styles.opening}`}>
+                <div className={styles.col30}>
+                  <label>Arbeitstage:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <CheckboxSelectElement
+                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                    setOpenDays={setOpenDays}
+                    openDays={openDays}
+                  />
+                </div>
               </div>
-              <div className={styles.col70}>
-                <CheckboxSelectElement
-                  labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                  setOpenDays={setOpenDays}
-                  openDays={openDays}
-                />
+              <div className={`${styles.row} ${styles.opening}`}>
+                <div className={styles.col30}>
+                  <label>Arbeitszeiten:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <TimeDefinitionSection
+                    openDays={openDays}
+                    setTimes={setTimes}
+                    times={times}
+                  />
+                </div>
               </div>
             </div>
-            <div className={`${styles.row} ${styles.opening}`}>
-              <div className={styles.col30}>
-                <label>Arbeitszeiten:*</label>
-              </div>
-              <div className={styles.col70}>
-                <TimeDefinitionSection openDays={openDays} />
-              </div>
+            <div className={styles.buttonContainer}>
+              <Button icon="" size="medium" variant="primary">
+                speichern & weiter
+              </Button>
             </div>
-          </div>
-          <div className={styles.buttonContainer}>
-            <Button icon="" size="medium" variant="primary">
-              Weiter
-            </Button>
-          </div>
-        </form>
+          </form>
+        </div>
       </CardContainer>
     </div>
   );

@@ -6,21 +6,13 @@ import OpeningHours from "../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../ui/components/ContactCard/ContactCard";
 import AddressCard from "../ui/components/AddressCard/AddressCard";
 import calendar from "../ui/components/assets/calendar_add.svg";
-import { useAuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function Web() {
-  const { currentUser } = useAuthContext();
   const router = useRouter();
-  const contact = {
-    email: "naturfriseur@gmail.com",
-    telephone: "+49 1577 37384273",
-    website: "www.naturfriseur-aachen.de",
-  };
-
   const salon = {
     address: {
       number: "415",
@@ -95,48 +87,6 @@ export default function Web() {
     },
     name: "Odysseus Reynolds",
   };
-
-  const address = {
-    city: "Aachen",
-    country: "Deutschland",
-    name: "Naturfriseur Aachen",
-    number: 11,
-    postalCode: "52064",
-    street: "Habsburgerallee",
-  };
-
-  const openingHours = [
-    {
-      day: "Monday",
-      end: "18:00",
-      start: "08:00",
-    },
-    {
-      day: "Tuesday",
-      end: "18:00",
-      start: "08:00",
-    },
-    {
-      day: "Wednesday",
-      end: "18:00",
-      start: "08:00",
-    },
-    {
-      day: "Thursday",
-      end: "18:00",
-      start: "08:00",
-    },
-    {
-      day: "Friday",
-      end: "18:00",
-      start: "08:00",
-    },
-    {
-      day: "Saturday",
-      end: "15:00",
-      start: "08:00",
-    },
-  ];
 
   const [salonData, setSalonData] = useState(salon);
   async function getData() {

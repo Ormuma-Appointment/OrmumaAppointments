@@ -106,7 +106,7 @@ const AccountAdmin = () => {
     );
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       employeesTemp.push(doc.data());
     });
     setSalonEmployees(employeesTemp);
@@ -164,7 +164,6 @@ const AccountAdmin = () => {
               <div className={styles.opening_container}>
                 <h3>Öffnungszeiten</h3>
                 {salonData.openingHours.map((el, index) => {
-                  console.log(el.start);
                   return (
                     <div key={index} className={styles.day}>
                       <p>
@@ -202,6 +201,7 @@ const AccountAdmin = () => {
             return (
               <AppointmentCard
                 customer={el.name}
+                key={index}
                 date={el.date}
                 service={el.service}
                 stylist={el.stylist}

@@ -6,10 +6,11 @@ export function WithPublic(Component) {
   return function WithPublic(props) {
     const auth = useAuthContext();
     const router = useRouter();
-
-    if (auth.currentUser) {
-      router.push("/account");
-    }
+    useEffect(() => {
+      if (auth.currentUser) {
+        router.push("/account");
+      }
+    }, []);
     return <Component auth={auth} {...props} />;
   };
 }
@@ -18,10 +19,11 @@ export function WithAuth(Component) {
   return function WithAuth(props) {
     const auth = useAuthContext();
     const router = useRouter();
-
-    if (!auth.currentUser) {
-      router.push("/login");
-    }
+    useEffect(() => {
+      if (!auth.currentUser) {
+        router.push("/login");
+      }
+    }, []);
     return <Component auth={auth} {...props} />;
   };
 }

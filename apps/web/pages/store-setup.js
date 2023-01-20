@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
@@ -7,6 +7,8 @@ import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/Checkb
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 const StoreSetup = () => {
   const email = "dummyaddress@test.de";
@@ -70,8 +72,9 @@ const StoreSetup = () => {
   ];
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const [times, setTimes] = useState(days_times);
+  const [formData, setFormData] = useState({});
   const router = useRouter();
-  const handleSubmit = (e, path) => {
+  const handleSubmit = async (e, path) => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
@@ -91,7 +94,14 @@ const StoreSetup = () => {
       openingHours: times,
     };
 
+    // setFormData(storeObj);
     console.log(storeObj);
+
+    try {
+      await setDoc(doc(db, "stores", "one"), storeObj);
+    } catch (err) {
+      console.error(err);
+    }
     router.push(path);
   };
 
@@ -243,7 +253,12 @@ const StoreSetup = () => {
               </div>
             </div>
             <div className={styles.buttonContainer}>
-              <Button icon="" size="medium" variant="primary">
+              <Button
+                onSubmit={handleSubmit}
+                icon=""
+                size="medium"
+                variant="primary"
+              >
                 speichern & weiter
               </Button>
             </div>

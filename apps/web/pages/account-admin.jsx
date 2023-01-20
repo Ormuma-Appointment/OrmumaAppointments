@@ -139,15 +139,7 @@ const AccountAdmin = () => {
       time: "11:30-12:00",
     },
   ];
-  const hours = [
-    { day: "Monday", start: "08:00", end: "18:00" },
-    { day: "Tuesday", start: "08:00", end: "18:00" },
-    { day: "Wednesday", start: "08:00", end: "18:00" },
-    { day: "Thursday", start: "08:00", end: "18:00" },
-    { day: "Friday", start: "08:00", end: "18:00" },
-    { day: "Saturday", start: "08:00", end: "15:00" },
-  ];
-  // query salon info
+
   const [salonData, setSalonData] = useState(salon);
   async function getData() {
     const docRef = doc(db, "stores", "one");
@@ -156,14 +148,12 @@ const AccountAdmin = () => {
       console.log("Document data:", docSnap.data());
       setSalonData(docSnap.data());
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   }
   useEffect(() => {
     getData();
   }, []);
-  // query opening hours
 
   return (
     <div className={styles.page_container}>
@@ -231,7 +221,13 @@ const AccountAdmin = () => {
                         }
                       </p>{" "}
                       <div>
-                        <p>{el.start}</p> - <p> {el.end}</p>
+                        {el.start ? (
+                          <>
+                            <p>{el.start}</p> - <p> {el.end}</p>
+                          </>
+                        ) : (
+                          <p>geschlossen</p>
+                        )}
                       </div>
                     </div>
                   );
@@ -263,7 +259,8 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        <EmployeeOverview employees={salon.employees} />
+        {/* <EmployeeOverview employees={salonData.employees} /> */}
+        NEED TO WORK ON! EMPLOYEE DATA NO IN DB YET
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ function LoginAdmin() {
       setErr(false);
       const res = await signInWithEmailAndPassword(auth, email, password);
       // Signed in
-      router.push("/account");
+      router.push("/account-admin");
       const user = res.userCredential.user;
       setCurrentUser(user);
 

@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import styles from "./SelectElement.module.css";
 import Down from "../assets/down.svg";
 
-function SelectElement({ minute, day, time }) {
+function SelectElement({ day, time, defaultValue }) {
   const [data, setData] = useState([
     "-",
     "06:00",
@@ -46,7 +46,12 @@ function SelectElement({ minute, day, time }) {
 
   return (
     <div className={styles.container}>
-      <select name={`${day}_${time}`} id="time" className={styles.input}>
+      <select
+        name={`${day}_${time}`}
+        id="time"
+        className={styles.input}
+        defaultValue={defaultValue}
+      >
         {data.map((el, index) => {
           return (
             <option key={index} value={el}>

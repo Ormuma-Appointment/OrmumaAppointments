@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./TimeDefinitionSection.module.css";
 import SelectElement from "../SelectElement/SelectElement";
 
-function TimeDefinitionSection({ openDays, setTimes }) {
+function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
   let start = "start";
   let end = "end";
   let pauseStart = "pausestart";
@@ -66,10 +66,28 @@ function TimeDefinitionSection({ openDays, setTimes }) {
         return (
           <div key={index}>
             <div className={styles.input_group} onChange={handleChange}>
-              <p>{el}</p> <SelectElement time={start} day={el} />
-              <SelectElement time={end} day={el} />
-              <p>Pause</p> <SelectElement time={pauseStart} day={el} />
-              <SelectElement time={pauseEnd} day={el} />
+              <p>{el}</p>{" "}
+              <SelectElement
+                time={start}
+                day={el}
+                defaultValue={hasData ? defaultValue[index].start : ""}
+              />
+              <SelectElement
+                time={end}
+                day={el}
+                defaultValue={hasData ? defaultValue[index].end : "-"}
+              />
+              <p>Pause</p>{" "}
+              <SelectElement
+                time={pauseStart}
+                day={el}
+                defaultValue={hasData ? defaultValue[index].breakStart : "-"}
+              />
+              <SelectElement
+                time={pauseEnd}
+                day={el}
+                defaultValue={hasData ? defaultValue[index].breakEnd : "-"}
+              />
             </div>
           </div>
         );
@@ -79,3 +97,32 @@ function TimeDefinitionSection({ openDays, setTimes }) {
 }
 
 export default TimeDefinitionSection;
+
+// const [oneStart, setOneStart] = useState("");
+// const [oneEnd, setOneEnd] = useState("");
+// const [oneStartPause, setOneStartPause] = useState("");
+// const [oneEndPause, setOneEndPause] = useState("");
+// const [twoStart, setTwoStart] = useState("");
+// const [twoEnd, setTwoEnd] = useState("");
+// const [twoStartPause, setTwoStartPause] = useState("");
+// const [twoEndPause, setTwoEndPause] = useState("");
+// const [threeStart, setThreeStart] = useState("");
+// const [threeEnd, setThreeEnd] = useState("");
+// const [threeStartPause, setThreeStartPause] = useState("");
+// const [threeEndPause, setThreeEndPause] = useState("");
+// const [fourStart, setFourStart] = useState("");
+// const [fourEnd, setFourEnd] = useState("");
+// const [fourStartPause, setFourStartPause] = useState("");
+// const [fourEndPause, setFourEndPause] = useState("");
+// const [fiveStart, setFiveStart] = useState("");
+// const [fiveEnd, setFiveEnd] = useState("");
+// const [fiveStartPause, setFiveStartPause] = useState("");
+// const [fiveEndPause, setFiveEndPause] = useState("");
+// const [sixStart, setSixStart] = useState("");
+// const [sixEnd, setSixEnd] = useState("");
+// const [sixStartPause, setSixStartPause] = useState("");
+// const [sixEndPause, setSixEndPause] = useState("");
+// const [sevenStart, setSevenStart] = useState("");
+// const [sevenEnd, setSevenEnd] = useState("");
+// const [sevenStartPause, setSevenStartPause] = useState("");
+// const [sevenEndPause, setSevenEndPause] = useState("");

@@ -125,7 +125,7 @@ const StoreSetup = () => {
   const [city, setCity] = useState("");
   const [telephone, setTelephone] = useState("");
   const [website, setWebsite] = useState("");
-
+  const [fullOpenDays, setFullOpenDays] = useState([]);
   async function getData() {
     const docRef = doc(db, "stores", "one");
     const docSnap = await getDoc(docRef);
@@ -141,7 +141,15 @@ const StoreSetup = () => {
       setTelephone(data.contact.telephone);
       setWebsite(data.contact.website);
       setTimes(data.openingHours);
+
       setHasData(true);
+      setOpenDays(() => {
+        let temp = [];
+        let onlyopen = data.openingHours.filter((el) => el.start || el.end);
+        onlyopen.map((el) => temp.push(el.label));
+        return temp;
+      });
+      setFullOpenDays(data.openingHours.filter((el) => el.start || el.end));
     } else {
       console.log("No such document!");
     }
@@ -149,6 +157,10 @@ const StoreSetup = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    console.log(fullOpenDays);
+  }, [fullOpenDays]);
 
   return (
     <div>
@@ -306,11 +318,19 @@ const StoreSetup = () => {
                   <label>Arbeitszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <TimeDefinitionSection
-                    openDays={openDays}
-                    setTimes={setTimes}
-                    times={times}
-                  />
+                  {!hasData ? (
+                    <TimeDefinitionSection
+                      openDays={openDays}
+                      setTimes={setTimes}
+                    />
+                  ) : (
+                    <TimeDefinitionSection
+                      openDays={openDays}
+                      setTimes={setTimes}
+                      defaultValue={fullOpenDays}
+                      hasData={hasData}
+                    />
+                  )}
                 </div>
               </div>
             </div>

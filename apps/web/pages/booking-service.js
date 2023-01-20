@@ -36,10 +36,10 @@ const BookingService = () => {
           {services.map((service, id) => {
             return (
               <>
-                <h4 type="button" onClick={handleOpenStyle}>
-                  {service.categorie} <i className="fa-solid fa-play"></i>
+                <h4 type="button" onClick={handleOpenStyle} key={id}>
+                  {service.category} <i className="fa-solid fa-play"></i>
                 </h4>
-                {service.services.map((el, id) => {
+                {service.services.map((el, index) => {
                   return (
                     isOpenStyle && (
                       <SelectItem
@@ -47,7 +47,7 @@ const BookingService = () => {
                         plus
                         price={el.price}
                         title={el.service}
-                        key={id}
+                        key={index}
                         setSelected={setSelected}
                         onClick={() => setSelected({ price, title, duration })}
                       />

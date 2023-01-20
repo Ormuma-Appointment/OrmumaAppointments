@@ -31,11 +31,11 @@ const BookingCalendar = () => {
           <h4>Ihre Auswahl</h4>
           <div>
             <SelectItem
-              title={service.style}
+              service={service.style}
               duration={service.time}
               price={service.price}
             />
-            <SelectItem title={employee.name} />
+            <SelectItem employee={employee.name} />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

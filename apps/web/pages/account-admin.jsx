@@ -139,14 +139,7 @@ const AccountAdmin = () => {
       time: "11:30-12:00",
     },
   ];
-  const hours = [
-    { day: "Monday", start: "08:00", end: "18:00" },
-    { day: "Tuesday", start: "08:00", end: "18:00" },
-    { day: "Wednesday", start: "08:00", end: "18:00" },
-    { day: "Thursday", start: "08:00", end: "18:00" },
-    { day: "Friday", start: "08:00", end: "18:00" },
-    { day: "Saturday", start: "08:00", end: "15:00" },
-  ];
+
   // query salon info
   const [salonData, setSalonData] = useState(salon);
   async function getData() {
@@ -263,7 +256,7 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        <EmployeeOverview employees={salon.employees} />
+        <EmployeeOverview employees={salonData.employees} />
       </div>
     </div>
   );

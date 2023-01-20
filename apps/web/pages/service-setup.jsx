@@ -38,7 +38,13 @@ function ServiceSetup() {
     }));
     console.log(queryData);
     // queryData.map(async (v) => {
-    await setDoc(doc(db, `stores/${queryData.id}/services`), serviceObj);
+    const res = await setDoc(
+      doc(db, "stores", queryData[0].id, "services", "serviceList"),
+      {
+        serviceObj,
+      }
+    );
+    console.log();
     // });
     router.push(path);
   }

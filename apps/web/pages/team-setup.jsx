@@ -108,6 +108,7 @@ function TeamSetup() {
       telephone: e.target.telephone.value,
       photo: e.target.photo.value,
       services: services,
+      description: e.target.description.value,
       workingTime: times,
     };
     const q = query(collection(db, "stores"));

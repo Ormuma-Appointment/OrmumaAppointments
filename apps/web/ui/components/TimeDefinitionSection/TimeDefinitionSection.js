@@ -97,32 +97,3 @@ function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
 }
 
 export default TimeDefinitionSection;
-
-// const [oneStart, setOneStart] = useState("");
-// const [oneEnd, setOneEnd] = useState("");
-// const [oneStartPause, setOneStartPause] = useState("");
-// const [oneEndPause, setOneEndPause] = useState("");
-// const [twoStart, setTwoStart] = useState("");
-// const [twoEnd, setTwoEnd] = useState("");
-// const [twoStartPause, setTwoStartPause] = useState("");
-// const [twoEndPause, setTwoEndPause] = useState("");
-// const [threeStart, setThreeStart] = useState("");
-// const [threeEnd, setThreeEnd] = useState("");
-// const [threeStartPause, setThreeStartPause] = useState("");
-// const [threeEndPause, setThreeEndPause] = useState("");
-// const [fourStart, setFourStart] = useState("");
-// const [fourEnd, setFourEnd] = useState("");
-// const [fourStartPause, setFourStartPause] = useState("");
-// const [fourEndPause, setFourEndPause] = useState("");
-// const [fiveStart, setFiveStart] = useState("");
-// const [fiveEnd, setFiveEnd] = useState("");
-// const [fiveStartPause, setFiveStartPause] = useState("");
-// const [fiveEndPause, setFiveEndPause] = useState("");
-// const [sixStart, setSixStart] = useState("");
-// const [sixEnd, setSixEnd] = useState("");
-// const [sixStartPause, setSixStartPause] = useState("");
-// const [sixEndPause, setSixEndPause] = useState("");
-// const [sevenStart, setSevenStart] = useState("");
-// const [sevenEnd, setSevenEnd] = useState("");
-// const [sevenStartPause, setSevenStartPause] = useState("");
-// const [sevenEndPause, setSevenEndPause] = useState("");

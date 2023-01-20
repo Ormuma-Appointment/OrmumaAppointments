@@ -118,13 +118,6 @@ const StoreSetup = () => {
   // load existing information, for editing purposes
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
-  const [name, setName] = useState("");
-  const [street, setStreet] = useState("");
-  const [number, setNumber] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [city, setCity] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [website, setWebsite] = useState("");
   const [fullOpenDays, setFullOpenDays] = useState([]);
   async function getData() {
     const docRef = doc(db, "stores", "one");
@@ -132,16 +125,8 @@ const StoreSetup = () => {
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
       let data = docSnap.data();
-      setSalonData(data);
-      setName(data.name);
-      setStreet(data.address.street);
-      setNumber(data.address.number);
-      setPostalCode(data.address.postalCode);
-      setCity(data.address.city);
-      setTelephone(data.contact.telephone);
-      setWebsite(data.contact.website);
+      setSalonData(docSnap.data());
       setTimes(data.openingHours);
-
       setHasData(true);
       setOpenDays(() => {
         let temp = [];
@@ -159,7 +144,7 @@ const StoreSetup = () => {
   }, []);
 
   useEffect(() => {
-    console.log(fullOpenDays);
+    // console.log(fullOpenDays);
   }, [fullOpenDays]);
 
   return (
@@ -197,8 +182,7 @@ const StoreSetup = () => {
                     name="name"
                     id="name"
                     placeholder="Salon Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    defaultValue={salonData.name}
                     required
                   />
                 </div>
@@ -214,8 +198,7 @@ const StoreSetup = () => {
                         type="text"
                         name="street"
                         id="street"
-                        value={street}
-                        onChange={(e) => setStreet(e.target.value)}
+                        defaultValue={hasData ? salonData.address.street : ""}
                         placeholder="Straße"
                       />
                     </div>{" "}
@@ -224,8 +207,7 @@ const StoreSetup = () => {
                         type="number"
                         name="number"
                         id="number"
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)}
+                        defaultValue={hasData ? salonData.address.number : ""}
                         placeholder="Nummer"
                       />
                     </div>{" "}
@@ -236,8 +218,9 @@ const StoreSetup = () => {
                         type="text"
                         name="postalCode"
                         id="postalCode"
-                        value={postalCode}
-                        onChange={(e) => setPostalCode(e.target.value)}
+                        defaultValue={
+                          hasData ? salonData.address.postalCode : ""
+                        }
                         placeholder="Postleitzahl"
                         required
                       />
@@ -247,8 +230,7 @@ const StoreSetup = () => {
                         type="text"
                         name="city"
                         id="city"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
+                        defaultValue={hasData ? salonData.address.city : ""}
                         placeholder="Stadt"
                         required
                       />
@@ -265,8 +247,7 @@ const StoreSetup = () => {
                     type="tel"
                     name="telephone"
                     id="telephone"
-                    value={telephone}
-                    onChange={(e) => setTelephone(e.target.value)}
+                    defaultValue={hasData ? salonData.contact.telephone : ""}
                     placeholder="Telefonnummer"
                     required
                   />
@@ -281,8 +262,7 @@ const StoreSetup = () => {
                     type="text"
                     name="website"
                     id="website"
-                    value={website}
-                    onChange={(e) => setWebsite(e.target.value)}
+                    defaultValue={hasData ? salonData.contact.website : ""}
                     placeholder="Webseite"
                   />
                 </div>

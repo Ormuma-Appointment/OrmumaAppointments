@@ -37,7 +37,6 @@ function Login() {
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ");
-      // console.log("errrrroorrr");
     }
   };
 

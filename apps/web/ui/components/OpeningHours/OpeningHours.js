@@ -10,9 +10,27 @@ function OpeningHours({ hours }) {
         {hours.map((el, index) => {
           return (
             <div key={index} className={styles.day}>
-              <p>{el.day}</p>{" "}
+              <p>
+                {
+                  [
+                    "Sonntag",
+                    "Montag",
+                    "Dienstag",
+                    "Mittwoch",
+                    "Donnerstag",
+                    "Freitag",
+                    "Samstag",
+                  ][el.day]
+                }
+              </p>{" "}
               <div>
-                <p>{el.start}</p> - <p> {el.end}</p>
+                {el.start ? (
+                  <>
+                    <p>{el.start}</p> - <p> {el.end}</p>
+                  </>
+                ) : (
+                  <p>geschlossen</p>
+                )}
               </div>
             </div>
           );

@@ -28,7 +28,7 @@ function LoginAdmin() {
       setErr(false);
       const res = await signInWithEmailAndPassword(auth, email, password);
       // Signed in
-      router.push("/account");
+      router.push("/account-admin");
       const user = res.userCredential.user;
       setCurrentUser(user);
 
@@ -73,7 +73,7 @@ function LoginAdmin() {
         Du hast noch keinen Account?
       </Link>
       <Link className={styles.link} href="/register">
-        Du bist Kunde und hast keinen Salon?
+        Kein Admin? Hier entlang zum Kundenportal!
       </Link>
     </div>
   );

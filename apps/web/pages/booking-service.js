@@ -7,7 +7,7 @@ import { admin } from "./data-sample";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
-  const [selected, setSelected] = useState(undefined);
+  const [selected, setSelected] = useState(null);
 
   console.log("Admin", admin.services);
   console.log("selectedService", selected);
@@ -45,7 +45,7 @@ const BookingService = () => {
                         title={el.service}
                         key={id}
                         setSelected={setSelected}
-                        onClick={() => setSelected(id)}
+                        onClick={() => setSelected({price, title, duration})}
                       />
                     )
                   );

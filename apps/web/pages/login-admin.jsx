@@ -8,9 +8,8 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
-import { WithPublic } from "../route/route";
 
-function Login() {
+function LoginAdmin() {
   const [salonName, setSalonName] = useState("Natur Friseur");
   const [err, setErr] = useState(false);
   const router = useRouter();
@@ -44,8 +43,11 @@ function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h1>Willkommen bei {salonName}</h1>
-        <p>Logge dich ein, um alle Funktionen nutzen zu können</p>
+        <h1>Willkommen beim Admin-Login</h1>
+        <p>
+          Logge dich ein, um Termine zu verwalten und weitere Funktionen der App
+          nutzen zu können
+        </p>
       </div>
       <form className={styles.form} onSubmit={handleLoginSubmit}>
         <Input
@@ -67,11 +69,14 @@ function Login() {
           Anmelden
         </Button>
       </form>
-      <Link className={styles.link} href="/register">
+      <Link className={styles.link} href="/register-admin">
         Du hast noch keinen Account?
+      </Link>
+      <Link className={styles.link} href="/register">
+        Du bist Kunde und hast keinen Salon?
       </Link>
     </div>
   );
 }
 
-export default WithPublic(Login);
+export default LoginAdmin;

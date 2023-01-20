@@ -9,14 +9,24 @@ import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 import Minus from "../ui/components/assets/minus.svg";
 import StylistCard from "../ui/components/StylistCard/StylistCard";
+import { useRouter } from "next/router";
+import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
   let dummyservices = ["Long", "Short", "Bold", "Style"];
   let dummyemployees = [
-    { name: "Kasper Schneiderlein", photo: null },
-    { name: "Juli Katter", photo: null },
-    { name: "Kyle Superwow", photo: null },
+    {
+      name: "Kasper Schneiderlein",
+      photo: null,
+      description: "Balayage, vibrant color Spezialist",
+    },
+    { name: "Juli Katter", photo: null, description: "Layers, Bobs, Fringes" },
+    {
+      name: "Kyle Superwow",
+      photo: null,
+      description: "Razers, Beards, Nails",
+    },
   ];
   let days_times = [
     {
@@ -80,25 +90,31 @@ function TeamSetup() {
   const [yesno] = useState(["ja", "nein"]);
   const [allEmployees, setAllEmployees] = useState(dummyemployees);
   const [times, setTimes] = useState(days_times);
-
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
-
+  const router = useRouter();
   function handleFormSubmit(e) {
     e.preventDefault();
-    let teamObj = {
+    let employee = {
       name: e.target.name.value,
-      street: e.target.street.value,
-      postalCode: e.target.postalCode.value,
-      city: e.target.city.value,
-      phone: e.target.phone.value,
+      adress: {
+        street: e.target.street.value,
+        number: e.target.number.value,
+        postalCode: e.target.postalCode.value,
+        city: e.target.city.value,
+        country: "Deutschland", //prefilled
+      },
+      telephone: e.target.telephone.value,
       photo: e.target.photo.value,
       services: services,
-      times: times,
+      workingTime: times,
     };
 
-    console.log(teamObj);
+    console.log(times);
   }
-
+  function handleBackClick(e, path) {
+    e.preventDefault();
+    router.push(path);
+  }
   function handleRemoveClick(index) {
     setServices((prev) => prev.filter((elem, i) => i !== index));
   }
@@ -107,10 +123,6 @@ function TeamSetup() {
     e.preventDefault();
     setServices(dummyservices);
   }
-
-  useEffect(() => {
-    console.log(times);
-  }, [times]);
 
   return (
     <div>
@@ -156,12 +168,24 @@ function TeamSetup() {
                     <label>Adresse:</label>
                   </div>
                   <div className={styles.col70}>
-                    <Input
-                      type="text"
-                      name="street"
-                      id="street"
-                      placeholder="Straße, Nummer"
-                    />
+                    <div className={`${styles.row} ${styles.city}`}>
+                      <div className={styles.col70}>
+                        <Input
+                          type="text"
+                          name="street"
+                          id="street"
+                          placeholder="Straße"
+                        />
+                      </div>{" "}
+                      <div className={styles.col30}>
+                        <Input
+                          type="number"
+                          name="number"
+                          id="number"
+                          placeholder="Nummer"
+                        />
+                      </div>{" "}
+                    </div>
                     <div className={`${styles.row} ${styles.city}`}>
                       <div className={styles.col50}>
                         <Input
@@ -188,10 +212,23 @@ function TeamSetup() {
                   </div>
                   <div className={styles.col70}>
                     <Input
-                      type="text"
-                      name="phone"
-                      id="phone"
+                      type="tel"
+                      name="telephone"
+                      id="telephone"
                       placeholder="Telefonnummer"
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Beschreibung:</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="text"
+                      name="description"
+                      id="description"
+                      placeholder="z.B. Farbspezialistin, Balayage, ... "
                     />
                   </div>
                 </div>
@@ -273,17 +310,22 @@ function TeamSetup() {
                 </>
               )}
             </div>
-            <Button icon="" size="medium" variant="primary">
-              Person speichern
-            </Button>
+            <div className={styles.footer}>
+              <Button
+                size="medium"
+                variant="danger"
+                onClick={(e) => handleBackClick(e, "service-setup")}
+              >
+                zurück
+              </Button>
+              <Button icon="" size="medium" variant="primary">
+                Person speichern
+              </Button>
+            </div>
           </form>
           <div className={styles.employee_container}>
             <h2>Alle Mitarbeiter</h2>
-            <div className={styles.employees}>
-              {allEmployees.map((el, index) => {
-                return <StylistCard key={index} name={el.name} />;
-              })}
-            </div>
+            <EmployeeOverview employees={allEmployees} />
           </div>
         </div>
       </CardContainer>

@@ -17,6 +17,9 @@
   justify-content: center;
   align-items: flex-start;
 }
+.info h3 {
+  flex-wrap: wrap;
+}
 .name {
   color: var(--primary-color);
 }
@@ -25,7 +28,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 14rem;
+    width: 15rem;
     max-height: none;
   }
   .image {

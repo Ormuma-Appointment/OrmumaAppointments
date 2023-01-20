@@ -21,7 +21,7 @@ const users = [
 
 const admin = {
   name: "Natur frisseur",
-  logo: "",
+  photo: "",
   contact: {
     email: "naturfriseur@gmail.com",
     telephone: "+49 1577 37384273",
@@ -87,23 +87,23 @@ const admin = {
   ],
   services: [
     {
-      categorie: "Cutting & Styling",
+      category: "Cutting & Styling",
       services: [
-        { service: "style 1", price: "45€", duration: 30 },
-        { service: "style 2", price: "30€", duration: 45 },
-        { service: "style 3", price: "25€", duration: 30 },
-        { service: "style 4", price: "45€", duration: 30 },
-        { service: "style 5", price: "455€", duration: 15 },
+        { service: "style 1", price: "45€", duration: 30, waiting: 20 },
+        { service: "style 2", price: "30€", duration: 45, waiting: 20 },
+        { service: "style 3", price: "25€", duration: 30, waiting: 20 },
+        { service: "style 4", price: "45€", duration: 30, waiting: 20 },
+        { service: "style 5", price: "455€", duration: 15, waiting: 20 },
       ],
     },
     {
-      categorie: "Colors",
+      category: "Colors",
       services: [
-        { service: "color 1", price: "45€", duration: 30 },
-        { service: "color 2", price: "30€", duration: 90 },
-        { service: "color 3", price: "25€", duration: 45 },
-        { service: "color 4", price: "45€", duration: 60 },
-        { service: "color 5", price: "455€", duration: 75 },
+        { service: "color 1", price: "45€", duration: 30, waiting: 20 },
+        { service: "color 2", price: "30€", duration: 90, waiting: 20 },
+        { service: "color 3", price: "25€", duration: 45, waiting: 20 },
+        { service: "color 4", price: "45€", duration: 60, waiting: 20 },
+        { service: "color 5", price: "455€", duration: 75, waiting: 20 },
       ],
     },
   ],
@@ -111,7 +111,7 @@ const admin = {
     {
       name: "Marie",
       description: "",
-      phone: "123",
+      telephone: "123",
       image: "",
       adress: {
         city: "Aachen",
@@ -137,6 +137,7 @@ const admin = {
       workingTime: [
         {
           day: 1,
+          label: "Mo",
           start: "0800",
           breakStart: "1200",
           breakEnd: "1300",
@@ -150,7 +151,7 @@ const admin = {
     {
       name: "John",
       description: "",
-      phone: "123",
+      telephone: "123",
       image: "",
       adress: {
         city: "Aachen",
@@ -172,6 +173,7 @@ const admin = {
       workingTime: [
         {
           day: 1,
+          label: "Mo",
           start: "0800",
           breakStart: "1200",
           breakEnd: "1300",

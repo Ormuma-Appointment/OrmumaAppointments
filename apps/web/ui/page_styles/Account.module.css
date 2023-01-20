@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+  align-items: center;
 }
 .box {
   height: 20vh;
@@ -9,12 +10,18 @@
   background-color: bisque;
   margin-bottom: 1rem;
 }
+.row > div {
+  width: 100%;
+}
 .appointments {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 .appointment_box {
+  width: 100%;
+}
+.appointment_box div {
   width: 100%;
 }
 .appointment_box h3 {

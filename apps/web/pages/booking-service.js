@@ -3,38 +3,31 @@ import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
+import { admin } from "./data-sample";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
-  const [selected, setSelected] = useState(undefined);
+  const [selected, setSelected] = useState(null);
+
+  console.log("Admin", admin.services);
+  console.log("selectedService", selected);
 
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = () => {
     setIsOpenStyle(!isOpenStyle);
   };
+
+  let services = admin.services;
+
+  //let event = { service: selected.title, duration: selected.duration };
+
+  //push event to array of event database now or later - but find a way to import the event object to booking employee
+
+  //console.log("Event", event);
   useEffect(() => {
     console.log("selectedService", selected);
   }, [selected]);
-  let services = [
-    {
-      name: "Cutting & Styling",
-      service: [
-        { style: "style 1", price: "45€", time: "30min" },
-        { style: "style 2", price: "30€", time: "30min" },
-        { style: "style 3", price: "25€", time: "30min" },
-        { style: "style 4", price: "45€", time: "30min" },
-        { style: "style 5", price: "455€", time: "30min" },
-      ],
-    },
-    {
-      name: "Colors",
-      service: [
-        { style: "color 1", price: "65€", time: "30min" },
-        { style: "color 2", price: "70€", time: "30min" },
-        { style: "color 3", price: "55€", time: "30min" },
-      ],
-    },
-  ];
+
   return (
     <div className={styles.pageContainer}>
       <h1>Unsere Service</h1>
@@ -43,20 +36,20 @@ const BookingService = () => {
           {services.map((service, id) => {
             return (
               <>
-                <h4 type="button" onClick={handleOpenStyle}>
-                  {service.name} <i className="fa-solid fa-play"></i>
+                <h4 type="button" onClick={handleOpenStyle} key={id}>
+                  {service.category} <i className="fa-solid fa-play"></i>
                 </h4>
-                {service.service.map((el, id) => {
+                {service.services.map((el, index) => {
                   return (
                     isOpenStyle && (
                       <SelectItem
-                        duration={el.time}
+                        duration={el.duration}
                         plus
                         price={el.price}
-                        title={el.style}
-                        key={id}
+                        title={el.service}
+                        key={index}
                         setSelected={setSelected}
-                        onClick={() => setSelected(id)}
+                        onClick={() => setSelected({ price, title, duration })}
                       />
                     )
                   );

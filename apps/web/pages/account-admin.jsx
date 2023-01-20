@@ -6,6 +6,9 @@ import InfoElement from "../ui/components/InfoElement/InfoElement";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
+import { auth, db } from "../firebase/firebase";
+import { useAuthContext } from "../context/AuthContext";
+import { doc, setDoc } from "firebase/firestore";
 
 const AccountAdmin = () => {
   const salon = {

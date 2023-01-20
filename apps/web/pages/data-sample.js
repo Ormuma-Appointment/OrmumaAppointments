@@ -19,7 +19,7 @@ const users = [
   },
 ];
 
-const admin = {
+export const admin = {
   name: "Natur frisseur",
   photo: "",
   contact: {

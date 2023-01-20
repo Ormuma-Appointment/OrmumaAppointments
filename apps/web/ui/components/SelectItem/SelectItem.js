@@ -8,7 +8,7 @@ function SelectItem(props) {
   const { title, minus, price, duration, plus, edit, selected, ...rest } =
     props;
 
-  const { setSelected } = props;
+  const setSelected = props.setSelected;
 
   const handleSelected = () => {
     if (plus) {

@@ -256,7 +256,8 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        <EmployeeOverview employees={salonData.employees} />
+        {/* <EmployeeOverview employees={salonData.employees} /> */}
+        NEED TO WORK ON! EMPLOYEE DATA NO IN DB YET
       </div>
     </div>
   );

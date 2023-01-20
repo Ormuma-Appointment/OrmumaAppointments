@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Navigation.module.css";
 import logo from "../assets/placeholderLogo.png";
@@ -23,6 +23,17 @@ function Navigation(props) {
     admin_logged_out,
     ...rest
   } = props;
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    if (currentUser) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [currentUser]);
+
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
@@ -34,9 +45,9 @@ function Navigation(props) {
           width={50}
         />
       </Link>
-      {(admin_logged_in || customer_logged_in) && (
+      {isLoggedIn && (
         <div className={styles.right}>
-          {admin_logged_in && (
+          {isAdmin && (
             <>
               <Button icon size="small" variant="secondary">
                 Termin buchen
@@ -59,7 +70,7 @@ function Navigation(props) {
         </div>
       )}
 
-      {(customer_logged_out || admin_logged_out) && (
+      {!isLoggedIn && (
         <div className={styles.loggedOut}>
           <Button
             size="small"
@@ -68,7 +79,7 @@ function Navigation(props) {
           >
             Login
           </Button>
-          {customer_logged_out && (
+          {!isAdmin && (
             <Button
               size="small"
               variant="secondary"
@@ -77,7 +88,7 @@ function Navigation(props) {
               Registrieren
             </Button>
           )}
-          {admin_logged_out && (
+          {isAdmin && (
             <>
               <Button
                 size="small"

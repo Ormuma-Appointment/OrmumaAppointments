@@ -47,15 +47,30 @@ function Navigation(props) {
       </Link>
       {isLoggedIn && (
         <div className={styles.right}>
-          {isAdmin && (
+          {!isAdmin && (
             <>
-              <Button icon size="small" variant="secondary">
+              <Button
+                icon
+                size="small"
+                variant="secondary"
+                onClick={() => router.push("/booking-service")}
+              >
                 Termin buchen
               </Button>
-              <Calendar className={styles.icon} />
             </>
           )}
-          <AccountIcon className={styles.icon} />
+          {isAdmin ? (
+            <AccountIcon
+              className={styles.icon}
+              onClick={() => router.push("/account-admin")}
+            />
+          ) : (
+            <AccountIcon
+              className={styles.icon}
+              onClick={() => router.push("/account")}
+            />
+          )}
+
           <button
             onClick={() =>
               signOut(auth).then(() => {

@@ -80,7 +80,7 @@ const StoreSetup = () => {
       name: e.target.name.value,
       photo: e.target.photo.value,
       contact: {
-        email: email, // maybe we can remove it from here if this is already stored
+        email: email,
         telephone: e.target.telephone.value,
         website: e.target.website.value,
       },
@@ -102,6 +102,7 @@ const StoreSetup = () => {
     } catch (err) {
       console.error(err);
     }
+    // console.log(storeObj);
     router.push(path);
   };
 

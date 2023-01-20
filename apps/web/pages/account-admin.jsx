@@ -141,7 +141,7 @@ const AccountAdmin = () => {
   ];
 
   const [salonData, setSalonData] = useState(salon);
-  async function getData() {
+  async function getSalonData() {
     const docRef = doc(db, "stores", "one");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -152,8 +152,23 @@ const AccountAdmin = () => {
     }
   }
   useEffect(() => {
-    getData();
+    getSalonData();
   }, []);
+
+  // const [salonEmployees, setSalonEmployees] = useState(salon.employees);
+  // async function getSalonData() {
+  //   const docRef = doc(db, "stores", "one", "employeeList");
+  //   const docSnap = await getDoc(docRef);
+  //   if (docSnap.exists()) {
+  //     console.log("Document data:", docSnap.data());
+  //     // setSalonEmployees(docSnap.data());
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  // }
+  // useEffect(() => {
+  //   getSalonData();
+  // }, []);
 
   return (
     <div className={styles.page_container}>

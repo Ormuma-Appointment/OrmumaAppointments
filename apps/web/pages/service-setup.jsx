@@ -7,6 +7,9 @@ import styles from "../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../ui/components/assets/minus.svg";
 import Link from "next/link";
+// import { doc, setDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { doc, setDoc, collection, query, getDocs } from "firebase/firestore";
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
@@ -23,11 +26,20 @@ function ServiceSetup() {
 
   // handle continue and save button click
   const router = useRouter();
-  function handleContinueClick(e, path) {
+  async function handleContinueClick(e, path) {
     e.preventDefault();
     let serviceObj = data;
     // here we need to add to push data either in a context or to firebase
-    console.log(serviceObj);
+    const q = query(collection(db, "stores"));
+    const querySnapshot = await getDocs(q);
+    const queryData = querySnapshot.docs.map((detail) => ({
+      ...detail.data(),
+      id: detail.id,
+    }));
+    console.log(queryData);
+    // queryData.map(async (v) => {
+    await setDoc(doc(db, `stores/${queryData.id}/services`), serviceObj);
+    // });
     router.push(path);
   }
   // handle back button click

@@ -46,10 +46,12 @@ const BookingService = () => {
                         duration={el.duration}
                         plus
                         price={el.price}
-                        title={el.service}
+                        service={el.service}
                         key={index}
                         setSelected={setSelected}
-                        onClick={() => setSelected({ price, title, duration })}
+                        onClick={() =>
+                          setSelected({ price, service, duration })
+                        }
                       />
                     )
                   );

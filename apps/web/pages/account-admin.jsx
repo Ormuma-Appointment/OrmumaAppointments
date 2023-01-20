@@ -7,7 +7,7 @@ import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 
 const AccountAdmin = () => {
   const salon = {
@@ -82,7 +82,7 @@ const AccountAdmin = () => {
       country: "Deutschland",
       number: "104",
     },
-    name: "Mulugeta birish",
+    name: "Not From Firebase",
     employees: [
       {
         name: "Kasper Schneiderlein",
@@ -139,7 +139,7 @@ const AccountAdmin = () => {
       time: "11:30-12:00",
     },
   ];
-
+  // get salon data for salon overview from Firebase
   const [salonData, setSalonData] = useState(salon);
   async function getSalonData() {
     const docRef = doc(db, "stores", "one");
@@ -155,20 +155,26 @@ const AccountAdmin = () => {
     getSalonData();
   }, []);
 
-  // const [salonEmployees, setSalonEmployees] = useState(salon.employees);
-  // async function getSalonData() {
-  //   const docRef = doc(db, "stores", "one", "employeeList");
-  //   const docSnap = await getDoc(docRef);
-  //   if (docSnap.exists()) {
-  //     console.log("Document data:", docSnap.data());
-  //     // setSalonEmployees(docSnap.data());
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  // }
-  // useEffect(() => {
-  //   getSalonData();
-  // }, []);
+  // get Employees for Employee-Listing from Firebase
+  const [salonEmployees, setSalonEmployees] = useState(salon.employees);
+  async function getEmployeeData() {
+    let employeesTemp = [];
+    const querySnapshot = await getDocs(
+      collection(db, "stores", "one", "employeeList")
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      employeesTemp.push(doc.data());
+    });
+    setSalonEmployees(employeesTemp);
+  }
+  useEffect(() => {
+    getEmployeeData();
+  }, []);
+  useEffect(() => {
+    console.log(salonEmployees);
+  }, [salonEmployees]);
 
   return (
     <div className={styles.page_container}>
@@ -274,8 +280,7 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        {/* <EmployeeOverview employees={salonData.employees} /> */}
-        NEED TO WORK ON! EMPLOYEE DATA NO IN DB YET
+        <EmployeeOverview employees={salonEmployees} />
       </div>
     </div>
   );

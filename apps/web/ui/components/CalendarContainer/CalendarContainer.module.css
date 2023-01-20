@@ -1,0 +1,22 @@
+.app {
+  /* text-align: center; */
+  margin: 0 auto;
+  width: 100%;
+}
+
+.times button {
+  display: block;
+  background-color: var(--primary-color-light);
+  color: white;
+  margin-top: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+}
+
+.times button:hover {
+  background-color: var(--primary-color);
+}
+
+.times button:focus {
+  background-color: var(--primary-color);
+}

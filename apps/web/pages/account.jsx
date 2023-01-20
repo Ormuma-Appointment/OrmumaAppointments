@@ -41,7 +41,7 @@ const Account = () => {
   // };
   // getData();
   // }, []);
-  console.log(currentUser);
+  // console.log(currentUser);
   // const datadata = getData();
   // console.log(datadata, "gggg");
 
@@ -54,9 +54,9 @@ const Account = () => {
           Termin buchen
         </Button>
       </div>
-      <div>
+      <div className={styles.row}>
         <h3>Meine Daten</h3>
-        <AccountCard className={styles.box}></AccountCard>
+        <AccountCard className={styles.box} />
       </div>
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>

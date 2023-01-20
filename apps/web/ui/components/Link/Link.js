@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Link.module.css";
-
-function Link(props) {
+import Link from "next/link";
+function StyledLink({ href }) {
   const { children = "Click here", ...rest } = props;
 
   return (
-    <a className={`${styles.link}`} {...rest}>
+    <Link href={href} className={styles.link} {...rest}>
       {children}
-    </a>
+    </Link>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
@@ -8,6 +9,7 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 
 const StoreSetup = () => {
+  const email = "dummyaddress@test.de";
   let days_times = [
     {
       label: "Mo",
@@ -68,19 +70,29 @@ const StoreSetup = () => {
   ];
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const [times, setTimes] = useState(days_times);
-  const handleSubmit = (e) => {
+  const router = useRouter();
+  const handleSubmit = (e, path) => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
-      street: e.target.street.value,
-      postalCode: e.target.postalCode.value,
-      city: e.target.city.value,
-      phone: e.target.phone.value,
       photo: e.target.photo.value,
-      times: times,
+      contact: {
+        email: email, // maybe we can remove it from here if this is already stored
+        telephone: e.target.telephone.value,
+        website: e.target.website.value,
+      },
+      address: {
+        street: e.target.street.value,
+        number: e.target.number.value,
+        postalCode: e.target.postalCode.value,
+        city: e.target.city.value,
+        country: "Deutschland", //prefilled
+      },
+      openingHours: times,
     };
 
     console.log(storeObj);
+    router.push(path);
   };
 
   return (
@@ -103,7 +115,10 @@ const StoreSetup = () => {
             wir Ihre Position auf einer Karte anzeigen und die Öffnungszeiten
             Ihren Kunden auf ihrer Homepage anzeigen.
           </div>
-          <form className={styles.setUpForm} onSubmit={(e) => handleSubmit(e)}>
+          <form
+            className={styles.setUpForm}
+            onSubmit={(e) => handleSubmit(e, "/service-setup")}
+          >
             <div className={styles.setUpInfos}>
               <div className={styles.row}>
                 <div className={styles.col30}>
@@ -124,13 +139,24 @@ const StoreSetup = () => {
                   <label>Adresse:*</label>
                 </div>
                 <div className={styles.col70}>
-                  <Input
-                    type="text"
-                    name="street"
-                    id="street"
-                    placeholder="Straße, Nummer"
-                    required
-                  />
+                  <div className={`${styles.row} ${styles.city}`}>
+                    <div className={styles.col70}>
+                      <Input
+                        type="text"
+                        name="street"
+                        id="street"
+                        placeholder="Straße"
+                      />
+                    </div>{" "}
+                    <div className={styles.col30}>
+                      <Input
+                        type="number"
+                        name="number"
+                        id="number"
+                        placeholder="Nummer"
+                      />
+                    </div>{" "}
+                  </div>
                   <div className={`${styles.row} ${styles.city}`}>
                     <div className={styles.col50}>
                       <Input
@@ -159,11 +185,24 @@ const StoreSetup = () => {
                 </div>
                 <div className={styles.col70}>
                   <Input
-                    type="text"
-                    name="phone"
-                    id="phone"
+                    type="tel"
+                    name="telephone"
+                    id="telephone"
                     placeholder="Telefonnummer"
                     required
+                  />
+                </div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.col30}>
+                  <label>Webseite:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <Input
+                    type="text"
+                    name="website"
+                    id="website"
+                    placeholder="Webseite"
                   />
                 </div>
               </div>
@@ -205,7 +244,7 @@ const StoreSetup = () => {
             </div>
             <div className={styles.buttonContainer}>
               <Button icon="" size="medium" variant="primary">
-                Weiter
+                speichern & weiter
               </Button>
             </div>
           </form>

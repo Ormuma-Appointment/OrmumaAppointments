@@ -17,7 +17,9 @@
 .address li:first-of-type {
   font-weight: bolder;
 }
-
+.address li {
+  list-style: none;
+}
 .map {
   height: 35vh;
   width: 100%;

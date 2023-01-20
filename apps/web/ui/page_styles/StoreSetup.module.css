@@ -62,7 +62,7 @@
     padding: 4rem;
   }
   .setUpForm {
-    padding: 4rem;
+    padding: 4rem auto;
   }
   .row {
     flex-direction: row;
@@ -88,7 +88,11 @@
   .col50:first-child {
     margin-right: 2%;
   }
+  .col70:first-child {
+    margin-right: 2%;
+  }
 }
+
 @media screen and (min-width: 1060px) {
   .container {
     width: 70vw;

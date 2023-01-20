@@ -16,7 +16,12 @@ function ServiceAdd({ setData, services, setServices, categories }) {
       let category = e.target.category[index].value;
       let duration = Number(e.target.duration[index].value);
       let waiting = Number(e.target.waiting[index].value);
-      let price = Number(e.target.price[index].value);
+      let price;
+      if (index === 0) {
+        price = Number(e.target.price.value);
+      } else {
+        price = Number(e.target.price[index].value);
+      }
       let serviceData = { service, price, duration, waiting };
       let categoryData = result.find((cat) => cat.category === category);
       if (!categoryData) {

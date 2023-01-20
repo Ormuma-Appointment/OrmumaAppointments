@@ -10,6 +10,9 @@ import Link from "next/link";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+
+
 const StoreSetup = () => {
   const email = "dummyaddress@test.de";
   let days_times = [
@@ -94,6 +97,7 @@ const StoreSetup = () => {
       openingHours: times,
     };
 
+<<<<<<< HEAD
     // setFormData(storeObj);
     console.log(storeObj);
 
@@ -102,12 +106,18 @@ const StoreSetup = () => {
     } catch (err) {
       console.error(err);
     }
+=======
+    // update firebase data if page was loaded with existing store data
+    hasData && (await updateDoc(doc(db, "stores", "one"), storeObj));
+
+>>>>>>> a48e1ff (add update data functionality to store page, open hours still missing)
     // console.log(storeObj);
     router.push(path);
   };
 
   // load existing information, for editing purposes
   const [salonData, setSalonData] = useState([]);
+  const [hasData, setHasData] = useState(false);
   const [name, setName] = useState("");
   const [street, setStreet] = useState("");
   const [number, setNumber] = useState("");
@@ -115,13 +125,12 @@ const StoreSetup = () => {
   const [city, setCity] = useState("");
   const [telephone, setTelephone] = useState("");
   const [website, setWebsite] = useState("");
-  const [openingHours, setOpeningHours] = useState("");
 
   async function getData() {
     const docRef = doc(db, "stores", "one");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
+      console.log("Document data:", docSnap.data());
       let data = docSnap.data();
       setSalonData(data);
       setName(data.name);
@@ -131,7 +140,8 @@ const StoreSetup = () => {
       setCity(data.address.city);
       setTelephone(data.contact.telephone);
       setWebsite(data.contact.website);
-      setOpeningHours(data.openingHours);
+      setTimes(data.openingHours);
+      setHasData(true);
     } else {
       console.log("No such document!");
     }
@@ -275,18 +285,22 @@ const StoreSetup = () => {
               </div>
             </div>
             <div className={styles.setUpOpenings}>
-              <div className={`${styles.row} ${styles.opening}`}>
-                <div className={styles.col30}>
-                  <label>Arbeitstage:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <CheckboxSelectElement
-                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                    setOpenDays={setOpenDays}
-                    openDays={openDays}
-                  />
-                </div>
-              </div>
+              {!hasData && (
+                <>
+                  <div className={`${styles.row} ${styles.opening}`}>
+                    <div className={styles.col30}>
+                      <label>Arbeitstage:*</label>
+                    </div>
+                    <div className={styles.col70}>
+                      <CheckboxSelectElement
+                        labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                        setOpenDays={setOpenDays}
+                        openDays={openDays}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
                   <label>Arbeitszeiten:*</label>

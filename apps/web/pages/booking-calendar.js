@@ -5,6 +5,7 @@ import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import Link from "next/link";
 import Button from "../ui/components/Button/Button";
+import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
 
 const BookingCalendar = () => {
   //const [selectedTime, setSelectedTime] = useState(null);
@@ -24,16 +25,17 @@ const BookingCalendar = () => {
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Calendar</h4>
+          <CalendarContainer />
         </CardContainer>
         <CardContainer>
           <h4>Ihre Auswahl</h4>
           <div>
             <SelectItem
-              title={service.style}
+              service={service.style}
               duration={service.time}
               price={service.price}
             />
-            <SelectItem title={employee.name} />
+            <SelectItem employee={employee.name} />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

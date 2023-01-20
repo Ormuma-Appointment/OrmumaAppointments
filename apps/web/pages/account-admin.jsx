@@ -80,6 +80,9 @@ const AccountAdmin = () => {
     { day: "Friday", start: "08:00", end: "18:00" },
     { day: "Saturday", start: "08:00", end: "15:00" },
   ];
+  // query salon info
+
+  // query opening hours
 
   return (
     <div className={styles.page_container}>

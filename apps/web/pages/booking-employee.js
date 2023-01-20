@@ -35,7 +35,7 @@ const BookingEmployee = () => {
             return (
               <SelectItem
                 plus
-                title={employee.name}
+                employee={employee.name}
                 key={id}
                 setSelected={setSelected}
               />

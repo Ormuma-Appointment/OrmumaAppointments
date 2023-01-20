@@ -88,7 +88,7 @@ function TeamSetup() {
       breakEnd: null,
     },
   ];
-  const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
+  const [services, setServices] = useState(dummyservices);
   const [yesno] = useState(["ja", "nein"]);
   const [allEmployees, setAllEmployees] = useState(dummyemployees);
   const [times, setTimes] = useState(days_times);

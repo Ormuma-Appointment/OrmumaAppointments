@@ -7,7 +7,7 @@ import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/Checkb
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 const StoreSetup = () => {
@@ -106,6 +106,40 @@ const StoreSetup = () => {
     router.push(path);
   };
 
+  // load existing information, for editing purposes
+  const [salonData, setSalonData] = useState([]);
+  const [name, setName] = useState("");
+  const [street, setStreet] = useState("");
+  const [number, setNumber] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [city, setCity] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [website, setWebsite] = useState("");
+  const [openingHours, setOpeningHours] = useState("");
+
+  async function getData() {
+    const docRef = doc(db, "stores", "one");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      // console.log("Document data:", docSnap.data());
+      let data = docSnap.data();
+      setSalonData(data);
+      setName(data.name);
+      setStreet(data.address.street);
+      setNumber(data.address.number);
+      setPostalCode(data.address.postalCode);
+      setCity(data.address.city);
+      setTelephone(data.contact.telephone);
+      setWebsite(data.contact.website);
+      setOpeningHours(data.openingHours);
+    } else {
+      console.log("No such document!");
+    }
+  }
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
       <div className={styles.breadcrumb}>
@@ -141,6 +175,8 @@ const StoreSetup = () => {
                     name="name"
                     id="name"
                     placeholder="Salon Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
@@ -156,6 +192,8 @@ const StoreSetup = () => {
                         type="text"
                         name="street"
                         id="street"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
                         placeholder="Straße"
                       />
                     </div>{" "}
@@ -164,6 +202,8 @@ const StoreSetup = () => {
                         type="number"
                         name="number"
                         id="number"
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
                         placeholder="Nummer"
                       />
                     </div>{" "}
@@ -174,6 +214,8 @@ const StoreSetup = () => {
                         type="text"
                         name="postalCode"
                         id="postalCode"
+                        value={postalCode}
+                        onChange={(e) => setPostalCode(e.target.value)}
                         placeholder="Postleitzahl"
                         required
                       />
@@ -183,6 +225,8 @@ const StoreSetup = () => {
                         type="text"
                         name="city"
                         id="city"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                         placeholder="Stadt"
                         required
                       />
@@ -199,6 +243,8 @@ const StoreSetup = () => {
                     type="tel"
                     name="telephone"
                     id="telephone"
+                    value={telephone}
+                    onChange={(e) => setTelephone(e.target.value)}
                     placeholder="Telefonnummer"
                     required
                   />
@@ -213,6 +259,8 @@ const StoreSetup = () => {
                     type="text"
                     name="website"
                     id="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
                     placeholder="Webseite"
                   />
                 </div>
@@ -226,7 +274,6 @@ const StoreSetup = () => {
                 </div>
               </div>
             </div>
-
             <div className={styles.setUpOpenings}>
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>

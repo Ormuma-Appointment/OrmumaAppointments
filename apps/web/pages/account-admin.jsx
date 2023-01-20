@@ -224,7 +224,13 @@ const AccountAdmin = () => {
                         }
                       </p>{" "}
                       <div>
-                        <p>{el.start}</p> - <p> {el.end}</p>
+                        {el.start ? (
+                          <>
+                            <p>{el.start}</p> - <p> {el.end}</p>
+                          </>
+                        ) : (
+                          <p>geschlossen</p>
+                        )}
                       </div>
                     </div>
                   );

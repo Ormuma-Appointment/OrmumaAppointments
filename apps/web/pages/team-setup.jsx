@@ -117,6 +117,7 @@ function TeamSetup() {
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
+  const [employeeIndex, setEmployeeIndex] = useState(0);
 
   async function getEmployeeData() {
     if (currentUser) {
@@ -137,6 +138,10 @@ function TeamSetup() {
   useEffect(() => {
     getEmployeeData();
   }, [currentUser]);
+
+  useEffect(() => {
+    setSelectedEmployee(salonEmployees[employeeIndex]);
+  }, [employeeIndex]);
 
   useEffect(() => {
     console.log("selectedEmployee ", selectedEmployee);
@@ -405,7 +410,10 @@ function TeamSetup() {
           </form>
           <div className={styles.employee_container}>
             <h2>Alle Mitarbeiter</h2>
-            <EmployeeOverview employees={salonEmployees} />
+            <EmployeeOverview
+              employees={salonEmployees}
+              setEmployeeIndex={setEmployeeIndex}
+            />
           </div>
         </div>
       </CardContainer>

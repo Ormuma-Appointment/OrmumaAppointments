@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TimeDefinitionSection.module.css";
 import SelectElement from "../SelectElement/SelectElement";
 
 function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
+  const [localHasData, setLocalHasData] = useState(hasData);
+  useEffect(() => {
+    console.log("change");
+    setLocalHasData(hasData);
+  }, [hasData]);
+
   let start = "start";
   let end = "end";
   let pauseStart = "pausestart";
@@ -60,33 +66,52 @@ function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
     );
   }
 
+  console.log("default value", defaultValue);
+
   return (
     <div className={styles.container}>
       {openDays.map((el, index) => {
         return (
           <div key={index}>
             <div className={styles.input_group} onChange={handleChange}>
-              <p>{el}</p>{" "}
+              <p>{el}</p>
               <SelectElement
                 time={start}
                 day={el}
-                defaultValue={hasData ? defaultValue[index].start : ""}
+                defaultValue={
+                  localHasData &&
+                  defaultValue[index].start !== "-" &&
+                  console.log("Hello") &&
+                  defaultValue[index].start
+                }
               />
               <SelectElement
                 time={end}
                 day={el}
-                defaultValue={hasData ? defaultValue[index].end : "-"}
+                defaultValue={
+                  localHasData &&
+                  defaultValue[index].start !== "-" &&
+                  defaultValue[index].end
+                }
               />
               <p>Pause</p>{" "}
               <SelectElement
                 time={pauseStart}
                 day={el}
-                defaultValue={hasData ? defaultValue[index].breakStart : "-"}
+                defaultValue={
+                  localHasData &&
+                  defaultValue[index].start !== "-" &&
+                  defaultValue[index].breakStart
+                }
               />
               <SelectElement
                 time={pauseEnd}
                 day={el}
-                defaultValue={hasData ? defaultValue[index].breakEnd : "-"}
+                defaultValue={
+                  localHasData &&
+                  defaultValue[index].start !== "-" &&
+                  defaultValue[index].breakEnd
+                }
               />
             </div>
           </div>

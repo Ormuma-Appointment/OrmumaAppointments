@@ -1,9 +1,8 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./SelectElement.module.css";
-import Down from "../assets/down.svg";
 
 function SelectElement({ day, time, defaultValue }) {
-  const [data, setData] = useState([
+  const [data] = useState([
     "-",
     "06:00",
     "06:30",

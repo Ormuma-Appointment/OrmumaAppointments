@@ -11,8 +11,6 @@ import Minus from "../ui/components/assets/minus.svg";
 import StylistCard from "../ui/components/StylistCard/StylistCard";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
-import { db } from "../firebase/firebase";
-import { doc, setDoc, collection, query, getDocs } from "firebase/firestore";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
@@ -94,7 +92,7 @@ function TeamSetup() {
   const [times, setTimes] = useState(days_times);
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const router = useRouter();
-  async function handleFormSubmit(e) {
+  function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {
       name: e.target.name.value,
@@ -340,7 +338,7 @@ function TeamSetup() {
           </form>
           <div className={styles.employee_container}>
             <h2>Alle Mitarbeiter</h2>
-            <EmployeeOverview employees={allEmployees} />
+            <EmployeeOverview employees={salonEmployees} />
           </div>
         </div>
       </CardContainer>

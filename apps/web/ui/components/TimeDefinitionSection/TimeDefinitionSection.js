@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import styles from "./TimeDefinitionSection.module.css";
 import SelectElement from "../SelectElement/SelectElement";
+import { collection } from "firebase/firestore";
+import { connectAuthEmulator } from "firebase/auth";
 
-function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
+function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
+  const [localTimes, setLocalTimes] = useState(times);
+  useEffect(() => {
+    setLocalTimes((prev) => times);
+  }, [times]);
+
   const [localHasData, setLocalHasData] = useState(hasData);
   useEffect(() => {
-    console.log("change");
-    setLocalHasData(hasData);
+    setLocalHasData((prev) => hasData);
   }, [hasData]);
 
   let start = "start";
   let end = "end";
-  let pauseStart = "pausestart";
-  let pauseEnd = "pauseend";
+  let breakStart = "breakStart";
+  let breakEnd = "breakEnd";
 
   function handleChange(e) {
     let target_name = e.target.name;
@@ -51,12 +57,12 @@ function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
             ...time,
             end: e.target.value,
           };
-        } else if (start_end === "pausestart") {
+        } else if (start_end === "breakStart") {
           return {
             ...time,
             breakStart: e.target.value,
           };
-        } else if (start_end === "pauseend") {
+        } else if (start_end === "breakEnd") {
           return {
             ...time,
             breakEnd: e.target.value,
@@ -65,8 +71,6 @@ function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
       })
     );
   }
-
-  console.log("default value", defaultValue);
 
   return (
     <div className={styles.container}>
@@ -78,40 +82,27 @@ function TimeDefinitionSection({ openDays, setTimes, defaultValue, hasData }) {
               <SelectElement
                 time={start}
                 day={el}
-                defaultValue={
-                  localHasData &&
-                  defaultValue[index].start !== "-" &&
-                  console.log("Hello") &&
-                  defaultValue[index].start
-                }
+                hasData={hasData}
+                value={localHasData ? localTimes[index].start : "-"}
               />
               <SelectElement
                 time={end}
                 day={el}
-                defaultValue={
-                  localHasData &&
-                  defaultValue[index].start !== "-" &&
-                  defaultValue[index].end
-                }
+                hasData={hasData}
+                value={localHasData ? localTimes[index].end : "-"}
               />
-              <p>Pause</p>{" "}
+              <p>Pause</p>
               <SelectElement
-                time={pauseStart}
+                time={breakStart}
                 day={el}
-                defaultValue={
-                  localHasData &&
-                  defaultValue[index].start !== "-" &&
-                  defaultValue[index].breakStart
-                }
+                hasData={hasData}
+                value={localHasData ? localTimes[index].breakStart : "-"}
               />
               <SelectElement
-                time={pauseEnd}
+                time={breakEnd}
                 day={el}
-                defaultValue={
-                  localHasData &&
-                  defaultValue[index].start !== "-" &&
-                  defaultValue[index].breakEnd
-                }
+                hasData={hasData}
+                value={localHasData ? localTimes[index].breakEnd : "-"}
               />
             </div>
           </div>

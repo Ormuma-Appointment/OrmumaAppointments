@@ -13,7 +13,6 @@ import { db } from "../firebase/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
-
 const StoreSetup = () => {
   const email = "dummyaddress@test.de";
   let days_times = [
@@ -97,22 +96,18 @@ const StoreSetup = () => {
       },
       openingHours: times,
     };
-
-<<<<<<< HEAD
-    // setFormData(storeObj);
-    console.log(storeObj);
-
-    try {
-      await setDoc(doc(db, "stores", "one"), storeObj);
-    } catch (err) {
-      console.error(err);
+    if (hasData) {
+      hasData && (await updateDoc(doc(db, "stores", "one"), storeObj));
+    } else {
+      try {
+        await setDoc(doc(db, "stores", "one"), storeObj);
+      } catch (err) {
+        console.error(err);
+      }
     }
-=======
     // update firebase data if page was loaded with existing store data
-    hasData && (await updateDoc(doc(db, "stores", "one"), storeObj));
 
->>>>>>> a48e1ff (add update data functionality to store page, open hours still missing)
-    // console.log(storeObj);
+    console.log(storeObj);
     router.push(path);
   };
   const { currentUser } = useAuthContext();
@@ -271,19 +266,6 @@ const StoreSetup = () => {
             </div>
             {
               <div className={styles.setUpOpenings}>
-                {/* <div className={`${styles.row} ${styles.opening}`}>
-                <div className={styles.col30}>
-                  <label>Arbeitstage:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <CheckboxSelectElement
-                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                    setOpenDays={setOpenDays}
-                    openDays={openDays}
-                    hasData={hasData}
-                  />
-                </div>
-              </div> */}
                 <div className={`${styles.row} ${styles.opening}`}>
                   <div className={styles.col30}>
                     <label>Öffnungszeiten:*</label>
@@ -292,7 +274,7 @@ const StoreSetup = () => {
                     <TimeDefinitionSection
                       openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
                       setTimes={setTimes}
-                      defaultValue={times}
+                      times={times}
                       hasData={hasData}
                     />
                   </div>

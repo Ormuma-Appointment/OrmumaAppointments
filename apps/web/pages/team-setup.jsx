@@ -117,8 +117,27 @@ function TeamSetup() {
     workingTime: times,
   };
 
-  // get all Employees from Firebase
+  // get services from Store Collection services
   const { currentUser } = useAuthContext();
+  const [dbServices, setDbServices] = useState([]);
+  async function getDBServices() {
+    if (currentUser) {
+      const docRef = doc(db, "stores", "one", "services", "all");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data().serviceObj);
+        let data = docSnap.data().serviceObj;
+        setDbServices(data);
+      } else {
+        console.log("No such document!");
+      }
+    }
+  }
+  useEffect(() => {
+    getDBServices();
+  }, []);
+
+  // get all Employees from Firebase
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
@@ -155,10 +174,6 @@ function TeamSetup() {
       setServices(selectedEmployee.services);
       setTimes(selectedEmployee.workingTime);
     }
-  }, [selectedEmployee]);
-
-  useEffect(() => {
-    console.log("hasData ", hasData);
   }, [selectedEmployee]);
 
   async function handleFormSubmit(e, path) {

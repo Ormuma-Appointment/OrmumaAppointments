@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./RadioSelectElement.module.css";
 
 function RadioSelectElement({
@@ -9,11 +9,7 @@ function RadioSelectElement({
   noSelected,
   setNoSelected,
 }) {
-  const [localHasData, setLocalHasData] = useState(hasData);
-
   useEffect(() => {
-    setLocalHasData(hasData);
-
     if (hasData) {
       setShowServices(true);
     } else {

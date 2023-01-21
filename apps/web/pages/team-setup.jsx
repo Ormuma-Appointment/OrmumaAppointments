@@ -11,10 +11,14 @@ import Minus from "../ui/components/assets/minus.svg";
 import StylistCard from "../ui/components/StylistCard/StylistCard";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
+import { db } from "../firebase/firebase";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
   let dummyservices = ["Long", "Short", "Bold", "Style"];
+
   let dummyemployees = [
     {
       name: "Kasper Schneiderlein",
@@ -88,37 +92,56 @@ function TeamSetup() {
   ];
   const [services, setServices] = useState(dummyservices);
   const [yesno] = useState(["ja", "nein"]);
-  const [allEmployees, setAllEmployees] = useState(dummyemployees);
   const [times, setTimes] = useState(days_times);
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const router = useRouter();
+  let dummyemployee = {
+    name: "Dummy",
+    adress: {
+      street: "dummy",
+      number: "0",
+      postalCode: "00000",
+      city: "dummy",
+      country: "Deutschland", //prefilled
+    },
+    telephone: "999999999",
+    photo: null,
+    services: services,
+    description: "dummy",
+    workingTime: times,
+  };
 
 
   // get all Employees from Firebase
+  const { currentUser } = useAuthContext();
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [hasData, setHasData] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState(undefined);
+  const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
 
   async function getEmployeeData() {
-    let employeesTemp = [];
-    const querySnapshot = await getDocs(
-      collection(db, "stores", "one", "employeeList")
-    );
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-      employeesTemp.push(doc.data());
+    if (currentUser) {
+      let employeesTemp = [];
+      const querySnapshot = await getDocs(
+        collection(db, "stores", "one", "employeeList")
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data());
+        employeesTemp.push(doc.data());
+      });
+      setSalonEmployees(employeesTemp);
+      setSelectedEmployee(employeesTemp[0]);
       setHasData(true);
-    });
-    setSalonEmployees(employeesTemp);
+    }
   }
   useEffect(() => {
     getEmployeeData();
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
-    console.log(salonEmployees);
-  }, [salonEmployees]);
+    console.log("selectedEmployee ", selectedEmployee);
+    console.log("hasData ", hasData);
+  }, [hasData]);
 
 
   function handleFormSubmit(e) {
@@ -201,6 +224,7 @@ function TeamSetup() {
                       name="name"
                       id="name"
                       placeholder="Name"
+                      defaultValue={hasData ? selectedEmployee.name : ""}
                       required
                     />
                   </div>
@@ -216,6 +240,9 @@ function TeamSetup() {
                           type="text"
                           name="street"
                           id="street"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.street : ""
+                          }
                           placeholder="Straße"
                         />
                       </div>{" "}
@@ -224,6 +251,9 @@ function TeamSetup() {
                           type="number"
                           name="number"
                           id="number"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.number : ""
+                          }
                           placeholder="Nummer"
                         />
                       </div>{" "}
@@ -234,6 +264,9 @@ function TeamSetup() {
                           type="text"
                           name="postalCode"
                           id="postalCode"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.postalCode : ""
+                          }
                           placeholder="Postleitzahl"
                         />
                       </div>
@@ -242,6 +275,9 @@ function TeamSetup() {
                           type="text"
                           name="city"
                           id="city"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.city : ""
+                          }
                           placeholder="Stadt"
                         />
                       </div>
@@ -257,6 +293,7 @@ function TeamSetup() {
                       type="tel"
                       name="telephone"
                       id="telephone"
+                      defaultValue={hasData ? selectedEmployee.telephone : ""}
                       placeholder="Telefonnummer"
                     />
                   </div>
@@ -270,6 +307,7 @@ function TeamSetup() {
                       type="text"
                       name="description"
                       id="description"
+                      defaultValue={hasData ? selectedEmployee.description : ""}
                       placeholder="z.B. Farbspezialistin, Balayage, ... "
                     />
                   </div>

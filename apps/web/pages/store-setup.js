@@ -11,6 +11,7 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 
 const StoreSetup = () => {
@@ -73,7 +74,7 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
-  const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
+
   const [times, setTimes] = useState(days_times);
   const [formData, setFormData] = useState({});
   const router = useRouter();
@@ -114,38 +115,30 @@ const StoreSetup = () => {
     // console.log(storeObj);
     router.push(path);
   };
-
+  const { currentUser } = useAuthContext();
   // load existing information, for editing purposes
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
-  const [fullOpenDays, setFullOpenDays] = useState([]);
+
   async function getData() {
-    const docRef = doc(db, "stores", "one");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      let data = docSnap.data();
-      setSalonData(docSnap.data());
-      setTimes(data.openingHours);
-      setHasData(true);
-      setOpenDays(() => {
-        let temp = [];
-        let onlyopen = data.openingHours.filter((el) => el.start || el.end);
-        onlyopen.map((el) => temp.push(el.label));
-        return temp;
-      });
-      setFullOpenDays(data.openingHours.filter((el) => el.start || el.end));
-    } else {
-      console.log("No such document!");
+    if (currentUser) {
+      const docRef = doc(db, "stores", "one");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        let data = docSnap.data();
+        setSalonData(docSnap.data());
+        setTimes(data.openingHours);
+        setHasData(true);
+      } else {
+        console.log("No such document!");
+      }
     }
   }
   useEffect(() => {
+    setTimes((prev) => prev);
     getData();
-  }, []);
-
-  useEffect(() => {
-    // console.log(fullOpenDays);
-  }, [fullOpenDays]);
+  }, [currentUser]);
 
   return (
     <div>
@@ -276,44 +269,36 @@ const StoreSetup = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.setUpOpenings}>
-              {!hasData && (
-                <>
-                  <div className={`${styles.row} ${styles.opening}`}>
-                    <div className={styles.col30}>
-                      <label>Arbeitstage:*</label>
-                    </div>
-                    <div className={styles.col70}>
-                      <CheckboxSelectElement
-                        labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                        setOpenDays={setOpenDays}
-                        openDays={openDays}
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-              <div className={`${styles.row} ${styles.opening}`}>
+            {
+              <div className={styles.setUpOpenings}>
+                {/* <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
-                  <label>Arbeitszeiten:*</label>
+                  <label>Arbeitstage:*</label>
                 </div>
                 <div className={styles.col70}>
-                  {!hasData ? (
+                  <CheckboxSelectElement
+                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                    setOpenDays={setOpenDays}
+                    openDays={openDays}
+                    hasData={hasData}
+                  />
+                </div>
+              </div> */}
+                <div className={`${styles.row} ${styles.opening}`}>
+                  <div className={styles.col30}>
+                    <label>Öffnungszeiten:*</label>
+                  </div>
+                  <div className={styles.col70}>
                     <TimeDefinitionSection
-                      openDays={openDays}
+                      openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
                       setTimes={setTimes}
-                    />
-                  ) : (
-                    <TimeDefinitionSection
-                      openDays={openDays}
-                      setTimes={setTimes}
-                      defaultValue={fullOpenDays}
+                      defaultValue={times}
                       hasData={hasData}
                     />
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
+            }
             <div className={styles.buttonContainer}>
               <Button
                 onSubmit={handleSubmit}

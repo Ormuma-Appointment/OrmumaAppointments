@@ -99,6 +99,7 @@ const AccountAdmin = () => {
 
   // get Employees for Employee-Listing from Firebase
   const [salonEmployees, setSalonEmployees] = useState(salon.employees);
+  const [employeeIndex, setEmployeeIndex] = useState(0);
   async function getEmployeeData() {
     let employeesTemp = [];
     const querySnapshot = await getDocs(
@@ -219,7 +220,10 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        <EmployeeOverview employees={salonEmployees} />
+        <EmployeeOverview
+          employees={salonEmployees}
+          setEmployeeIndex={setEmployeeIndex}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SelectElement.module.css";
 
-function SelectElement({ day, time, defaultValue }) {
+function SelectElement({ day, time, value }) {
+  const [localValue, setLocalValue] = useState(value);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
   const [data] = useState([
     "-",
     "06:00",
@@ -49,7 +55,8 @@ function SelectElement({ day, time, defaultValue }) {
         name={`${day}_${time}`}
         id="time"
         className={styles.input}
-        defaultValue={defaultValue}
+        value={localValue}
+        onChange={(e) => setLocalValue((prev) => e.target.value)}
       >
         {data.map((el, index) => {
           return (

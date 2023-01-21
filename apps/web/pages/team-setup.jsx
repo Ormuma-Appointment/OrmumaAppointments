@@ -3,12 +3,10 @@ import Link from "next/link";
 import styles from "../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
-import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 import Minus from "../ui/components/assets/minus.svg";
-import StylistCard from "../ui/components/StylistCard/StylistCard";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
@@ -23,21 +21,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
-  let dummyservices = ["Long", "Short", "Bold", "Style"];
-
-  let dummyemployees = [
-    {
-      name: "Kasper Schneiderlein",
-      photo: null,
-      description: "Balayage, vibrant color Spezialist",
-    },
-    { name: "Juli Katter", photo: null, description: "Layers, Bobs, Fringes" },
-    {
-      name: "Kyle Superwow",
-      photo: null,
-      description: "Razers, Beards, Nails",
-    },
-  ];
+  let dummyservices = ["no data"];
   let days_times = [
     {
       label: "Mo",
@@ -96,10 +80,10 @@ function TeamSetup() {
       breakEnd: null,
     },
   ];
-  const [services, setServices] = useState(dummyservices);
+
   const [yesno] = useState(["ja", "nein"]);
   const [times, setTimes] = useState(days_times);
-  const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
+  const [services, setServices] = useState(dummyservices);
   const router = useRouter();
   let dummyemployee = {
     name: "Dummy",
@@ -125,9 +109,18 @@ function TeamSetup() {
       const docRef = doc(db, "stores", "one", "services", "all");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data().serviceObj);
+        // console.log("Document data:", docSnap.data().serviceObj);
         let data = docSnap.data().serviceObj;
-        setDbServices(data);
+        if (data[0]) {
+          let temp = [];
+          data.forEach((el) => {
+            el.services.forEach((elem) =>
+              temp.push(`${el.category}  -  ${elem.service}`)
+            );
+          });
+          setServices(temp);
+          setDbServices(temp);
+        }
       } else {
         console.log("No such document!");
       }
@@ -135,7 +128,7 @@ function TeamSetup() {
   }
   useEffect(() => {
     getDBServices();
-  }, []);
+  }, [currentUser]);
 
   // get all Employees from Firebase
   const [salonEmployees, setSalonEmployees] = useState([]);
@@ -176,7 +169,7 @@ function TeamSetup() {
     }
   }, [selectedEmployee]);
 
-  async function handleFormSubmit(e, path) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {
       name: e.target.name.value,
@@ -231,7 +224,11 @@ function TeamSetup() {
     if (hasData) {
       setServices(selectedEmployee.services);
     } else {
-      setServices(dummyservices);
+      if (dbServices) {
+        setServices(dbServices);
+      } else {
+        setServices(dummyservices);
+      }
     }
   }
 

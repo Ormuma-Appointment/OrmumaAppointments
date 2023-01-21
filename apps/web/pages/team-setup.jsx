@@ -92,6 +92,35 @@ function TeamSetup() {
   const [times, setTimes] = useState(days_times);
   const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
   const router = useRouter();
+
+
+  // get all Employees from Firebase
+  const [salonEmployees, setSalonEmployees] = useState([]);
+  const [hasData, setHasData] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(undefined);
+
+  async function getEmployeeData() {
+    let employeesTemp = [];
+    const querySnapshot = await getDocs(
+      collection(db, "stores", "one", "employeeList")
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      employeesTemp.push(doc.data());
+      setHasData(true);
+    });
+    setSalonEmployees(employeesTemp);
+  }
+  useEffect(() => {
+    getEmployeeData();
+  }, []);
+
+  useEffect(() => {
+    console.log(salonEmployees);
+  }, [salonEmployees]);
+
+
   function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {

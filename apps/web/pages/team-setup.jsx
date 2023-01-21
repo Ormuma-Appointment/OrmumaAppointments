@@ -202,6 +202,7 @@ function TeamSetup() {
     // reload page and clear all fields
     router.reload(window.location.pathname);
   }
+
   function handleBackClick(e, path) {
     e.preventDefault();
     router.push(path);
@@ -212,7 +213,11 @@ function TeamSetup() {
 
   function handleCancelClick(e) {
     e.preventDefault();
-    setServices(dummyservices);
+    if (hasData) {
+      setServices(selectedEmployee.services);
+    } else {
+      setServices(dummyservices);
+    }
   }
 
   return (

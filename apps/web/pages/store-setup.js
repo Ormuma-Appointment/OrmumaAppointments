@@ -264,23 +264,21 @@ const StoreSetup = () => {
                 </div>
               </div>
             </div>
-            {
-              <div className={styles.setUpOpenings}>
-                <div className={`${styles.row} ${styles.opening}`}>
-                  <div className={styles.col30}>
-                    <label>Öffnungszeiten:*</label>
-                  </div>
-                  <div className={styles.col70}>
-                    <TimeDefinitionSection
-                      openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                      setTimes={setTimes}
-                      times={times}
-                      hasData={hasData}
-                    />
-                  </div>
+            <div className={styles.setUpOpenings}>
+              <div className={`${styles.row} ${styles.opening}`}>
+                <div className={styles.col30}>
+                  <label>Öffnungszeiten:*</label>
+                </div>
+                <div className={styles.col70}>
+                  <TimeDefinitionSection
+                    openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                    setTimes={setTimes}
+                    times={times}
+                    hasData={hasData}
+                  />
                 </div>
               </div>
-            }
+            </div>
             <div className={styles.buttonContainer}>
               <Button
                 onSubmit={handleSubmit}

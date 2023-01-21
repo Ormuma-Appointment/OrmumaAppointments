@@ -341,25 +341,14 @@ function TeamSetup() {
             <div className={styles.setUpOpenings}>
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
-                  <label>Arbeitstage:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <CheckboxSelectElement
-                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                    setOpenDays={setOpenDays}
-                    openDays={openDays}
-                  />
-                </div>
-              </div>
-              <div className={`${styles.row} ${styles.opening}`}>
-                <div className={styles.col30}>
-                  <label>Arbeitszeiten:*</label>
+                  <label>Öffnungszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
                   <TimeDefinitionSection
-                    openDays={openDays}
+                    openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
                     setTimes={setTimes}
                     times={times}
+                    hasData={hasData}
                   />
                 </div>
               </div>

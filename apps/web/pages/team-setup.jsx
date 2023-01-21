@@ -12,7 +12,13 @@ import StylistCard from "../ui/components/StylistCard/StylistCard";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  collection,
+} from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
 function TeamSetup() {
@@ -111,7 +117,6 @@ function TeamSetup() {
     workingTime: times,
   };
 
-
   // get all Employees from Firebase
   const { currentUser } = useAuthContext();
   const [salonEmployees, setSalonEmployees] = useState([]);
@@ -143,12 +148,13 @@ function TeamSetup() {
   }, [employeeIndex]);
 
   useEffect(() => {
-    console.log("employeeIndex ", employeeIndex);
-    console.log("hasData ", hasData);
-  }, [employeeIndex]);
+    if (hasData) {
+      setServices(selectedEmployee.services);
+      setTimes(selectedEmployee.workingTime);
+    }
+  }, [selectedEmployee]);
 
-
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {
       name: e.target.name.value,
@@ -179,6 +185,12 @@ function TeamSetup() {
     );
 
     console.log(times);
+
+    hasData &&
+      (await updateDoc(
+        doc(db, "stores", "one", "employeeList", selectedEmployee.name),
+        employee
+      ));
   }
   function handleBackClick(e, path) {
     e.preventDefault();

@@ -42,6 +42,7 @@ function RadioSelectElement({
               value={el}
               name={name}
               className={styles.input}
+              onChange={() => {}}
               checked={noSelected ? index === 1 && true : index === 0 && true}
             />
           </div>

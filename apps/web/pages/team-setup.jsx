@@ -117,7 +117,7 @@ function TeamSetup() {
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
-  const [employeeIndex, setEmployeeIndex] = useState(0);
+  const [employeeIndex, setEmployeeIndex] = useState(undefined);
 
   async function getEmployeeData() {
     if (currentUser) {
@@ -131,8 +131,6 @@ function TeamSetup() {
         employeesTemp.push(doc.data());
       });
       setSalonEmployees(employeesTemp);
-      setSelectedEmployee(employeesTemp[0]);
-      setHasData(true);
     }
   }
   useEffect(() => {
@@ -140,13 +138,14 @@ function TeamSetup() {
   }, [currentUser]);
 
   useEffect(() => {
+    if (employeeIndex || employeeIndex === 0) setHasData(true);
     setSelectedEmployee(salonEmployees[employeeIndex]);
   }, [employeeIndex]);
 
   useEffect(() => {
-    console.log("selectedEmployee ", selectedEmployee);
+    console.log("employeeIndex ", employeeIndex);
     console.log("hasData ", hasData);
-  }, [hasData]);
+  }, [employeeIndex]);
 
 
   function handleFormSubmit(e) {
@@ -215,7 +214,7 @@ function TeamSetup() {
               Felder aus. Sobald Sie auf "Person speichern" klicken, wird diese
               unten auftauchen. Keine persönlichen Daten, werden für Kund*Innen
               sichtbar sein. <br />
-              Klicken Sie auf "Prozess beenden", um alle Daten zu speichern.
+              Klicken Sie auf "Person speichern", um alle Daten zu speichern.
             </div>
             <div className={styles.form}>
               <div className={styles.setUpInfos}>

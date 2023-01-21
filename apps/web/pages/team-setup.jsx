@@ -123,6 +123,7 @@ function TeamSetup() {
   const [hasData, setHasData] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
+  const [noSelected, setNoSelected] = useState(false);
 
   async function getEmployeeData() {
     if (currentUser) {
@@ -145,6 +146,8 @@ function TeamSetup() {
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
     setSelectedEmployee(salonEmployees[employeeIndex]);
+    setShowServices(true);
+    setNoSelected(true);
   }, [employeeIndex]);
 
   useEffect(() => {
@@ -370,6 +373,9 @@ function TeamSetup() {
                     name="services_done"
                     labels={yesno}
                     setShowServices={setShowServices}
+                    hasData={hasData}
+                    setNoSelected={setNoSelected}
+                    noSelected={noSelected}
                   />
                 </div>
               </div>

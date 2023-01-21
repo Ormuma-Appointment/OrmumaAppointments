@@ -154,7 +154,11 @@ function TeamSetup() {
     }
   }, [selectedEmployee]);
 
-  async function handleFormSubmit(e) {
+  useEffect(() => {
+    console.log("hasData ", hasData);
+  }, [selectedEmployee]);
+
+  async function handleFormSubmit(e, path) {
     e.preventDefault();
     let employee = {
       name: e.target.name.value,
@@ -191,6 +195,9 @@ function TeamSetup() {
         doc(db, "stores", "one", "employeeList", selectedEmployee.name),
         employee
       ));
+
+    // reload page and clear all fields
+    router.reload(window.location.pathname);
   }
   function handleBackClick(e, path) {
     e.preventDefault();

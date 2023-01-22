@@ -12,10 +12,10 @@ import { useRouter } from "next/router";
 
 export const AuthContext = createContext();
 //created a context hook that we can import  anywhere
+
 export function useAuthContext() {
   return useContext(AuthContext);
 }
-
 export const AuthContextProvider = ({ children }) => {
   const router = useRouter();
 
@@ -23,8 +23,10 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      // console.log(user);
+      if (user) {
+        setCurrentUser(user);
+      } // console.log(user);
+      return null;
     });
 
     return () => {
@@ -51,7 +53,9 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser, isLoggedIn }}>
+    <AuthContext.Provider
+      value={{ currentUser, setCurrentUser, isLoggedIn, logOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

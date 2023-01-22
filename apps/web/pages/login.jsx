@@ -8,6 +8,7 @@ import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
+import { WithPublic } from "../route/route";
 
 function Login() {
   const [salonName, setSalonName] = useState("Natur Friseur");
@@ -72,4 +73,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default WithPublic(Login);

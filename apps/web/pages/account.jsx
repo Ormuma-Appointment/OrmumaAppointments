@@ -7,34 +7,15 @@ import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import { useAuthContext } from "../context/AuthContext";
-import { db } from "../firebase/firebase";
+import { db, auth } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { WithAuth } from "../route/route";
 
-const Account = ({ name }) => {
-  const dummyUser = {
-    displayName: "",
-    email: "",
-  };
-  const [user, setUser] = useState(dummyUser);
-  const { currentUser, isLoggedIn } = useAuthContext();
+// import { useSession } from "next-auth/client ";
 
-  async function getData() {
-    if (currentUser) {
-      const docRef = doc(db, "users", currentUser.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUser(docSnap.data());
-      } else {
-        console.log("No such document!");
-      }
-    }
-  }
-  useEffect(() => {
-    if (currentUser) {
-      getData();
-    }
-    console.log(currentUser);
-  }, [currentUser]);
+const Account = () => {
+  const { currentUser, isLoggedIn, logOut } = useAuthContext();
+  const [userData, setUserData] = useState({});
 
   const pastAppointments = [
     {
@@ -80,6 +61,7 @@ const Account = ({ name }) => {
             time="11:30-12:00"
           />
         </div>
+        <button onClick={() => logOut(auth)}>Logout</button>
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
@@ -102,4 +84,4 @@ const Account = ({ name }) => {
   // }
 };
 
-export default Account;
+export default WithAuth(Account);

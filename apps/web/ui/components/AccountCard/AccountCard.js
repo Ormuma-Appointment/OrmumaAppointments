@@ -18,8 +18,8 @@ function AccountCard({
           <RoundImage alt={name} image={image} initialWidth={100} />
         </div>
         <div className={styles.info}>
-          <div>{name}</div>
-          <div>{email}</div>
+          {/* <div>{currentUser?.displayName || "user name"}</div> */}
+          {/* <div>{currentUser?.email || "email"}</div> */}
         </div>
       </div>
     </CardContainer>

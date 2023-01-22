@@ -28,8 +28,9 @@ function ServiceSetup() {
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
   const { currentUser } = useAuthContext();
-
   const [dbServices, setDbServices] = useState([]);
+  const [servicesDetails, setServicesDetails] = useState([]);
+  const [hasData, setHasData] = useState(false);
   async function getDBServices() {
     if (currentUser) {
       const docRef = doc(db, "stores", "one", "services", "all");
@@ -41,7 +42,11 @@ function ServiceSetup() {
         setServices(
           () => data.map((el) => el.services.map((elem) => elem.service))[0]
         );
+        setServicesDetails(
+          () => data.map((el) => el.services.map((elem) => elem))[0]
+        );
         setDbServices(data);
+        hasData(true);
       }
     } else {
       console.log("No such document!");
@@ -52,8 +57,8 @@ function ServiceSetup() {
     getDBServices();
   }, [currentUser]);
   useEffect(() => {
-    console.log(services);
-  }, [services]);
+    console.log(servicesDetails);
+  }, [servicesDetails]);
 
   function handleCatSubmit(e) {
     e.preventDefault();
@@ -69,6 +74,7 @@ function ServiceSetup() {
     e.preventDefault();
     let serviceObj = data;
     // here we need to add to push data either in a context or to firebase
+<<<<<<< HEAD
     const q = query(collection(db, "stores"));
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((detail) => ({
@@ -85,6 +91,12 @@ function ServiceSetup() {
     );
     console.log();
     // });
+=======
+
+    hasData &&
+      (await updateDoc(doc(db, "stores", "one", "services", "all"), storeObj));
+    console.log(serviceObj);
+>>>>>>> 7802ef7 (add data from firebase for service details)
     router.push(path);
   }
   // handle back button click
@@ -147,6 +159,7 @@ function ServiceSetup() {
             services={services}
             setServices={setServices}
             categories={categories}
+            servicesDetails={servicesDetails[0] ? servicesDetails : false}
           />
           <div className={styles.footer}>
             <Button

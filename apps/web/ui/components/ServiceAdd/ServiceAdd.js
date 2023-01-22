@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ServiceAdd.module.css";
 import Input from "../InputField/Input";
 import Button from "../Button/Button";
-import Minus from "../assets/minus.svg";
 import Trash from "../assets/trash.svg";
+import ServiceDetailInput from "./ServiceDetailInput";
 
 function ServiceAdd({
   setData,
@@ -11,11 +11,13 @@ function ServiceAdd({
   setServices,
   categories,
   servicesDetails,
+  setServicesDetails,
 }) {
   function handleServiceSubmit(e) {
     e.preventDefault();
     setServices((prev) => [...prev, e.target.service.value]);
   }
+
   console.log("servicesDetails ", servicesDetails);
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -41,9 +43,24 @@ function ServiceAdd({
     setData(newServices);
   }
 
+  const [indexToRemove, setIndexToRemove] = useState(undefined);
+  const [remove, setRemove] = useState(false);
   function handleRemoveClick(index) {
+    if (servicesDetails[0]) {
+      setServicesDetails((prev) =>
+        prev.filter((el) => el !== servicesDetails[index])
+      );
+    }
     setServices((prev) => prev.filter((elem, i) => i !== index));
   }
+  useEffect(() => {
+    handleRemoveClick(indexToRemove);
+  }, [remove]);
+
+  useEffect(() => {
+    console.log(services);
+  }, [services]);
+
   return (
     <>
       <div className={styles.service_cat}>
@@ -68,66 +85,15 @@ function ServiceAdd({
           <form action="" onSubmit={handleFormSubmit}>
             {services.map((el, index) => {
               return (
-                <div className={styles.group} key={index}>
-                  <div>{el}</div>
-                  <select
-                    name={`category`}
-                    id="category"
-                    className={styles.select_category}
-                  >
-                    {categories.map((elem, i) => {
-                      return (
-                        <option key={i} value={elem}>
-                          {elem}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <select
-                    name="duration"
-                    id="duration"
-                    defaultValue={
-                      servicesDetails && servicesDetails[index].duration
-                    }
-                    className={styles.select_things}
-                  >
-                    {[15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
-                      return (
-                        <option key={i} value={elem}>
-                          {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <select
-                    name="waiting"
-                    id="waiting"
-                    defaultValue={
-                      servicesDetails && servicesDetails[index].waiting
-                    }
-                    className={styles.select_things}
-                  >
-                    {[0, 15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
-                      return (
-                        <option key={i} value={elem}>
-                          {elem < 60 ? `${elem} mins` : `${elem / 60} h`}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  <Input
-                    name="price"
-                    defaultValue={
-                      servicesDetails && servicesDetails[index].price
-                    }
-                  ></Input>
-                  <div className={styles.delete}>
-                    <Minus
-                      className={styles.icon}
-                      onClick={() => handleRemoveClick(index)}
-                    />
-                  </div>
-                </div>
+                <ServiceDetailInput
+                  key={index}
+                  name={el}
+                  categories={categories}
+                  setIndexToRemove={setIndexToRemove}
+                  servicesDetails={servicesDetails[index]}
+                  index={index}
+                  setRemove={setRemove}
+                />
               );
             })}
             <Button size="small" variant="secondary">

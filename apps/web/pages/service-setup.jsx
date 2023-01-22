@@ -13,13 +13,7 @@ import { db } from "../firebase/firebase";
 import { doc, setDoc, collection, query, getDocs } from "firebase/firestore";
 =======
 import { db } from "../firebase/firebase";
-import {
-  doc,
-  getDoc,
-  getDocs,
-  updateDoc,
-  collection,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 >>>>>>> 11966fc (add firebase data for categories and service labels)
 
@@ -42,11 +36,17 @@ function ServiceSetup() {
         setServices(
           () => data.map((el) => el.services.map((elem) => elem.service))[0]
         );
-        setServicesDetails(
-          () => data.map((el) => el.services.map((elem) => elem))[0]
-        );
+        setServicesDetails(() => {
+          let id = -1;
+          return data.map((el) =>
+            el.services.map((elem) => {
+              id = id + 1;
+              return Object.assign(elem, { category: el.category }, { id: id });
+            })
+          )[0];
+        });
         setDbServices(data);
-        hasData(true);
+        setHasData(true);
       }
     } else {
       console.log("No such document!");
@@ -93,8 +93,8 @@ function ServiceSetup() {
     // });
 =======
 
-    hasData &&
-      (await updateDoc(doc(db, "stores", "one", "services", "all"), storeObj));
+    // hasData &&
+    //   (await updateDoc(doc(db, "stores", "one", "services", "all"), storeObj));
     console.log(serviceObj);
 >>>>>>> 7802ef7 (add data from firebase for service details)
     router.push(path);
@@ -160,6 +160,7 @@ function ServiceSetup() {
             setServices={setServices}
             categories={categories}
             servicesDetails={servicesDetails[0] ? servicesDetails : false}
+            setServicesDetails={setServicesDetails}
           />
           <div className={styles.footer}>
             <Button

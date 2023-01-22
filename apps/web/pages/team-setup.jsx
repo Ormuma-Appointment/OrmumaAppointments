@@ -129,13 +129,13 @@ function TeamSetup() {
   useEffect(() => {
     getDBServices();
   }, [currentUser]);
-
   // get all Employees from Firebase
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
   const [noSelected, setNoSelected] = useState(false);
+  const [currentPath] = useState(router.pathname);
 
   async function getEmployeeData() {
     if (currentUser) {
@@ -244,7 +244,7 @@ function TeamSetup() {
         </span>{" "}
         <span className={styles.arrows}>&#9654;</span>
       </div>
-      <h1>Team Konfigurieren</h1>
+      <h1 id="top">Team Konfigurieren</h1>
       <CardContainer>
         <div className={styles.container}>
           <form action="" onSubmit={handleFormSubmit}>
@@ -443,6 +443,7 @@ function TeamSetup() {
             <EmployeeOverview
               employees={salonEmployees}
               setEmployeeIndex={setEmployeeIndex}
+              currentPath={currentPath}
             />
           </div>
         </div>

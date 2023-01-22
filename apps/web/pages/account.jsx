@@ -27,27 +27,6 @@ const Account = () => {
     },
   ];
 
-  // useEffect(() => {
-  // const getData = async () => {
-  //   const docRef = doc(db, "users", currentUser.uid);
-  //   const docSnap = await getDoc(docRef);
-
-  //   if (docSnap.exists()) {
-  //     console.log("Document data:", docSnap.data());
-
-  //     // setUserData(docSnap.data());
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  //   return docSnap.data();
-  // };
-  // getData();
-  // }, []);
-  // console.log(currentUser);
-  // const datadata = getData();
-  // console.log(datadata, "gggg");
-
-  // if (currentUser) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -64,7 +43,11 @@ const Account = () => {
             bearbeiten
           </Link>
         </div>
-        <AccountCard className={styles.box} />
+        <AccountCard
+          className={styles.box}
+          name={!user.displayName ? " " : user.displayName}
+          email={!user.email ? " " : user.email}
+        />
       </div>
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>

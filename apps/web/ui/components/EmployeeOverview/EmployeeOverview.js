@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./EmployeeOverview.module.css";
 import StylistCard from "../StylistCard/StylistCard";
 
-function EmployeeOverview({ employees, setEmployeeIndex, currentPath }) {
+function EmployeeOverview({ employees, setEmployeeIndex }) {
   return (
     <div className={styles.employees}>
       {employees.map((el, index) => {
@@ -13,7 +13,6 @@ function EmployeeOverview({ employees, setEmployeeIndex, currentPath }) {
             name={el.name}
             description={el.description}
             setEmployeeIndex={setEmployeeIndex}
-            currentPath={currentPath}
           />
         );
       })}

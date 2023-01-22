@@ -134,11 +134,13 @@ function TeamSetup() {
   const [hasData, setHasData] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
+  const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
 
   async function getEmployeeData() {
     if (currentUser) {
       let employeesTemp = [];
+      let idsTemp = [];
       const querySnapshot = await getDocs(
         collection(db, "stores", "one", "employeeList")
       );
@@ -146,8 +148,10 @@ function TeamSetup() {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
         employeesTemp.push(doc.data());
+        idsTemp.push(doc.id);
       });
       setSalonEmployees(employeesTemp);
+      setEmployeeFirebaseID(idsTemp);
     }
   }
   useEffect(() => {
@@ -202,7 +206,13 @@ function TeamSetup() {
 
     hasData &&
       (await updateDoc(
-        doc(db, "stores", "one", "employeeList", selectedEmployee.name),
+        doc(
+          db,
+          "stores",
+          "one",
+          "employeeList",
+          employeeFirebaseID[employeeIndex]
+        ),
         employee
       ));
 
@@ -229,6 +239,10 @@ function TeamSetup() {
         setServices(dummyservices);
       }
     }
+  }
+  function handleLoadClick(e) {
+    e.preventDefault();
+    setServices(dbServices);
   }
 
   return (
@@ -414,13 +428,22 @@ function TeamSetup() {
                       );
                     })}
                   </div>
-                  <Button
-                    size="xsmall"
-                    variant="invisible"
-                    onClick={handleCancelClick}
-                  >
-                    Änderungen rückgängig machen
-                  </Button>
+                  <div className={styles.button_group}>
+                    <Button
+                      size="xsmall"
+                      variant="invisible"
+                      onClick={handleLoadClick}
+                    >
+                      Alle Services des Salons laden
+                    </Button>
+                    <Button
+                      size="xsmall"
+                      variant="invisible"
+                      onClick={handleCancelClick}
+                    >
+                      Änderungen rückgängig machen
+                    </Button>
+                  </div>
                 </>
               )}
             </div>

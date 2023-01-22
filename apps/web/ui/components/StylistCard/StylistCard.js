@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./StylistCard.module.css";
 import CardContainer from "../CardContainer/CardContainer";
 import RoundImage from "../RoundImage/RoundImage";
 import placeHolder from "../assets/placeholder-profile.jpeg";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function StylistCard({
   image = placeHolder,
@@ -11,12 +12,13 @@ function StylistCard({
   description,
   index,
   setEmployeeIndex,
-  currentPath,
   ...rest
 }) {
+  const router = useRouter();
+  const [currentPathA] = useState(router.pathname);
   return (
     <CardContainer>
-      <Link href={`${currentPath}/#top`} scroll={false}>
+      <Link href={`${currentPathA}/#top`} scroll={false}>
         <div
           className={styles.container}
           onClick={() => setEmployeeIndex(index)}

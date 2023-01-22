@@ -55,7 +55,7 @@ function SelectElement({ day, time, value }) {
         name={`${day}_${time}`}
         id="time"
         className={styles.input}
-        value={localValue}
+        value={localValue ? localValue : ""}
         onChange={(e) => setLocalValue((prev) => e.target.value)}
       >
         {data.map((el, index) => {

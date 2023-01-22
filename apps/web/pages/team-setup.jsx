@@ -135,7 +135,6 @@ function TeamSetup() {
   const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
   const [noSelected, setNoSelected] = useState(false);
-  const [currentPath] = useState(router.pathname);
 
   async function getEmployeeData() {
     if (currentUser) {
@@ -443,7 +442,6 @@ function TeamSetup() {
             <EmployeeOverview
               employees={salonEmployees}
               setEmployeeIndex={setEmployeeIndex}
-              currentPath={currentPath}
             />
           </div>
         </div>

@@ -77,6 +77,7 @@ const StoreSetup = () => {
   const [times, setTimes] = useState(days_times);
   const [formData, setFormData] = useState({});
   const router = useRouter();
+
   const handleSubmit = async (e, path) => {
     e.preventDefault();
     let storeObj = {
@@ -114,7 +115,6 @@ const StoreSetup = () => {
   // load existing information, for editing purposes
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
-
   async function getData() {
     if (currentUser) {
       const docRef = doc(db, "stores", "one");

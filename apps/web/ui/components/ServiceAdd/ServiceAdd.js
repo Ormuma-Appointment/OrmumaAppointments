@@ -5,11 +5,18 @@ import Button from "../Button/Button";
 import Minus from "../assets/minus.svg";
 import Trash from "../assets/trash.svg";
 
-function ServiceAdd({ setData, services, setServices, categories }) {
+function ServiceAdd({
+  setData,
+  services,
+  setServices,
+  categories,
+  servicesDetails,
+}) {
   function handleServiceSubmit(e) {
     e.preventDefault();
     setServices((prev) => [...prev, e.target.service.value]);
   }
+  console.log("servicesDetails ", servicesDetails);
   function handleFormSubmit(e) {
     e.preventDefault();
     let newServices = services.reduce((result, service, index) => {
@@ -79,6 +86,9 @@ function ServiceAdd({ setData, services, setServices, categories }) {
                   <select
                     name="duration"
                     id="duration"
+                    defaultValue={
+                      servicesDetails && servicesDetails[index].duration
+                    }
                     className={styles.select_things}
                   >
                     {[15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
@@ -92,6 +102,9 @@ function ServiceAdd({ setData, services, setServices, categories }) {
                   <select
                     name="waiting"
                     id="waiting"
+                    defaultValue={
+                      servicesDetails && servicesDetails[index].waiting
+                    }
                     className={styles.select_things}
                   >
                     {[0, 15, 30, 45, 60, 75, 90, 105, 120].map((elem, i) => {
@@ -102,7 +115,12 @@ function ServiceAdd({ setData, services, setServices, categories }) {
                       );
                     })}
                   </select>
-                  <Input name="price"></Input>
+                  <Input
+                    name="price"
+                    defaultValue={
+                      servicesDetails && servicesDetails[index].price
+                    }
+                  ></Input>
                   <div className={styles.delete}>
                     <Minus
                       className={styles.icon}

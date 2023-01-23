@@ -24,14 +24,14 @@ function ServiceSetup() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
-  const { currentUser } = useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
 
   async function getDBServices() {
     if (currentUser) {
-      const docRef = doc(db, "stores", "one", "services", "serviceList");
+      const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data().serviceObj);

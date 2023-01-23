@@ -5,6 +5,7 @@ import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 let service = { style: "style 1", price: "45€", time: "30min" };
 
@@ -29,6 +30,11 @@ const BookingEmployee = () => {
   useEffect(() => {
     getEmployees();
   }, []);
+
+  const router = useRouter();
+  const selectedService = router.query;
+
+  console.log("selected service from employee", selectedService);
 
   return (
     <div className={styles.pageContainer}>

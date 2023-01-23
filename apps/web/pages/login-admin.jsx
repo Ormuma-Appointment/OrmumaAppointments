@@ -10,7 +10,6 @@ import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
 
 function LoginAdmin() {
-  const [salonName, setSalonName] = useState("Natur Friseur");
   const [err, setErr] = useState(false);
   const router = useRouter();
 

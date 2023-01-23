@@ -10,7 +10,9 @@
 .setUpForm label {
   color: var(--primary-color);
 }
-
+.intro {
+  margin-bottom: 3rem;
+}
 .row {
   display: flex;
   flex-direction: column;

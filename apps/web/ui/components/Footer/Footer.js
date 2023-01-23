@@ -9,10 +9,10 @@ function Footer() {
     <div className={styles.container}>
       <div className={styles.pagewidth}>
         <div>
-          <p className={styles.link}>Impressum</p>
-          <p className={styles.link}>Datenschutz</p>
-          <Link href="/login-admin" className={styles.link}>
-            Zum Admin-Login
+          {/* <p className={styles.link}>Impressum</p>
+          <p className={styles.link}>Datenschutz</p> */}
+          <Link href="/register-admin" className={styles.link}>
+            neuen Salon anmelden
           </Link>
         </div>
         <div>

@@ -1,46 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
+import { db } from "../firebase/firebase";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+
+let service = { style: "style 1", price: "45€", time: "30min" };
 
 const BookingEmployee = () => {
+  const [isLoading, SetIsLoading] = useState(true);
+  const [employees, setEmployees] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  let service = { style: "style 1", price: "45€", time: "30min" };
-  let employees = [
-    {
-      name: "John",
-      description:
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    {
-      name: "Marie",
-      description:
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-    {
-      name: "Helene",
-      description:
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
-  ];
+  async function getEmployees() {
+    let employeesArray = [];
+    const querySnapshot = await getDocs(
+      collection(db, "stores", "one", "employeeList")
+    );
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, doc.data());
+      employeesArray.push(doc.data());
+    });
+    setEmployees(employeesArray);
+    SetIsLoading(false);
+  }
+
+  useEffect(() => {
+    getEmployees();
+  }, []);
+
   return (
     <div className={styles.pageContainer}>
       <h1>Unsere Mitarbeiter</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Employees</h4>
-          {employees.map((employee, id) => {
-            return (
-              <SelectItem
-                plus
-                employee={employee.name}
-                key={id}
-                setSelected={setSelected}
-              />
-            );
-          })}
+          {!isLoading ? (
+            employees.map((employee, id) => {
+              return (
+                <SelectItem
+                  plus
+                  employee={employee.name}
+                  key={id}
+                  setSelected={setSelected}
+                />
+              );
+            })
+          ) : (
+            <div>Is loading</div>
+          )}
         </CardContainer>
         <CardContainer>
           <SelectionCard
@@ -59,10 +68,3 @@ const BookingEmployee = () => {
 };
 
 export default BookingEmployee;
-
-//<div className={styles.employeeCardContainer}>
-//  {employees.map((employee) => (
-//    <EmployeeCard employee={employee} />
-//  ))}
-//</div>;
-//

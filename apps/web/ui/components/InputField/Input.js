@@ -4,7 +4,7 @@ import Email from "../assets/email.svg";
 import Password from "../assets/password.svg";
 
 function Input(props) {
-  const { user, password, email, placeholder, ...rest } = props;
+  const { user, password, email, placeholder, defaultValue, ...rest } = props;
   return (
     <div className={styles.container}>
       {(user || email || password) && (
@@ -23,6 +23,7 @@ function Input(props) {
         }
         {...rest}
         placeholder={placeholder}
+        defaultValue={defaultValue ? defaultValue : ""}
       />
     </div>
   );

@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Web() {
   const router = useRouter();
@@ -99,6 +100,7 @@ export default function Web() {
       console.log("No such document!");
     }
   }
+
   useEffect(() => {
     getData();
   }, []);

@@ -13,9 +13,6 @@ import { useAuthContext } from "../context/AuthContext";
 function RegisterAdmin() {
   const router = useRouter();
   const [err, setErr] = useState(false);
-  const { register } = useAuthContext();
-
-  const [salonName, setSalonName] = useState("Natur Friseur");
   // a function checks if both passwords are the same
   const isPasswordConfirmed = (password, confimPassword) => {
     if (password && confimPassword && password === confimPassword) return true;
@@ -87,7 +84,7 @@ function RegisterAdmin() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h1>Willkommen bei {salonName}</h1>
+        <h1>Willkommen</h1>
         <p>Registriere dich, um Kund*Innen online Termine buchen zu lassen.</p>
       </div>
       <form className={styles.form} onSubmit={handleRegistrationSubmit}>
@@ -118,11 +115,11 @@ function RegisterAdmin() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
-      <Link className={styles.link} href="/login-admin">
-        Du hast bereits einen Admin-Account?
+      <Link className={styles.link} href="/login">
+        Du hast bereits einen Account?
       </Link>
       <Link className={styles.link} href="/login">
-        Du bist Kunde und hast keinen Salon?
+        Du bist Kunde?
       </Link>
     </div>
   );

@@ -69,6 +69,7 @@ const Account = () => {
               return (
                 <AppointmentCard
                   customer={el.name}
+                  key={index}
                   date={el.date}
                   service={el.service}
                   stylist={el.stylist}

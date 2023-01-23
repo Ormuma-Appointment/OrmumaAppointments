@@ -40,22 +40,47 @@ function RegisterAdmin() {
 
         setErr(false);
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        router.push("/account");
+
         console.log(res);
         // a new user inside the users collection
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
           displayName,
           email,
+          isAdmin: true,
         });
         await updateProfile(res.user, {
           displayName,
         });
+        handleAdminRegistration(email);
+        router.push("/registration-confirmation");
         // the user is redirected to the home page once the registration form is submited
         // using the useRouter hook from next as oppose to the useNavigate from react router dom
       }
     } catch (e) {
       setErr(true);
+    }
+  };
+
+  const handleAdminRegistration = async (email) => {
+    const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/makeAdmin`;
+    const data = { email };
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    try {
+      const response = await fetch(endpoint, options);
+      const json = await response.json();
+      if (json.message) {
+        console.log("User has been made an admin", json.message);
+      } else {
+        console.log("making the user an admin has failed");
+      }
+    } catch (err) {
+      console.log("making the user an admin has failed", err);
     }
   };
 

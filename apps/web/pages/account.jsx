@@ -78,7 +78,7 @@ const Account = () => {
             time="11:30-12:00"
           />
         </div>
-        <button onClick={() => logOut(auth)}>Logout</button>
+
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
@@ -101,4 +101,4 @@ const Account = () => {
   // }
 };
 
-export default WithAuth(Account);
+export default Account;

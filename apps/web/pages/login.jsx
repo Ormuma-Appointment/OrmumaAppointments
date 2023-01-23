@@ -73,4 +73,4 @@ function Login() {
   );
 }
 
-export default WithPublic(Login);
+export default Login;

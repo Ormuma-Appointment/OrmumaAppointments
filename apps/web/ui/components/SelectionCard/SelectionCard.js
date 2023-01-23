@@ -11,6 +11,8 @@ const SelectionCard = (props) => {
   const setSelected = props.setSelected;
   const service = props.service;
 
+  console.log("cate from selection card", props.category);
+
   //console.log("SELECTED FROM SELECTION CARD", selected);
 
   useEffect(() => {

@@ -49,10 +49,15 @@ h3 {
   margin-bottom: 1rem;
 }
 
-h4 {
+h4,
+.h4 {
   color: var(--primary-color);
   margin-bottom: 1rem;
   font-weight: bold;
+}
+
+.h4 {
+  display: block;
 }
 
 p {

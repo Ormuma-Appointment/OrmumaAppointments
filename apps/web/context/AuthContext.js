@@ -20,7 +20,8 @@ export const AuthContextProvider = ({ children }) => {
   const router = useRouter();
 
   const [currentUser, setCurrentUser] = useState(null);
-
+  const [loading, setLoading] = useState(true);
+  console.log(currentUser);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -28,6 +29,7 @@ export const AuthContextProvider = ({ children }) => {
       } // console.log(user);
       return null;
     });
+    setLoading(false);
 
     return () => {
       unsub();
@@ -56,7 +58,7 @@ export const AuthContextProvider = ({ children }) => {
     <AuthContext.Provider
       value={{ currentUser, setCurrentUser, isLoggedIn, logOut }}
     >
-      {children}
+      {loading ? null : children}
     </AuthContext.Provider>
   );
 };

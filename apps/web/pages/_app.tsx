@@ -8,8 +8,11 @@ import Footer from "../ui/components/Footer/Footer";
 import PageOverviewTemp from "../ui/components/PageOverviewTemp/PageOverviewTemp";
 import { useAuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import ProtectedRoutes from "../route/ProtectedRoutes";
 
 // This default export is required in a new `pages/_app.js` file.
+
+const noAuthRequired = ["/", "/login", "/register"];
 export default function MyApp({ Component, pageProps }: AppProps) {
   // const { currentUser } = useAuthContext();
   const Router = useRouter();
@@ -21,7 +24,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <div className="grid_main_wrapper">
         <Navigation customer_logged_out />
         <div className="page_wrapper">
-          <Component {...pageProps} />
+          {noAuthRequired.includes(Router.pathname) ? (
+            <Component {...pageProps} />
+          ) : (
+            <ProtectedRoutes>
+              <Component {...pageProps} />
+            </ProtectedRoutes>
+          )}
         </div>
         <PageOverviewTemp />
       </div>

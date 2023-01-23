@@ -75,4 +75,4 @@ const Account = () => {
   // }
 };
 
-export default WithAuth(Account);
+export default Account;

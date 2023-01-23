@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TimeDefinitionSection.module.css";
 import SelectElement from "../SelectElement/SelectElement";
+import { collection } from "firebase/firestore";
+import { connectAuthEmulator } from "firebase/auth";
 
-function TimeDefinitionSection({ openDays, setTimes }) {
+function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
+  const [localTimes, setLocalTimes] = useState(times);
+  useEffect(() => {
+    setLocalTimes((prev) => times);
+  }, [times]);
+
+  const [localHasData, setLocalHasData] = useState(hasData);
+  useEffect(() => {
+    setLocalHasData((prev) => hasData);
+  }, [hasData]);
+
   let start = "start";
   let end = "end";
-  let pauseStart = "pausestart";
-  let pauseEnd = "pauseend";
+  let breakStart = "breakStart";
+  let breakEnd = "breakEnd";
 
   function handleChange(e) {
     let target_name = e.target.name;
@@ -45,12 +57,12 @@ function TimeDefinitionSection({ openDays, setTimes }) {
             ...time,
             end: e.target.value,
           };
-        } else if (start_end === "pausestart") {
+        } else if (start_end === "breakStart") {
           return {
             ...time,
             breakStart: e.target.value,
           };
-        } else if (start_end === "pauseend") {
+        } else if (start_end === "breakEnd") {
           return {
             ...time,
             breakEnd: e.target.value,
@@ -66,10 +78,32 @@ function TimeDefinitionSection({ openDays, setTimes }) {
         return (
           <div key={index}>
             <div className={styles.input_group} onChange={handleChange}>
-              <p>{el}</p> <SelectElement time={start} day={el} />
-              <SelectElement time={end} day={el} />
-              <p>Pause</p> <SelectElement time={pauseStart} day={el} />
-              <SelectElement time={pauseEnd} day={el} />
+              <p>{el}</p>
+              <SelectElement
+                time={start}
+                day={el}
+                hasData={hasData}
+                value={localHasData ? localTimes[index].start : "-"}
+              />
+              <SelectElement
+                time={end}
+                day={el}
+                hasData={hasData}
+                value={localHasData ? localTimes[index].end : "-"}
+              />
+              <p>Pause</p>
+              <SelectElement
+                time={breakStart}
+                day={el}
+                hasData={hasData}
+                value={localHasData ? localTimes[index].breakStart : "-"}
+              />
+              <SelectElement
+                time={breakEnd}
+                day={el}
+                hasData={hasData}
+                value={localHasData ? localTimes[index].breakEnd : "-"}
+              />
             </div>
           </div>
         );

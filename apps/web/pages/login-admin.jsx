@@ -10,18 +10,15 @@ import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
 
 function LoginAdmin() {
-  const [salonName, setSalonName] = useState("Natur Friseur");
   const [err, setErr] = useState(false);
   const router = useRouter();
 
   const { currentUser, setCurrentUser } = useAuthContext();
-  console.log(currentUser, "current user from use context");
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(password);
 
     try {
       // if (currentUser) {
@@ -36,7 +33,6 @@ function LoginAdmin() {
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ");
-      // console.log("errrrroorrr");
     }
   };
 

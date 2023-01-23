@@ -104,11 +104,11 @@ function TeamSetup() {
   };
 
   // get services from Store Collection services
-  const { currentUser } = useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   async function getDBServices() {
     if (currentUser) {
-      const docRef = doc(db, "stores", "one", "services", "serviceList");
+      const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -144,7 +144,7 @@ function TeamSetup() {
       let employeesTemp = [];
       let idsTemp = [];
       const querySnapshot = await getDocs(
-        collection(db, "stores", "one", "employeeList")
+        collection(db, "stores", storeID, "employeeList")
       );
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -203,7 +203,7 @@ function TeamSetup() {
         doc(
           db,
           "stores",
-          "one",
+          storeID,
           "employeeList",
           employeeFirebaseID[employeeIndex]
         ),

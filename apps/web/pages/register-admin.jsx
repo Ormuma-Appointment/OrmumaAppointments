@@ -115,11 +115,11 @@ function RegisterAdmin() {
         </Button>
         <span style={{ color: "red" }}>{err && "something is wrong"}</span>
       </form>
-      <Link className={styles.link} href="/login-admin">
-        Du hast bereits einen Admin-Account?
+      <Link className={styles.link} href="/login">
+        Du hast bereits einen Account?
       </Link>
       <Link className={styles.link} href="/login">
-        Du bist Kunde und hast keinen Salon?
+        Du bist Kunde?
       </Link>
     </div>
   );

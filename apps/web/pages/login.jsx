@@ -35,7 +35,7 @@ function Login() {
       router.push("/account"); //if is admin go to /account-admin
     } catch (e) {
       setErr(true);
-      console.error("somthing is wrong ");
+      console.error("somthing is wrong ", e);
     }
   };
 

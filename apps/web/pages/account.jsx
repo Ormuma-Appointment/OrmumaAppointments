@@ -7,14 +7,10 @@ import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import { useAuthContext } from "../context/AuthContext";
-import { db, auth } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { WithAuth } from "../route/route";
 
-// import { useSession } from "next-auth/client ";
-
 const Account = () => {
-  const { currentUser, isLoggedIn, logOut } = useAuthContext();
+  const { currentUser } = useAuthContext();
   const [userData, setUserData] = useState({});
 
   const pastAppointments = [
@@ -26,7 +22,6 @@ const Account = () => {
       time: "11:30-12:00",
     },
   ];
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -43,11 +38,7 @@ const Account = () => {
             bearbeiten
           </Link>
         </div>
-        <AccountCard
-          className={styles.box}
-          name={!user.displayName ? " " : user.displayName}
-          email={!user.email ? " " : user.email}
-        />
+        <AccountCard className={styles.box} />
       </div>
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>
@@ -61,7 +52,6 @@ const Account = () => {
             time="11:30-12:00"
           />
         </div>
-        <button onClick={() => logOut(auth)}>Logout</button>
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>

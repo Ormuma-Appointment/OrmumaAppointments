@@ -16,13 +16,11 @@ function Login() {
   const router = useRouter();
 
   const { currentUser, setCurrentUser } = useAuthContext();
-  console.log(currentUser, "current user from use context");
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(password);
 
     try {
       // if (currentUser) {

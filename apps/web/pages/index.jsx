@@ -93,7 +93,7 @@ export default function Web() {
     const docRef = doc(db, "stores", "one");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      // console.log("Document data:", docSnap.data());
       setSalonData(docSnap.data());
     } else {
       console.log("No such document!");
@@ -102,6 +102,7 @@ export default function Web() {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.welcome}>

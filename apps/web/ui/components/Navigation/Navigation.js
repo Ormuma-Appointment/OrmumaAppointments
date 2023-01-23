@@ -96,7 +96,6 @@ function Navigation(props) {
               onClick={() => router.push("/account")}
             />
           )}
-
           <button
             onClick={() => {
               logOut(auth);

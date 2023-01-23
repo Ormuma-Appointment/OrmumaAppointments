@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
 import calendar from "../ui/components/assets/calendar.svg";
@@ -6,13 +6,10 @@ import AccountCard from "../ui/components/AccountCard/AccountCard";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
-import { useAuthContext } from "../context/AuthContext";
 import { WithAuth } from "../route/route";
+import { useRouter } from "next/router";
 
 const Account = () => {
-  const { currentUser } = useAuthContext();
-  const [userData, setUserData] = useState({});
-
   const pastAppointments = [
     {
       customer: "Andrea Berg",
@@ -22,11 +19,17 @@ const Account = () => {
       time: "11:30-12:00",
     },
   ];
+  const router = useRouter();
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Mein Account</h1>
-        <Button icon={calendar} size="medium" variant="primary">
+        <Button
+          icon={calendar}
+          size="medium"
+          variant="primary"
+          onClick={() => router.push("/booking-service")}
+        >
           Termin buchen
         </Button>
       </div>

@@ -27,11 +27,12 @@ function Login() {
       setErr(false);
       const res = await signInWithEmailAndPassword(auth, email, password);
       // Signed in
-      router.push("/account");
+
       const user = res.userCredential.user;
       setCurrentUser(user);
 
       console.log(currentUser, "logout func");
+      router.push("/account"); //if is admin go to /account-admin
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ");

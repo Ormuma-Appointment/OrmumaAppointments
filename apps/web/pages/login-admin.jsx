@@ -14,13 +14,11 @@ function LoginAdmin() {
   const router = useRouter();
 
   const { currentUser, setCurrentUser } = useAuthContext();
-  console.log(currentUser, "current user from use context");
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(password);
 
     try {
       // if (currentUser) {
@@ -35,7 +33,6 @@ function LoginAdmin() {
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ");
-      // console.log("errrrroorrr");
     }
   };
 

@@ -103,9 +103,6 @@ export default function Web() {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log(salonData);
-  }, [salonData]);
   return (
     <div className={styles.container}>
       <div className={styles.welcome}>

@@ -10,7 +10,7 @@ function AccountCard({
   email = "testtest@test.de",
   image = placeHolder,
 }) {
-  // const { currentUser, userData } = useAuthContext();
+  const { currentUser } = useAuthContext();
   return (
     <CardContainer>
       <div className={styles.container}>
@@ -18,8 +18,8 @@ function AccountCard({
           <RoundImage alt={name} image={image} initialWidth={100} />
         </div>
         <div className={styles.info}>
-          {/* <div>{currentUser?.displayName || "user name"}</div> */}
-          {/* <div>{currentUser?.email || "email"}</div> */}
+          <div>{currentUser ? currentUser.displayName : "user name"}</div>
+          <div>{currentUser ? currentUser.email : "email"}</div>
         </div>
       </div>
     </CardContainer>

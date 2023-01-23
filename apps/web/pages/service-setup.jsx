@@ -7,15 +7,18 @@ import styles from "../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../ui/components/assets/minus.svg";
 import Link from "next/link";
-<<<<<<< HEAD
-// import { doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { doc, setDoc, collection, query, getDocs } from "firebase/firestore";
-=======
-import { db } from "../firebase/firebase";
-import { doc, getDoc, updateDoc, collection } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  updateDoc,
+  query,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+
 import { useAuthContext } from "../context/AuthContext";
->>>>>>> 11966fc (add firebase data for categories and service labels)
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
@@ -25,27 +28,32 @@ function ServiceSetup() {
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
+
   async function getDBServices() {
     if (currentUser) {
-      const docRef = doc(db, "stores", "one", "services", "all");
+      const docRef = doc(db, "stores", "one", "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data().serviceObj);
-        let data = docSnap.data().serviceObj;
-        setCategories(() => data.map((el) => el.category));
-        setServices(
-          () => data.map((el) => el.services.map((elem) => elem.service))[0]
-        );
-        setServicesDetails(() => {
-          let id = -1;
-          return data.map((el) =>
-            el.services.map((elem) => {
-              id = id + 1;
-              return Object.assign(elem, { category: el.category }, { id: id });
-            })
-          )[0];
+        let fbData = docSnap.data().serviceObj;
+        setCategories(() => fbData.map((el) => el.category));
+        setServices(() => {
+          let temp = [];
+          fbData.forEach((el) =>
+            el.services.forEach((elem) => (temp = [...temp, elem.service]))
+          );
+          return temp;
         });
-        setDbServices(data);
+        setServicesDetails(() => {
+          let temp = [];
+          fbData.forEach((el) =>
+            el.services.forEach((elem) => {
+              temp = [...temp, { ...elem, category: el.category }];
+            })
+          );
+          return temp;
+        });
+        setDbServices(fbData);
         setHasData(true);
       }
     } else {
@@ -56,9 +64,10 @@ function ServiceSetup() {
   useEffect(() => {
     getDBServices();
   }, [currentUser]);
+
   useEffect(() => {
-    console.log(servicesDetails);
-  }, [servicesDetails]);
+    console.log("data", data);
+  }, [data]);
 
   function handleCatSubmit(e) {
     e.preventDefault();
@@ -74,29 +83,26 @@ function ServiceSetup() {
     e.preventDefault();
     let serviceObj = data;
     // here we need to add to push data either in a context or to firebase
-<<<<<<< HEAD
     const q = query(collection(db, "stores"));
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((detail) => ({
       ...detail.data(),
       id: detail.id,
     }));
-    console.log(queryData);
-    // queryData.map(async (v) => {
-    const res = await setDoc(
-      doc(db, "stores", queryData[0].id, "services", "serviceList"),
-      {
-        serviceObj,
-      }
-    );
-    console.log();
-    // });
-=======
 
-    // hasData &&
-    //   (await updateDoc(doc(db, "stores", "one", "services", "all"), storeObj));
-    console.log(serviceObj);
->>>>>>> 7802ef7 (add data from firebase for service details)
+    if (hasData) {
+      await updateDoc(
+        doc(db, "stores", queryData[0].id, "services", "serviceList"),
+        { serviceObj }
+      );
+    } else {
+      const res = await setDoc(
+        doc(db, "stores", queryData[0].id, "services", "serviceList"),
+        {
+          serviceObj,
+        }
+      );
+    }
     router.push(path);
   }
   // handle back button click

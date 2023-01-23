@@ -37,7 +37,7 @@ function Register() {
       } else {
         // otherwise a new userr is created
         setErr(false);
-        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const res = await (auth, email, password);
         router.push("/account");
         console.log(res);
         // a new user inside the users collection

@@ -22,10 +22,6 @@ const Account = () => {
       time: "11:30-12:00",
     },
   ];
-
-  useEffect(() => {
-    setUserData(currentUser);
-  }, [currentUser]);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -42,11 +38,7 @@ const Account = () => {
             bearbeiten
           </Link>
         </div>
-        <AccountCard
-          className={styles.box}
-          name={userData ? userData.displayName : ""}
-          email={userData ? userData.email : ""}
-        />
+        <AccountCard className={styles.box} />
       </div>
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>

@@ -7,10 +7,8 @@ import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/Checkb
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-
-import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
 const StoreSetup = () => {
@@ -98,17 +96,17 @@ const StoreSetup = () => {
       openingHours: times,
     };
     if (hasData) {
+      // update firebase data if page was loaded with existing store data
       hasData && (await updateDoc(doc(db, "stores", "one"), storeObj));
     } else {
+      // setup data in firebase
       try {
         await setDoc(doc(db, "stores", "one"), storeObj);
       } catch (err) {
         console.error(err);
       }
     }
-    // update firebase data if page was loaded with existing store data
 
-    console.log(storeObj);
     router.push(path);
   };
   const { currentUser } = useAuthContext();

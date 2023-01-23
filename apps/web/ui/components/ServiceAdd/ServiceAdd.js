@@ -18,7 +18,6 @@ function ServiceAdd({
     setServices((prev) => [...prev, e.target.service.value]);
   }
 
-  console.log("servicesDetails ", servicesDetails);
   function handleFormSubmit(e) {
     e.preventDefault();
     let newServices = services.reduce((result, service, index) => {

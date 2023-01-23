@@ -12,6 +12,8 @@ import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview
 import { db } from "../firebase/firebase";
 import {
   doc,
+  setDoc,
+  query,
   getDoc,
   getDocs,
   updateDoc,
@@ -106,7 +108,7 @@ function TeamSetup() {
   const [dbServices, setDbServices] = useState([]);
   async function getDBServices() {
     if (currentUser) {
-      const docRef = doc(db, "stores", "one", "services", "all");
+      const docRef = doc(db, "stores", "one", "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -196,16 +198,8 @@ function TeamSetup() {
       id: detail.id,
     }));
     console.log(queryData);
-
-    const res = await setDoc(
-      doc(db, "stores", queryData[0].id, "employeeList", employee.name),
-      employee
-    );
-
-    console.log(times);
-
-    hasData &&
-      (await updateDoc(
+    if (hasData) {
+      await updateDoc(
         doc(
           db,
           "stores",
@@ -214,7 +208,13 @@ function TeamSetup() {
           employeeFirebaseID[employeeIndex]
         ),
         employee
-      ));
+      );
+    } else {
+      const res = await setDoc(
+        doc(db, "stores", queryData[0].id, "employeeList", employee.name),
+        employee
+      );
+    }
 
     // reload page and clear all fields
     router.reload(window.location.pathname);

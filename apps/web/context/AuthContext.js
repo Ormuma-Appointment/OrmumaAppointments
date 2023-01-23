@@ -55,20 +55,22 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
+  // add storeID to context
   const [storeID, setStoreID] = useState(undefined);
   async function getStore() {
-    let idsTemp = [];
-    const querySnapshot = await getDocs(
-      collection(db, "users", currentUser.uid, "stores")
-    );
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-      idsTemp.push(doc.id);
-    });
-    setStoreID(idsTemp[0]);
+    if (currentUser) {
+      let idsTemp = [];
+      const querySnapshot = await getDocs(
+        collection(db, "users", currentUser.uid, "stores")
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data());
+        idsTemp.push(doc.id);
+      });
+      setStoreID(idsTemp[0]);
+    }
   }
-
   useEffect(() => {
     getStore();
   }, [currentUser]);

@@ -8,6 +8,7 @@ import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 const AccountAdmin = () => {
   const salon = {
@@ -82,9 +83,10 @@ const AccountAdmin = () => {
     },
   ];
   // get salon data for salon overview from Firebase
+  const { currentUser, storeID } = useAuthContext();
   const [salonData, setSalonData] = useState(salon);
   async function getSalonData() {
-    const docRef = doc(db, "stores", "one");
+    const docRef = doc(db, "stores", storeID);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       //console.log("Document data:", docSnap.data());
@@ -103,7 +105,7 @@ const AccountAdmin = () => {
   async function getEmployeeData() {
     let employeesTemp = [];
     const querySnapshot = await getDocs(
-      collection(db, "stores", "one", "employeeList")
+      collection(db, "stores", storeID, "employeeList")
     );
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots

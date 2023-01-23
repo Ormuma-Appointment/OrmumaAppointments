@@ -12,7 +12,7 @@ import ProtectedRoutes from "../route/ProtectedRoutes";
 
 // This default export is required in a new `pages/_app.js` file.
 
-const noAuthRequired = ["/", "/login", "/register"];
+const noAuthRequired = ["/", "/login", "/register", "/register-admin"];
 export default function MyApp({ Component, pageProps }: AppProps) {
   // const { currentUser } = useAuthContext();
   const Router = useRouter();

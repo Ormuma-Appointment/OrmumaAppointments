@@ -7,7 +7,7 @@ import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 
 const AccountAdmin = () => {
   const salon = {
@@ -19,54 +19,6 @@ const AccountAdmin = () => {
         label: "Mo",
         day: 1,
         breakEnd: null,
-      },
-      {
-        end: null,
-        breakStart: null,
-        label: "Di",
-        start: null,
-        breakEnd: null,
-        day: 2,
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        day: 3,
-        start: null,
-        label: "Mi",
-        end: null,
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        start: null,
-        day: 4,
-        end: null,
-        label: "Do",
-      },
-      {
-        day: 5,
-        end: null,
-        start: null,
-        breakStart: null,
-        breakEnd: null,
-        label: "Fr",
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        label: "Sa",
-        end: null,
-        start: null,
-        day: 6,
-      },
-      {
-        breakStart: null,
-        label: "So",
-        start: null,
-        end: null,
-        breakEnd: null,
-        day: 0,
       },
     ],
     photo: "",
@@ -82,22 +34,12 @@ const AccountAdmin = () => {
       country: "Deutschland",
       number: "104",
     },
-    name: "Mulugeta birish",
+    name: "Not From Firebase",
     employees: [
       {
         name: "Kasper Schneiderlein",
         photo: null,
         description: "Balayage, vibrant color Spezialist",
-      },
-      {
-        name: "Juli Katter",
-        photo: null,
-        description: "Layers, Bobs, Fringes",
-      },
-      {
-        name: "Kyle Superwow",
-        photo: null,
-        description: "Razers, Beards, Nails",
       },
     ],
   };
@@ -139,31 +81,40 @@ const AccountAdmin = () => {
       time: "11:30-12:00",
     },
   ];
-  const hours = [
-    { day: "Monday", start: "08:00", end: "18:00" },
-    { day: "Tuesday", start: "08:00", end: "18:00" },
-    { day: "Wednesday", start: "08:00", end: "18:00" },
-    { day: "Thursday", start: "08:00", end: "18:00" },
-    { day: "Friday", start: "08:00", end: "18:00" },
-    { day: "Saturday", start: "08:00", end: "15:00" },
-  ];
-  // query salon info
+  // get salon data for salon overview from Firebase
   const [salonData, setSalonData] = useState(salon);
-  async function getData() {
+  async function getSalonData() {
     const docRef = doc(db, "stores", "one");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      //console.log("Document data:", docSnap.data());
       setSalonData(docSnap.data());
     } else {
-      // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   }
   useEffect(() => {
-    getData();
+    getSalonData();
   }, []);
-  // query opening hours
+
+  // get Employees for Employee-Listing from Firebase
+  const [salonEmployees, setSalonEmployees] = useState(salon.employees);
+  const [employeeIndex, setEmployeeIndex] = useState(0);
+  async function getEmployeeData() {
+    let employeesTemp = [];
+    const querySnapshot = await getDocs(
+      collection(db, "stores", "one", "employeeList")
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      employeesTemp.push(doc.data());
+    });
+    setSalonEmployees(employeesTemp);
+  }
+  useEffect(() => {
+    getEmployeeData();
+  }, []);
 
   return (
     <div className={styles.page_container}>
@@ -214,7 +165,6 @@ const AccountAdmin = () => {
               <div className={styles.opening_container}>
                 <h3>Öffnungszeiten</h3>
                 {salonData.openingHours.map((el, index) => {
-                  console.log(el.start);
                   return (
                     <div key={index} className={styles.day}>
                       <p>
@@ -231,7 +181,13 @@ const AccountAdmin = () => {
                         }
                       </p>{" "}
                       <div>
-                        <p>{el.start}</p> - <p> {el.end}</p>
+                        {el.start ? (
+                          <>
+                            <p>{el.start}</p> - <p> {el.end}</p>
+                          </>
+                        ) : (
+                          <p>geschlossen</p>
+                        )}
                       </div>
                     </div>
                   );
@@ -246,6 +202,7 @@ const AccountAdmin = () => {
             return (
               <AppointmentCard
                 customer={el.name}
+                key={index}
                 date={el.date}
                 service={el.service}
                 stylist={el.stylist}
@@ -263,7 +220,10 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        <EmployeeOverview employees={salon.employees} />
+        <EmployeeOverview
+          employees={salonEmployees}
+          setEmployeeIndex={setEmployeeIndex}
+        />
       </div>
     </div>
   );

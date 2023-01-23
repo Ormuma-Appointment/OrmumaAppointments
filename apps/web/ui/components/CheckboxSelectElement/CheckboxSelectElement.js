@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CheckboxSelectElement.module.css";
 
-function CheckboxSelectElement({ labels, setOpenDays, openDays }) {
+function CheckboxSelectElement({ labels, setOpenDays, openDays, hasData }) {
   function handleChange(e) {
     let current = e.target.value;
     if (openDays.includes(current)) {
@@ -26,6 +26,8 @@ function CheckboxSelectElement({ labels, setOpenDays, openDays }) {
               value={el}
               name={el}
               className={styles.input}
+              checked={hasData ? "checked" : ""}
+              onChange={(e) => {}}
             />
           </div>
         );

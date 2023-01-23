@@ -4,7 +4,6 @@ import styles from "./Navigation.module.css";
 import logo from "../assets/placeholderLogo.png";
 import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
-import Calendar from "../assets/calendar.svg";
 import Button from "../Button/Button";
 import { useAuthContext } from "../../../context/AuthContext";
 import { auth } from "../../../firebase/firebase";
@@ -15,7 +14,7 @@ import Link from "next/link";
 function Navigation(props) {
   const router = useRouter();
 
-  const { logOut, currentUser } = useAuthContext();
+  const { currentUser } = useAuthContext();
   const {
     customer_logged_out,
     customer_logged_in,
@@ -26,13 +25,40 @@ function Navigation(props) {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     if (currentUser) {
       setIsLoggedIn(true);
+      getUserClaims(currentUser.uid);
     } else {
       setIsLoggedIn(false);
     }
   }, [currentUser]);
+
+  const getUserClaims = async (uid) => {
+    const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
+    const data = { uid };
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    try {
+      const response = await fetch(endpoint, options);
+      const json = await response.json();
+      if (json.claims) {
+        // Handle success
+        console.log(json.claims);
+      } else {
+        // Handle error
+        console.log(json.error);
+      }
+    } catch (err) {
+      // Handle error
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -49,13 +75,28 @@ function Navigation(props) {
         <div className={styles.right}>
           {isAdmin && (
             <>
-              <Button icon size="small" variant="secondary">
+              <Button
+                icon
+                size="small"
+                variant="secondary"
+                onClick={() => router.push("/booking-service")}
+              >
                 Termin buchen
               </Button>
-              <Calendar className={styles.icon} />
             </>
           )}
-          <AccountIcon className={styles.icon} />
+          {isAdmin ? (
+            <AccountIcon
+              className={styles.icon}
+              onClick={() => router.push("/account-admin")}
+            />
+          ) : (
+            <AccountIcon
+              className={styles.icon}
+              onClick={() => router.push("/account")}
+            />
+          )}
+
           <button
             onClick={() =>
               signOut(auth).then(() => {

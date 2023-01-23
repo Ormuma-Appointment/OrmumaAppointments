@@ -12,14 +12,12 @@ import {
   collection,
   setDoc,
   getDoc,
-  getDocs,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
 const StoreSetup = () => {
-  const email = "dummyaddress@test.de";
   let days_times = [
     {
       label: "Mo",
@@ -78,6 +76,7 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
+  const email = "dummyaddress@test.de";
   const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(days_times);
   const router = useRouter();
@@ -88,7 +87,7 @@ const StoreSetup = () => {
       name: e.target.name.value,
       photo: e.target.photo.value,
       contact: {
-        email: email,
+        email: currentUser.email,
         telephone: e.target.telephone.value,
         website: e.target.website.value,
       },

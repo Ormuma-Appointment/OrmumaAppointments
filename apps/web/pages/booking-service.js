@@ -4,20 +4,46 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { admin } from "./data-sample";
+import { db } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const BookingService = () => {
+  const [isLoading, SetIsLoading] = useState(true);
+  const [serviceList, setServiceList] = useState({});
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  console.log("Admin", admin.services);
+  async function getData() {
+    const docRef = doc(db, "stores", "one", "services", "serviceList");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setServiceList(docSnap.data());
+      SetIsLoading(false);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
+  useEffect(() => {
+    getData();
+  }, []);
+
+  //let services = serviceList.serviceObj
+
+  //let services = serviceList.serviceObj;
+
+  //console.log("Admin", admin.services);
+  console.log("service list", serviceList.serviceObj);
   console.log("selectedService", selected);
+  // console.log("Salon data", services);
 
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = () => {
     setIsOpenStyle(!isOpenStyle);
   };
 
-  let services = admin.services;
+  //let services = admin.services;
 
   //let event = { service: selected.title, duration: selected.duration };
 
@@ -33,32 +59,36 @@ const BookingService = () => {
       <h1>Unsere Service</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
-          {services.map((service, id) => {
-            return (
-              <>
-                <h4 type="button" onClick={handleOpenStyle} key={id}>
-                  {service.category} <i className="fa-solid fa-play"></i>
-                </h4>
-                {service.services.map((el, index) => {
-                  return (
-                    isOpenStyle && (
-                      <SelectItem
-                        duration={el.duration}
-                        plus
-                        price={el.price}
-                        service={el.service}
-                        key={index}
-                        setSelected={setSelected}
-                        onClick={() =>
-                          setSelected({ price, service, duration })
-                        }
-                      />
-                    )
-                  );
-                })}
-              </>
-            );
-          })}
+          {!isLoading ? (
+            serviceList.serviceObj.map((service, id) => {
+              return (
+                <>
+                  <h4 type="button" onClick={handleOpenStyle} key={id}>
+                    {service.category} <i className="fa-solid fa-play"></i>
+                  </h4>
+                  {service.services.map((el, index) => {
+                    return (
+                      isOpenStyle && (
+                        <SelectItem
+                          duration={el.duration}
+                          plus
+                          price={el.price}
+                          service={el.service}
+                          key={index}
+                          setSelected={setSelected}
+                          onClick={() =>
+                            setSelected({ price, service, duration })
+                          }
+                        />
+                      )
+                    );
+                  })}
+                </>
+              );
+            })
+          ) : (
+            <div>Is loading</div>
+          )}
         </CardContainer>
         <CardContainer>
           <SelectionCard

@@ -36,7 +36,7 @@ function Navigation(props) {
   }, [currentUser]);
 
   const getUserClaims = async (uid) => {
-    const endpoint = `https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/getUserClaims`;
+    const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
     const data = { uid };
     const options = {
       method: "POST",

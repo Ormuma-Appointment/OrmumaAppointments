@@ -6,6 +6,7 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { admin } from "./data-sample";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 const BookingService = () => {
   const [isLoading, SetIsLoading] = useState(true);
@@ -29,8 +30,8 @@ const BookingService = () => {
     getData();
   }, []);
 
-  console.log("service list", serviceList.serviceObj);
-  console.log("selectedService", selected);
+  //console.log("service list", serviceList.serviceObj);
+  //console.log("selectedService", selected);
 
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = () => {
@@ -42,9 +43,16 @@ const BookingService = () => {
   //push event to array of event database now or later - but find a way to import the event object to booking employee
 
   //console.log("Event", event);
-  useEffect(() => {
-    console.log("selectedService", selected);
-  }, [selected]);
+  //useEffect(() => {
+  //  console.log("selectedService", selected.service);
+  //  //let event = { service: selected.service, duration: selected.duration };
+  //}, [selected]);
+
+  //const router = useRouter();
+  //router.push(
+  //  { pathname: "/booking-employee", query: { selected: "someone" } },
+  //  "/booking-service"
+  //);
 
   return (
     <div className={styles.pageContainer}>
@@ -59,6 +67,7 @@ const BookingService = () => {
                     {service.category} <i className="fa-solid fa-play"></i>
                   </h4>
                   {service.services.map((el, index) => {
+                    let category = service.category;
                     return (
                       isOpenStyle && (
                         <SelectItem

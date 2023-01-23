@@ -1,15 +1,29 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
 
 const SelectionCard = (props) => {
+  const [selectedService, setSelectedService] = useState({});
   const step = props.step;
   const selected = props.selected;
   const setSelected = props.setSelected;
-
   const service = props.service;
+
+  //console.log("SELECTED FROM SELECTION CARD", selected);
+
+  useEffect(() => {
+    if (selected) {
+      let selectedService = {
+        service: selected.service,
+        duration: selected.duration,
+      };
+      setSelectedService(selectedService);
+    }
+  }, [selected]);
+
+  //console.log("selectedService", selectedService);
 
   return (
     <div>
@@ -38,7 +52,14 @@ const SelectionCard = (props) => {
 
             {selected && (
               <Button icon="" size="medium" variant="primary">
-                <Link href="/booking-employee">Next step</Link>
+                <Link
+                  href={{
+                    pathname: "/booking-employee",
+                    query: selectedService,
+                  }}
+                >
+                  Next step
+                </Link>
               </Button>
             )}
           </div>

@@ -6,7 +6,14 @@ import Input from "../ui/components/InputField/Input";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  addDoc,
+  collection,
+  setDoc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
@@ -70,12 +77,13 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
-
+  const { currentUser } = useAuthContext();
   const [times, setTimes] = useState(days_times);
   const [formData, setFormData] = useState({});
   const router = useRouter();
 
   const handleSubmit = async (e, path) => {
+    const storeID = "aksdhgfig";
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
@@ -100,7 +108,10 @@ const StoreSetup = () => {
     } else {
       // setup data in firebase
       try {
-        await setDoc(doc(db, "stores", "one"), storeObj);
+        const docRef = await addDoc(collection(db, "stores"), storeObj);
+        await setDoc(doc(db, "users", currentUser.uid, "stores", docRef.id), {
+          storeID: docRef.id,
+        });
       } catch (err) {
         console.error(err);
       }
@@ -108,7 +119,7 @@ const StoreSetup = () => {
 
     router.push(path);
   };
-  const { currentUser } = useAuthContext();
+
   // load existing information, for editing purposes
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
@@ -132,6 +143,7 @@ const StoreSetup = () => {
     getData();
   }, [currentUser]);
 
+  console.log(hasData);
   return (
     <div>
       <div className={styles.breadcrumb}>

@@ -33,11 +33,9 @@ function Register() {
       if (!isPasswordConfirmed(password, passwordPconfirm)) {
         // password is not matching, throws error
         setErr(true);
-
         console.error("passwords not matching ");
       } else {
         // otherwise a new userr is created
-
         setErr(false);
         const res = await createUserWithEmailAndPassword(auth, email, password);
         router.push("/account");

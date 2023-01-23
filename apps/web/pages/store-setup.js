@@ -12,6 +12,7 @@ import {
   collection,
   setDoc,
   getDoc,
+  getDocs,
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
@@ -77,13 +78,11 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
-  const { currentUser } = useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(days_times);
-  const [formData, setFormData] = useState({});
   const router = useRouter();
 
   const handleSubmit = async (e, path) => {
-    const storeID = "aksdhgfig";
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
@@ -104,7 +103,7 @@ const StoreSetup = () => {
     };
     if (hasData) {
       // update firebase data if page was loaded with existing store data
-      hasData && (await updateDoc(doc(db, "stores", "one"), storeObj));
+      hasData && (await updateDoc(doc(db, "stores", storeID), storeObj));
     } else {
       // setup data in firebase
       try {
@@ -124,8 +123,8 @@ const StoreSetup = () => {
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   async function getData() {
-    if (currentUser) {
-      const docRef = doc(db, "stores", "one");
+    if ((currentUser, storeID)) {
+      const docRef = doc(db, "stores", storeID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data());
@@ -138,10 +137,10 @@ const StoreSetup = () => {
       }
     }
   }
+
   useEffect(() => {
-    setTimes((prev) => prev);
     getData();
-  }, [currentUser]);
+  }, [storeID]);
 
   console.log(hasData);
   return (

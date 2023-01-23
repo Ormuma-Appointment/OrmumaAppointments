@@ -7,7 +7,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 
 export const AuthContext = createContext();
@@ -26,15 +26,16 @@ export const AuthContextProvider = ({ children }) => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
+        setLoading(false);
       } // console.log(user);
       return null;
     });
-    setLoading(false);
 
     return () => {
       unsub();
     };
   }, []);
+
   const isLoggedIn = (currentUser) => {
     if (currentUser) {
       return true;
@@ -54,9 +55,27 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
+  const [storeID, setStoreID] = useState(undefined);
+  async function getStore() {
+    let idsTemp = [];
+    const querySnapshot = await getDocs(
+      collection(db, "users", currentUser.uid, "stores")
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      idsTemp.push(doc.id);
+    });
+    setStoreID(idsTemp[0]);
+  }
+
+  useEffect(() => {
+    getStore();
+  }, [currentUser]);
+
   return (
     <AuthContext.Provider
-      value={{ currentUser, setCurrentUser, isLoggedIn, logOut }}
+      value={{ currentUser, setCurrentUser, isLoggedIn, logOut, storeID }}
     >
       {loading ? null : children}
     </AuthContext.Provider>

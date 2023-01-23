@@ -104,11 +104,11 @@ function TeamSetup() {
   };
 
   // get services from Store Collection services
-  const { currentUser } = useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   async function getDBServices() {
-    if (currentUser) {
-      const docRef = doc(db, "stores", "one", "services", "serviceList");
+    if ((currentUser, storeID)) {
+      const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -130,7 +130,7 @@ function TeamSetup() {
   }
   useEffect(() => {
     getDBServices();
-  }, [currentUser]);
+  }, [storeID]);
   // get all Employees from Firebase
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [hasData, setHasData] = useState(false);
@@ -140,11 +140,11 @@ function TeamSetup() {
   const [noSelected, setNoSelected] = useState(false);
 
   async function getEmployeeData() {
-    if (currentUser) {
+    if ((currentUser, storeID)) {
       let employeesTemp = [];
       let idsTemp = [];
       const querySnapshot = await getDocs(
-        collection(db, "stores", "one", "employeeList")
+        collection(db, "stores", storeID, "employeeList")
       );
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -158,7 +158,7 @@ function TeamSetup() {
   }
   useEffect(() => {
     getEmployeeData();
-  }, [currentUser]);
+  }, [storeID]);
 
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
@@ -203,7 +203,7 @@ function TeamSetup() {
         doc(
           db,
           "stores",
-          "one",
+          storeID,
           "employeeList",
           employeeFirebaseID[employeeIndex]
         ),

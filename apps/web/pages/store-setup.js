@@ -3,11 +3,18 @@ import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
-import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  addDoc,
+  collection,
+  setDoc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useAuthContext } from "../context/AuthContext";
 
@@ -71,9 +78,8 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
-
+  const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(days_times);
-  const [formData, setFormData] = useState({});
   const router = useRouter();
 
   const handleSubmit = async (e, path) => {
@@ -97,11 +103,14 @@ const StoreSetup = () => {
     };
     if (hasData) {
       // update firebase data if page was loaded with existing store data
-      hasData && (await updateDoc(doc(db, "stores", "one"), storeObj));
+      hasData && (await updateDoc(doc(db, "stores", storeID), storeObj));
     } else {
       // setup data in firebase
       try {
-        await setDoc(doc(db, "stores", "one"), storeObj);
+        const docRef = await addDoc(collection(db, "stores"), storeObj);
+        await setDoc(doc(db, "users", currentUser.uid, "stores", docRef.id), {
+          storeID: docRef.id,
+        });
       } catch (err) {
         console.error(err);
       }
@@ -109,13 +118,13 @@ const StoreSetup = () => {
 
     router.push(path);
   };
-  const { currentUser } = useAuthContext();
+
   // load existing information, for editing purposes
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   async function getData() {
-    if (currentUser) {
-      const docRef = doc(db, "stores", "one");
+    if ((currentUser, storeID)) {
+      const docRef = doc(db, "stores", storeID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data());
@@ -128,11 +137,12 @@ const StoreSetup = () => {
       }
     }
   }
-  useEffect(() => {
-    setTimes((prev) => prev);
-    getData();
-  }, [currentUser]);
 
+  useEffect(() => {
+    getData();
+  }, [storeID]);
+
+  console.log(hasData);
   return (
     <div>
       <div className={styles.breadcrumb}>

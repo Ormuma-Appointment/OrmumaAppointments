@@ -29,21 +29,13 @@ const BookingService = () => {
     getData();
   }, []);
 
-  //let services = serviceList.serviceObj
-
-  //let services = serviceList.serviceObj;
-
-  //console.log("Admin", admin.services);
   console.log("service list", serviceList.serviceObj);
   console.log("selectedService", selected);
-  // console.log("Salon data", services);
 
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = () => {
     setIsOpenStyle(!isOpenStyle);
   };
-
-  //let services = admin.services;
 
   //let event = { service: selected.title, duration: selected.duration };
 

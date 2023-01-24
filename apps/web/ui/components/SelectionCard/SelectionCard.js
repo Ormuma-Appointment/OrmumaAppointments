@@ -10,8 +10,8 @@ const SelectionCard = (props) => {
   const setSelected = props.setSelected;
   const service = props.service;
   const category = props.category;
-  const [selectedService, setSelectedService] = useState(service);
-  const [selectedEmployee, setSelectedEmployee] = useState({});
+  const [event, setEvent] = useState(service);
+  //const [selectedEmployee, setSelectedEmployee] = useState({});
 
   //console.log("SELECTED FROM SELECTION CARD", selected);
 
@@ -24,20 +24,22 @@ const SelectionCard = (props) => {
           price: selected.price,
           category: category,
         };
-        setSelectedService(selectedService);
+        setEvent(selectedService);
+      } else if (step === "employee") {
+        let selectedEmployee = {
+          employee: selected.employee,
+        };
+
+        service.employee = selected.employee;
+        setEvent(service);
+        //setSelectedEmployee(selectedEmployee);
       }
-
-      let selectedEmployee = {
-        employee: selected.employee,
-      };
-
-      setSelectedEmployee(selectedEmployee);
     }
   }, [selected]);
 
   //let event = { ...service, ...selectedEmployee };
 
-  console.log(selectedService, selectedEmployee);
+  console.log("Event", event);
 
   //console.log("selectedService", service);
 
@@ -71,7 +73,7 @@ const SelectionCard = (props) => {
                 <Link
                   href={{
                     pathname: "/booking-employee",
-                    query: selectedService,
+                    query: event,
                   }}
                 >
                   Next step
@@ -111,7 +113,7 @@ const SelectionCard = (props) => {
                 <Link
                   href={{
                     pathname: "/booking-calendar",
-                    query: selectedService,
+                    query: event,
                   }}
                 >
                   Next step

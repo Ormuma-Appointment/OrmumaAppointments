@@ -31,9 +31,6 @@ const BookingService = () => {
     getData();
   }, []);
 
-  //console.log("service list", serviceList.serviceObj);
-  //console.log("selectedService", selected);
-
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = (e) => {
     setIsOpenStyle(true);

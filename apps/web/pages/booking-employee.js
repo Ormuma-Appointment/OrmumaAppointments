@@ -7,7 +7,7 @@ import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 
-let service = { style: "style 1", price: "45€", time: "30min" };
+//let service = { style: "style 1", price: "45€", time: "30min" };
 
 const BookingEmployee = () => {
   const [isLoading, SetIsLoading] = useState(true);
@@ -20,7 +20,7 @@ const BookingEmployee = () => {
       collection(db, "stores", "one", "employeeList")
     );
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, doc.data());
+      //console.log(doc.id, doc.data());
       employeesArray.push(doc.data());
     });
     setEmployees(employeesArray);
@@ -61,7 +61,7 @@ const BookingEmployee = () => {
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
-            service={service}
+            service={selectedService}
             step="employee"
           />
         </CardContainer>

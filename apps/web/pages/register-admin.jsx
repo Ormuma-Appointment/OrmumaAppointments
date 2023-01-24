@@ -12,6 +12,12 @@ import { useAuthContext } from "../context/AuthContext";
 
 function RegisterAdmin() {
   const router = useRouter();
+  const { currentUser, isAdmin } = useAuthContext();
+  if (currentUser && !isAdmin) {
+    router.push("/account");
+  } else if (currentUser && isAdmin) {
+    router.push("/account-admin");
+  }
   const [err, setErr] = useState(false);
   // a function checks if both passwords are the same
   const isPasswordConfirmed = (password, confimPassword) => {

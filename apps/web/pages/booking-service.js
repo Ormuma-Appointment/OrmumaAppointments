@@ -14,7 +14,6 @@ const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
   async function getData() {
     const docRef = doc(db, "stores", "one", "services", "serviceList");
@@ -37,15 +36,11 @@ const BookingService = () => {
 
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = (e) => {
-    setIsOpenStyle(!isOpenStyle);
+    setIsOpenStyle(true);
     let id = e.target.value;
-    setSelectedCategoryId(id);
     let category = serviceList.serviceObj[id].category;
     setSelectedCategory(category);
   };
-
-  console.log(selectedCategoryId);
-  console.log(serviceList.serviceObj[selectedCategoryId]);
 
   return (
     <div className={styles.pageContainer}>

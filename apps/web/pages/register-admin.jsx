@@ -40,10 +40,8 @@ function RegisterAdmin() {
         console.error("passwords not matching ");
       } else {
         // otherwise a new userr is created
-
         setErr(false);
         const res = await createUserWithEmailAndPassword(auth, email, password);
-
         console.log(res);
         // a new user inside the users collection
         await setDoc(doc(db, "users", res.user.uid), {
@@ -64,8 +62,9 @@ function RegisterAdmin() {
       setErr(true);
     }
   };
-
+  // add admin claim to user
   const handleAdminRegistration = async (email) => {
+    // call firebase cloud function endpoint
     const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/makeAdmin`;
     const data = { email };
     const options = {
@@ -73,7 +72,6 @@ function RegisterAdmin() {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     };
-
     try {
       const response = await fetch(endpoint, options);
       const json = await response.json();

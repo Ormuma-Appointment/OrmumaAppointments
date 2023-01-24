@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { auth, db } from "../firebase/firebase";
+import { auth } from "../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import styles from "../ui/page_styles/Register.module.css";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
-import { WithPublic } from "../route/route";
 
 function Login() {
   const [salonName, setSalonName] = useState("Natur Friseur");
@@ -16,6 +14,11 @@ function Login() {
   const router = useRouter();
 
   const { currentUser, setCurrentUser, isAdmin } = useAuthContext();
+  if (currentUser && !isAdmin) {
+    router.push("/account");
+  } else if (currentUser && isAdmin) {
+    router.push("/account-admin");
+  }
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();

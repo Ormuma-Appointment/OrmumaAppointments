@@ -11,9 +11,14 @@ import { doc, setDoc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
 function Register() {
+  const { currentUser, isAdmin } = useAuthContext();
   const router = useRouter();
+  if (currentUser && !isAdmin) {
+    router.push("/account");
+  } else if (currentUser && isAdmin) {
+    router.push("/account-admin");
+  }
   const [err, setErr] = useState(false);
-  const { register } = useAuthContext();
 
   const [salonName, setSalonName] = useState("Natur Friseur");
   // a function checks if both passwords are the same

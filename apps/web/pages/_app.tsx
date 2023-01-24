@@ -9,6 +9,7 @@ import PageOverviewTemp from "../ui/components/PageOverviewTemp/PageOverviewTemp
 import { useAuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedRoutes from "../route/ProtectedRoutes";
+import { BookingContextProvider } from "../context/BookingContext";
 
 // This default export is required in a new `pages/_app.js` file.
 
@@ -19,24 +20,26 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AuthContextProvider>
-      {/* <Component {...pageProps} /> */}
+      <BookingContextProvider>
+        {/* <Component {...pageProps} /> */}
 
-      <div className="grid_main_wrapper">
-        <Navigation customer_logged_out />
-        <div className="page_wrapper">
-          {noAuthRequired.includes(Router.pathname) ? (
-            <Component {...pageProps} />
-          ) : (
-            <ProtectedRoutes>
+        <div className="grid_main_wrapper">
+          <Navigation customer_logged_out />
+          <div className="page_wrapper">
+            {noAuthRequired.includes(Router.pathname) ? (
               <Component {...pageProps} />
-            </ProtectedRoutes>
-          )}
+            ) : (
+              <ProtectedRoutes>
+                <Component {...pageProps} />
+              </ProtectedRoutes>
+            )}
+          </div>
+          <PageOverviewTemp />
         </div>
-        <PageOverviewTemp />
-      </div>
-      <div className="grid_footer">
-        <Footer />
-      </div>
+        <div className="grid_footer">
+          <Footer />
+        </div>
+      </BookingContextProvider>
     </AuthContextProvider>
   );
 }

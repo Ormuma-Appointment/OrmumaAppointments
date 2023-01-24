@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
 import Button from "../ui/components/Button/Button";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../ui/components/assets/minus.svg";
-import Link from "next/link";
 import { db } from "../firebase/firebase";
 import {
   doc,
@@ -34,7 +34,7 @@ function ServiceSetup() {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data().serviceObj);
+        // console.log("Document data:", docSnap.data().serviceObj);
         let fbData = docSnap.data().serviceObj;
         setCategories(() => fbData.map((el) => el.category));
         setServices(() => {
@@ -64,10 +64,6 @@ function ServiceSetup() {
   useEffect(() => {
     getDBServices();
   }, [currentUser]);
-
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
 
   function handleCatSubmit(e) {
     e.preventDefault();
@@ -112,16 +108,10 @@ function ServiceSetup() {
   }
   return (
     <div>
-      <div className={styles.breadcrumb}>
-        <Link href="/store-setup">Store Setup</Link>{" "}
-        <span className={styles.arrows}> &#9654;</span>{" "}
-        <span className={styles.current_breadcrumb}>
-          <Link href="/service-setup">Services Konfgurieren </Link>{" "}
-        </span>{" "}
-        <span className={styles.arrows}>&#9654;</span>{" "}
-        <Link href="/team-setup">Team konfigurieren </Link>
-        <span className={styles.arrows}>&#9654;</span>
-      </div>
+      <BreadCrumb
+        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+        current={1}
+      />
       <h1>Services Konfigurieren</h1>
       <CardContainer>
         <div className={styles.container}>

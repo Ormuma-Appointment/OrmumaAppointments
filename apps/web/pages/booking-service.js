@@ -55,7 +55,9 @@ const BookingService = () => {
                     value={id}
                     className="h4"
                   >
-                    {service.category} <i className="fa-solid fa-play"></i>
+                    {service.category.charAt(0).toUpperCase() +
+                      service.category.slice(1)}{" "}
+                    <i className="fa-solid fa-play"></i>
                   </button>
 
                   {service.services.map((el, index) => {

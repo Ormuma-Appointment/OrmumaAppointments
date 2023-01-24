@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 
 const SelectionCard = (props) => {
   const [selectedService, setSelectedService] = useState({});
+  const [selectedEmployee, setSelectedEmployee] = useState({});
   const step = props.step;
   const selected = props.selected;
   const setSelected = props.setSelected;
@@ -22,11 +23,16 @@ const SelectionCard = (props) => {
         price: selected.price,
         category: category,
       };
+      let selectedEmployee = {
+        employee: selected.employee,
+      };
       setSelectedService(selectedService);
+      setSelectedEmployee(selectedEmployee);
     }
   }, [selected]);
 
-  console.log("selectedService", service);
+  //console.log(selectedService, selectedEmployee);
+  //console.log("selectedService", service);
 
   return (
     <div>

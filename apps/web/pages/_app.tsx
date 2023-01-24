@@ -9,10 +9,25 @@ import PageOverviewTemp from "../ui/components/PageOverviewTemp/PageOverviewTemp
 import { useAuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedRoutes from "../route/ProtectedRoutes";
+import AdminProtectedRoutes from "../route/AdminProtectedRoutes";
 
 // This default export is required in a new `pages/_app.js` file.
 
 const noAuthRequired = ["/", "/login", "/register", "/register-admin"];
+const customerAuthRequired = [
+  "/account",
+  "/booking-service",
+  "/booking-employee",
+  "/booking-calendar",
+  "/booking-confirmation",
+];
+const adminAuthRequired = [
+  "/account-admin",
+  "/store-setup",
+  "/service-setup",
+  "/register-admin",
+  "/team-setup",
+];
 export default function MyApp({ Component, pageProps }: AppProps) {
   // const { currentUser } = useAuthContext();
   const Router = useRouter();
@@ -26,10 +41,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <div className="page_wrapper">
           {noAuthRequired.includes(Router.pathname) ? (
             <Component {...pageProps} />
-          ) : (
+          ) : customerAuthRequired.includes(Router.pathname) ? (
             <ProtectedRoutes>
               <Component {...pageProps} />
             </ProtectedRoutes>
+          ) : (
+            <AdminProtectedRoutes>
+              <Component {...pageProps} />
+            </AdminProtectedRoutes>
           )}
         </div>
         <PageOverviewTemp />

@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { auth, db } from "../firebase/firebase";
+import { auth } from "../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import styles from "../ui/page_styles/Register.module.css";
 import Button from "../ui/components/Button/Button";
 import Link from "next/link";
 import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
-import { WithPublic } from "../route/route";
 
 function Login() {
   const [salonName, setSalonName] = useState("Natur Friseur");
   const [err, setErr] = useState(false);
   const router = useRouter();
 
-  const { currentUser, setCurrentUser } = useAuthContext();
+  const { currentUser, setCurrentUser, isAdmin } = useAuthContext();
+  if (currentUser && !isAdmin) {
+    router.push("/account");
+  } else if (currentUser && isAdmin) {
+    router.push("/account-admin");
+  }
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +35,11 @@ function Login() {
       setCurrentUser(user);
 
       console.log(currentUser, "logout func");
-      router.push("/account"); //if is admin go to /account-admin
+      if (isAdmin) {
+        router.push("/account-admin");
+      } else {
+        router.push("/account");
+      }
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ", e);

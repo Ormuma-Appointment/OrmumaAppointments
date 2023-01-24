@@ -6,10 +6,10 @@ import AccountCard from "../ui/components/AccountCard/AccountCard";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
-import { WithAuth } from "../route/route";
 import { useRouter } from "next/router";
 
 const Account = () => {
+  const router = useRouter();
   const pastAppointments = [
     {
       customer: "Andrea Berg",
@@ -19,7 +19,7 @@ const Account = () => {
       time: "11:30-12:00",
     },
   ];
-  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>

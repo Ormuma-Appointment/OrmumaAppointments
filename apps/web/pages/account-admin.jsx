@@ -7,7 +7,8 @@ import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 const AccountAdmin = () => {
   const salon = {
@@ -19,54 +20,6 @@ const AccountAdmin = () => {
         label: "Mo",
         day: 1,
         breakEnd: null,
-      },
-      {
-        end: null,
-        breakStart: null,
-        label: "Di",
-        start: null,
-        breakEnd: null,
-        day: 2,
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        day: 3,
-        start: null,
-        label: "Mi",
-        end: null,
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        start: null,
-        day: 4,
-        end: null,
-        label: "Do",
-      },
-      {
-        day: 5,
-        end: null,
-        start: null,
-        breakStart: null,
-        breakEnd: null,
-        label: "Fr",
-      },
-      {
-        breakEnd: null,
-        breakStart: null,
-        label: "Sa",
-        end: null,
-        start: null,
-        day: 6,
-      },
-      {
-        breakStart: null,
-        label: "So",
-        start: null,
-        end: null,
-        breakEnd: null,
-        day: 0,
       },
     ],
     photo: "",
@@ -82,22 +35,12 @@ const AccountAdmin = () => {
       country: "Deutschland",
       number: "104",
     },
-    name: "Mulugeta birish",
+    name: "Not From Firebase",
     employees: [
       {
         name: "Kasper Schneiderlein",
         photo: null,
         description: "Balayage, vibrant color Spezialist",
-      },
-      {
-        name: "Juli Katter",
-        photo: null,
-        description: "Layers, Bobs, Fringes",
-      },
-      {
-        name: "Kyle Superwow",
-        photo: null,
-        description: "Razers, Beards, Nails",
       },
     ],
   };
@@ -139,20 +82,40 @@ const AccountAdmin = () => {
       time: "11:30-12:00",
     },
   ];
-
+  // get salon data for salon overview from Firebase
+  const { currentUser, storeID } = useAuthContext();
   const [salonData, setSalonData] = useState(salon);
-  async function getData() {
-    const docRef = doc(db, "stores", "one");
+  async function getSalonData() {
+    const docRef = doc(db, "stores", storeID);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
+      //console.log("Document data:", docSnap.data());
       setSalonData(docSnap.data());
     } else {
       console.log("No such document!");
     }
   }
   useEffect(() => {
-    getData();
+    getSalonData();
+  }, []);
+
+  // get Employees for Employee-Listing from Firebase
+  const [salonEmployees, setSalonEmployees] = useState(salon.employees);
+  const [employeeIndex, setEmployeeIndex] = useState(0);
+  async function getEmployeeData() {
+    let employeesTemp = [];
+    const querySnapshot = await getDocs(
+      collection(db, "stores", storeID, "employeeList")
+    );
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // console.log(doc.id, " => ", doc.data());
+      employeesTemp.push(doc.data());
+    });
+    setSalonEmployees(employeesTemp);
+  }
+  useEffect(() => {
+    getEmployeeData();
   }, []);
 
   return (
@@ -204,7 +167,6 @@ const AccountAdmin = () => {
               <div className={styles.opening_container}>
                 <h3>Öffnungszeiten</h3>
                 {salonData.openingHours.map((el, index) => {
-                  console.log(el.start);
                   return (
                     <div key={index} className={styles.day}>
                       <p>
@@ -242,6 +204,7 @@ const AccountAdmin = () => {
             return (
               <AppointmentCard
                 customer={el.name}
+                key={index}
                 date={el.date}
                 service={el.service}
                 stylist={el.stylist}
@@ -259,8 +222,10 @@ const AccountAdmin = () => {
             bearbeiten
           </Link>
         </div>
-        {/* <EmployeeOverview employees={salonData.employees} /> */}
-        NEED TO WORK ON! EMPLOYEE DATA NO IN DB YET
+        <EmployeeOverview
+          employees={salonEmployees}
+          setEmployeeIndex={setEmployeeIndex}
+        />
       </div>
     </div>
   );

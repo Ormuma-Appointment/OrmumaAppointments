@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import Input from "../ui/components/InputField/Input";
-import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
-import Link from "next/link";
-import { doc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  addDoc,
+  collection,
+  setDoc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { useAuthContext } from "../context/AuthContext";
 
 const StoreSetup = () => {
-  const email = "dummyaddress@test.de";
   let days_times = [
     {
       label: "Mo",
@@ -70,17 +76,18 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
-  const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
+  const email = "dummyaddress@test.de";
+  const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(days_times);
-  const [formData, setFormData] = useState({});
   const router = useRouter();
+
   const handleSubmit = async (e, path) => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
       photo: e.target.photo.value,
       contact: {
-        email: email, // maybe we can remove it from here if this is already stored
+        email: currentUser.email,
         telephone: e.target.telephone.value,
         website: e.target.website.value,
       },
@@ -93,30 +100,54 @@ const StoreSetup = () => {
       },
       openingHours: times,
     };
-
-    // setFormData(storeObj);
-    console.log(storeObj);
-
-    try {
-      await setDoc(doc(db, "stores", "one"), storeObj);
-    } catch (err) {
-      console.error(err);
+    if (hasData) {
+      // update firebase data if page was loaded with existing store data
+      hasData && (await updateDoc(doc(db, "stores", storeID), storeObj));
+    } else {
+      // setup data in firebase
+      try {
+        const docRef = await addDoc(collection(db, "stores"), storeObj);
+        await setDoc(doc(db, "users", currentUser.uid, "stores", docRef.id), {
+          storeID: docRef.id,
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
+
     router.push(path);
   };
 
+  // load existing information, for editing purposes
+  const [salonData, setSalonData] = useState([]);
+  const [hasData, setHasData] = useState(false);
+  async function getData() {
+    if ((currentUser, storeID)) {
+      const docRef = doc(db, "stores", storeID);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        let data = docSnap.data();
+        setSalonData(docSnap.data());
+        setTimes(data.openingHours);
+        setHasData(true);
+      } else {
+        console.log("No such document!");
+      }
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [storeID]);
+
+  console.log(hasData);
   return (
     <div>
-      <div className={styles.breadcrumb}>
-        <span className={styles.current_breadcrumb}>
-          <Link href="/store-setup">Store Setup</Link>{" "}
-        </span>{" "}
-        <span className={styles.arrows}> &#9654;</span>{" "}
-        <Link href="/service-setup">Services Konfgurieren </Link>{" "}
-        <span className={styles.arrows}>&#9654;</span>{" "}
-        <Link href="/team-setup">Team konfigurieren </Link>
-        <span className={styles.arrows}>&#9654;</span>
-      </div>
+      <BreadCrumb
+        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+        current={0}
+      />
       <h1>Store Setup</h1>
       <CardContainer>
         <div className={styles.container}>
@@ -140,6 +171,7 @@ const StoreSetup = () => {
                     name="name"
                     id="name"
                     placeholder="Salon Name"
+                    defaultValue={salonData.name}
                     required
                   />
                 </div>
@@ -155,6 +187,7 @@ const StoreSetup = () => {
                         type="text"
                         name="street"
                         id="street"
+                        defaultValue={hasData ? salonData.address.street : ""}
                         placeholder="Straße"
                       />
                     </div>{" "}
@@ -163,6 +196,7 @@ const StoreSetup = () => {
                         type="number"
                         name="number"
                         id="number"
+                        defaultValue={hasData ? salonData.address.number : ""}
                         placeholder="Nummer"
                       />
                     </div>{" "}
@@ -173,6 +207,9 @@ const StoreSetup = () => {
                         type="text"
                         name="postalCode"
                         id="postalCode"
+                        defaultValue={
+                          hasData ? salonData.address.postalCode : ""
+                        }
                         placeholder="Postleitzahl"
                         required
                       />
@@ -182,6 +219,7 @@ const StoreSetup = () => {
                         type="text"
                         name="city"
                         id="city"
+                        defaultValue={hasData ? salonData.address.city : ""}
                         placeholder="Stadt"
                         required
                       />
@@ -198,6 +236,7 @@ const StoreSetup = () => {
                     type="tel"
                     name="telephone"
                     id="telephone"
+                    defaultValue={hasData ? salonData.contact.telephone : ""}
                     placeholder="Telefonnummer"
                     required
                   />
@@ -212,6 +251,7 @@ const StoreSetup = () => {
                     type="text"
                     name="website"
                     id="website"
+                    defaultValue={hasData ? salonData.contact.website : ""}
                     placeholder="Webseite"
                   />
                 </div>
@@ -225,29 +265,17 @@ const StoreSetup = () => {
                 </div>
               </div>
             </div>
-
             <div className={styles.setUpOpenings}>
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
-                  <label>Arbeitstage:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <CheckboxSelectElement
-                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                    setOpenDays={setOpenDays}
-                    openDays={openDays}
-                  />
-                </div>
-              </div>
-              <div className={`${styles.row} ${styles.opening}`}>
-                <div className={styles.col30}>
-                  <label>Arbeitszeiten:*</label>
+                  <label>Öffnungszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
                   <TimeDefinitionSection
-                    openDays={openDays}
+                    openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
                     setTimes={setTimes}
                     times={times}
+                    hasData={hasData}
                   />
                 </div>
               </div>

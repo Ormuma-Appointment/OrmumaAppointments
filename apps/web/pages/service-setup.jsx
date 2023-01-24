@@ -1,20 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
 import Button from "../ui/components/Button/Button";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../ui/components/assets/minus.svg";
-import Link from "next/link";
-// import { doc, setDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { doc, setDoc, collection, query, getDocs } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  updateDoc,
+  query,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+
+import { useAuthContext } from "../context/AuthContext";
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
+  const { currentUser, storeID } = useAuthContext();
+  const [dbServices, setDbServices] = useState([]);
+  const [servicesDetails, setServicesDetails] = useState([]);
+  const [hasData, setHasData] = useState(false);
+
+  async function getDBServices() {
+    if (currentUser) {
+      const docRef = doc(db, "stores", storeID, "services", "serviceList");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data().serviceObj);
+        let fbData = docSnap.data().serviceObj;
+        setCategories(() => fbData.map((el) => el.category));
+        setServices(() => {
+          let temp = [];
+          fbData.forEach((el) =>
+            el.services.forEach((elem) => (temp = [...temp, elem.service]))
+          );
+          return temp;
+        });
+        setServicesDetails(() => {
+          let temp = [];
+          fbData.forEach((el) =>
+            el.services.forEach((elem) => {
+              temp = [...temp, { ...elem, category: el.category }];
+            })
+          );
+          return temp;
+        });
+        setDbServices(fbData);
+        setHasData(true);
+      }
+    } else {
+      console.log("No such document!");
+    }
+  }
+
+  useEffect(() => {
+    getDBServices();
+  }, [currentUser]);
 
   function handleCatSubmit(e) {
     e.preventDefault();
@@ -36,16 +85,20 @@ function ServiceSetup() {
       ...detail.data(),
       id: detail.id,
     }));
-    console.log(queryData);
-    // queryData.map(async (v) => {
-    const res = await setDoc(
-      doc(db, "stores", queryData[0].id, "services", "serviceList"),
-      {
-        serviceObj,
-      }
-    );
-    console.log();
-    // });
+
+    if (hasData) {
+      await updateDoc(
+        doc(db, "stores", queryData[0].id, "services", "serviceList"),
+        { serviceObj }
+      );
+    } else {
+      const res = await setDoc(
+        doc(db, "stores", queryData[0].id, "services", "serviceList"),
+        {
+          serviceObj,
+        }
+      );
+    }
     router.push(path);
   }
   // handle back button click
@@ -55,16 +108,10 @@ function ServiceSetup() {
   }
   return (
     <div>
-      <div className={styles.breadcrumb}>
-        <Link href="/store-setup">Store Setup</Link>{" "}
-        <span className={styles.arrows}> &#9654;</span>{" "}
-        <span className={styles.current_breadcrumb}>
-          <Link href="/service-setup">Services Konfgurieren </Link>{" "}
-        </span>{" "}
-        <span className={styles.arrows}>&#9654;</span>{" "}
-        <Link href="/team-setup">Team konfigurieren </Link>
-        <span className={styles.arrows}>&#9654;</span>
-      </div>
+      <BreadCrumb
+        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+        current={1}
+      />
       <h1>Services Konfigurieren</h1>
       <CardContainer>
         <div className={styles.container}>
@@ -108,6 +155,8 @@ function ServiceSetup() {
             services={services}
             setServices={setServices}
             categories={categories}
+            servicesDetails={servicesDetails[0] ? servicesDetails : false}
+            setServicesDetails={setServicesDetails}
           />
           <div className={styles.footer}>
             <Button

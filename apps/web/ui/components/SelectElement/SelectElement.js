@@ -1,9 +1,14 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SelectElement.module.css";
-import Down from "../assets/down.svg";
 
-function SelectElement({ minute, day, time }) {
-  const [data, setData] = useState([
+function SelectElement({ day, time, value }) {
+  const [localValue, setLocalValue] = useState(value);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  const [data] = useState([
     "-",
     "06:00",
     "06:30",
@@ -46,7 +51,13 @@ function SelectElement({ minute, day, time }) {
 
   return (
     <div className={styles.container}>
-      <select name={`${day}_${time}`} id="time" className={styles.input}>
+      <select
+        name={`${day}_${time}`}
+        id="time"
+        className={styles.input}
+        value={localValue ? localValue : ""}
+        onChange={(e) => setLocalValue((prev) => e.target.value)}
+      >
         {data.map((el, index) => {
           return (
             <option key={index} value={el}>

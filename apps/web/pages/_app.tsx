@@ -10,34 +10,42 @@ import { useAuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedRoutes from "../route/ProtectedRoutes";
 import { BookingContextProvider } from "../context/BookingContext";
+import AdminProtectedRoutes from "../route/AdminProtectedRoutes";
 
-// This default export is required in a new `pages/_app.js` file.
+const noAuthRequired = ["/", "/login", "/register", "/register-admin"];
+const loggedIn = ["/"];
+const customerAuthRequired = [
+  "/account",
+  "/booking-service",
+  "/booking-employee",
+  "/booking-calendar",
+  "/booking-confirmation",
+];
 
-const noAuthRequired = ["/", "/login", "/register"];
 export default function MyApp({ Component, pageProps }: AppProps) {
-  // const { currentUser } = useAuthContext();
   const Router = useRouter();
 
   return (
     <AuthContextProvider>
       <BookingContextProvider>
-        {/* <Component {...pageProps} /> */}
-
         <div className="grid_main_wrapper">
           <Navigation customer_logged_out />
           <div className="page_wrapper">
             {noAuthRequired.includes(Router.pathname) ? (
               <Component {...pageProps} />
-            ) : (
+            ) : customerAuthRequired.includes(Router.pathname) ? (
               <ProtectedRoutes>
                 <Component {...pageProps} />
               </ProtectedRoutes>
+            ) : (
+              <AdminProtectedRoutes>
+                <Component {...pageProps} />
+              </AdminProtectedRoutes>
             )}
           </div>
-          <PageOverviewTemp />
-        </div>
-        <div className="grid_footer">
-          <Footer />
+          <div className="grid_footer">
+            <Footer />
+          </div>
         </div>
       </BookingContextProvider>
     </AuthContextProvider>

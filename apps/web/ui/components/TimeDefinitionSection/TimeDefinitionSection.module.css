@@ -7,7 +7,7 @@
 }
 .container div {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .input_group {
   width: 515px;
@@ -19,6 +19,7 @@
 }
 .input_group p {
   margin-left: 1rem;
+  width: 3rem;
 }
 .input_group div {
   margin-left: 0.5rem;

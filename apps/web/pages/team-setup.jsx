@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import Input from "../ui/components/InputField/Input";
-import CheckboxSelectElement from "../ui/components/CheckboxSelectElement/CheckboxSelectElement";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
 import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
 import Minus from "../ui/components/assets/minus.svg";
-import StylistCard from "../ui/components/StylistCard/StylistCard";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
-import { doc, setDoc, collection, query, getDocs } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  query,
+  getDoc,
+  getDocs,
+  updateDoc,
+  collection,
+} from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
-  let dummyservices = ["Long", "Short", "Bold", "Style"];
-  let dummyemployees = [
-    {
-      name: "Kasper Schneiderlein",
-      photo: null,
-      description: "Balayage, vibrant color Spezialist",
-    },
-    { name: "Juli Katter", photo: null, description: "Layers, Bobs, Fringes" },
-    {
-      name: "Kyle Superwow",
-      photo: null,
-      description: "Razers, Beards, Nails",
-    },
-  ];
+  let dummyservices = ["no data"];
   let days_times = [
     {
       label: "Mo",
@@ -88,12 +82,126 @@ function TeamSetup() {
       breakEnd: null,
     },
   ];
-  const [services, setServices] = useState(dummyservices); // will need to get the services from the page before or from firebase directly
+
   const [yesno] = useState(["ja", "nein"]);
-  const [allEmployees, setAllEmployees] = useState(dummyemployees);
   const [times, setTimes] = useState(days_times);
-  const [openDays, setOpenDays] = useState([]); // stores values from form checkboxes
+  const [services, setServices] = useState(dummyservices);
   const router = useRouter();
+  let dummyemployee = {
+    name: "Dummy",
+    adress: {
+      street: "dummy",
+      number: "0",
+      postalCode: "00000",
+      city: "dummy",
+      country: "Deutschland", //prefilled
+    },
+    telephone: "999999999",
+    photo: null,
+    services: services,
+    description: "dummy",
+    workingTime: times,
+  };
+
+  // get services from Store Collection services
+  const { currentUser, storeID } = useAuthContext();
+  const [dbServices, setDbServices] = useState([]);
+  async function getDBServices() {
+    if ((currentUser, storeID)) {
+      const docRef = doc(db, "stores", storeID, "services", "serviceList");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data().serviceObj);
+        let data = docSnap.data().serviceObj;
+        if (data[0]) {
+          let temp = [];
+          data.forEach((el) => {
+            el.services.forEach((elem) =>
+              temp.push(`${el.category}  -  ${elem.service}`)
+            );
+          });
+          setServices(temp);
+          setDbServices(temp);
+        }
+      } else {
+        console.log("No such document!");
+      }
+    }
+  }
+  useEffect(() => {
+    getDBServices();
+  }, [storeID]);
+  // get all Employees from Firebase
+  const [salonEmployees, setSalonEmployees] = useState([]);
+  const [hasData, setHasData] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(dummyemployee);
+  const [employeeIndex, setEmployeeIndex] = useState(undefined);
+  const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
+  const [noSelected, setNoSelected] = useState(false);
+
+  async function getEmployeeData() {
+    if ((currentUser, storeID)) {
+      let employeesTemp = [];
+      let idsTemp = [];
+      const querySnapshot = await getDocs(
+        collection(db, "stores", storeID, "employeeList")
+      );
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        // console.log(doc.id, " => ", doc.data());
+        employeesTemp.push(doc.data());
+        idsTemp.push(doc.id);
+      });
+      setSalonEmployees(employeesTemp);
+      setEmployeeFirebaseID(idsTemp);
+    }
+  }
+  useEffect(() => {
+    getEmployeeData();
+  }, [storeID]);
+
+  useEffect(() => {
+    if (employeeIndex || employeeIndex === 0) setHasData(true);
+    setSelectedEmployee(salonEmployees[employeeIndex]);
+    setShowServices(true);
+    setNoSelected(true);
+  }, [employeeIndex]);
+
+  function reverseTransform(obj) {
+    let result = [];
+    obj.forEach((item) => {
+      item.services.forEach((service) => {
+        result.push(`${item.category}  -  ${service.service}`);
+      });
+    });
+    return result;
+  }
+
+  useEffect(() => {
+    if (hasData) {
+      setServices(reverseTransform(selectedEmployee.services));
+      setTimes(selectedEmployee.workingTime);
+    }
+  }, [selectedEmployee]);
+
+  function transformArray(arr) {
+    let result = {};
+    arr.forEach((item) => {
+      let parts = item.split("  -  ");
+      let category = parts[0];
+      let service = parts[1];
+      if (!result[category]) {
+        result[category] = {
+          category: category,
+          services: [{ service: service }],
+        };
+      } else {
+        result[category].services.push({ service: service });
+      }
+    });
+    return Object.values(result);
+  }
+
   async function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {
@@ -107,7 +215,8 @@ function TeamSetup() {
       },
       telephone: e.target.telephone.value,
       photo: e.target.photo.value,
-      services: services,
+      services: transformArray(services),
+      description: e.target.description.value,
       workingTime: times,
     };
     const q = query(collection(db, "stores"));
@@ -117,14 +226,28 @@ function TeamSetup() {
       id: detail.id,
     }));
     console.log(queryData);
+    if (hasData) {
+      await updateDoc(
+        doc(
+          db,
+          "stores",
+          storeID,
+          "employeeList",
+          employeeFirebaseID[employeeIndex]
+        ),
+        employee
+      );
+    } else {
+      const res = await setDoc(
+        doc(db, "stores", queryData[0].id, "employeeList", employee.name),
+        employee
+      );
+    }
 
-    const res = await setDoc(
-      doc(db, "stores", queryData[0].id, "employeeList", employee.name),
-      employee
-    );
-
-    console.log(times);
+    // reload page and clear all fields
+    router.reload(window.location.pathname);
   }
+
   function handleBackClick(e, path) {
     e.preventDefault();
     router.push(path);
@@ -135,22 +258,28 @@ function TeamSetup() {
 
   function handleCancelClick(e) {
     e.preventDefault();
-    setServices(dummyservices);
+    if (hasData) {
+      setServices(selectedEmployee.services);
+    } else {
+      if (dbServices) {
+        setServices(dbServices);
+      } else {
+        setServices(dummyservices);
+      }
+    }
+  }
+  function handleLoadClick(e) {
+    e.preventDefault();
+    setServices(dbServices);
   }
 
   return (
     <div>
-      <div className={styles.breadcrumb}>
-        <Link href="/store-setup">Store Setup</Link>{" "}
-        <span className={styles.arrows}> &#9654;</span>{" "}
-        <Link href="/service-setup">Services Konfgurieren </Link>{" "}
-        <span className={styles.arrows}>&#9654;</span>{" "}
-        <span className={styles.current_breadcrumb}>
-          <Link href="/team-setup">Team konfigurieren </Link>
-        </span>{" "}
-        <span className={styles.arrows}>&#9654;</span>
-      </div>
-      <h1>Team Konfigurieren</h1>
+      <BreadCrumb
+        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+        current={2}
+      />
+      <h1 id="top">Team Konfigurieren</h1>
       <CardContainer>
         <div className={styles.container}>
           <form action="" onSubmit={handleFormSubmit}>
@@ -159,7 +288,7 @@ function TeamSetup() {
               Felder aus. Sobald Sie auf "Person speichern" klicken, wird diese
               unten auftauchen. Keine persönlichen Daten, werden für Kund*Innen
               sichtbar sein. <br />
-              Klicken Sie auf "Prozess beenden", um alle Daten zu speichern.
+              Klicken Sie auf "Person speichern", um alle Daten zu speichern.
             </div>
             <div className={styles.form}>
               <div className={styles.setUpInfos}>
@@ -173,6 +302,7 @@ function TeamSetup() {
                       name="name"
                       id="name"
                       placeholder="Name"
+                      defaultValue={hasData ? selectedEmployee.name : ""}
                       required
                     />
                   </div>
@@ -188,6 +318,9 @@ function TeamSetup() {
                           type="text"
                           name="street"
                           id="street"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.street : ""
+                          }
                           placeholder="Straße"
                         />
                       </div>{" "}
@@ -196,6 +329,9 @@ function TeamSetup() {
                           type="number"
                           name="number"
                           id="number"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.number : ""
+                          }
                           placeholder="Nummer"
                         />
                       </div>{" "}
@@ -206,6 +342,9 @@ function TeamSetup() {
                           type="text"
                           name="postalCode"
                           id="postalCode"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.postalCode : ""
+                          }
                           placeholder="Postleitzahl"
                         />
                       </div>
@@ -214,6 +353,9 @@ function TeamSetup() {
                           type="text"
                           name="city"
                           id="city"
+                          defaultValue={
+                            hasData ? selectedEmployee.adress.city : ""
+                          }
                           placeholder="Stadt"
                         />
                       </div>
@@ -229,6 +371,7 @@ function TeamSetup() {
                       type="tel"
                       name="telephone"
                       id="telephone"
+                      defaultValue={hasData ? selectedEmployee.telephone : ""}
                       placeholder="Telefonnummer"
                     />
                   </div>
@@ -242,6 +385,7 @@ function TeamSetup() {
                       type="text"
                       name="description"
                       id="description"
+                      defaultValue={hasData ? selectedEmployee.description : ""}
                       placeholder="z.B. Farbspezialistin, Balayage, ... "
                     />
                   </div>
@@ -259,25 +403,14 @@ function TeamSetup() {
             <div className={styles.setUpOpenings}>
               <div className={`${styles.row} ${styles.opening}`}>
                 <div className={styles.col30}>
-                  <label>Arbeitstage:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <CheckboxSelectElement
-                    labels={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                    setOpenDays={setOpenDays}
-                    openDays={openDays}
-                  />
-                </div>
-              </div>
-              <div className={`${styles.row} ${styles.opening}`}>
-                <div className={styles.col30}>
-                  <label>Arbeitszeiten:*</label>
+                  <label>Öffnungszeiten:*</label>
                 </div>
                 <div className={styles.col70}>
                   <TimeDefinitionSection
-                    openDays={openDays}
+                    openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
                     setTimes={setTimes}
                     times={times}
+                    hasData={hasData}
                   />
                 </div>
               </div>
@@ -292,6 +425,9 @@ function TeamSetup() {
                     name="services_done"
                     labels={yesno}
                     setShowServices={setShowServices}
+                    hasData={hasData}
+                    setNoSelected={setNoSelected}
+                    noSelected={noSelected}
                   />
                 </div>
               </div>
@@ -314,13 +450,22 @@ function TeamSetup() {
                       );
                     })}
                   </div>
-                  <Button
-                    size="xsmall"
-                    variant="invisible"
-                    onClick={handleCancelClick}
-                  >
-                    Änderungen rückgängig machen
-                  </Button>
+                  <div className={styles.button_group}>
+                    <Button
+                      size="xsmall"
+                      variant="invisible"
+                      onClick={handleLoadClick}
+                    >
+                      Alle Services des Salons laden
+                    </Button>
+                    <Button
+                      size="xsmall"
+                      variant="invisible"
+                      onClick={handleCancelClick}
+                    >
+                      Änderungen rückgängig machen
+                    </Button>
+                  </div>
                 </>
               )}
             </div>
@@ -339,7 +484,10 @@ function TeamSetup() {
           </form>
           <div className={styles.employee_container}>
             <h2>Alle Mitarbeiter</h2>
-            <EmployeeOverview employees={allEmployees} />
+            <EmployeeOverview
+              employees={salonEmployees}
+              setEmployeeIndex={setEmployeeIndex}
+            />
           </div>
         </div>
       </CardContainer>

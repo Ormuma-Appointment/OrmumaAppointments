@@ -46,8 +46,13 @@ const SelectionCard = (props) => {
             </div>
           </div>
           <div className={styles.buttonsContainer}>
-            <Button icon="" size="medium" variant="danger">
-              <Link href="/">Go back</Link>
+            <Button
+              icon=""
+              size="medium"
+              variant="danger"
+              onClick={() => router.push("/")}
+            >
+              abbrechen
             </Button>
 
             {selected && (

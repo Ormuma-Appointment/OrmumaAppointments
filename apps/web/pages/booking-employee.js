@@ -7,8 +7,6 @@ import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 
-//let service = { style: "style 1", price: "45€", time: "30min" };
-
 const BookingEmployee = () => {
   const [isLoading, SetIsLoading] = useState(true);
   const [employees, setEmployees] = useState([]);
@@ -34,20 +32,37 @@ const BookingEmployee = () => {
   const router = useRouter();
   const selectedService = router.query;
 
-  console.log("selected service from employee", selectedService);
+  //console.log("selected service from employee", selectedService);
+  //console.log("EMPLOYEES", employees);
+
+  function filterEmployees(selected) {
+    let filteredEmployees = employees.filter((employee) => {
+      return employee.services.some((category) => {
+        return (
+          category.category === selected.category &&
+          category.services.some(
+            (service) => service.service === selected.service
+          )
+        );
+      });
+    });
+    return filteredEmployees.map((employee) => employee.name);
+  }
+
+  const filteredEmployees = filterEmployees(selectedService);
 
   return (
     <div className={styles.pageContainer}>
       <h1>Wähle eine*n Mitarbeiter*In</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
-          <h4>Employees</h4>
+          <h4>Mitarbeiter</h4>
           {!isLoading ? (
-            employees.map((employee, id) => {
+            filteredEmployees.map((employee, id) => {
               return (
                 <SelectItem
                   plus
-                  employee={employee.name}
+                  employee={employee}
                   key={id}
                   setSelected={setSelected}
                 />

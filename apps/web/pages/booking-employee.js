@@ -32,20 +32,25 @@ const BookingEmployee = () => {
   const router = useRouter();
   const selectedService = router.query;
 
-  console.log("selected service from employee", selectedService);
+  //console.log("selected service from employee", selectedService);
+  //console.log("EMPLOYEES", employees);
 
-  let filteredEmployees = employees.filter((employee) => {
-    employee.services.forEach((service) => {
-      if (
-        service.category === selectedService.category &&
-        service.services.includes(selectedService.service)
-      ) {
-        return employee;
-      }
+  function filterEmployees(selected) {
+    let filteredEmployees = employees.filter((employee) => {
+      return employee.services.some((category) => {
+        return (
+          category.category === selected.category &&
+          category.services.some(
+            (service) => service.service === selected.service
+          )
+        );
+      });
     });
-  });
+    return filteredEmployees.map((employee) => employee.name);
+  }
 
-  console.log(filteredEmployees);
+  const filteredEmployees = filterEmployees(selectedService);
+
   return (
     <div className={styles.pageContainer}>
       <h1>Wähle eine*n Mitarbeiter*In</h1>
@@ -53,11 +58,11 @@ const BookingEmployee = () => {
         <CardContainer>
           <h4>Mitarbeiter</h4>
           {!isLoading ? (
-            employees.map((employee, id) => {
+            filteredEmployees.map((employee, id) => {
               return (
                 <SelectItem
                   plus
-                  employee={employee.name}
+                  employee={employee}
                   key={id}
                   setSelected={setSelected}
                 />

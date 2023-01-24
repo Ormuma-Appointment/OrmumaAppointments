@@ -11,6 +11,7 @@ const SelectionCard = (props) => {
   const service = props.service;
   const category = props.category;
   const [event, setEvent] = useState(service);
+  const [eventTest, setEventTest] = useState(service);
   //const [selectedEmployee, setSelectedEmployee] = useState({});
 
   //console.log("SELECTED FROM SELECTION CARD", selected);
@@ -26,22 +27,15 @@ const SelectionCard = (props) => {
         };
         setEvent(selectedService);
       } else if (step === "employee") {
-        let selectedEmployee = {
-          employee: selected.employee,
-        };
-
-        service.employee = selected.employee;
-        setEvent(service);
+        event.employee = selected.employee;
+        setEvent(event);
         //setSelectedEmployee(selectedEmployee);
       }
     }
   }, [selected]);
 
-  //let event = { ...service, ...selectedEmployee };
-
   console.log("Event", event);
-
-  //console.log("selectedService", service);
+  console.log("Event test", eventTest);
 
   return (
     <div>

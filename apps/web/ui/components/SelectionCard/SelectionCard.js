@@ -3,8 +3,10 @@ import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
+import { useRouter } from "next/router";
 
 const SelectionCard = (props) => {
+  const router = useRouter();
   const [selectedService, setSelectedService] = useState({});
   const step = props.step;
   const selected = props.selected;

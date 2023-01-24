@@ -29,36 +29,10 @@ function Navigation(props) {
   useEffect(() => {
     if (currentUser) {
       setIsLoggedIn(true);
-      getUserClaims(currentUser.uid);
     } else {
       setIsLoggedIn(false);
     }
   }, [currentUser]);
-
-  const getUserClaims = async (uid) => {
-    const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
-    const data = { uid };
-    const options = {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    };
-
-    try {
-      const response = await fetch(endpoint, options);
-      const json = await response.json();
-      if (json.claims) {
-        // Handle success
-        console.log(json.claims);
-      } else {
-        // Handle error
-        console.log(json.error);
-      }
-    } catch (err) {
-      // Handle error
-      console.log(err);
-    }
-  };
 
   return (
     <div className={styles.container}>

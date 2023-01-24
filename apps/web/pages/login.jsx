@@ -15,7 +15,7 @@ function Login() {
   const [err, setErr] = useState(false);
   const router = useRouter();
 
-  const { currentUser, setCurrentUser } = useAuthContext();
+  const { currentUser, setCurrentUser, isAdmin } = useAuthContext();
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +32,11 @@ function Login() {
       setCurrentUser(user);
 
       console.log(currentUser, "logout func");
-      router.push("/account"); //if is admin go to /account-admin
+      if (isAdmin) {
+        router.push("/account-admin");
+      } else {
+        router.push("/account");
+      }
     } catch (e) {
       setErr(true);
       console.error("somthing is wrong ", e);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -6,8 +6,11 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
+import { BookingContext } from "../context/BookingContext";
 
 const BookingCalendar = () => {
+  const { employeeData, setChosen, chosen } = useContext(BookingContext);
+
   //const [selectedTime, setSelectedTime] = useState(null);
 
   //WE HAVE TO FIND A LOGIC HERE - maybe with moment.js
@@ -35,7 +38,7 @@ const BookingCalendar = () => {
               duration={service.time}
               price={service.price}
             />
-            <SelectItem employee={employee.name} />
+            <SelectItem employee={chosen.employee} />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

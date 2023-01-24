@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import Input from "../ui/components/InputField/Input";
 import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../ui/components/Button/Button";
-import Link from "next/link";
 import {
   doc,
   addDoc,
@@ -144,16 +144,10 @@ const StoreSetup = () => {
   console.log(hasData);
   return (
     <div>
-      <div className={styles.breadcrumb}>
-        <span className={styles.current_breadcrumb}>
-          <Link href="/store-setup">Store Setup</Link>{" "}
-        </span>{" "}
-        <span className={styles.arrows}> &#9654;</span>{" "}
-        <Link href="/service-setup">Services Konfgurieren </Link>{" "}
-        <span className={styles.arrows}>&#9654;</span>{" "}
-        <Link href="/team-setup">Team konfigurieren </Link>
-        <span className={styles.arrows}>&#9654;</span>
-      </div>
+      <BreadCrumb
+        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+        current={0}
+      />
       <h1>Store Setup</h1>
       <CardContainer>
         <div className={styles.container}>

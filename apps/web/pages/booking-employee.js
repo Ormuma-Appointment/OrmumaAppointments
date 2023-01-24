@@ -38,7 +38,7 @@ const BookingEmployee = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Unsere Mitarbeiter</h1>
+      <h1>Wähle eine*n Mitarbeiter*In</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Employees</h4>

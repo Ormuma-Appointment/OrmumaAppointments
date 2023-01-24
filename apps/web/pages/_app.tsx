@@ -12,7 +12,7 @@ import ProtectedRoutes from "../route/ProtectedRoutes";
 import AdminProtectedRoutes from "../route/AdminProtectedRoutes";
 
 const noAuthRequired = ["/", "/login", "/register", "/register-admin"];
-const alreadyLoggedIn = ["/login", "/register", "/register-admin"];
+const loggedIn = ["/"];
 const customerAuthRequired = [
   "/account",
   "/booking-service",

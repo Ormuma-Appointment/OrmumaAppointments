@@ -9,6 +9,7 @@ import Edit from "../ui/components/assets/edit.svg";
 import { useRouter } from "next/router";
 
 const Account = () => {
+  const router = useRouter();
   const pastAppointments = [
     {
       customer: "Andrea Berg",
@@ -18,7 +19,7 @@ const Account = () => {
       time: "11:30-12:00",
     },
   ];
-  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>

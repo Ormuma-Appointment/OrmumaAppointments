@@ -10,8 +10,7 @@ const SelectionCard = (props) => {
   const selected = props.selected;
   const setSelected = props.setSelected;
   const service = props.service;
-
-  console.log("cate from selection card", props.category);
+  const category = props.category;
 
   //console.log("SELECTED FROM SELECTION CARD", selected);
 
@@ -20,6 +19,7 @@ const SelectionCard = (props) => {
       let selectedService = {
         service: selected.service,
         duration: selected.duration,
+        category: category,
       };
       setSelectedService(selectedService);
     }

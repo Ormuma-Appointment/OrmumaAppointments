@@ -13,6 +13,7 @@ const BookingService = () => {
   const [serviceList, setServiceList] = useState({});
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   async function getData() {
     const docRef = doc(db, "stores", "one", "services", "serviceList");
@@ -34,25 +35,12 @@ const BookingService = () => {
   //console.log("selectedService", selected);
 
   //is opening everything and not only one service - to correct later
-  const handleOpenStyle = () => {
-    setIsOpenStyle(!isOpenStyle);
+  const handleOpenStyle = (e) => {
+    setIsOpenStyle(true);
+    let id = e.target.value;
+    let category = serviceList.serviceObj[id].category;
+    setSelectedCategory(category);
   };
-
-  //let event = { service: selected.title, duration: selected.duration };
-
-  //push event to array of event database now or later - but find a way to import the event object to booking employee
-
-  //console.log("Event", event);
-  //useEffect(() => {
-  //  console.log("selectedService", selected.service);
-  //  //let event = { service: selected.service, duration: selected.duration };
-  //}, [selected]);
-
-  //const router = useRouter();
-  //router.push(
-  //  { pathname: "/booking-employee", query: { selected: "someone" } },
-  //  "/booking-service"
-  //);
 
   return (
     <div className={styles.pageContainer}>
@@ -63,26 +51,34 @@ const BookingService = () => {
             serviceList.serviceObj.map((service, id) => {
               return (
                 <>
-                  <h4 type="button" onClick={handleOpenStyle} key={id}>
+                  <button
+                    type="button"
+                    onClick={handleOpenStyle}
+                    key={id}
+                    value={id}
+                    className="h4"
+                  >
                     {service.category} <i className="fa-solid fa-play"></i>
-                  </h4>
+                  </button>
+
                   {service.services.map((el, index) => {
-                    let category = service.category;
-                    return (
-                      isOpenStyle && (
-                        <SelectItem
-                          duration={el.duration}
-                          plus
-                          price={el.price}
-                          service={el.service}
-                          key={index}
-                          setSelected={setSelected}
-                          onClick={() =>
-                            setSelected({ price, service, duration })
-                          }
-                        />
-                      )
-                    );
+                    if (service.category === selectedCategory) {
+                      return (
+                        isOpenStyle && (
+                          <SelectItem
+                            duration={el.duration}
+                            plus
+                            price={el.price}
+                            service={el.service}
+                            key={index}
+                            setSelected={setSelected}
+                            onClick={() =>
+                              setSelected({ price, service, duration })
+                            }
+                          />
+                        )
+                      );
+                    }
                   })}
                 </>
               );
@@ -95,6 +91,7 @@ const BookingService = () => {
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
+            category={selectedCategory}
             step="service"
           />
         </CardContainer>

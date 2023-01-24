@@ -3,10 +3,8 @@ import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
-import { useRouter } from "next/router";
 
 const SelectionCard = (props) => {
-  const router = useRouter();
   const [selectedService, setSelectedService] = useState({});
   const step = props.step;
   const selected = props.selected;
@@ -21,13 +19,14 @@ const SelectionCard = (props) => {
       let selectedService = {
         service: selected.service,
         duration: selected.duration,
+        price: selected.price,
         category: category,
       };
       setSelectedService(selectedService);
     }
   }, [selected]);
 
-  //console.log("selectedService", selectedService);
+  console.log("selectedService", service);
 
   return (
     <div>
@@ -50,13 +49,8 @@ const SelectionCard = (props) => {
             </div>
           </div>
           <div className={styles.buttonsContainer}>
-            <Button
-              icon=""
-              size="medium"
-              variant="danger"
-              onClick={() => router.push("/")}
-            >
-              abbrechen
+            <Button icon="" size="medium" variant="danger">
+              <Link href="/">Go back</Link>
             </Button>
 
             {selected && (
@@ -78,9 +72,9 @@ const SelectionCard = (props) => {
         <>
           <div>
             <SelectItem
-              duration={service.time}
+              duration={service.duration}
               price={service.price}
-              employee={service.style}
+              service={service.service}
             />
             {!selected && (
               <p className={styles.selectItemText}>Select a employee</p>

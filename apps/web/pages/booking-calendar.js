@@ -6,6 +6,7 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
+import { useRouter } from "next/router";
 
 const BookingCalendar = () => {
   //const [selectedTime, setSelectedTime] = useState(null);
@@ -18,6 +19,11 @@ const BookingCalendar = () => {
     description:
       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   };
+
+  const router = useRouter();
+  const selectedService = router.query.selectedService;
+
+  console.log("selected service from calendar", selectedService);
 
   return (
     <div className={styles.pageContainer}>

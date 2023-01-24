@@ -11,9 +11,14 @@ import { doc, setDoc } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 
 function Register() {
+  const { currentUser, isAdmin } = useAuthContext();
   const router = useRouter();
+  if (currentUser && !isAdmin) {
+    router.push("/account");
+  } else if (currentUser && isAdmin) {
+    router.push("/account-admin");
+  }
   const [err, setErr] = useState(false);
-  const { register } = useAuthContext();
 
   const [salonName, setSalonName] = useState("Natur Friseur");
   // a function checks if both passwords are the same
@@ -37,8 +42,8 @@ function Register() {
       } else {
         // otherwise a new userr is created
         setErr(false);
-        const res = await (auth, email, password);
-        router.push("/account");
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+
         console.log(res);
         // a new user inside the users collection
         await setDoc(doc(db, "users", res.user.uid), {
@@ -49,6 +54,7 @@ function Register() {
         await updateProfile(res.user, {
           displayName,
         });
+        router.push("/account");
         // the user is redirected to the home page once the registration form is submited
         // using the useRouter hook from next as oppose to the useNavigate from react router dom
       }

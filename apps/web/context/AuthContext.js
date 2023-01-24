@@ -26,9 +26,8 @@ export const AuthContextProvider = ({ children }) => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (user) {
         setCurrentUser(user);
-        setLoading(false);
-      } // console.log(user);
-      return null;
+      }
+      setLoading(false);
     });
 
     return () => {
@@ -42,12 +41,13 @@ export const AuthContextProvider = ({ children }) => {
     }
     return false;
   };
-
+  const [isAdmin, setIsAdmin] = useState(false);
   const logOut = (a) => {
     signOut(a)
       .then(() => {
         setCurrentUser(null);
-        console.log("looged out");
+        console.log("logged out");
+        setIsAdmin(false);
         router.push("/");
       })
       .catch((err) => {
@@ -71,13 +71,51 @@ export const AuthContextProvider = ({ children }) => {
       setStoreID(idsTemp[0]);
     }
   }
+
+  const getUserClaims = async (uid) => {
+    const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
+    const data = { uid };
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    try {
+      const response = await fetch(endpoint, options);
+      const json = await response.json();
+      if (json.claims) {
+        // Handle success
+        if (json.claims.admin) {
+          setIsAdmin(true);
+        }
+      } else {
+        // Handle error
+        console.log(json.error);
+      }
+    } catch (err) {
+      // Handle error
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    getStore();
+    if (currentUser) {
+      getStore();
+      getUserClaims(currentUser.uid);
+    }
   }, [currentUser]);
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, setCurrentUser, isLoggedIn, logOut, storeID }}
+      value={{
+        currentUser,
+        setCurrentUser,
+        isLoggedIn,
+        logOut,
+        storeID,
+        isAdmin,
+      }}
     >
       {loading ? null : children}
     </AuthContext.Provider>

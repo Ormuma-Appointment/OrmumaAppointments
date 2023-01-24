@@ -111,7 +111,7 @@ function TeamSetup() {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data().serviceObj);
+        console.log("Document data:", docSnap.data().serviceObj);
         let data = docSnap.data().serviceObj;
         if (data[0]) {
           let temp = [];
@@ -167,12 +167,40 @@ function TeamSetup() {
     setNoSelected(true);
   }, [employeeIndex]);
 
+  function reverseTransform(obj) {
+    let result = [];
+    obj.forEach((item) => {
+      item.services.forEach((service) => {
+        result.push(`${item.category}  -  ${service.service}`);
+      });
+    });
+    return result;
+  }
+
   useEffect(() => {
     if (hasData) {
-      setServices(selectedEmployee.services);
+      setServices(reverseTransform(selectedEmployee.services));
       setTimes(selectedEmployee.workingTime);
     }
   }, [selectedEmployee]);
+
+  function transformArray(arr) {
+    let result = {};
+    arr.forEach((item) => {
+      let parts = item.split("  -  ");
+      let category = parts[0];
+      let service = parts[1];
+      if (!result[category]) {
+        result[category] = {
+          category: category,
+          services: [{ service: service }],
+        };
+      } else {
+        result[category].services.push({ service: service });
+      }
+    });
+    return Object.values(result);
+  }
 
   async function handleFormSubmit(e) {
     e.preventDefault();
@@ -187,7 +215,7 @@ function TeamSetup() {
       },
       telephone: e.target.telephone.value,
       photo: e.target.photo.value,
-      services: services,
+      services: transformArray(services),
       description: e.target.description.value,
       workingTime: times,
     };

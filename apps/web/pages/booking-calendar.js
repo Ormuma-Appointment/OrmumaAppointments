@@ -21,7 +21,7 @@ const BookingCalendar = () => {
   };
 
   const router = useRouter();
-  const selectedService = router.query.selectedService;
+  const selectedService = router.query;
 
   console.log("selected service from calendar", selectedService);
 

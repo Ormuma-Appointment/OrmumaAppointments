@@ -14,6 +14,7 @@ const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
   async function getData() {
     const docRef = doc(db, "stores", "one", "services", "serviceList");
@@ -37,29 +38,14 @@ const BookingService = () => {
   //is opening everything and not only one service - to correct later
   const handleOpenStyle = (e) => {
     setIsOpenStyle(!isOpenStyle);
-    console.log("ID", e.target.value);
     let id = e.target.value;
+    setSelectedCategoryId(id);
     let category = serviceList.serviceObj[id].category;
     setSelectedCategory(category);
   };
 
-  console.log(selectedCategory);
-
-  //let event = { service: selected.title, duration: selected.duration };
-
-  //push event to array of event database now or later - but find a way to import the event object to booking employee
-
-  //console.log("Event", event);
-  //useEffect(() => {
-  //  console.log("selectedService", selected.service);
-  //  //let event = { service: selected.service, duration: selected.duration };
-  //}, [selected]);
-
-  //const router = useRouter();
-  //router.push(
-  //  { pathname: "/booking-employee", query: { selected: "someone" } },
-  //  "/booking-service"
-  //);
+  console.log(selectedCategoryId);
+  console.log(serviceList.serviceObj[selectedCategoryId]);
 
   return (
     <div className={styles.pageContainer}>
@@ -79,25 +65,25 @@ const BookingService = () => {
                   >
                     {service.category} <i className="fa-solid fa-play"></i>
                   </button>
+
                   {service.services.map((el, index) => {
-                    {
-                      /*let category = service.category;*/
+                    if (service.category === selectedCategory) {
+                      return (
+                        isOpenStyle && (
+                          <SelectItem
+                            duration={el.duration}
+                            plus
+                            price={el.price}
+                            service={el.service}
+                            key={index}
+                            setSelected={setSelected}
+                            onClick={() =>
+                              setSelected({ price, service, duration })
+                            }
+                          />
+                        )
+                      );
                     }
-                    return (
-                      isOpenStyle && (
-                        <SelectItem
-                          duration={el.duration}
-                          plus
-                          price={el.price}
-                          service={el.service}
-                          key={index}
-                          setSelected={setSelected}
-                          onClick={() =>
-                            setSelected({ price, service, duration })
-                          }
-                        />
-                      )
-                    );
                   })}
                 </>
               );
@@ -110,6 +96,7 @@ const BookingService = () => {
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
+            category={selectedCategory}
             step="service"
           />
         </CardContainer>

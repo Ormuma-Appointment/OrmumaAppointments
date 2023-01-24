@@ -26,9 +26,6 @@ function PageOverviewTemp() {
       <Link style={divStyle} href="/register">
         Registration
       </Link>
-      <Link style={divStyle} href="/login-admin">
-        Admin Login
-      </Link>
       <Link style={divStyle} href="/register-admin">
         Admin Registration
       </Link>

@@ -14,7 +14,7 @@ import Link from "next/link";
 function Navigation(props) {
   const router = useRouter();
 
-  const { currentUser, logOut } = useAuthContext();
+  const { currentUser, logOut, isAdmin } = useAuthContext();
   const {
     customer_logged_out,
     customer_logged_in,
@@ -24,7 +24,7 @@ function Navigation(props) {
   } = props;
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+
   useEffect(() => {
     if (currentUser) {
       setIsLoggedIn(true);
@@ -69,7 +69,6 @@ function Navigation(props) {
               onClick={() => router.push("/account")}
             />
           )}
-
           <button
             onClick={() => {
               logOut(auth);

@@ -1,15 +1,38 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
 
 const SelectionCard = (props) => {
+  const [selectedService, setSelectedService] = useState({});
+  const [selectedEmployee, setSelectedEmployee] = useState({});
   const step = props.step;
   const selected = props.selected;
   const setSelected = props.setSelected;
-
   const service = props.service;
+  const category = props.category;
+
+  //console.log("SELECTED FROM SELECTION CARD", selected);
+
+  useEffect(() => {
+    if (selected) {
+      let selectedService = {
+        service: selected.service,
+        duration: selected.duration,
+        price: selected.price,
+        category: category,
+      };
+      let selectedEmployee = {
+        employee: selected.employee,
+      };
+      setSelectedService(selectedService);
+      setSelectedEmployee(selectedEmployee);
+    }
+  }, [selected]);
+
+  //console.log(selectedService, selectedEmployee);
+  //console.log("selectedService", service);
 
   return (
     <div>
@@ -38,7 +61,14 @@ const SelectionCard = (props) => {
 
             {selected && (
               <Button icon="" size="medium" variant="primary">
-                <Link href="/booking-employee">Next step</Link>
+                <Link
+                  href={{
+                    pathname: "/booking-employee",
+                    query: selectedService,
+                  }}
+                >
+                  Next step
+                </Link>
               </Button>
             )}
           </div>
@@ -48,9 +78,9 @@ const SelectionCard = (props) => {
         <>
           <div>
             <SelectItem
-              duration={service.time}
+              duration={service.duration}
               price={service.price}
-              employee={service.style}
+              service={service.service}
             />
             {!selected && (
               <p className={styles.selectItemText}>Select a employee</p>

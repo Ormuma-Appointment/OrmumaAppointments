@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
 import calendar from "../ui/components/assets/calendar.svg";
@@ -6,17 +6,10 @@ import AccountCard from "../ui/components/AccountCard/AccountCard";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
-import { useAuthContext } from "../context/AuthContext";
-import { db, auth } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { WithAuth } from "../route/route";
-
-// import { useSession } from "next-auth/client ";
+import { useRouter } from "next/router";
 
 const Account = () => {
-  const { currentUser, isLoggedIn, logOut } = useAuthContext();
-  const [userData, setUserData] = useState({});
-
+  const router = useRouter();
   const pastAppointments = [
     {
       customer: "Andrea Berg",
@@ -27,32 +20,16 @@ const Account = () => {
     },
   ];
 
-  // useEffect(() => {
-  // const getData = async () => {
-  //   const docRef = doc(db, "users", currentUser.uid);
-  //   const docSnap = await getDoc(docRef);
-
-  //   if (docSnap.exists()) {
-  //     console.log("Document data:", docSnap.data());
-
-  //     // setUserData(docSnap.data());
-  //   } else {
-  //     console.log("No such document!");
-  //   }
-  //   return docSnap.data();
-  // };
-  // getData();
-  // }, []);
-  // console.log(currentUser);
-  // const datadata = getData();
-  // console.log(datadata, "gggg");
-
-  // if (currentUser) {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Mein Account</h1>
-        <Button icon={calendar} size="medium" variant="primary">
+        <Button
+          icon={calendar}
+          size="medium"
+          variant="primary"
+          onClick={() => router.push("/booking-service")}
+        >
           Termin buchen
         </Button>
       </div>
@@ -78,7 +55,6 @@ const Account = () => {
             time="11:30-12:00"
           />
         </div>
-
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
@@ -86,6 +62,7 @@ const Account = () => {
               return (
                 <AppointmentCard
                   customer={el.name}
+                  key={index}
                   date={el.date}
                   service={el.service}
                   stylist={el.stylist}

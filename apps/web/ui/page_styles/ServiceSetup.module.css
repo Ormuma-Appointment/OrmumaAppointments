@@ -2,16 +2,6 @@
   padding: 3rem 1.5rem 3rem 1.5rem;
   width: 95vw;
 }
-.breadcrumb {
-  margin-bottom: 1rem;
-}
-.arrows {
-  font-size: 0.75rem;
-}
-.current_breadcrumb {
-  color: var(--primary-color);
-  font-weight: bold;
-}
 .intro {
   margin-bottom: 3rem;
 }

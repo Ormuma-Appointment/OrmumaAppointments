@@ -7,7 +7,7 @@ function ContactCard({ email, website, telephone }) {
   return (
     <CardContainer>
       <div className={styles.container}>
-        <InfoElement email infoDetail={email} infoHl="Email" />
+        <InfoElement infoDetail={email} infoHl="Email" email />
         <InfoElement infoDetail={website} infoHl="Website" internet />
         <InfoElement infoDetail={telephone} infoHl="Telefon" phone />
       </div>

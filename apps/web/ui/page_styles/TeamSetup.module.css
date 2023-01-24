@@ -52,6 +52,7 @@
   justify-content: flex-end;
   margin-top: 5rem;
 }
+
 .employee_services {
   margin-top: 1rem;
   padding: 0 0 5rem;
@@ -134,5 +135,9 @@
   }
   .col70:first-child {
     margin-right: 2%;
+  }
+  .button_group {
+    display: flex;
+    justify-content: flex-end;
   }
 }

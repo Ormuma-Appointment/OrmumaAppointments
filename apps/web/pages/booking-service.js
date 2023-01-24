@@ -4,66 +4,93 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { admin } from "./data-sample";
+import { db } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 const BookingService = () => {
+  const [isLoading, SetIsLoading] = useState(true);
+  const [serviceList, setServiceList] = useState({});
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  console.log("Admin", admin.services);
-  console.log("selectedService", selected);
+  async function getData() {
+    const docRef = doc(db, "stores", "one", "services", "serviceList");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setServiceList(docSnap.data());
+      SetIsLoading(false);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
+  useEffect(() => {
+    getData();
+  }, []);
 
   //is opening everything and not only one service - to correct later
-  const handleOpenStyle = () => {
-    setIsOpenStyle(!isOpenStyle);
+  const handleOpenStyle = (e) => {
+    setIsOpenStyle(true);
+    let id = e.target.value;
+    let category = serviceList.serviceObj[id].category;
+    setSelectedCategory(category);
   };
-
-  let services = admin.services;
-
-  //let event = { service: selected.title, duration: selected.duration };
-
-  //push event to array of event database now or later - but find a way to import the event object to booking employee
-
-  //console.log("Event", event);
-  useEffect(() => {
-    console.log("selectedService", selected);
-  }, [selected]);
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Unsere Service</h1>
+      <h1>Wähle deinen gewünschten Service</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
-          {services.map((service, id) => {
-            return (
-              <>
-                <h4 type="button" onClick={handleOpenStyle} key={id}>
-                  {service.category} <i className="fa-solid fa-play"></i>
-                </h4>
-                {service.services.map((el, index) => {
-                  return (
-                    isOpenStyle && (
-                      <SelectItem
-                        duration={el.duration}
-                        plus
-                        price={el.price}
-                        service={el.service}
-                        key={index}
-                        setSelected={setSelected}
-                        onClick={() =>
-                          setSelected({ price, service, duration })
-                        }
-                      />
-                    )
-                  );
-                })}
-              </>
-            );
-          })}
+          {!isLoading ? (
+            serviceList.serviceObj.map((service, id) => {
+              return (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleOpenStyle}
+                    key={id}
+                    value={id}
+                    className="h4"
+                  >
+                    {service.category.charAt(0).toUpperCase() +
+                      service.category.slice(1)}{" "}
+                    <i className="fa-solid fa-play"></i>
+                  </button>
+
+                  {service.services.map((el, index) => {
+                    if (service.category === selectedCategory) {
+                      return (
+                        isOpenStyle && (
+                          <SelectItem
+                            duration={el.duration}
+                            plus
+                            price={el.price}
+                            service={el.service}
+                            key={index}
+                            setSelected={setSelected}
+                            onClick={() =>
+                              setSelected({ price, service, duration })
+                            }
+                          />
+                        )
+                      );
+                    }
+                  })}
+                </>
+              );
+            })
+          ) : (
+            <div>Is loading</div>
+          )}
         </CardContainer>
         <CardContainer>
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
+            category={selectedCategory}
             step="service"
           />
         </CardContainer>

@@ -56,7 +56,7 @@ const BookingService = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Unsere Service</h1>
+      <h1>Wähle deinen gewünschten Service</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           {!isLoading ? (

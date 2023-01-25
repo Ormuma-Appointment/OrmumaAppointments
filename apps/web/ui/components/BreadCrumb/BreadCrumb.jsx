@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./BreadCrumb.module.css";
 
 function BreadCrumb({ steps, current }) {
-  console.log(steps);
   return (
     <div className={styles.breadcrumb}>
       {steps.map((el, index) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -6,17 +6,25 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
-import { useRouter } from "next/router";
+import { BookingContext } from "../context/BookingContext";
 
 const BookingCalendar = () => {
-  const router = useRouter();
-  const selectedItems = router.query;
+  const { employeeData, setChosen, chosen } = useContext(BookingContext);
 
-  console.log("selected items from calendar", selectedItems);
+  //const [selectedTime, setSelectedTime] = useState(null);
+
+  //WE HAVE TO FIND A LOGIC HERE - maybe with moment.js
+
+  let service = { style: "style 1", price: "45€", time: "30min" };
+  let employee = {
+    name: "John",
+    description:
+      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  };
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Wähle einen passenden Termin</h1>
+      <h1>Unsere calandar</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Calendar</h4>
@@ -26,11 +34,11 @@ const BookingCalendar = () => {
           <h4>Ihre Auswahl</h4>
           <div>
             <SelectItem
-              service={selectedItems.service}
-              duration={selectedItems.duration}
-              price={selectedItems.price}
+              service={service.style}
+              duration={service.time}
+              price={service.price}
             />
-            <SelectItem employee={selectedItems.employee} />
+            <SelectItem employee={employee.name} />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

@@ -19,7 +19,6 @@ import {
 } from "firebase/firestore";
 
 import { useAuthContext } from "../../context/AuthContext";
-import StoreSetup from "./store";
 
 function ServiceSetup() {
   const [loading, setLoading] = useState(true);
@@ -27,15 +26,11 @@ function ServiceSetup() {
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
   const router = useRouter();
-  const { currentUser, storeID, inStoreSetupProcess, setInStoreSetupProcess } =
-    useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
 
-  if (!storeID && !inStoreSetupProcess) {
-    router.push("/store-setup/store");
-  }
   async function getDBServices() {
     if (currentUser && storeID) {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
@@ -68,7 +63,7 @@ function ServiceSetup() {
     }
     setLoading(false);
   }
-  console.log(storeID);
+
   useEffect(() => {
     getDBServices();
   }, [currentUser]);
@@ -82,7 +77,7 @@ function ServiceSetup() {
   }
 
   // handle continue and save button click
-  console.log("data", data);
+
   async function handleContinueClick(e, path) {
     e.preventDefault();
     let serviceObj;
@@ -112,7 +107,6 @@ function ServiceSetup() {
         }
       );
     }
-    setInStoreSetupProcess(true);
     router.push(path);
   }
 

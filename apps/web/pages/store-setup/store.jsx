@@ -22,7 +22,7 @@ const StoreSetup = () => {
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { currentUser, storeID, setInStoreSetupProcess } = useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(workingTimes);
   const router = useRouter();
 
@@ -59,7 +59,6 @@ const StoreSetup = () => {
         console.error(err);
       }
     }
-    setInStoreSetupProcess(true);
     router.push(path);
   };
 

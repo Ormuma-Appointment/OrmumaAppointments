@@ -13,47 +13,11 @@ const BookingEmployee = () => {
   //const [employees, setEmployees] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  const { employeeData, setChosen, chosen, isLoading } =
+  const { employeeData, setChosen, chosenService, isLoading } =
     useContext(BookingContext);
-
-  // async function getEmployees() {
-  //   let employeesArray = [];
-  //   const querySnapshot = await getDocs(
-  //     collection(db, "stores", "one", "employeeList")
-  //   );
-  //   querySnapshot.forEach((doc) => {
-  //     //console.log(doc.id, doc.data());
-  //     employeesArray.push(doc.data());
-  //   });
-  //   setEmployees(employeesArray);
-  //   SetIsLoading(false);
-  // }
-  //
-  // useEffect(() => {
-  //   getEmployees();
-  // }, []);
 
   const router = useRouter();
   const selectedService = router.query;
-
-  console.log("Employee data", employeeData);
-
-  //console.log("selected service from employee", selectedService);
-  // console.log("EMPLOYEES", employees);
-
-  //  function filterEmployees(selected) {
-  //    let filteredEmployees = employeeData.filter((employee) => {
-  //      return employee.services.some((category) => {
-  //        return (
-  //          category.category === selected.category &&
-  //          category.services.some(
-  //            (service) => service.service === selected.service
-  //          )
-  //        );
-  //      });
-  //    });
-  //    return filteredEmployees.map((employee) => employee.name);
-  //  }
 
   function filterEmployees(selected) {
     let filteredEmployees = employeeData.filter((employee) => {
@@ -69,9 +33,12 @@ const BookingEmployee = () => {
     return filteredEmployees.map((employee) => employee.name);
   }
 
-  const filteredEmployees = filterEmployees(selectedService);
+  const filteredEmployees = filterEmployees(chosenService);
 
-  console.log("filteredEmployees", filteredEmployees);
+  console.log(selectedService);
+  console.log("CHOSEN FROM EMPLOYEE", chosenService);
+
+  setChosen(selected);
 
   return (
     <div className={styles.pageContainer}>
@@ -98,7 +65,7 @@ const BookingEmployee = () => {
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
-            service={selectedService}
+            service={chosenService}
             step="employee"
           />
         </CardContainer>

@@ -8,6 +8,7 @@ function SelectItem(props) {
   const {
     service,
     employee,
+    date,
     minus,
     price,
     duration,
@@ -34,7 +35,9 @@ function SelectItem(props) {
       className={`${styles.service_container} ${selected && styles.selected}`}
       onClick={handleSelected}
     >
-      <div className={styles.serviceName}>{service ? service : employee}</div>
+      <div className={styles.serviceName}>
+        {service ? service : employee ? employee : date}
+      </div>
       <div className={price ? styles.serviceRight : styles.rightIconOnly}>
         {price && (
           <div className={styles.serviceDetails}>

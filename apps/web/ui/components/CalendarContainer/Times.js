@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "./CalendarContainer.module.css";
 import moment from "moment";
 import { BookingContext } from "../../../context/BookingContext";
@@ -18,16 +18,17 @@ const Times = (props) => {
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
 
-  const { chosenService, selectedEmployee } = useContext(BookingContext);
+  const { chosenService, selectedEmployee, setChosenSlot } =
+    useContext(BookingContext);
 
-  console.log(selectedEmployee.workingTime, "times employee");
+  //console.log(selectedEmployee.workingTime, "times employee");
 
   const displayInfo = (e) => {
     setInfo(true);
     setEvent(e.target.innerText);
   };
 
-  console.log("props date", props.date, props.date.getDay());
+  //console.log("props date", props.date, props.date.getDay());
   let selectedDay = props.date.getDay();
   //let selectedDay = props.date.split("").slice(0, 2).join("");
   //console.log(selectedDay);
@@ -78,6 +79,18 @@ const Times = (props) => {
     }
     slotTime = slotTime.add(x.nextSlot, "minutes");
   }
+
+  let selectedSlot = {
+    start: event,
+    date: props.date,
+    duration: chosenService.duration,
+    end: "start + DURATION",
+  };
+  console.log("selectedSlot", selectedSlot);
+
+  //useEffect(() => {
+  //  setChosenSlot(selectedSlot);
+  //}, [selectedSlot]);
 
   return (
     <div className={styles.times}>

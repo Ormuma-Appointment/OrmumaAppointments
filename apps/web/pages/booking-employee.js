@@ -6,37 +6,57 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { BookingContext } from "../context/BookingContext";
 
 const BookingEmployee = () => {
-  const [isLoading, SetIsLoading] = useState(true);
-  const [employees, setEmployees] = useState([]);
+  //  const [isLoading, SetIsLoading] = useState(true);
+  //const [employees, setEmployees] = useState([]);
   const [selected, setSelected] = useState(null);
 
-  async function getEmployees() {
-    let employeesArray = [];
-    const querySnapshot = await getDocs(
-      collection(db, "stores", "one", "employeeList")
-    );
-    querySnapshot.forEach((doc) => {
-      //console.log(doc.id, doc.data());
-      employeesArray.push(doc.data());
-    });
-    setEmployees(employeesArray);
-    SetIsLoading(false);
-  }
+  const { employeeData, setChosen, chosen, isLoading } =
+    useContext(BookingContext);
 
-  useEffect(() => {
-    getEmployees();
-  }, []);
+  // async function getEmployees() {
+  //   let employeesArray = [];
+  //   const querySnapshot = await getDocs(
+  //     collection(db, "stores", "one", "employeeList")
+  //   );
+  //   querySnapshot.forEach((doc) => {
+  //     //console.log(doc.id, doc.data());
+  //     employeesArray.push(doc.data());
+  //   });
+  //   setEmployees(employeesArray);
+  //   SetIsLoading(false);
+  // }
+  //
+  // useEffect(() => {
+  //   getEmployees();
+  // }, []);
 
   const router = useRouter();
   const selectedService = router.query;
 
+  console.log("Employee data", employeeData);
+
   //console.log("selected service from employee", selectedService);
-  //console.log("EMPLOYEES", employees);
+  // console.log("EMPLOYEES", employees);
+
+  //  function filterEmployees(selected) {
+  //    let filteredEmployees = employeeData.filter((employee) => {
+  //      return employee.services.some((category) => {
+  //        return (
+  //          category.category === selected.category &&
+  //          category.services.some(
+  //            (service) => service.service === selected.service
+  //          )
+  //        );
+  //      });
+  //    });
+  //    return filteredEmployees.map((employee) => employee.name);
+  //  }
 
   function filterEmployees(selected) {
-    let filteredEmployees = employees.filter((employee) => {
+    let filteredEmployees = employeeData.filter((employee) => {
       return employee.services.some((category) => {
         return (
           category.category === selected.category &&
@@ -50,6 +70,8 @@ const BookingEmployee = () => {
   }
 
   const filteredEmployees = filterEmployees(selectedService);
+
+  console.log("filteredEmployees", filteredEmployees);
 
   return (
     <div className={styles.pageContainer}>

@@ -21,6 +21,7 @@ import {
 import { useAuthContext } from "../../context/AuthContext";
 
 function ServiceSetup() {
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
@@ -62,6 +63,7 @@ function ServiceSetup() {
     } else {
       console.log("No such document!");
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -116,78 +118,82 @@ function ServiceSetup() {
     e.preventDefault();
     router.push(path);
   }
-  return (
-    <div>
-      <BreadCrumb
-        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
-        current={1}
-      />
-      <h1>Services Konfigurieren</h1>
-      <CardContainer>
-        <div className={styles.container}>
-          <div className={styles.intro}>
-            Erstellen Sie Ihren Service Katalog in 2 einfachen Schritten:
-            <ol>
-              <li>
-                Fügen Sie Kategorien hinzu (diese erleichtern es Ihren
-                Kund*innen den richtigen Service zu finden)
-              </li>
-              <li>
-                fügen Sie Services hinzu, wählen Sie die dazugehörigen Kateogrie
-                und geben Sie Dauer, Wartezeit und Preis für jeden Service an.
-              </li>
-            </ol>
-          </div>
-          <div className={styles.service_cat}>
-            <h3>1. Service Kategorien erstellen</h3>
-            <form className={styles.input_group} onSubmit={handleCatSubmit}>
-              <Input placeholder="Kategorie hinzufügen ..." name="category" />{" "}
-              <Button icon="" size="medium" variant="secondary">
-                + hinzufügen
+
+  if (!loading) {
+    return (
+      <div>
+        <BreadCrumb
+          steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+          current={1}
+        />
+        <h1>Services Konfigurieren</h1>
+        <CardContainer>
+          <div className={styles.container}>
+            <div className={styles.intro}>
+              Erstellen Sie Ihren Service Katalog in 2 einfachen Schritten:
+              <ol>
+                <li>
+                  Fügen Sie Kategorien hinzu (diese erleichtern es Ihren
+                  Kund*innen den richtigen Service zu finden)
+                </li>
+                <li>
+                  fügen Sie Services hinzu, wählen Sie die dazugehörigen
+                  Kateogrie und geben Sie Dauer, Wartezeit und Preis für jeden
+                  Service an.
+                </li>
+              </ol>
+            </div>
+            <div className={styles.service_cat}>
+              <h3>1. Service Kategorien erstellen</h3>
+              <form className={styles.input_group} onSubmit={handleCatSubmit}>
+                <Input placeholder="Kategorie hinzufügen ..." name="category" />{" "}
+                <Button icon="" size="medium" variant="secondary">
+                  + hinzufügen
+                </Button>
+              </form>
+              <div className={styles.cat_box}>
+                {categories.map((el, index) => {
+                  return (
+                    <div key={index} className={styles.pill}>
+                      {el}
+                      <Minus
+                        className={styles.icon}
+                        onClick={() => handleRemoveCatClick(index)}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <ServiceAdd
+              setData={setData}
+              services={services}
+              setServices={setServices}
+              categories={categories}
+              servicesDetails={servicesDetails[0] ? servicesDetails : false}
+              setServicesDetails={setServicesDetails}
+            />
+            <div className={styles.footer}>
+              <Button
+                size="medium"
+                variant="danger"
+                onClick={(e) => handleBackClick(e, "/store-setup/store")}
+              >
+                zurück
               </Button>
-            </form>
-            <div className={styles.cat_box}>
-              {categories.map((el, index) => {
-                return (
-                  <div key={index} className={styles.pill}>
-                    {el}
-                    <Minus
-                      className={styles.icon}
-                      onClick={() => handleRemoveCatClick(index)}
-                    />
-                  </div>
-                );
-              })}
+              <Button
+                size="medium"
+                variant="primary"
+                onClick={(e) => handleContinueClick(e, "/store-setup/team")}
+              >
+                speichern & weiter
+              </Button>
             </div>
           </div>
-          <ServiceAdd
-            setData={setData}
-            services={services}
-            setServices={setServices}
-            categories={categories}
-            servicesDetails={servicesDetails[0] ? servicesDetails : false}
-            setServicesDetails={setServicesDetails}
-          />
-          <div className={styles.footer}>
-            <Button
-              size="medium"
-              variant="danger"
-              onClick={(e) => handleBackClick(e, "/store-setup/store")}
-            >
-              zurück
-            </Button>
-            <Button
-              size="medium"
-              variant="primary"
-              onClick={(e) => handleContinueClick(e, "/store-setup/team")}
-            >
-              speichern & weiter
-            </Button>
-          </div>
-        </div>
-      </CardContainer>
-    </div>
-  );
+        </CardContainer>
+      </div>
+    );
+  }
 }
 
 export default ServiceSetup;

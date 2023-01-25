@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import workingTimes from "../data-sample";
+import { workingTimes } from "../data-sample";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";

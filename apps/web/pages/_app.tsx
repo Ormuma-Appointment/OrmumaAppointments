@@ -12,7 +12,13 @@ import ProtectedRoutes from "../route/ProtectedRoutes";
 import { BookingContextProvider } from "../context/BookingContext";
 import AdminProtectedRoutes from "../route/AdminProtectedRoutes";
 
-const noAuthRequired = ["/", "/login", "/register", "/register-admin"];
+const noAuthRequired = [
+  "/",
+  "/h/[slug]",
+  "/login",
+  "/register",
+  "/register-admin",
+];
 const loggedIn = ["/"];
 const customerAuthRequired = [
   "/account",

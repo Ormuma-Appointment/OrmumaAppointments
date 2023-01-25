@@ -43,10 +43,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               </AdminProtectedRoutes>
             )}
           </div>
-          <PageOverviewTemp />
-          <div className="grid_footer">
-            <Footer />
-          </div>
+          <PageOverviewTemp />{" "}
+        </div>
+        <div className="grid_footer">
+          <Footer />
         </div>
       </BookingContextProvider>
     </AuthContextProvider>

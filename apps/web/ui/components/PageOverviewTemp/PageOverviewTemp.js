@@ -35,13 +35,13 @@ function PageOverviewTemp() {
       <Link style={divStyle} href="/account-admin">
         Admin Account
       </Link>
-      <Link style={divStyle} href="/setup/store-setup">
+      <Link style={divStyle} href="/store-setup/store">
         StoreSetup
       </Link>
-      <Link style={divStyle} href="/setup/service-setup">
+      <Link style={divStyle} href="/store-setup/service">
         Service Setup
       </Link>
-      <Link style={divStyle} href="/setup/team-setup">
+      <Link style={divStyle} href="/store-setup/team">
         Team Setup
       </Link>
       <Link style={divStyle} href="/booking-calendar">

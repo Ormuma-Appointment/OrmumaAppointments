@@ -82,11 +82,14 @@ function TeamSetup() {
       breakEnd: null,
     },
   ];
-
+  const { currentUser, storeID } = useAuthContext();
   const [yesno] = useState(["ja", "nein"]);
   const [times, setTimes] = useState(days_times);
   const [services, setServices] = useState(dummyservices);
   const router = useRouter();
+  if (!storeID) {
+    router.push("/store-setup/store");
+  }
   let dummyemployee = {
     name: "Dummy",
     adress: {
@@ -104,7 +107,7 @@ function TeamSetup() {
   };
 
   // get services from Store Collection services
-  const { currentUser, storeID } = useAuthContext();
+
   const [dbServices, setDbServices] = useState([]);
   async function getDBServices() {
     if ((currentUser, storeID)) {

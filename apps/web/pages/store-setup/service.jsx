@@ -24,13 +24,16 @@ function ServiceSetup() {
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
+  const router = useRouter();
   const { currentUser, storeID } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
-
+  if (!storeID) {
+    router.push("/store-setup/store");
+  }
   async function getDBServices() {
-    if (currentUser) {
+    if (currentUser && storeID) {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -74,7 +77,7 @@ function ServiceSetup() {
   }
 
   // handle continue and save button click
-  const router = useRouter();
+
   async function handleContinueClick(e, path) {
     e.preventDefault();
     let serviceObj;

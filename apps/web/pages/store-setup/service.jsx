@@ -34,6 +34,7 @@ function ServiceSetup() {
   async function getDBServices() {
     if (currentUser && storeID) {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
+
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -66,7 +67,7 @@ function ServiceSetup() {
 
   useEffect(() => {
     getDBServices();
-  }, [currentUser]);
+  }, [currentUser, storeID]);
 
   function handleCatSubmit(e) {
     e.preventDefault();

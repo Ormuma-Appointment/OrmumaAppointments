@@ -83,7 +83,7 @@ const StoreSetup = () => {
 
   useEffect(() => {
     getData();
-  }, [storeID]);
+  }, [currentUser, storeID]);
 
   if (!loading) {
     return (

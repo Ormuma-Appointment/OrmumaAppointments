@@ -1,43 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
-import { admin } from "./data-sample";
-import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
+import { BookingContext } from "../context/BookingContext";
 
 const BookingService = () => {
-  const [isLoading, SetIsLoading] = useState(true);
-  const [serviceList, setServiceList] = useState({});
+  //const [isLoading, SetIsLoading] = useState(true);
+  //const [serviceList, setServiceList] = useState({});
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [event, setEvent] = useState(selected);
 
-  async function getData() {
-    const docRef = doc(db, "stores", "one", "services", "serviceList");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      setServiceList(docSnap.data());
-      SetIsLoading(false);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
-  useEffect(() => {
-    getData();
-  }, []);
+  const { serviceList, setChosenService, isLoading } =
+    useContext(BookingContext);
 
-  //is opening everything and not only one service - to correct later
   const handleOpenStyle = (e) => {
     setIsOpenStyle(true);
     let id = e.target.value;
     let category = serviceList.serviceObj[id].category;
     setSelectedCategory(category);
   };
+
+  useEffect(() => {
+    if (selected) {
+      let selectedService = {
+        service: selected.service,
+        duration: selected.duration,
+        price: selected.price,
+        category: selectedCategory,
+      };
+      setEvent(selectedService);
+    }
+  }, [selected]);
+
+  setChosenService(event);
 
   return (
     <div className={styles.pageContainer}>

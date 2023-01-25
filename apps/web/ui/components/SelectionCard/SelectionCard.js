@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
@@ -9,33 +8,6 @@ const SelectionCard = (props) => {
   const selected = props.selected;
   const setSelected = props.setSelected;
   const service = props.service;
-  const category = props.category;
-  const [event, setEvent] = useState(service);
-  const [eventTest, setEventTest] = useState(service);
-  //const [selectedEmployee, setSelectedEmployee] = useState({});
-
-  //console.log("SELECTED FROM SELECTION CARD", selected);
-
-  useEffect(() => {
-    if (selected) {
-      if (!service) {
-        let selectedService = {
-          service: selected.service,
-          duration: selected.duration,
-          price: selected.price,
-          category: category,
-        };
-        setEvent(selectedService);
-      } else if (step === "employee") {
-        event.employee = selected.employee;
-        setEvent(event);
-        //setSelectedEmployee(selectedEmployee);
-      }
-    }
-  }, [selected]);
-
-  console.log("Event", event);
-  console.log("Event test", eventTest);
 
   return (
     <div>
@@ -64,14 +36,7 @@ const SelectionCard = (props) => {
 
             {selected && (
               <Button icon="" size="medium" variant="primary">
-                <Link
-                  href={{
-                    pathname: "/booking-employee",
-                    query: event,
-                  }}
-                >
-                  Next step
-                </Link>
+                <Link href="/booking-employee">Next step</Link>
               </Button>
             )}
           </div>
@@ -81,9 +46,9 @@ const SelectionCard = (props) => {
         <>
           <div>
             <SelectItem
-              duration={service.duration}
-              price={service.price}
-              service={service.service}
+              duration={service?.duration}
+              price={service?.price}
+              service={service?.service}
             />
             {!selected && (
               <p className={styles.selectItemText}>Select a employee</p>
@@ -99,26 +64,12 @@ const SelectionCard = (props) => {
               size="medium"
               variant="danger"
             >
-              <Link
-                href={{
-                  pathname: "/booking-service",
-                  query: event,
-                }}
-              >
-                Go back
-              </Link>
+              <Link href="/booking-service">Go back</Link>
             </Button>
 
             {selected && (
               <Button icon="" size="medium" variant="primary">
-                <Link
-                  href={{
-                    pathname: "/booking-calendar",
-                    query: event,
-                  }}
-                >
-                  Next step
-                </Link>
+                <Link href="/booking-calendar">Next step</Link>
               </Button>
             )}
           </div>

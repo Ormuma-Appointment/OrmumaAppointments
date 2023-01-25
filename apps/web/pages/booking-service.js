@@ -4,17 +4,20 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
+import Button from "../ui/components/Button/Button";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
-import { admin } from "./data-sample";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { BookingContext } from "../context/BookingContext";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [event, setEvent] = useState(selected);
+  const router = useRouter();
+  const { storeID } = useContext(BookingContext);
 
   const { serviceList, setChosenService, isLoading } =
     useContext(BookingContext);

@@ -10,22 +10,14 @@ import { BookingContext } from "../../context/BookingContext";
 import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
-import {
-  doc,
-  getDoc,
-  getDocs,
-  collection,
-  query,
-  where,
-} from "firebase/firestore";
-import { useAuthContext } from "../../context/AuthContext";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 export default function Web() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { slug } = router.query;
   const [storeData, setStoreData] = useState(undefined);
-  const { setStoreID } = useContext(BookingContext);
+  const { setStoreID, storeID } = useContext(BookingContext);
 
   async function getData() {
     const q = query(collection(db, "stores"), where("slug", "==", slug));
@@ -43,9 +35,16 @@ export default function Web() {
     getData();
   }, []);
 
-  useEffect(() => {
-    console.log("Store data: ", storeData);
-  }, [storeData]);
+  function handleBookingClick() {
+    if (storeID) {
+      router.push({
+        pathname: "/booking-service",
+        query: { storeid: storeID },
+      });
+    } else {
+      router.push("/booking-service");
+    }
+  }
 
   if (!loading) {
     if (storeData) {
@@ -59,7 +58,7 @@ export default function Web() {
               icon={calendar}
               size="medium"
               variant="primary"
-              onClick={() => router.push("/booking-service")}
+              onClick={handleBookingClick}
             >
               Termin buchen
             </Button>

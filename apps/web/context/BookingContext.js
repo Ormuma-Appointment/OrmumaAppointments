@@ -91,6 +91,8 @@ export const BookingContextProvider = ({ children }) => {
         setChosenSlot,
         isLoading,
         selectedEmployee,
+        setStoreID,
+        storeID,
       }}
     >
       {children}

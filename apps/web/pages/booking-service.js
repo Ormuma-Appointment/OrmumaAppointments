@@ -6,8 +6,6 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
 
 const BookingService = () => {
-  //const [isLoading, SetIsLoading] = useState(true);
-  //const [serviceList, setServiceList] = useState({});
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");

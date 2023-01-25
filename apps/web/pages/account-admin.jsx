@@ -10,9 +10,10 @@ import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import Button from "../ui/components/Button/Button";
-import { CLIENT_STATIC_FILES_RUNTIME } from "next/dist/shared/lib/constants";
+import { useRouter } from "next/router";
 
 const AccountAdmin = () => {
+  const router = useRouter();
   const salon = {
     openingHours: [
       {
@@ -244,7 +245,11 @@ const AccountAdmin = () => {
             Um Kund*Innen Termine buchen zu lassen, klicken Sie auf den Button,
             um ihren Salon zu definieren.
           </p>
-          <Button size="medium" variant="primary">
+          <Button
+            size="medium"
+            variant="primary"
+            onClick={() => router.push("/store-setup/store")}
+          >
             Salon erstellen
           </Button>
         </div>

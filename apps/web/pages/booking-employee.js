@@ -7,6 +7,7 @@ import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { BookingContext } from "../context/BookingContext";
+import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 
 const BookingEmployee = () => {
   //  const [isLoading, SetIsLoading] = useState(true);
@@ -36,7 +37,7 @@ const BookingEmployee = () => {
   const filteredEmployees = filterEmployees(chosenService);
 
   console.log(selectedService);
-  console.log("CHOSEN FROM EMPLOYEE", chosenService);
+  console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
 
   setChosen(selected);
 
@@ -72,6 +73,7 @@ const BookingEmployee = () => {
       </div>
       <div>
         <h2>Unsere Mitarbeiter</h2>
+        <EmployeeOverview employees={filteredEmployees} />
       </div>
     </div>
   );

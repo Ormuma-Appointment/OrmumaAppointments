@@ -3,10 +3,6 @@ import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
-import { admin } from "./data-sample";
-import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { useRouter } from "next/router";
 import { BookingContext } from "../context/BookingContext";
 
 const BookingService = () => {
@@ -17,7 +13,7 @@ const BookingService = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [event, setEvent] = useState(selected);
 
-  const { serviceList, setChosenService, chosenService, isLoading } =
+  const { serviceList, setChosenService, isLoading } =
     useContext(BookingContext);
 
   const handleOpenStyle = (e) => {
@@ -40,23 +36,6 @@ const BookingService = () => {
   }, [selected]);
 
   setChosenService(event);
-  //async function getData() {
-  //  const docRef = doc(db, "stores", "one", "services", "serviceList");
-  //  const docSnap = await getDoc(docRef);
-  //  if (docSnap.exists()) {
-  //    console.log("Document data:", docSnap.data());
-  //    setServiceList(docSnap.data());
-  //    SetIsLoading(false);
-  //  } else {
-  //    // doc.data() will be undefined in this case
-  //    console.log("No such document!");
-  //  }
-  //}
-  //useEffect(() => {
-  //  getData();
-  //}, []);
-  //
-  ////is opening everything and not only one service - to correct later
 
   return (
     <div className={styles.pageContainer}>

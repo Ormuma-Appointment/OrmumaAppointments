@@ -24,7 +24,7 @@ import { useAuthContext } from "../../context/AuthContext";
 function TeamSetup() {
   const [loading, setLoading] = useState(true);
   const [showServices, setShowServices] = useState(false);
-  const { currentUser, storeID, inStoreSetupProcess } = useAuthContext();
+  const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(workingTimes);
   const [services, setServices] = useState(["no data"]);
   const router = useRouter();
@@ -35,9 +35,6 @@ function TeamSetup() {
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
   const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
-  if (!storeID && !inStoreSetupProcess) {
-    router.push("/store-setup/store");
-  }
 
   // get services from Store Collection services
   async function getDBServices() {

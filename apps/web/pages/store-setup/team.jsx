@@ -14,7 +14,6 @@ import { db } from "../../firebase/firebase";
 import {
   doc,
   setDoc,
-  query,
   getDoc,
   getDocs,
   updateDoc,
@@ -25,11 +24,9 @@ import { useAuthContext } from "../../context/AuthContext";
 function TeamSetup() {
   const [loading, setLoading] = useState(true);
   const [showServices, setShowServices] = useState(false);
-  let dummyservices = ["no data"];
-  const { currentUser, storeID } = useAuthContext();
-  let days_times = workingTimes;
-  const [times, setTimes] = useState(days_times);
-  const [services, setServices] = useState(dummyservices);
+  const { currentUser, storeID, inStoreSetupProcess } = useAuthContext();
+  const [times, setTimes] = useState(workingTimes);
+  const [services, setServices] = useState(["no data"]);
   const router = useRouter();
   const [dbServices, setDbServices] = useState([]);
   const [salonEmployees, setSalonEmployees] = useState([]);
@@ -38,7 +35,7 @@ function TeamSetup() {
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
   const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
-  if (!storeID) {
+  if (!storeID && !inStoreSetupProcess) {
     router.push("/store-setup/store");
   }
 
@@ -151,12 +148,6 @@ function TeamSetup() {
       description: e.target.description.value,
       workingTime: times,
     };
-    const q = query(collection(db, "stores"));
-    const querySnapshot = await getDocs(q);
-    const queryData = querySnapshot.docs.map((detail) => ({
-      ...detail.data(),
-      id: detail.id,
-    }));
 
     if (hasData) {
       await updateDoc(
@@ -171,7 +162,7 @@ function TeamSetup() {
       );
     } else {
       const res = await setDoc(
-        doc(db, "stores", queryData[0].id, "employeeList", employee.name),
+        doc(db, "stores", storeID, "employeeList", employee.name),
         employee
       );
     }

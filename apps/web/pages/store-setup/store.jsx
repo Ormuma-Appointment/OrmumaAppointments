@@ -19,14 +19,13 @@ import { db } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
 
 const StoreSetup = () => {
-  let days_times = workingTimes;
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { currentUser, storeID } = useAuthContext();
-  const [times, setTimes] = useState(days_times);
+  const { currentUser, storeID, setInStoreSetupProcess } = useAuthContext();
+  const [times, setTimes] = useState(workingTimes);
   const router = useRouter();
-  console.log("workingTimes", workingTimes);
+
   const handleSubmit = async (e, path) => {
     e.preventDefault();
     let storeObj = {
@@ -60,6 +59,7 @@ const StoreSetup = () => {
         console.error(err);
       }
     }
+    setInStoreSetupProcess(true);
     router.push(path);
   };
 
@@ -81,7 +81,7 @@ const StoreSetup = () => {
     }
     setLoading(false);
   }
-  console.log("times", times);
+
   useEffect(() => {
     getData();
   }, [storeID]);

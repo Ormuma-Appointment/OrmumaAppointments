@@ -76,7 +76,8 @@ const StoreSetup = () => {
       breakEnd: null,
     },
   ];
-  const email = "dummyaddress@test.de";
+
+  const [loading, setLoading] = useState(true);
   const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(days_times);
   const router = useRouter();
@@ -114,7 +115,6 @@ const StoreSetup = () => {
         console.error(err);
       }
     }
-
     router.push(path);
   };
 
@@ -135,166 +135,168 @@ const StoreSetup = () => {
         console.log("No such document!");
       }
     }
+    setLoading(false);
   }
 
   useEffect(() => {
     getData();
   }, [storeID]);
 
-  console.log(hasData);
-  return (
-    <div>
-      <BreadCrumb
-        steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
-        current={0}
-      />
-      <h1>Store Setup</h1>
-      <CardContainer>
-        <div className={styles.container}>
-          <div className={styles.intro}>
-            Geben Sie hier die Daten für Ihren Salon ein. Mit der Adresse können
-            wir Ihre Position auf einer Karte anzeigen und die Öffnungszeiten
-            Ihren Kunden auf ihrer Homepage anzeigen.
+  if (!loading) {
+    return (
+      <div>
+        <BreadCrumb
+          steps={["Store Setup", "Services Konfgurieren", "Team konfigurieren"]}
+          current={0}
+        />
+        <h1>Store Setup</h1>
+        <CardContainer>
+          <div className={styles.container}>
+            <div className={styles.intro}>
+              Geben Sie hier die Daten für Ihren Salon ein. Mit der Adresse
+              können wir Ihre Position auf einer Karte anzeigen und die
+              Öffnungszeiten Ihren Kunden auf ihrer Homepage anzeigen.
+            </div>
+            <form
+              className={styles.setUpForm}
+              onSubmit={(e) => handleSubmit(e, "/store-setup/service")}
+            >
+              <div className={styles.setUpInfos}>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Salon Name:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Salon Name"
+                      defaultValue={salonData.name}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className={`${styles.row} ${styles.adresse}`}>
+                  <div className={styles.col30}>
+                    <label>Adresse:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <div className={`${styles.row} ${styles.city}`}>
+                      <div className={styles.col70}>
+                        <Input
+                          type="text"
+                          name="street"
+                          id="street"
+                          defaultValue={hasData ? salonData.address.street : ""}
+                          placeholder="Straße"
+                        />
+                      </div>{" "}
+                      <div className={styles.col30}>
+                        <Input
+                          type="number"
+                          name="number"
+                          id="number"
+                          defaultValue={hasData ? salonData.address.number : ""}
+                          placeholder="Nummer"
+                        />
+                      </div>{" "}
+                    </div>
+                    <div className={`${styles.row} ${styles.city}`}>
+                      <div className={styles.col50}>
+                        <Input
+                          type="text"
+                          name="postalCode"
+                          id="postalCode"
+                          defaultValue={
+                            hasData ? salonData.address.postalCode : ""
+                          }
+                          placeholder="Postleitzahl"
+                          required
+                        />
+                      </div>
+                      <div className={styles.col50}>
+                        <Input
+                          type="text"
+                          name="city"
+                          id="city"
+                          defaultValue={hasData ? salonData.address.city : ""}
+                          placeholder="Stadt"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Telefon:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="tel"
+                      name="telephone"
+                      id="telephone"
+                      defaultValue={hasData ? salonData.contact.telephone : ""}
+                      placeholder="Telefonnummer"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Webseite:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="text"
+                      name="website"
+                      id="website"
+                      defaultValue={hasData ? salonData.contact.website : ""}
+                      placeholder="Webseite"
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Logo:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input type="file" name="photo" id="logo" />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.setUpOpenings}>
+                <div className={`${styles.row} ${styles.opening}`}>
+                  <div className={styles.col30}>
+                    <label>Öffnungszeiten:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <TimeDefinitionSection
+                      openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
+                      setTimes={setTimes}
+                      times={times}
+                      hasData={hasData}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className={styles.buttonContainer}>
+                <Button
+                  onSubmit={handleSubmit}
+                  icon=""
+                  size="medium"
+                  variant="primary"
+                >
+                  speichern & weiter
+                </Button>
+              </div>
+            </form>
           </div>
-          <form
-            className={styles.setUpForm}
-            onSubmit={(e) => handleSubmit(e, "/store-setup/service")}
-          >
-            <div className={styles.setUpInfos}>
-              <div className={styles.row}>
-                <div className={styles.col30}>
-                  <label>Salon Name:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <Input
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Salon Name"
-                    defaultValue={salonData.name}
-                    required
-                  />
-                </div>
-              </div>
-              <div className={`${styles.row} ${styles.adresse}`}>
-                <div className={styles.col30}>
-                  <label>Adresse:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <div className={`${styles.row} ${styles.city}`}>
-                    <div className={styles.col70}>
-                      <Input
-                        type="text"
-                        name="street"
-                        id="street"
-                        defaultValue={hasData ? salonData.address.street : ""}
-                        placeholder="Straße"
-                      />
-                    </div>{" "}
-                    <div className={styles.col30}>
-                      <Input
-                        type="number"
-                        name="number"
-                        id="number"
-                        defaultValue={hasData ? salonData.address.number : ""}
-                        placeholder="Nummer"
-                      />
-                    </div>{" "}
-                  </div>
-                  <div className={`${styles.row} ${styles.city}`}>
-                    <div className={styles.col50}>
-                      <Input
-                        type="text"
-                        name="postalCode"
-                        id="postalCode"
-                        defaultValue={
-                          hasData ? salonData.address.postalCode : ""
-                        }
-                        placeholder="Postleitzahl"
-                        required
-                      />
-                    </div>
-                    <div className={styles.col50}>
-                      <Input
-                        type="text"
-                        name="city"
-                        id="city"
-                        defaultValue={hasData ? salonData.address.city : ""}
-                        placeholder="Stadt"
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.col30}>
-                  <label>Telefon:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <Input
-                    type="tel"
-                    name="telephone"
-                    id="telephone"
-                    defaultValue={hasData ? salonData.contact.telephone : ""}
-                    placeholder="Telefonnummer"
-                    required
-                  />
-                </div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.col30}>
-                  <label>Webseite:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <Input
-                    type="text"
-                    name="website"
-                    id="website"
-                    defaultValue={hasData ? salonData.contact.website : ""}
-                    placeholder="Webseite"
-                  />
-                </div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.col30}>
-                  <label>Logo:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <Input type="file" name="photo" id="logo" />
-                </div>
-              </div>
-            </div>
-            <div className={styles.setUpOpenings}>
-              <div className={`${styles.row} ${styles.opening}`}>
-                <div className={styles.col30}>
-                  <label>Öffnungszeiten:*</label>
-                </div>
-                <div className={styles.col70}>
-                  <TimeDefinitionSection
-                    openDays={["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]}
-                    setTimes={setTimes}
-                    times={times}
-                    hasData={hasData}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={styles.buttonContainer}>
-              <Button
-                onSubmit={handleSubmit}
-                icon=""
-                size="medium"
-                variant="primary"
-              >
-                speichern & weiter
-              </Button>
-            </div>
-          </form>
-        </div>
-      </CardContainer>
-    </div>
-  );
+        </CardContainer>
+      </div>
+    );
+  }
 };
 
 export default StoreSetup;

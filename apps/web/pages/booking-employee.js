@@ -9,11 +9,13 @@ import { useRouter } from "next/router";
 import { BookingContext } from "../context/BookingContext";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { BookingContext } from "../context/BookingContext";
 
 const BookingEmployee = () => {
   //  const [isLoading, SetIsLoading] = useState(true);
   //const [employees, setEmployees] = useState([]);
   const [selected, setSelected] = useState(null);
+  const { storeID } = useContext(BookingContext);
 
   const { employeeData, setChosen, chosenService, isLoading } =
     useContext(BookingContext);

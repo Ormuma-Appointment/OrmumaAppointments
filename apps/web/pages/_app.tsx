@@ -9,6 +9,7 @@ import PageOverviewTemp from "../ui/components/PageOverviewTemp/PageOverviewTemp
 import { useAuthContext } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import ProtectedRoutes from "../route/ProtectedRoutes";
+import { BookingContextProvider } from "../context/BookingContext";
 import AdminProtectedRoutes from "../route/AdminProtectedRoutes";
 
 const noAuthRequired = ["/", "/login", "/register", "/register-admin"];
@@ -26,26 +27,27 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AuthContextProvider>
-      <div className="grid_main_wrapper">
-        <Navigation customer_logged_out />
-        <div className="page_wrapper">
-          {noAuthRequired.includes(Router.pathname) ? (
-            <Component {...pageProps} />
-          ) : customerAuthRequired.includes(Router.pathname) ? (
-            <ProtectedRoutes>
+      <BookingContextProvider>
+        <div className="grid_main_wrapper">
+          <Navigation customer_logged_out />
+          <div className="page_wrapper">
+            {noAuthRequired.includes(Router.pathname) ? (
               <Component {...pageProps} />
-            </ProtectedRoutes>
-          ) : (
-            <AdminProtectedRoutes>
-              <Component {...pageProps} />
-            </AdminProtectedRoutes>
-          )}
+            ) : customerAuthRequired.includes(Router.pathname) ? (
+              <ProtectedRoutes>
+                <Component {...pageProps} />
+              </ProtectedRoutes>
+            ) : (
+              <AdminProtectedRoutes>
+                <Component {...pageProps} />
+              </AdminProtectedRoutes>
+            )}
+          </div>
+          <div className="grid_footer">
+            <Footer />
+          </div>
         </div>
-        <PageOverviewTemp />
-      </div>
-      <div className="grid_footer">
-        <Footer />
-      </div>
+      </BookingContextProvider>
     </AuthContextProvider>
   );
 }

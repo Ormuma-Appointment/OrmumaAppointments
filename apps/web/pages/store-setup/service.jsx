@@ -86,7 +86,7 @@ function ServiceSetup() {
     } else {
       serviceObj = dbServices;
     }
-    console.log(serviceObj);
+
     // here we need to add to push data either in a context or to firebase
     const q = query(collection(db, "stores"));
     const querySnapshot = await getDocs(q);
@@ -110,7 +110,7 @@ function ServiceSetup() {
     }
     router.push(path);
   }
-  console.log("dbServices:", dbServices);
+
   // handle back button click
   function handleBackClick(e, path) {
     e.preventDefault();

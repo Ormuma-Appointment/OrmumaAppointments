@@ -114,7 +114,7 @@ function TeamSetup() {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data().serviceObj);
+        // console.log("Document data:", docSnap.data().serviceObj);
         let data = docSnap.data().serviceObj;
         if (data[0]) {
           let temp = [];
@@ -228,7 +228,7 @@ function TeamSetup() {
       ...detail.data(),
       id: detail.id,
     }));
-    console.log(queryData);
+
     if (hasData) {
       await updateDoc(
         doc(

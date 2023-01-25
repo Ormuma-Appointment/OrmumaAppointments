@@ -6,8 +6,9 @@ import OpeningHours from "../../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../../ui/components/ContactCard/ContactCard";
 import AddressCard from "../../ui/components/AddressCard/AddressCard";
 import calendar from "../../ui/components/assets/calendar_add.svg";
+import { BookingContext } from "../../context/BookingContext";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
 import {
   doc,
@@ -24,7 +25,7 @@ export default function Web() {
   const router = useRouter();
   const { slug } = router.query;
   const [storeData, setStoreData] = useState(undefined);
-  const [storeID, setStoreID] = useState(undefined);
+  const { setStoreID } = useContext(BookingContext);
 
   async function getData() {
     const q = query(collection(db, "stores"), where("slug", "==", slug));

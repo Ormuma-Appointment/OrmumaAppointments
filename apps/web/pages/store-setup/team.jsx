@@ -22,15 +22,15 @@ import {
 import { useAuthContext } from "../../context/AuthContext";
 
 function TeamSetup() {
-  const [loading, setLoading] = useState(true);
-  const [showServices, setShowServices] = useState(false);
   const { currentUser, storeID } = useAuthContext();
-  const [times, setTimes] = useState(workingTimes);
-  const [services, setServices] = useState(["no data"]);
   const router = useRouter();
-  const [dbServices, setDbServices] = useState([]);
-  const [salonEmployees, setSalonEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
+  const [dbServices, setDbServices] = useState([]);
+  const [showServices, setShowServices] = useState(false);
+  const [services, setServices] = useState(["no data"]);
+  const [times, setTimes] = useState(workingTimes);
+  const [salonEmployees, setSalonEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(undefined);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
   const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
@@ -93,16 +93,6 @@ function TeamSetup() {
     setNoSelected(true);
   }, [employeeIndex]);
 
-  function reverseTransform(obj) {
-    let result = [];
-    obj.forEach((item) => {
-      item.services.forEach((service) => {
-        result.push(`${item.category}  -  ${service.service}`);
-      });
-    });
-    return result;
-  }
-
   useEffect(() => {
     if (hasData) {
       setServices(reverseTransform(selectedEmployee.services));
@@ -126,6 +116,16 @@ function TeamSetup() {
       }
     });
     return Object.values(result);
+  }
+
+  function reverseTransform(obj) {
+    let result = [];
+    obj.forEach((item) => {
+      item.services.forEach((service) => {
+        result.push(`${item.category}  -  ${service.service}`);
+      });
+    });
+    return result;
   }
 
   async function handleFormSubmit(e) {
@@ -178,19 +178,25 @@ function TeamSetup() {
   function handleCancelClick(e) {
     e.preventDefault();
     if (hasData) {
-      setServices(selectedEmployee.services);
+      setServices(reverseTransform(selectedEmployee.services));
     } else {
       if (dbServices) {
         setServices(dbServices);
-      } else {
-        setServices(dummyservices);
       }
     }
   }
+  useEffect(() => {
+    if (!showServices) {
+      setServices(dbServices);
+    }
+  }, [showServices]);
+
   function handleLoadClick(e) {
     e.preventDefault();
     setServices(dbServices);
   }
+
+  console.log(services);
   if (!loading) {
     return (
       <div>

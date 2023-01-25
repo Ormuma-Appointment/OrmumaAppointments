@@ -35,6 +35,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
+  const [storeID, setStoreID] = useState(undefined);
 
   const handleRead = async () => {
     const docRef = collection(db, "stores", "one", "employeeList");

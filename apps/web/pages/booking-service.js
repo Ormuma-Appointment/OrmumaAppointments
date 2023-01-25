@@ -4,6 +4,11 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { admin } from "./data-sample";
+import { db } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
@@ -37,7 +42,15 @@ const BookingService = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Wähle deinen gewünschten Service</h1>
+      <BreadCrumb
+        steps={[
+          "1. Service wählen",
+          "2. Stylist*In wählen",
+          "3. Termin wählen",
+        ]}
+        current={0}
+      />
+      <h1>Wähle den gewünschten Service</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           {!isLoading ? (

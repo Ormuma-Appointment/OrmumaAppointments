@@ -6,6 +6,7 @@ export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
   const [employeeData, setEmployeeData] = useState([]);
   const [chosen, setChosen] = useState(null);
+  const [isLoading, SetIsLoading] = useState(true);
 
   const handleRead = async () => {
     const docRef = collection(db, "stores", "one", "employeeList");
@@ -15,6 +16,7 @@ export const BookingContextProvider = ({ children }) => {
       const el = doc.data();
       // console.log(doc.id, " => ", doc.data());
       setEmployeeData((prev) => [...prev, el]);
+      SetIsLoading(false);
       // empArray.push(el);
     });
   };
@@ -24,7 +26,9 @@ export const BookingContextProvider = ({ children }) => {
   console.log(chosen, "chosen");
 
   return (
-    <BookingContext.Provider value={{ employeeData, setChosen, chosen }}>
+    <BookingContext.Provider
+      value={{ employeeData, setChosen, chosen, isLoading }}
+    >
       {children}
     </BookingContext.Provider>
   );

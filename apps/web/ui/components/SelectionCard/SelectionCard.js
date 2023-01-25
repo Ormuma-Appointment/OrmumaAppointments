@@ -11,8 +11,6 @@ const SelectionCard = (props) => {
   const service = props.service;
   const category = props.category;
   const [event, setEvent] = useState(service);
-  const [eventTest, setEventTest] = useState(service);
-  //const [selectedEmployee, setSelectedEmployee] = useState({});
 
   //console.log("SELECTED FROM SELECTION CARD", selected);
 
@@ -35,7 +33,6 @@ const SelectionCard = (props) => {
   }, [selected]);
 
   console.log("Event", event);
-  console.log("Event test", eventTest);
 
   return (
     <div>
@@ -111,14 +108,7 @@ const SelectionCard = (props) => {
 
             {selected && (
               <Button icon="" size="medium" variant="primary">
-                <Link
-                  href={{
-                    pathname: "/booking-calendar",
-                    query: event,
-                  }}
-                >
-                  Next step
-                </Link>
+                <Link href="/booking-calendar">Next step</Link>
               </Button>
             )}
           </div>

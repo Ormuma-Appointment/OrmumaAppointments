@@ -6,18 +6,13 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
+import { useRouter } from "next/router";
 
 const BookingCalendar = () => {
-  //const [selectedTime, setSelectedTime] = useState(null);
+  const router = useRouter();
+  const selectedItems = router.query;
 
-  //WE HAVE TO FIND A LOGIC HERE - maybe with moment.js
-
-  let service = { style: "style 1", price: "45€", time: "30min" };
-  let employee = {
-    name: "John",
-    description:
-      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  };
+  console.log("selected items from calendar", selectedItems);
 
   return (
     <div className={styles.pageContainer}>
@@ -31,11 +26,11 @@ const BookingCalendar = () => {
           <h4>Ihre Auswahl</h4>
           <div>
             <SelectItem
-              service={service.style}
-              duration={service.time}
-              price={service.price}
+              service={selectedItems.service}
+              duration={selectedItems.duration}
+              price={selectedItems.price}
             />
-            <SelectItem employee={employee.name} />
+            <SelectItem employee={selectedItems.employee} />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

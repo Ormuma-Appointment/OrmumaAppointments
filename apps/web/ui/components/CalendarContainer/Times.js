@@ -27,7 +27,10 @@ const Times = (props) => {
     setEvent(e.target.innerText);
   };
 
-  console.log("props date", props.date);
+  console.log("props date", props.date, props.date.getDay());
+  let selectedDay = props.date.getDay();
+  //let selectedDay = props.date.split("").slice(0, 2).join("");
+  //console.log(selectedDay);
   // const x = {
   //   nextSlot: 45,
   //   breakTime: [
@@ -47,12 +50,12 @@ const Times = (props) => {
     nextSlot: chosenService.duration,
     breakTime: [
       [
-        selectedEmployee.workingTime[6].breakStart,
-        selectedEmployee.workingTime[6].breakEnd,
+        selectedEmployee.workingTime[selectedDay].breakStart,
+        selectedEmployee.workingTime[selectedDay].breakEnd,
       ],
     ],
-    startTime: selectedEmployee.workingTime[6].start,
-    endTime: selectedEmployee.workingTime[6].end,
+    startTime: selectedEmployee.workingTime[selectedDay].start,
+    endTime: selectedEmployee.workingTime[selectedDay].end,
   };
 
   console.log(x);

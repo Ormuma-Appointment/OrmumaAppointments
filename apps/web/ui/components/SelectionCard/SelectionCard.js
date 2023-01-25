@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
@@ -9,30 +8,6 @@ const SelectionCard = (props) => {
   const selected = props.selected;
   const setSelected = props.setSelected;
   const service = props.service;
-  const category = props.category;
-  //const [event, setEvent] = useState(service);
-  //
-  ////console.log("SELECTED FROM SELECTION CARD", selected);
-  //
-  //useEffect(() => {
-  //  if (selected) {
-  //    if (!service) {
-  //      let selectedService = {
-  //        service: selected.service,
-  //        duration: selected.duration,
-  //        price: selected.price,
-  //        category: category,
-  //      };
-  //      setEvent(selectedService);
-  //    } else if (step === "employee") {
-  //      event.employee = selected.employee;
-  //      setEvent(event);
-  //      //setSelectedEmployee(selectedEmployee);
-  //    }
-  //  }
-  //}, [selected]);
-  //
-  //console.log("Event", event);
 
   return (
     <div>

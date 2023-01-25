@@ -8,9 +8,9 @@ const AdminProtectedRoutes = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!currentUser && !isAdmin) {
-      router.push("/login");
-    } else if (currentUser && !isAdmin) {
+    // if (!currentUser && !isAdmin) {
+    //   router.push("/login");
+    if (currentUser && !isAdmin) {
       router.push("/account");
     }
   }, [router, currentUser, isAdmin]);

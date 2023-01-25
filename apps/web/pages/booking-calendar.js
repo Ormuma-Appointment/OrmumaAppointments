@@ -24,7 +24,7 @@ const BookingCalendar = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Wähle einen passenden Termin</h1>
+      <h1>Unsere calandar</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Calendar</h4>
@@ -38,7 +38,7 @@ const BookingCalendar = () => {
               duration={service.time}
               price={service.price}
             />
-            <SelectItem employee={chosen.employee} />
+            <SelectItem employee={employee.name} />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

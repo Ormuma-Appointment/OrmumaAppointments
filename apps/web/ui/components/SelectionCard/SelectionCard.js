@@ -99,7 +99,14 @@ const SelectionCard = (props) => {
               size="medium"
               variant="danger"
             >
-              <Link href="/booking-service">Go back</Link>
+              <Link
+                href={{
+                  pathname: "/booking-service",
+                  query: event,
+                }}
+              >
+                Go back
+              </Link>
             </Button>
 
             {selected && (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import workingTimes from "../data-sample";
 import styles from "../../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
@@ -18,65 +19,9 @@ import { db } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
 
 const StoreSetup = () => {
-  let days_times = [
-    {
-      label: "Mo",
-      day: 1,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-    {
-      label: "Di",
-      day: 2,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-    {
-      label: "Mi",
-      day: 3,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-    {
-      label: "Do",
-      day: 4,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-    {
-      label: "Fr",
-      day: 5,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-    {
-      label: "Sa",
-      day: 6,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-    {
-      label: "So",
-      day: 0,
-      start: null,
-      end: null,
-      breakStart: null,
-      breakEnd: null,
-    },
-  ];
-
+  let days_times = workingTimes;
+  const [salonData, setSalonData] = useState([]);
+  const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
   const { currentUser, storeID } = useAuthContext();
   const [times, setTimes] = useState(days_times);
@@ -119,8 +64,7 @@ const StoreSetup = () => {
   };
 
   // load existing information, for editing purposes
-  const [salonData, setSalonData] = useState([]);
-  const [hasData, setHasData] = useState(false);
+
   async function getData() {
     if ((currentUser, storeID)) {
       const docRef = doc(db, "stores", storeID);

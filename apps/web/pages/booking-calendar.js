@@ -32,6 +32,7 @@ const BookingCalendar = () => {
               price={chosenService?.price}
             />
             <SelectItem employee={chosen?.employee} />
+            <SelectItem date="hehe" />
 
             <p className={styles.selectItemText}>Select a time</p>
           </div>

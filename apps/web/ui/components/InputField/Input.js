@@ -15,7 +15,7 @@ function Input(props) {
         </div>
       )}
       <input
-        type="text"
+        type={password ? "password" : "text"}
         className={
           user || email || password
             ? `${styles.input}`

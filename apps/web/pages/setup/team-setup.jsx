@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
-import styles from "../ui/page_styles/TeamSetup.module.css";
-import CardContainer from "../ui/components/CardContainer/CardContainer";
-import Input from "../ui/components/InputField/Input";
-import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
-import Button from "../ui/components/Button/Button";
-import RadioSelectElement from "../ui/components/RadioSelectElement/RadioSelectElement";
-import Minus from "../ui/components/assets/minus.svg";
+import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
+import styles from "../../ui/page_styles/TeamSetup.module.css";
+import CardContainer from "../../ui/components/CardContainer/CardContainer";
+import Input from "../../ui/components/InputField/Input";
+import TimeDefinitionSection from "../../ui/components/TimeDefinitionSection/TimeDefinitionSection";
+import Button from "../../ui/components/Button/Button";
+import RadioSelectElement from "../../ui/components/RadioSelectElement/RadioSelectElement";
+import Minus from "../../ui/components/assets/minus.svg";
 import { useRouter } from "next/router";
-import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
-import { db } from "../firebase/firebase";
+import EmployeeOverview from "../../ui/components/EmployeeOverview/EmployeeOverview";
+import { db } from "../../firebase/firebase";
 import {
   doc,
   setDoc,
@@ -19,7 +19,7 @@ import {
   updateDoc,
   collection,
 } from "firebase/firestore";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 function TeamSetup() {
   const [showServices, setShowServices] = useState(false);
@@ -473,7 +473,7 @@ function TeamSetup() {
               <Button
                 size="medium"
                 variant="danger"
-                onClick={(e) => handleBackClick(e, "service-setup")}
+                onClick={(e) => handleBackClick(e, "/setup/service-setup")}
               >
                 zurück
               </Button>

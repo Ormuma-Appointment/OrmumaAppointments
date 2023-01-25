@@ -26,9 +26,8 @@ exports.makeAdmin = functions.https.onRequest((req, res) => {
         return admin.auth().setCustomUserClaims(user.uid, { admin: true });
       })
       .then(() => {
-        return res
-          .status(200)
-          .json({ message: `Success! ${data.email} has been made an admin` });
+        return res.status(200);
+        // .json({ message: `Success! ${data.email} has been made an admin` });
       })
       .catch((err) => {
         return res.status(401).json({ message: err });

@@ -58,6 +58,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // add storeID to context
   const [storeID, setStoreID] = useState(undefined);
+  const [inStoreSetupProcess, setInStoreSetupProcess] = useState(undefined);
   async function getStore() {
     if (currentUser) {
       let idsTemp = [];
@@ -116,6 +117,8 @@ export const AuthContextProvider = ({ children }) => {
         logOut,
         storeID,
         isAdmin,
+        inStoreSetupProcess,
+        setInStoreSetupProcess,
       }}
     >
       {loading ? null : children}

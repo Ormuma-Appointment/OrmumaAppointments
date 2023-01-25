@@ -7,6 +7,7 @@ import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
 import { BookingContext } from "../context/BookingContext";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 
 const BookingCalendar = () => {
   const { chosenService, chosen } = useContext(BookingContext);
@@ -17,7 +18,15 @@ const BookingCalendar = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Unsere calandar</h1>
+      <BreadCrumb
+        steps={[
+          "1. Service wählen",
+          "2. Stylist*In wählen",
+          "3. Termin wählen",
+        ]}
+        current={2}
+      />
+      <h1>Wähle einen passenden Termin</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Calendar</h4>

@@ -8,6 +8,7 @@ import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { BookingContext } from "../context/BookingContext";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 
 const BookingEmployee = () => {
   //  const [isLoading, SetIsLoading] = useState(true);
@@ -45,6 +46,14 @@ const BookingEmployee = () => {
 
   return (
     <div className={styles.pageContainer}>
+      <BreadCrumb
+        steps={[
+          "1. Service wählen",
+          "2. Stylist*In wählen",
+          "3. Termin wählen",
+        ]}
+        current={1}
+      />
       <h1>Wähle eine*n Mitarbeiter*In</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>

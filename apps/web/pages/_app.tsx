@@ -43,6 +43,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               </AdminProtectedRoutes>
             )}
           </div>
+          <PageOverviewTemp />
           <div className="grid_footer">
             <Footer />
           </div>

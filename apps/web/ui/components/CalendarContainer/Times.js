@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "./CalendarContainer.module.css";
 import moment from "moment";
+import { BookingContext } from "../../../context/BookingContext";
 
 // const time = [
 //   "08:00",
@@ -17,20 +18,44 @@ const Times = (props) => {
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
 
+  const { chosenService, selectedEmployee } = useContext(BookingContext);
+
+  console.log(selectedEmployee.workingTime, "times employee");
+
   const displayInfo = (e) => {
     setInfo(true);
     setEvent(e.target.innerText);
   };
 
+  console.log("props date", props.date);
+  // const x = {
+  //   nextSlot: 45,
+  //   breakTime: [
+  //     ["11:00", "14:00"],
+  //     ["16:00", "18:00"],
+  //   ],
+  //   startTime: "8:00",
+  //   endTime: "20:00",
+  // };
+
+  //check with the date selected which date of the week is selected
+  // inside x change the number dynamicly with the day of the week
+
+  //check in the appointment of the employee if already have appoinment on this date, if yes add them to the break time
+
   const x = {
-    nextSlot: 45,
+    nextSlot: chosenService.duration,
     breakTime: [
-      ["11:00", "14:00"],
-      ["16:00", "18:00"],
+      [
+        selectedEmployee.workingTime[6].breakStart,
+        selectedEmployee.workingTime[6].breakEnd,
+      ],
     ],
-    startTime: "8:00",
-    endTime: "20:00",
+    startTime: selectedEmployee.workingTime[6].start,
+    endTime: selectedEmployee.workingTime[6].end,
   };
+
+  console.log(x);
 
   let slotTime = moment(x.startTime, "HH:mm");
   let endTime = moment(x.endTime, "HH:mm");

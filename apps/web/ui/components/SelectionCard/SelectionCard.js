@@ -46,9 +46,9 @@ const SelectionCard = (props) => {
         <>
           <div>
             <SelectItem
-              duration={service.duration}
-              price={service.price}
-              service={service.service}
+              duration={service?.duration}
+              price={service?.price}
+              service={service?.service}
             />
             {!selected && (
               <p className={styles.selectItemText}>Select a employee</p>

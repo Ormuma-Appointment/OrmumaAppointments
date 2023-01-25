@@ -17,14 +17,14 @@ const BookingEmployee = () => {
   const { employeeData, setChosen, chosenService, isLoading } =
     useContext(BookingContext);
 
-  const router = useRouter();
-  const selectedService = router.query;
-
+  // const router = useRouter();
+  // const selectedService = router.query;
+  //
   function filterEmployees(selected) {
     let filteredEmployees = employeeData.filter((employee) => {
       return employee.services.some((category) => {
         return (
-          category.category === selected.category &&
+          category.category === selected?.category &&
           category.services.some(
             (service) => service.service === selected.service
           )
@@ -36,7 +36,9 @@ const BookingEmployee = () => {
 
   const filteredEmployees = filterEmployees(chosenService);
 
-  console.log(selectedService);
+  console.log("FILTERED EMPLOYEE", filteredEmployees);
+
+  //console.log(selectedService);
   console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
 
   setChosen(selected);

@@ -158,7 +158,7 @@ const StoreSetup = () => {
           </div>
           <form
             className={styles.setUpForm}
-            onSubmit={(e) => handleSubmit(e, "/setup/service-setup")}
+            onSubmit={(e) => handleSubmit(e, "/store-setup/service")}
           >
             <div className={styles.setUpInfos}>
               <div className={styles.row}>

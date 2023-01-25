@@ -127,7 +127,7 @@ const AccountAdmin = () => {
         <div className={styles.column}>
           <div className={styles.header}>
             <h3>Salon Übersicht </h3>{" "}
-            <Link href="/setup/store-setup" className={styles.edit}>
+            <Link href="/store-setup/store" className={styles.edit}>
               <Edit className={styles.icon} />
               bearbeiten
             </Link>
@@ -217,7 +217,7 @@ const AccountAdmin = () => {
       <div className={styles.employee_container}>
         <div className={styles.header}>
           <h3>Salon Mitarbeiter*Innen</h3>
-          <Link href="/setup/team-setup" className={styles.edit}>
+          <Link href="/store-setup/team" className={styles.edit}>
             <Edit className={styles.icon} />
             bearbeiten
           </Link>

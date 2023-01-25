@@ -473,7 +473,7 @@ function TeamSetup() {
               <Button
                 size="medium"
                 variant="danger"
-                onClick={(e) => handleBackClick(e, "/setup/service-setup")}
+                onClick={(e) => handleBackClick(e, "/store-setup/service")}
               >
                 zurück
               </Button>

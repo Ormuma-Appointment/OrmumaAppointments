@@ -169,14 +169,14 @@ function ServiceSetup() {
             <Button
               size="medium"
               variant="danger"
-              onClick={(e) => handleBackClick(e, "/setup/store-setup")}
+              onClick={(e) => handleBackClick(e, "/store-setup/store")}
             >
               zurück
             </Button>
             <Button
               size="medium"
               variant="primary"
-              onClick={(e) => handleContinueClick(e, "/setup/team-setup")}
+              onClick={(e) => handleContinueClick(e, "/store-setup/team")}
             >
               speichern & weiter
             </Button>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import CardContainer from "../ui/components/CardContainer/CardContainer";
-import Input from "../ui/components/InputField/Input";
-import Button from "../ui/components/Button/Button";
-import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
-import styles from "../ui/page_styles/ServiceSetup.module.css";
-import ServiceAdd from "../ui/components/ServiceAdd/ServiceAdd";
-import Minus from "../ui/components/assets/minus.svg";
-import { db } from "../firebase/firebase";
+import CardContainer from "../../ui/components/CardContainer/CardContainer";
+import Input from "../../ui/components/InputField/Input";
+import Button from "../../ui/components/Button/Button";
+import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
+import styles from "../../ui/page_styles/ServiceSetup.module.css";
+import ServiceAdd from "../../ui/components/ServiceAdd/ServiceAdd";
+import Minus from "../../ui/components/assets/minus.svg";
+import { db } from "../../firebase/firebase";
 import {
   doc,
   setDoc,
@@ -18,7 +18,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 function ServiceSetup() {
   const [categories, setCategories] = useState([]);
@@ -77,7 +77,13 @@ function ServiceSetup() {
   const router = useRouter();
   async function handleContinueClick(e, path) {
     e.preventDefault();
-    let serviceObj = data;
+    let serviceObj;
+    if (data[0]) {
+      serviceObj = data;
+    } else {
+      serviceObj = dbServices;
+    }
+    console.log(serviceObj);
     // here we need to add to push data either in a context or to firebase
     const q = query(collection(db, "stores"));
     const querySnapshot = await getDocs(q);
@@ -101,6 +107,7 @@ function ServiceSetup() {
     }
     router.push(path);
   }
+  console.log("dbServices:", dbServices);
   // handle back button click
   function handleBackClick(e, path) {
     e.preventDefault();
@@ -162,14 +169,14 @@ function ServiceSetup() {
             <Button
               size="medium"
               variant="danger"
-              onClick={(e) => handleBackClick(e, "store-setup")}
+              onClick={(e) => handleBackClick(e, "/setup/store-setup")}
             >
               zurück
             </Button>
             <Button
               size="medium"
               variant="primary"
-              onClick={(e) => handleContinueClick(e, "/team-setup")}
+              onClick={(e) => handleContinueClick(e, "/setup/team-setup")}
             >
               speichern & weiter
             </Button>

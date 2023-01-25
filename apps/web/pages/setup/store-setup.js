@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import styles from "../ui/page_styles/StoreSetup.module.css";
-import CardContainer from "../ui/components/CardContainer/CardContainer";
-import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
-import Input from "../ui/components/InputField/Input";
-import TimeDefinitionSection from "../ui/components/TimeDefinitionSection/TimeDefinitionSection";
-import Button from "../ui/components/Button/Button";
+import styles from "../../ui/page_styles/StoreSetup.module.css";
+import CardContainer from "../../ui/components/CardContainer/CardContainer";
+import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
+import Input from "../../ui/components/InputField/Input";
+import TimeDefinitionSection from "../../ui/components/TimeDefinitionSection/TimeDefinitionSection";
+import Button from "../../ui/components/Button/Button";
 import {
   doc,
   addDoc,
@@ -14,8 +14,8 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../firebase/firebase";
-import { useAuthContext } from "../context/AuthContext";
+import { db } from "../../firebase/firebase";
+import { useAuthContext } from "../../context/AuthContext";
 
 const StoreSetup = () => {
   let days_times = [
@@ -158,7 +158,7 @@ const StoreSetup = () => {
           </div>
           <form
             className={styles.setUpForm}
-            onSubmit={(e) => handleSubmit(e, "/service-setup")}
+            onSubmit={(e) => handleSubmit(e, "/setup/service-setup")}
           >
             <div className={styles.setUpInfos}>
               <div className={styles.row}>

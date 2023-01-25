@@ -8,16 +8,7 @@ import styles from "../../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../../ui/components/assets/minus.svg";
 import { db } from "../../firebase/firebase";
-import {
-  doc,
-  setDoc,
-  collection,
-  updateDoc,
-  query,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
-
+import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { useAuthContext } from "../../context/AuthContext";
 
 function ServiceSetup() {
@@ -78,7 +69,6 @@ function ServiceSetup() {
   }
 
   // handle continue and save button click
-
   async function handleContinueClick(e, path) {
     e.preventDefault();
     let serviceObj;
@@ -87,15 +77,6 @@ function ServiceSetup() {
     } else {
       serviceObj = dbServices;
     }
-
-    // here we need to add to push data either in a context or to firebase
-    const q = query(collection(db, "stores"));
-    const querySnapshot = await getDocs(q);
-    const queryData = querySnapshot.docs.map((detail) => ({
-      ...detail.data(),
-      id: detail.id,
-    }));
-
     if (hasData) {
       await updateDoc(doc(db, "stores", storeID, "services", "serviceList"), {
         serviceObj,

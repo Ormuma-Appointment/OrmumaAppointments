@@ -6,6 +6,7 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
 import Button from "../ui/components/Button/Button";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { admin } from "./data-sample";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -17,7 +18,11 @@ const BookingService = () => {
   const [event, setEvent] = useState(selected);
   const router = useRouter();
   const { storeID, setStoreID } = useContext(BookingContext);
-  const { storeid } = router.query;
+  const query = router.query;
+
+  if (!storeID) {
+    setStoreID(query.storeid);
+  }
 
   const { serviceList, setChosenService, isLoading } =
     useContext(BookingContext);

@@ -35,6 +35,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
+  const [storeID, setStoreID] = useState(undefined);
 
   const handleRead = async () => {
     const docRef = collection(db, "stores", "one", "employeeList");
@@ -51,7 +52,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     handleRead();
   }, []);
-  console.log(chosen?.employee, "chosen");
+  console.log(chosen, "chosen");
 
   async function getEmployee() {
     if (chosen !== undefined && chosen !== null) {
@@ -96,9 +97,12 @@ export const BookingContextProvider = ({ children }) => {
         setChosenSlot,
         isLoading,
         selectedEmployee,
+        setStoreID,
+        storeID,
       }}
     >
       {children}
     </BookingContext.Provider>
   );
 };
+// };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import workingTimes from "../data-sample";
+import { workingTimes } from "../data-sample";
 import styles from "../../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
@@ -19,12 +19,11 @@ import { db } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
 
 const StoreSetup = () => {
-  let days_times = workingTimes;
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
   const { currentUser, storeID } = useAuthContext();
-  const [times, setTimes] = useState(days_times);
+  const [times, setTimes] = useState(workingTimes);
   const router = useRouter();
 
   const handleSubmit = async (e, path) => {
@@ -84,7 +83,7 @@ const StoreSetup = () => {
 
   useEffect(() => {
     getData();
-  }, [storeID]);
+  }, [currentUser, storeID]);
 
   if (!loading) {
     return (

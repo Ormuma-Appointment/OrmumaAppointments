@@ -21,6 +21,14 @@ const users = [
 
 export const workingTimes = [
   {
+    label: "So",
+    day: 0,
+    start: null,
+    end: null,
+    breakStart: null,
+    breakEnd: null,
+  },
+  {
     label: "Mo",
     day: 1,
     start: null,
@@ -63,14 +71,6 @@ export const workingTimes = [
   {
     label: "Sa",
     day: 6,
-    start: null,
-    end: null,
-    breakStart: null,
-    breakEnd: null,
-  },
-  {
-    label: "So",
-    day: 0,
     start: null,
     end: null,
     breakStart: null,

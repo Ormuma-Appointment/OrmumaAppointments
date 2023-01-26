@@ -20,21 +20,10 @@ const BookingCalendar = () => {
     setChosenService,
     setStoreID,
     storeID,
+    slotToString,
   } = useContext(BookingContext);
 
-  console.log("chosen slot from calendar", chosenSlot);
-
-  let slotToString = "";
-
-  if (chosenSlot) {
-    const dateString = chosenSlot.date.toLocaleString("en-us", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    slotToString = dateString + " " + chosenSlot.start;
-  }
+  //console.log("chosen slot from calendar", chosenSlot);
 
   const router = useRouter();
   const query = router.query;
@@ -105,15 +94,16 @@ const BookingCalendar = () => {
             >
               zurück
             </Button>
-
-            <Button
-              icon=""
-              size="medium"
-              variant="primary"
-              onClick={() => handleBookingClick()}
-            >
-              Next step
-            </Button>
+            {chosenSlot && (
+              <Button
+                icon=""
+                size="medium"
+                variant="primary"
+                onClick={() => handleBookingClick()}
+              >
+                Next step
+              </Button>
+            )}
           </div>
         </CardContainer>
       </div>

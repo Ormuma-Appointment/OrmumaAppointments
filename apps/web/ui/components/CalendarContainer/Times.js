@@ -3,17 +3,6 @@ import styles from "./CalendarContainer.module.css";
 import moment from "moment";
 import { BookingContext } from "../../../context/BookingContext";
 
-// const time = [
-//   "08:00",
-//   "08:30",
-//   "09:00",
-//   "09:30",
-//   "10:00",
-//   "14:00",
-//   "15:00",
-//   "17:00",
-// ];
-
 const Times = (props) => {
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
@@ -21,16 +10,13 @@ const Times = (props) => {
   const { chosenService, selectedEmployee, setChosenSlot } =
     useContext(BookingContext);
 
-  //console.log(selectedEmployee.workingTime, "times employee");
-
   const displayInfo = (e) => {
     setInfo(true);
     setEvent(e.target.innerText);
   };
 
-  //console.log("props date", props.date, props.date.getDay());
   let selectedDay = props.date.getDay();
-  console.log(selectedDay);
+
   //let selectedDay = props.date.split("").slice(0, 2).join("");
   //console.log(selectedDay);
   // const x = {
@@ -52,15 +38,15 @@ const Times = (props) => {
     nextSlot: chosenService.duration,
     breakTime: [
       [
-        selectedEmployee.workingTime[2].breakStart,
-        selectedEmployee.workingTime[2].breakEnd,
+        selectedEmployee.workingTime[selectedDay].breakStart,
+        selectedEmployee.workingTime[selectedDay].breakEnd,
       ],
     ],
     startTime: selectedEmployee.workingTime[selectedDay].start,
     endTime: selectedEmployee.workingTime[selectedDay].end,
   };
 
-  console.log(selectedEmployee);
+  //console.log(selectedEmployee);
 
   let slotTime = moment(x.startTime, "HH:mm");
   let endTime = moment(x.endTime, "HH:mm");
@@ -81,16 +67,41 @@ const Times = (props) => {
     slotTime = slotTime.add(x.nextSlot, "minutes");
   }
 
+  const eventTime = (startTime, duration) => {
+    //date with start time in milliseconds
+    // result + duration in milliseconds
+    // trznsforme the result in date and time again
+
+    const endTime = moment(startTime, "HH🇲🇲")
+      .add(duration, "minutes")
+      .format("HH:mm");
+    return endTime;
+  };
+
+  let endTimeSlot = eventTime(event, chosenService.duration);
+  //console.log("EVENNNNT", endTimeSlot);
+  //let momentEvent = moment(event);
+  //console.log("start time", momentEvent.add(2, "hours"));
+
+  //const endEventTime = moment(event, "HH:ss")
+  //  .add(chosenService.duration, "minutes")
+  //  .format("HH:mm");
+
+  // console.log(endEventTime, "endEventTime");
+  //console.log("serivce duration", chosenService.duration);
+
   let selectedSlot = {
+    slot: [event, endTimeSlot],
     start: event,
     date: props.date,
     duration: chosenService.duration,
-    end: "start + DURATION",
+    end: endTimeSlot,
   };
   console.log("selectedSlot", selectedSlot);
 
   useEffect(() => {
     if (event) {
+      // console.log("ICI", eventTime(event, chosenService.duration));
       setChosenSlot(selectedSlot);
     }
   }, [event]);

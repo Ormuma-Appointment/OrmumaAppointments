@@ -4,12 +4,20 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
+import Button from "../ui/components/Button/Button";
+import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { db } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [event, setEvent] = useState(selected);
+  const router = useRouter();
+  const { storeID, setStoreID } = useContext(BookingContext);
+  const { storeid } = router.query;
 
   const { serviceList, setChosenService, isLoading } =
     useContext(BookingContext);
@@ -37,7 +45,15 @@ const BookingService = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1>Wähle deinen gewünschten Service</h1>
+      <BreadCrumb
+        steps={[
+          "1. Service wählen",
+          "2. Stylist*In wählen",
+          "3. Termin wählen",
+        ]}
+        current={0}
+      />
+      <h1>Wähle den gewünschten Service</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           {!isLoading ? (

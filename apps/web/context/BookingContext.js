@@ -35,6 +35,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     getData();
   }, []);
+  const [storeID, setStoreID] = useState(undefined);
 
   const handleRead = async () => {
     const docRef = collection(db, "stores", "one", "employeeList");
@@ -51,20 +52,21 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     handleRead();
   }, []);
-  console.log(chosen?.employee, "chosen");
+  console.log(chosen, "chosen");
 
   async function getEmployee() {
-    //if (chosen !== undefined || chosen !== null) {
-    const docRef = doc(db, "stores", "one", "employeeList", chosen?.employee);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      setSelectedEmployeeData(docSnap.data());
-      SetIsLoading(false);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-      setSelectedEmployeeData("Oriane is the best");
+    if (chosen - 1 > 0) {
+      const docRef = doc(db, "stores", "one", "employeeList", chosen?.employee);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        setSelectedEmployeeData(docSnap.data());
+        SetIsLoading(false);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        setSelectedEmployeeData("Oriane is the best");
+      }
     }
     //} else {
     //  console.log("Mully is the best");
@@ -90,9 +92,12 @@ export const BookingContextProvider = ({ children }) => {
         setChosenSlot,
         isLoading,
         selectedEmployee,
+        setStoreID,
+        storeID,
       }}
     >
       {children}
     </BookingContext.Provider>
   );
 };
+// };

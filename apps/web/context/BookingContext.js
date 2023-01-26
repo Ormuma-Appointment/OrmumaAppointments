@@ -56,7 +56,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     handleRead();
   }, [storeID]);
-  console.log(chosen, "chosen");
+  //console.log(chosen, "chosen");
 
   async function getEmployee() {
     if (chosen !== undefined && chosen !== null) {
@@ -85,7 +85,7 @@ export const BookingContextProvider = ({ children }) => {
     getEmployee();
   }, [chosen]);
 
-  console.log("SELECTED EMPLOYEE", selectedEmployee);
+  //console.log("SELECTED EMPLOYEE", selectedEmployee);
   //console.log("SELECTED SLOT", chosenSlot);
 
   let slotToString = "";

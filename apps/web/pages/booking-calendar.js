@@ -23,7 +23,7 @@ const BookingCalendar = () => {
     slotToString,
   } = useContext(BookingContext);
 
-  console.log("chosen slot from calendar", chosenSlot);
+  //console.log("chosen slot from calendar", chosenSlot);
 
   const router = useRouter();
   const query = router.query;

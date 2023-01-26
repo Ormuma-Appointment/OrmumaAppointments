@@ -6,6 +6,7 @@ import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
 import Button from "../ui/components/Button/Button";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { admin } from "./data-sample";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";

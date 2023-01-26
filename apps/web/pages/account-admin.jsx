@@ -243,7 +243,7 @@ const AccountAdmin = () => {
           <h1>Hier gibts noch nichts zu sehen ...</h1>
           <p>
             Um Kund*Innen Termine buchen zu lassen, klicken Sie auf den Button,
-            um ihren Salon zu definieren.
+            um ihren Salon zu konfigurieren.
           </p>
           <Button
             size="medium"

@@ -1,4 +1,5 @@
 import styles from "../../ui/page_styles/Home.module.css";
+import Head from "next/head";
 import RoundImage from "../../ui/components/RoundImage/RoundImage";
 import Button from "../../ui/components/Button/Button";
 import Logo from "../../ui/components/assets/placeholderLogo.png";
@@ -50,8 +51,16 @@ export default function Web() {
     if (storeData) {
       return (
         <div className={styles.container}>
+          <Head>
+            <title>{storeData.name} | PeachOasis</title>
+            <meta
+              name="description"
+              content={`Buche deinen nächsten Termin bei ${storeData.name} über PeachOasis`}
+              key="desc"
+            />
+          </Head>
           <div className={styles.welcome}>
-            <h1>Wir lieben Natürlichkeit</h1>
+            <h1>Termin buchen bei {storeData.name}</h1>
             <RoundImage alt="Nice Image" image={Logo} initialWidth={200} />
 
             <Button

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import workingTimes from "../data-sample";
+import { workingTimes } from "../data-sample";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
@@ -14,7 +14,6 @@ import { db } from "../../firebase/firebase";
 import {
   doc,
   setDoc,
-  query,
   getDoc,
   getDocs,
   updateDoc,
@@ -23,24 +22,19 @@ import {
 import { useAuthContext } from "../../context/AuthContext";
 
 function TeamSetup() {
-  const [loading, setLoading] = useState(true);
-  const [showServices, setShowServices] = useState(false);
-  let dummyservices = ["no data"];
   const { currentUser, storeID } = useAuthContext();
-  let days_times = workingTimes;
-  const [times, setTimes] = useState(days_times);
-  const [services, setServices] = useState(dummyservices);
   const router = useRouter();
-  const [dbServices, setDbServices] = useState([]);
-  const [salonEmployees, setSalonEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
+  const [dbServices, setDbServices] = useState([]);
+  const [showServices, setShowServices] = useState(false);
+  const [services, setServices] = useState(["no data"]);
+  const [times, setTimes] = useState(workingTimes);
+  const [salonEmployees, setSalonEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(undefined);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
   const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
-  if (!storeID) {
-    router.push("/store-setup/store");
-  }
 
   // get services from Store Collection services
   async function getDBServices() {
@@ -99,16 +93,6 @@ function TeamSetup() {
     setNoSelected(true);
   }, [employeeIndex]);
 
-  function reverseTransform(obj) {
-    let result = [];
-    obj.forEach((item) => {
-      item.services.forEach((service) => {
-        result.push(`${item.category}  -  ${service.service}`);
-      });
-    });
-    return result;
-  }
-
   useEffect(() => {
     if (hasData) {
       setServices(reverseTransform(selectedEmployee.services));
@@ -134,6 +118,16 @@ function TeamSetup() {
     return Object.values(result);
   }
 
+  function reverseTransform(obj) {
+    let result = [];
+    obj.forEach((item) => {
+      item.services.forEach((service) => {
+        result.push(`${item.category}  -  ${service.service}`);
+      });
+    });
+    return result;
+  }
+
   async function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {
@@ -151,12 +145,6 @@ function TeamSetup() {
       description: e.target.description.value,
       workingTime: times,
     };
-    const q = query(collection(db, "stores"));
-    const querySnapshot = await getDocs(q);
-    const queryData = querySnapshot.docs.map((detail) => ({
-      ...detail.data(),
-      id: detail.id,
-    }));
 
     if (hasData) {
       await updateDoc(
@@ -171,7 +159,7 @@ function TeamSetup() {
       );
     } else {
       const res = await setDoc(
-        doc(db, "stores", queryData[0].id, "employeeList", employee.name),
+        doc(db, "stores", storeID, "employeeList", employee.name),
         employee
       );
     }
@@ -190,19 +178,25 @@ function TeamSetup() {
   function handleCancelClick(e) {
     e.preventDefault();
     if (hasData) {
-      setServices(selectedEmployee.services);
+      setServices(reverseTransform(selectedEmployee.services));
     } else {
       if (dbServices) {
         setServices(dbServices);
-      } else {
-        setServices(dummyservices);
       }
     }
   }
+  useEffect(() => {
+    if (!showServices) {
+      setServices(dbServices);
+    }
+  }, [showServices]);
+
   function handleLoadClick(e) {
     e.preventDefault();
     setServices(dbServices);
   }
+
+  console.log(services);
   if (!loading) {
     return (
       <div>

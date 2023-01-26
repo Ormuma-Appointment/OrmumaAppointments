@@ -30,6 +30,7 @@ const StoreSetup = () => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
+      slug: e.target.url.value,
       photo: e.target.photo.value,
       contact: {
         email: currentUser.email,
@@ -63,7 +64,7 @@ const StoreSetup = () => {
   };
 
   // load existing information, for editing purposes
-
+  const [slug, setSlug] = useState(undefined);
   async function getData() {
     if ((currentUser, storeID)) {
       const docRef = doc(db, "stores", storeID);
@@ -74,6 +75,7 @@ const StoreSetup = () => {
         setSalonData(docSnap.data());
         setTimes(data.openingHours);
         setHasData(true);
+        setSlug(data.slug);
       } else {
         console.log("No such document!");
       }
@@ -85,6 +87,12 @@ const StoreSetup = () => {
     getData();
   }, [currentUser, storeID]);
 
+  function handleNameChange(e) {
+    let value = e.target.value.toLowerCase().replaceAll(" ", "-");
+    if (!salonData.slug) {
+      setSlug(value);
+    }
+  }
   if (!loading) {
     return (
       <div>
@@ -116,6 +124,23 @@ const StoreSetup = () => {
                       id="name"
                       placeholder="Salon Name"
                       defaultValue={salonData.name}
+                      required
+                      onChange={(e) => handleNameChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Salon URL:*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="text"
+                      name="url"
+                      id="url"
+                      placeholder="Salon URL"
+                      disable={salonData.slug ? true : false}
+                      value={slug}
                       required
                     />
                   </div>

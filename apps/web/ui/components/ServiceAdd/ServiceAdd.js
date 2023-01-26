@@ -56,10 +56,6 @@ function ServiceAdd({
     handleRemoveClick(indexToRemove);
   }, [remove]);
 
-  useEffect(() => {
-    console.log(services);
-  }, [services]);
-
   return (
     <>
       <div className={styles.service_cat}>

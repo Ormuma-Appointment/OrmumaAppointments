@@ -4,6 +4,8 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  getIdTokenResult,
+  getIdToken,
   signOut,
 } from "firebase/auth";
 import { db } from "../firebase/firebase";
@@ -18,15 +20,19 @@ export function useAuthContext() {
 }
 export const AuthContextProvider = ({ children }) => {
   const router = useRouter();
-
+  const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(currentUser);
+
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
+    const unsub = onAuthStateChanged(auth, async (user) => {
       if (user) {
+        const idTokenResult = await (
+          await user.getIdTokenResult()
+        ).claims.admin;
         setCurrentUser(user);
-      } // console.log(user);
+        setIsAdmin(idTokenResult);
+      }
       setLoading(false);
       return null;
     });
@@ -42,7 +48,7 @@ export const AuthContextProvider = ({ children }) => {
     }
     return false;
   };
-  const [isAdmin, setIsAdmin] = useState(false);
+
   const logOut = (a) => {
     signOut(a)
       .then(() => {
@@ -58,6 +64,7 @@ export const AuthContextProvider = ({ children }) => {
 
   // add storeID to context
   const [storeID, setStoreID] = useState(undefined);
+  const [inStoreSetupProcess, setInStoreSetupProcess] = useState(undefined);
   async function getStore() {
     if (currentUser) {
       let idsTemp = [];
@@ -73,37 +80,36 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
-  const getUserClaims = async (uid) => {
-    const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
-    const data = { uid };
-    const options = {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    };
+  // const getUserClaims = async (uid) => {
+  //   const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
+  //   const data = { uid };
+  //   const options = {
+  //     method: "POST",
+  //     body: JSON.stringify(data),
+  //     headers: { "Content-Type": "application/json" },
+  //   };
 
-    try {
-      const response = await fetch(endpoint, options);
-      const json = await response.json();
-      if (json.claims) {
-        // Handle success
-        if (json.claims.admin) {
-          setIsAdmin(true);
-        }
-      } else {
-        // Handle error
-        console.log(json.error);
-      }
-    } catch (err) {
-      // Handle error
-      console.log(err);
-    }
-  };
+  //   try {
+  //     const response = await fetch(endpoint, options);
+  //     const json = await response.json();
+  //     if (json.claims) {
+  //       // Handle success
+  //       if (json.claims.admin) {
+  //         setIsAdmin(true);
+  //       }
+  //     } else {
+  //       // Handle error
+  //       console.log(json.error);
+  //     }
+  //   } catch (err) {
+  //     // Handle error
+  //     console.log(err);
+  //   }
+  // };
 
   useEffect(() => {
     if (currentUser) {
       getStore();
-      getUserClaims(currentUser.uid);
     }
   }, [currentUser]);
 
@@ -116,6 +122,8 @@ export const AuthContextProvider = ({ children }) => {
         logOut,
         storeID,
         isAdmin,
+        inStoreSetupProcess,
+        setInStoreSetupProcess,
       }}
     >
       {loading ? null : children}

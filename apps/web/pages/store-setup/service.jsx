@@ -8,16 +8,7 @@ import styles from "../../ui/page_styles/ServiceSetup.module.css";
 import ServiceAdd from "../../ui/components/ServiceAdd/ServiceAdd";
 import Minus from "../../ui/components/assets/minus.svg";
 import { db } from "../../firebase/firebase";
-import {
-  doc,
-  setDoc,
-  collection,
-  updateDoc,
-  query,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
-
+import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { useAuthContext } from "../../context/AuthContext";
 
 function ServiceSetup() {
@@ -30,12 +21,11 @@ function ServiceSetup() {
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
-  if (!storeID) {
-    router.push("/store-setup/store");
-  }
+
   async function getDBServices() {
     if (currentUser && storeID) {
       const docRef = doc(db, "stores", storeID, "services", "serviceList");
+
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -68,7 +58,7 @@ function ServiceSetup() {
 
   useEffect(() => {
     getDBServices();
-  }, [currentUser]);
+  }, [currentUser, storeID]);
 
   function handleCatSubmit(e) {
     e.preventDefault();
@@ -79,7 +69,6 @@ function ServiceSetup() {
   }
 
   // handle continue and save button click
-
   async function handleContinueClick(e, path) {
     e.preventDefault();
     let serviceObj;
@@ -88,23 +77,13 @@ function ServiceSetup() {
     } else {
       serviceObj = dbServices;
     }
-
-    // here we need to add to push data either in a context or to firebase
-    const q = query(collection(db, "stores"));
-    const querySnapshot = await getDocs(q);
-    const queryData = querySnapshot.docs.map((detail) => ({
-      ...detail.data(),
-      id: detail.id,
-    }));
-
     if (hasData) {
-      await updateDoc(
-        doc(db, "stores", queryData[0].id, "services", "serviceList"),
-        { serviceObj }
-      );
+      await updateDoc(doc(db, "stores", storeID, "services", "serviceList"), {
+        serviceObj,
+      });
     } else {
       const res = await setDoc(
-        doc(db, "stores", queryData[0].id, "services", "serviceList"),
+        doc(db, "stores", storeID, "services", "serviceList"),
         {
           serviceObj,
         }

@@ -9,7 +9,6 @@ import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import { db } from "../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import { BookingContext } from "../context/BookingContext";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
@@ -18,7 +17,6 @@ const BookingService = () => {
   const [event, setEvent] = useState(selected);
   const router = useRouter();
   const { storeID, setStoreID } = useContext(BookingContext);
-
   const { storeid } = router.query;
 
   const { serviceList, setChosenService, isLoading } =

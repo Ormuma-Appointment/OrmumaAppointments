@@ -12,6 +12,7 @@ import {
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
+  const [storeID, setStoreID] = useState(undefined);
   const [serviceList, setServiceList] = useState({});
   const [employeeData, setEmployeeData] = useState([]);
   const [selectedEmployee, setSelectedEmployeeData] = useState({});
@@ -21,47 +22,50 @@ export const BookingContextProvider = ({ children }) => {
   const [isLoading, SetIsLoading] = useState(true);
 
   async function getData() {
-    const docRef = doc(db, "stores", "one", "services", "serviceList");
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      setServiceList(docSnap.data());
-      SetIsLoading(false);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
+    if (storeID) {
+      const docRef = doc(db, "stores", storeID, "services", "serviceList");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        setServiceList(docSnap.data());
+        SetIsLoading(false);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
     }
   }
   useEffect(() => {
     getData();
-  }, []);
-  const [storeID, setStoreID] = useState(undefined);
+  }, [storeID]);
 
   const handleRead = async () => {
-    const docRef = collection(db, "stores", "one", "employeeList");
+    if (storeID) {
+      const docRef = collection(db, "stores", storeID, "employeeList");
 
-    const docSnap = await getDocs(docRef);
-    docSnap.forEach((doc) => {
-      const el = doc.data();
-      // console.log(doc.id, " => ", doc.data());
-      setEmployeeData((prev) => [...prev, el]);
-      SetIsLoading(false);
-      // empArray.push(el);
-    });
+      const docSnap = await getDocs(docRef);
+      docSnap.forEach((doc) => {
+        const el = doc.data();
+        // console.log(doc.id, " => ", doc.data());
+        setEmployeeData((prev) => [...prev, el]);
+        SetIsLoading(false);
+        // empArray.push(el);
+      });
+    }
   };
   useEffect(() => {
     handleRead();
-  }, []);
+  }, [storeID]);
   console.log(chosen, "chosen");
 
   async function getEmployee() {
-    if (chosen !== undefined && chosen !== null) {
+    if (chosen - 1 > 0) {
       const docRef = doc(
         db,
         "stores",
-        "one",
+        storeID,
         "employeeList",
-        chosen && chosen.employee
+        chosen?.employee
       );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {

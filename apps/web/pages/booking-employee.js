@@ -5,21 +5,42 @@ import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { db } from "../firebase/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
-import { useRouter } from "next/router";
 import { BookingContext } from "../context/BookingContext";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { useRouter } from "next/router";
 
 const BookingEmployee = () => {
   //  const [isLoading, SetIsLoading] = useState(true);
   //const [employees, setEmployees] = useState([]);
   const [selected, setSelected] = useState(null);
-  const { storeID } = useContext(BookingContext);
+  const {
+    employeeData,
+    setChosen,
+    chosenService,
+    setChosenService,
+    isLoading,
+    storeID,
+    setStoreID,
+  } = useContext(BookingContext);
 
-  const { employeeData, setChosen, chosenService, isLoading } =
-    useContext(BookingContext);
+  const router = useRouter();
+  const query = router.query;
+  if (!storeID) {
+    setStoreID(query.storeid);
+  }
+  useEffect(() => {
+    if (!chosenService) {
+      setChosenService({
+        service: query.service,
+        duration: query.duration,
+        price: query.price,
+        category: query.category,
+      });
+    }
+  }, [storeID]);
 
-  // const router = useRouter();
+  //
   // const selectedService = router.query;
   //
   function filterEmployees(selected) {

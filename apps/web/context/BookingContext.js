@@ -54,28 +54,34 @@ export const BookingContextProvider = ({ children }) => {
   console.log(chosen?.employee, "chosen");
 
   async function getEmployee() {
-    //if (chosen !== undefined || chosen !== null) {
-    const docRef = doc(db, "stores", "one", "employeeList", chosen?.employee);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      // console.log("Document data:", docSnap.data());
-      setSelectedEmployeeData(docSnap.data());
-      SetIsLoading(false);
+    if (chosen !== undefined && chosen !== null) {
+      const docRef = doc(
+        db,
+        "stores",
+        "one",
+        "employeeList",
+        chosen && chosen.employee
+      );
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data());
+        setSelectedEmployeeData(docSnap.data());
+        SetIsLoading(false);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        setSelectedEmployeeData("Oriane is the best");
+      }
     } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-      setSelectedEmployeeData("Oriane is the best");
+      console.log("Mully is the best");
     }
-    //} else {
-    //  console.log("Mully is the best");
-    //}
   }
   useEffect(() => {
     getEmployee();
   }, [chosen]);
 
   console.log("SELECTED EMPLOYEE", selectedEmployee);
-  // console.log("SELECTED SLOT", chosenSlot);
+  console.log("SELECTED SLOT", chosenSlot);
 
   return (
     <BookingContext.Provider

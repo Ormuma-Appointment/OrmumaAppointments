@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -8,10 +8,39 @@ import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
 import { BookingContext } from "../context/BookingContext";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
+import { useRouter } from "next/router";
 
 const BookingCalendar = () => {
-  const { chosenService, chosen } = useContext(BookingContext);
+  const {
+    chosenService,
+    chosen,
+    setChosen,
+    setChosenService,
+    setStoreID,
+    storeID,
+  } = useContext(BookingContext);
+  const router = useRouter();
+  const query = router.query;
+  if (!storeID) {
+    setStoreID(query.storeid);
+  }
+  useEffect(() => {
+    if (!chosenService) {
+      setChosenService({
+        service: query.service,
+        duration: query.duration,
+        price: query.price,
+        category: query.category,
+      });
+      setChosen({
+        employee: query.employee,
+      });
+    }
+  }, [storeID]);
 
+  function handleBookingClick() {
+    router.push("/booking-confirmation");
+  }
   //const [selectedTime, setSelectedTime] = useState(null);
 
   //WE HAVE TO FIND A LOGIC HERE - maybe with moment.js
@@ -46,12 +75,22 @@ const BookingCalendar = () => {
             <p className={styles.selectItemText}>Select a time</p>
           </div>
           <div className={styles.buttonsContainer}>
-            <Button icon="" size="medium" variant="danger">
-              <Link href="/booking-employee">Go back</Link>
+            <Button
+              icon=""
+              size="medium"
+              variant="danger"
+              onClick={() => router.back()}
+            >
+              zurück
             </Button>
 
-            <Button icon="" size="medium" variant="primary">
-              <Link href="/booking-confirmation">Next step</Link>
+            <Button
+              icon=""
+              size="medium"
+              variant="primary"
+              onClick={() => handleBookingClick()}
+            >
+              Next step
             </Button>
           </div>
         </CardContainer>

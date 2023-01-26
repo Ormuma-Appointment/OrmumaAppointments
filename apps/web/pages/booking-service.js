@@ -17,7 +17,11 @@ const BookingService = () => {
   const [event, setEvent] = useState(selected);
   const router = useRouter();
   const { storeID, setStoreID } = useContext(BookingContext);
-  const { storeid } = router.query;
+  const query = router.query;
+
+  if (!storeID) {
+    setStoreID(query.storeid);
+  }
 
   const { serviceList, setChosenService, isLoading } =
     useContext(BookingContext);

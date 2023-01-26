@@ -56,7 +56,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     handleRead();
   }, [storeID]);
-  console.log(chosen, "chosen");
+  //console.log(chosen, "chosen");
 
   async function getEmployee() {
     if (chosen !== undefined && chosen !== null) {
@@ -65,7 +65,7 @@ export const BookingContextProvider = ({ children }) => {
         "stores",
         storeID,
         "employeeList",
-        chosen?.employee
+        chosen && chosen.employee
       );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -85,8 +85,20 @@ export const BookingContextProvider = ({ children }) => {
     getEmployee();
   }, [chosen]);
 
-  console.log("SELECTED EMPLOYEE", selectedEmployee);
+  //console.log("SELECTED EMPLOYEE", selectedEmployee);
   //console.log("SELECTED SLOT", chosenSlot);
+
+  let slotToString = "";
+
+  if (chosenSlot) {
+    const dateString = chosenSlot.date.toLocaleString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    slotToString = dateString + " " + chosenSlot.start;
+  }
 
   return (
     <BookingContext.Provider
@@ -103,6 +115,7 @@ export const BookingContextProvider = ({ children }) => {
         selectedEmployee,
         setStoreID,
         storeID,
+        slotToString,
       }}
     >
       {children}

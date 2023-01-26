@@ -59,10 +59,10 @@ const BookingEmployee = () => {
 
   const filteredEmployees = filterEmployees(chosenService);
 
-  console.log("FILTERED EMPLOYEE", filteredEmployees);
+  //console.log("FILTERED EMPLOYEE", filteredEmployees);
 
   //console.log(selectedService);
-  console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
+  //console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
 
   setChosen(selected);
 

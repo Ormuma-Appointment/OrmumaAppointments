@@ -20,21 +20,10 @@ const BookingCalendar = () => {
     setChosenService,
     setStoreID,
     storeID,
+    slotToString,
   } = useContext(BookingContext);
 
   console.log("chosen slot from calendar", chosenSlot);
-
-  let slotToString = "";
-
-  if (chosenSlot) {
-    const dateString = chosenSlot.date.toLocaleString("en-us", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    slotToString = dateString + " " + chosenSlot.start;
-  }
 
   const router = useRouter();
   const query = router.query;

@@ -52,8 +52,8 @@ const Times = (props) => {
     nextSlot: chosenService.duration,
     breakTime: [
       [
-        selectedEmployee.workingTime[2].breakStart,
-        selectedEmployee.workingTime[2].breakEnd,
+        selectedEmployee.workingTime[selectedDay].breakStart,
+        selectedEmployee.workingTime[selectedDay].breakEnd,
       ],
     ],
     startTime: selectedEmployee.workingTime[selectedDay].start,

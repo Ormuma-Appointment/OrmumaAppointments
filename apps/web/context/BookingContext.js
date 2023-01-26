@@ -65,7 +65,7 @@ export const BookingContextProvider = ({ children }) => {
         "stores",
         storeID,
         "employeeList",
-        chosen?.employee
+        chosen && chosen.employee
       );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -88,6 +88,18 @@ export const BookingContextProvider = ({ children }) => {
   console.log("SELECTED EMPLOYEE", selectedEmployee);
   //console.log("SELECTED SLOT", chosenSlot);
 
+  let slotToString = "";
+
+  if (chosenSlot) {
+    const dateString = chosenSlot.date.toLocaleString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    slotToString = dateString + " " + chosenSlot.start;
+  }
+
   return (
     <BookingContext.Provider
       value={{
@@ -103,6 +115,7 @@ export const BookingContextProvider = ({ children }) => {
         selectedEmployee,
         setStoreID,
         storeID,
+        slotToString,
       }}
     >
       {children}

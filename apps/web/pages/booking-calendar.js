@@ -94,15 +94,16 @@ const BookingCalendar = () => {
             >
               zurück
             </Button>
-
-            <Button
-              icon=""
-              size="medium"
-              variant="primary"
-              onClick={() => handleBookingClick()}
-            >
-              Next step
-            </Button>
+            {chosenSlot && (
+              <Button
+                icon=""
+                size="medium"
+                variant="primary"
+                onClick={() => handleBookingClick()}
+              >
+                Next step
+              </Button>
+            )}
           </div>
         </CardContainer>
       </div>

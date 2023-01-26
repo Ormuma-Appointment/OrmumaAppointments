@@ -64,7 +64,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   // add storeID to context
-  const [storeID, setStoreID] = useState(undefined);
+  const [adminStoreID, setAdminStoreID] = useState(undefined);
   const [inStoreSetupProcess, setInStoreSetupProcess] = useState(undefined);
   async function getStore() {
     if (currentUser) {
@@ -77,7 +77,7 @@ export const AuthContextProvider = ({ children }) => {
         // console.log(doc.id, " => ", doc.data());
         idsTemp.push(doc.id);
       });
-      setStoreID(idsTemp[0]);
+      setAdminStoreID(idsTemp[0]);
     }
   }
 
@@ -121,7 +121,7 @@ export const AuthContextProvider = ({ children }) => {
         setCurrentUser,
         isLoggedIn,
         logOut,
-        storeID,
+        adminStoreID,
         isAdmin,
         inStoreSetupProcess,
         setInStoreSetupProcess,

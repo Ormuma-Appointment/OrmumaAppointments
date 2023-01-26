@@ -30,6 +30,7 @@ const Times = (props) => {
 
   //console.log("props date", props.date, props.date.getDay());
   let selectedDay = props.date.getDay();
+  console.log(selectedDay);
   //let selectedDay = props.date.split("").slice(0, 2).join("");
   //console.log(selectedDay);
   // const x = {
@@ -51,15 +52,15 @@ const Times = (props) => {
     nextSlot: chosenService.duration,
     breakTime: [
       [
-        selectedEmployee.workingTime[selectedDay].breakStart,
-        selectedEmployee.workingTime[selectedDay].breakEnd,
+        selectedEmployee.workingTime[2].breakStart,
+        selectedEmployee.workingTime[2].breakEnd,
       ],
     ],
     startTime: selectedEmployee.workingTime[selectedDay].start,
     endTime: selectedEmployee.workingTime[selectedDay].end,
   };
 
-  console.log(x);
+  console.log(selectedEmployee);
 
   let slotTime = moment(x.startTime, "HH:mm");
   let endTime = moment(x.endTime, "HH:mm");
@@ -88,9 +89,11 @@ const Times = (props) => {
   };
   console.log("selectedSlot", selectedSlot);
 
-  //useEffect(() => {
-  //  setChosenSlot(selectedSlot);
-  //}, [selectedSlot]);
+  useEffect(() => {
+    if (event) {
+      setChosenSlot(selectedSlot);
+    }
+  }, [event]);
 
   return (
     <div className={styles.times}>

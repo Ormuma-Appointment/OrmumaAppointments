@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { BookingContext } from "../context/BookingContext";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
-import { BookingContext } from "../context/BookingContext";
 
 const BookingEmployee = () => {
   //  const [isLoading, SetIsLoading] = useState(true);
@@ -39,7 +38,7 @@ const BookingEmployee = () => {
 
   const filteredEmployees = filterEmployees(chosenService);
 
-  console.log("FILTERED EMPLOYEE", filteredEmployees);
+  console.log("FILTERED EMPLOYEE", employeeData);
 
   //console.log(selectedService);
   console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
@@ -86,7 +85,11 @@ const BookingEmployee = () => {
       </div>
       <div>
         <h2>Unsere Mitarbeiter</h2>
-        <EmployeeOverview employees={filteredEmployees} />
+        <EmployeeOverview
+          employees={employeeData.filter((el) =>
+            filteredEmployees.includes(el.name)
+          )}
+        />
       </div>
     </div>
   );

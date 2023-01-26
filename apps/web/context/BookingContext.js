@@ -59,7 +59,7 @@ export const BookingContextProvider = ({ children }) => {
   console.log(chosen, "chosen");
 
   async function getEmployee() {
-    if (chosen - 1 > 0) {
+    if (chosen !== undefined && chosen !== null) {
       const docRef = doc(
         db,
         "stores",
@@ -86,7 +86,7 @@ export const BookingContextProvider = ({ children }) => {
   }, [chosen]);
 
   console.log("SELECTED EMPLOYEE", selectedEmployee);
-  console.log("SELECTED SLOT", chosenSlot);
+  //console.log("SELECTED SLOT", chosenSlot);
 
   return (
     <BookingContext.Provider

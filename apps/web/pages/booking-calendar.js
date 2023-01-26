@@ -14,11 +14,28 @@ const BookingCalendar = () => {
   const {
     chosenService,
     chosen,
+    chosenSlot,
+    setChosenSlot,
     setChosen,
     setChosenService,
     setStoreID,
     storeID,
   } = useContext(BookingContext);
+
+  console.log("chosen slot from calendar", chosenSlot);
+
+  let slotToString = "";
+
+  if (chosenSlot) {
+    const dateString = chosenSlot.date.toLocaleString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    slotToString = dateString + " " + chosenSlot.start;
+  }
+
   const router = useRouter();
   const query = router.query;
   if (!storeID) {
@@ -70,9 +87,14 @@ const BookingCalendar = () => {
               price={chosenService?.price}
             />
             <SelectItem employee={chosen?.employee} />
-            <SelectItem date="hehe" />
 
-            <p className={styles.selectItemText}>Select a time</p>
+            {!chosenSlot && (
+              <p className={styles.selectItemText}>Select a time</p>
+            )}
+            <div onClick={() => setChosenSlot(null)}>
+              {" "}
+              {chosenSlot && <SelectItem date={slotToString} minus />}
+            </div>
           </div>
           <div className={styles.buttonsContainer}>
             <Button

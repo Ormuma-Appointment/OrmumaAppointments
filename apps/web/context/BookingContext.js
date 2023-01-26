@@ -77,17 +77,16 @@ export const BookingContextProvider = ({ children }) => {
         console.log("No such document!");
         setSelectedEmployeeData("Oriane is the best");
       }
+    } else {
+      console.log("Mully is the best");
     }
-    //} else {
-    //  console.log("Mully is the best");
-    //}
   }
   useEffect(() => {
     getEmployee();
   }, [chosen]);
 
   console.log("SELECTED EMPLOYEE", selectedEmployee);
-  // console.log("SELECTED SLOT", chosenSlot);
+  console.log("SELECTED SLOT", chosenSlot);
 
   return (
     <BookingContext.Provider

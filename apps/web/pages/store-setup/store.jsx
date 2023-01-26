@@ -30,6 +30,7 @@ const StoreSetup = () => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
+      slug: e.target.url.value,
       photo: e.target.photo.value,
       contact: {
         email: currentUser.email,
@@ -63,7 +64,7 @@ const StoreSetup = () => {
   };
 
   // load existing information, for editing purposes
-
+  const [slug, setSlug] = useState(undefined);
   async function getData() {
     if ((currentUser, storeID)) {
       const docRef = doc(db, "stores", storeID);
@@ -74,6 +75,7 @@ const StoreSetup = () => {
         setSalonData(docSnap.data());
         setTimes(data.openingHours);
         setHasData(true);
+        setSlug(data.slug);
       } else {
         console.log("No such document!");
       }
@@ -84,6 +86,11 @@ const StoreSetup = () => {
   useEffect(() => {
     getData();
   }, [currentUser, storeID]);
+
+  function handleNameChange(e) {
+    let value = e.target.value.toLowerCase().replaceAll(" ", "-");
+    setSlug(value);
+  }
 
   if (!loading) {
     return (
@@ -117,7 +124,34 @@ const StoreSetup = () => {
                       placeholder="Salon Name"
                       defaultValue={salonData.name}
                       required
+                      onChange={(e) => handleNameChange(e)}
                     />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Salon URL:*</label>
+                  </div>
+                  <div className={styles.col50}>
+                    {salonData.slug ? (
+                      <div>somedomain.de/{salonData.slug}</div>
+                    ) : (
+                      <Input
+                        type="text"
+                        name="url"
+                        id="url"
+                        placeholder="Salon URL"
+                        value={slug}
+                        required
+                        onChange={(e) => handleNameChange(e)}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className={styles.row_small}>
+                  <div className={styles.col30}></div>
+                  <div className={styles.col70}>
+                    Achtung! Die URL kann nur einmalig konfiguriert werden!
                   </div>
                 </div>
                 <div className={`${styles.row} ${styles.adresse}`}>

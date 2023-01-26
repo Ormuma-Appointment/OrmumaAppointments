@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -10,7 +10,24 @@ import { BookingContext } from "../context/BookingContext";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 
 const BookingCalendar = () => {
-  const { chosenService, chosen } = useContext(BookingContext);
+  const { chosenService, chosen, chosenSlot, setChosenSlot } =
+    useContext(BookingContext);
+
+  console.log("chosen slot from calendar", chosenSlot);
+
+  let slotToString = "";
+
+  if (chosenSlot) {
+    const dateString = chosenSlot.date.toLocaleString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    slotToString = dateString + " " + chosenSlot.start;
+  }
+
+  console.log(slotToString);
 
   //const [selectedTime, setSelectedTime] = useState(null);
 
@@ -41,9 +58,14 @@ const BookingCalendar = () => {
               price={chosenService?.price}
             />
             <SelectItem employee={chosen?.employee} />
-            <SelectItem date="hehe" />
 
-            <p className={styles.selectItemText}>Select a time</p>
+            {!chosenSlot && (
+              <p className={styles.selectItemText}>Select a time</p>
+            )}
+            <div onClick={() => setChosenSlot(null)}>
+              {" "}
+              {chosenSlot && <SelectItem date={slotToString} minus />}
+            </div>
           </div>
           <div className={styles.buttonsContainer}>
             <Button icon="" size="medium" variant="danger">

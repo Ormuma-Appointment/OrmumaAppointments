@@ -82,7 +82,7 @@ export const BookingContextProvider = ({ children }) => {
   }, [chosen]);
 
   console.log("SELECTED EMPLOYEE", selectedEmployee);
-  console.log("SELECTED SLOT", chosenSlot);
+  //console.log("SELECTED SLOT", chosenSlot);
 
   return (
     <BookingContext.Provider

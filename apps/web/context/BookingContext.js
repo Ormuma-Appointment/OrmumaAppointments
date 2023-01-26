@@ -59,7 +59,7 @@ export const BookingContextProvider = ({ children }) => {
   console.log(chosen, "chosen");
 
   async function getEmployee() {
-    if (chosen - 1 > 0) {
+    if (chosen !== undefined && chosen !== null) {
       const docRef = doc(
         db,
         "stores",

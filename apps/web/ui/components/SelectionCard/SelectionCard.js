@@ -2,12 +2,53 @@ import styles from "./SelectionCard.module.css";
 import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { BookingContext } from "../../../context/BookingContext";
 
 const SelectionCard = (props) => {
   const step = props.step;
   const selected = props.selected;
   const setSelected = props.setSelected;
   const service = props.service;
+  const router = useRouter();
+  const { storeID, chosenService, chosen } = useContext(BookingContext);
+
+  function handleBookingClick() {
+    console.log(router.pathname);
+    if (router.pathname === "/booking-service") {
+      if (storeID) {
+        router.push({
+          pathname: "/booking-employee",
+          query: {
+            storeid: storeID,
+            service: chosenService.service,
+            category: chosenService.category,
+            duration: chosenService.duration,
+            price: chosenService.price,
+          },
+        });
+      } else {
+        router.push("/booking-employee");
+      }
+    } else if (router.pathname === "/booking-employee") {
+      if (storeID) {
+        router.push({
+          pathname: "/booking-calendar",
+          query: {
+            storeid: storeID,
+            service: chosenService.service,
+            category: chosenService.category,
+            duration: chosenService.duration,
+            price: chosenService.price,
+            employee: chosen.employee,
+          },
+        });
+      } else {
+        router.push("/booking-calendar");
+      }
+    }
+  }
 
   return (
     <div>
@@ -30,13 +71,23 @@ const SelectionCard = (props) => {
             </div>
           </div>
           <div className={styles.buttonsContainer}>
-            <Button icon="" size="medium" variant="danger">
-              <Link href="/">Go back</Link>
+            <Button
+              icon=""
+              size="medium"
+              variant="danger"
+              onClick={() => router.back()}
+            >
+              zurück
             </Button>
 
             {selected && (
-              <Button icon="" size="medium" variant="primary">
-                <Link href="/booking-employee">Next step</Link>
+              <Button
+                icon=""
+                size="medium"
+                variant="primary"
+                onClick={() => handleBookingClick()}
+              >
+                Weiter
               </Button>
             )}
           </div>
@@ -60,16 +111,20 @@ const SelectionCard = (props) => {
           <div className={styles.buttonsContainer}>
             <Button
               href="/booking-service"
-              icon=""
               size="medium"
               variant="danger"
+              onClick={() => router.back()}
             >
-              <Link href="/booking-service">Go back</Link>
+              zurück
             </Button>
 
             {selected && (
-              <Button icon="" size="medium" variant="primary">
-                <Link href="/booking-calendar">Next step</Link>
+              <Button
+                size="medium"
+                variant="primary"
+                onClick={() => handleBookingClick()}
+              >
+                Weiter
               </Button>
             )}
           </div>

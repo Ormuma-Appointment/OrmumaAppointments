@@ -3,11 +3,15 @@
   justify-content: flex-start;
   align-items: center;
   padding: 2rem 1.5rem 3rem 1.5rem;
-  max-height: 20rem;
+  object-fit: contain;
 }
 .image {
-  width: 35%;
+  height: 100%;
   aspect-ratio: 1/1;
+  margin: 0.5rem;
+}
+.image img {
+  object-fit: contain;
 }
 .info {
   margin-left: 1rem;

@@ -55,8 +55,14 @@ export const BookingContextProvider = ({ children }) => {
   console.log(chosen, "chosen");
 
   async function getEmployee() {
-    if (chosen - 1 > 0) {
-      const docRef = doc(db, "stores", "one", "employeeList", chosen?.employee);
+    if (chosen !== undefined && chosen !== null) {
+      const docRef = doc(
+        db,
+        "stores",
+        "one",
+        "employeeList",
+        chosen && chosen.employee
+      );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data());
@@ -67,17 +73,16 @@ export const BookingContextProvider = ({ children }) => {
         console.log("No such document!");
         setSelectedEmployeeData("Oriane is the best");
       }
+    } else {
+      console.log("Mully is the best");
     }
-    //} else {
-    //  console.log("Mully is the best");
-    //}
   }
   useEffect(() => {
     getEmployee();
   }, [chosen]);
 
   console.log("SELECTED EMPLOYEE", selectedEmployee);
-  // console.log("SELECTED SLOT", chosenSlot);
+  console.log("SELECTED SLOT", chosenSlot);
 
   return (
     <BookingContext.Provider

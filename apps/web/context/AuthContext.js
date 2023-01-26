@@ -32,6 +32,7 @@ export const AuthContextProvider = ({ children }) => {
         ).claims.admin;
         setCurrentUser(user);
         setLoading(false);
+        setIsAdmin(idTokenResult);
       } // console.log(user);
       return null;
     });

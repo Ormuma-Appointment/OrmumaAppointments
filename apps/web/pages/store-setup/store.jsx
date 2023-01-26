@@ -89,10 +89,9 @@ const StoreSetup = () => {
 
   function handleNameChange(e) {
     let value = e.target.value.toLowerCase().replaceAll(" ", "-");
-    if (!salonData.slug) {
-      setSlug(value);
-    }
+    setSlug(value);
   }
+
   if (!loading) {
     return (
       <div>
@@ -133,16 +132,26 @@ const StoreSetup = () => {
                   <div className={styles.col30}>
                     <label>Salon URL:*</label>
                   </div>
+                  <div className={styles.col50}>
+                    {salonData.slug ? (
+                      <div>somedomain.de/{salonData.slug}</div>
+                    ) : (
+                      <Input
+                        type="text"
+                        name="url"
+                        id="url"
+                        placeholder="Salon URL"
+                        value={slug}
+                        required
+                        onChange={(e) => handleNameChange(e)}
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className={styles.row_small}>
+                  <div className={styles.col30}></div>
                   <div className={styles.col70}>
-                    <Input
-                      type="text"
-                      name="url"
-                      id="url"
-                      placeholder="Salon URL"
-                      disable={salonData.slug ? true : false}
-                      value={slug}
-                      required
-                    />
+                    Achtung! Die URL kann nur einmalig konfiguriert werden!
                   </div>
                 </div>
                 <div className={`${styles.row} ${styles.adresse}`}>

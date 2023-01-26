@@ -88,9 +88,11 @@ const Times = (props) => {
   };
   console.log("selectedSlot", selectedSlot);
 
-  //useEffect(() => {
-  //  setChosenSlot(selectedSlot);
-  //}, [selectedSlot]);
+  useEffect(() => {
+    if (event) {
+      setChosenSlot(selectedSlot);
+    }
+  }, [event]);
 
   return (
     <div className={styles.times}>

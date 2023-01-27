@@ -1,0 +1,13 @@
+.container {
+  max-width: 30rem;
+  overflow: hidden;
+}
+.container img {
+  object-fit: fill;
+  border-bottom: 0.25rem solid var(--primary-color);
+}
+.store {
+  padding: 1.5rem 2rem;
+}
+.container h3 {
+}

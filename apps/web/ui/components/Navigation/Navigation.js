@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Navigation.module.css";
-import logo from "../assets/placeholderLogo.png";
+import logo from "../assets/logo.png";
 import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Button from "../Button/Button";
@@ -14,7 +14,7 @@ import Link from "next/link";
 function Navigation(props) {
   const router = useRouter();
 
-  const { currentUser, logOut, isAdmin } = useAuthContext();
+  const { currentUser, logOut, isAdmin, adminStoreID } = useAuthContext();
   const {
     customer_logged_out,
     customer_logged_in,
@@ -52,7 +52,14 @@ function Navigation(props) {
                 icon
                 size="small"
                 variant="secondary"
-                onClick={() => router.push("/booking-service")}
+                onClick={() =>
+                  router.push({
+                    pathname: "/booking-service",
+                    query: {
+                      storeid: adminStoreID,
+                    },
+                  })
+                }
               >
                 Termin buchen
               </Button>

@@ -81,9 +81,10 @@ export const BookingContextProvider = ({ children }) => {
       console.log("Mully is the best");
     }
   }
+  console.log(storeID);
   useEffect(() => {
     getEmployee();
-  }, [chosen]);
+  }, [chosen, storeID]);
 
   //console.log("SELECTED EMPLOYEE", selectedEmployee);
   //console.log("SELECTED SLOT", chosenSlot);

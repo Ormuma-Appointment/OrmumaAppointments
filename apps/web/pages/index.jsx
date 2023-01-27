@@ -13,7 +13,6 @@ import {
 import StoreCard from "../ui/components/StoreCard/StoreCard";
 
 export default function Web() {
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [stores, setStores] = useState(true);
 
@@ -23,10 +22,10 @@ export default function Web() {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       temp.push({ data: doc.data(), id: doc.id });
     });
-    console.log(temp);
+
     setStores(temp);
     setLoading(false);
   }

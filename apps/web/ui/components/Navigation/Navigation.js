@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Navigation.module.css";
-import logo from "../assets/placeholderLogo.png";
+import logo from "../assets/logo.png";
 import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Button from "../Button/Button";

@@ -22,7 +22,7 @@ import {
 import { useAuthContext } from "../../context/AuthContext";
 
 function TeamSetup() {
-  const { currentUser, storeID } = useAuthContext();
+  const { currentUser, adminStoreID } = useAuthContext();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
@@ -38,8 +38,8 @@ function TeamSetup() {
 
   // get services from Store Collection services
   async function getDBServices() {
-    if ((currentUser, storeID)) {
-      const docRef = doc(db, "stores", storeID, "services", "serviceList");
+    if ((currentUser, adminStoreID)) {
+      const docRef = doc(db, "stores", adminStoreID, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -61,15 +61,15 @@ function TeamSetup() {
   }
   useEffect(() => {
     getDBServices();
-  }, [storeID]);
+  }, [adminStoreID]);
   // get all Employees from Firebase
 
   async function getEmployeeData() {
-    if ((currentUser, storeID)) {
+    if ((currentUser, adminStoreID)) {
       let employeesTemp = [];
       let idsTemp = [];
       const querySnapshot = await getDocs(
-        collection(db, "stores", storeID, "employeeList")
+        collection(db, "stores", adminStoreID, "employeeList")
       );
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -84,7 +84,7 @@ function TeamSetup() {
   }
   useEffect(() => {
     getEmployeeData();
-  }, [storeID]);
+  }, [adminStoreID]);
 
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
@@ -151,7 +151,7 @@ function TeamSetup() {
         doc(
           db,
           "stores",
-          storeID,
+          adminStoreID,
           "employeeList",
           employeeFirebaseID[employeeIndex]
         ),
@@ -159,7 +159,7 @@ function TeamSetup() {
       );
     } else {
       const res = await setDoc(
-        doc(db, "stores", storeID, "employeeList", employee.name),
+        doc(db, "stores", adminStoreID, "employeeList", employee.name),
         employee
       );
     }
@@ -196,7 +196,6 @@ function TeamSetup() {
     setServices(dbServices);
   }
 
-  console.log(services);
   if (!loading) {
     return (
       <div>

@@ -22,7 +22,7 @@ const StoreSetup = () => {
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { currentUser, storeID } = useAuthContext();
+  const { currentUser, adminStoreID } = useAuthContext();
   const [times, setTimes] = useState(workingTimes);
   const router = useRouter();
 
@@ -30,7 +30,7 @@ const StoreSetup = () => {
     e.preventDefault();
     let storeObj = {
       name: e.target.name.value,
-      slug: e.target.url.value,
+      slug: e.target.url?.value || salonData.slug,
       photo: e.target.photo.value,
       contact: {
         email: currentUser.email,
@@ -48,7 +48,7 @@ const StoreSetup = () => {
     };
     if (hasData) {
       // update firebase data if page was loaded with existing store data
-      hasData && (await updateDoc(doc(db, "stores", storeID), storeObj));
+      hasData && (await updateDoc(doc(db, "stores", adminStoreID), storeObj));
     } else {
       // setup data in firebase
       try {
@@ -66,8 +66,8 @@ const StoreSetup = () => {
   // load existing information, for editing purposes
   const [slug, setSlug] = useState(undefined);
   async function getData() {
-    if ((currentUser, storeID)) {
-      const docRef = doc(db, "stores", storeID);
+    if ((currentUser, adminStoreID)) {
+      const docRef = doc(db, "stores", adminStoreID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data());
@@ -85,7 +85,7 @@ const StoreSetup = () => {
 
   useEffect(() => {
     getData();
-  }, [currentUser, storeID]);
+  }, [currentUser, adminStoreID]);
 
   function handleNameChange(e) {
     let value = e.target.value.toLowerCase().replaceAll(" ", "-");

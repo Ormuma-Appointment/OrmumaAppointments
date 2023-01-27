@@ -12,7 +12,7 @@ function Footer() {
           {/* <p className={styles.link}>Impressum</p>
           <p className={styles.link}>Datenschutz</p> */}
           <Link href="/register-admin" className={styles.link}>
-            neuen Salon anmelden
+            Partner werden
           </Link>
         </div>
         <div>

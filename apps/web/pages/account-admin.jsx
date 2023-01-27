@@ -86,12 +86,12 @@ const AccountAdmin = () => {
     },
   ];
   // get salon data for salon overview from Firebase
-  const { currentUser, storeID } = useAuthContext();
+  const { currentUser, adminStoreID } = useAuthContext();
   const [salonData, setSalonData] = useState(salon);
   const [isLoading, setIsLoading] = useState(true);
   async function getSalonData() {
-    if (storeID) {
-      const docRef = doc(db, "stores", storeID);
+    if (adminStoreID) {
+      const docRef = doc(db, "stores", adminStoreID);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         //console.log("Document data:", docSnap.data());
@@ -106,10 +106,10 @@ const AccountAdmin = () => {
   const [salonEmployees, setSalonEmployees] = useState(salon.employees);
   const [employeeIndex, setEmployeeIndex] = useState(0);
   async function getEmployeeData() {
-    if (storeID) {
+    if (adminStoreID) {
       let employeesTemp = [];
       const querySnapshot = await getDocs(
-        collection(db, "stores", storeID, "employeeList")
+        collection(db, "stores", adminStoreID, "employeeList")
       );
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -123,9 +123,9 @@ const AccountAdmin = () => {
     getSalonData();
     getEmployeeData();
     setIsLoading(false);
-  }, []);
+  }, [adminStoreID]);
   if (!isLoading) {
-    if (storeID) {
+    if (adminStoreID) {
       return (
         <div className={styles.page_container}>
           <div>

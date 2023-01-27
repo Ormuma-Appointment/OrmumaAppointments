@@ -123,7 +123,7 @@ const AccountAdmin = () => {
     getSalonData();
     getEmployeeData();
     setIsLoading(false);
-  }, []);
+  }, [adminStoreID]);
   if (!isLoading) {
     if (adminStoreID) {
       return (

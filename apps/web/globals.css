@@ -64,6 +64,17 @@ p {
   font-size: 1rem;
 }
 
+.container {
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  background-color: var(--background-white);
+  display: inline-block;
+}
+.container:hover {
+  box-shadow: var(--box-shadow-hover);
+}
+
 :root {
   --base-font-family: "Open Sans", sans-serif;
   /* sizes */

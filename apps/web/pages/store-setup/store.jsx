@@ -32,7 +32,7 @@ const StoreSetup = () => {
 
   function uploadImage(docRef) {
     if (imageUpload === null) return;
-    const imageRef = ref(storage, `images/${docRef}`);
+    const imageRef = ref(storage, `images/stores/${docRef}`);
     uploadBytes(imageRef, imageUpload)
       .then(() => console.log("Image uploaded!"))
       .catch(() => console.log(err));

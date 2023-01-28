@@ -8,7 +8,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 function StoreCard({ data }) {
   const [image, setImage] = useState();
   useEffect(() => {
-    const imageLocation = ref(storage, `images/${data.id}`);
+    const imageLocation = ref(storage, `images/stores/${data.id}`);
 
     getDownloadURL(ref(imageLocation))
       .then((url) => {
@@ -22,12 +22,16 @@ function StoreCard({ data }) {
   return (
     <div className={`container ${styles.container}`}>
       <Link href={`/h/${data.data.slug}`}>
-        <Image
-          src={image ? image : "/salon-placeholder.jpeg"}
-          alt={`Salon: ${data.data.name}`}
-          width={80}
-          height={80}
-        ></Image>
+        <div className={styles.image}>
+          <Image
+            src={image}
+            alt={`Salon: ${data.data.name}`}
+            layout="fill"
+            objectFit="cover"
+            width={600}
+            height={300}
+          />
+        </div>
         <div className={styles.store}>
           <h3>{data.data.name}</h3>
           <div className={styles.address}>

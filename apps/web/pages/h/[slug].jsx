@@ -88,12 +88,14 @@ export default function Web() {
               </Button>
             </div>
             <Parallax translateY={[-30, 10]} className={styles.image_container}>
-              <Image
-                alt="Nice Image"
-                src={image}
-                fill
-                className={styles.image}
-              />
+              {image && (
+                <Image
+                  alt={storeData.name}
+                  src={image}
+                  fill
+                  className={styles.image}
+                />
+              )}
             </Parallax>
           </div>
           <div className={styles.info}>

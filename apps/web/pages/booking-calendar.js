@@ -61,7 +61,7 @@ const BookingCalendar = () => {
         ]}
         current={2}
       />
-      <h1>Wähle einen passenden Termin</h1>
+      <h1>Termin wählen</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Calendar</h4>

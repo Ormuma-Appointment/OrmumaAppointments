@@ -58,7 +58,7 @@ const BookingService = () => {
         ]}
         current={0}
       />
-      <h1>Wähle den gewünschten Service</h1>
+      <h1>Service wählen</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           {!isLoading ? (

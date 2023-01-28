@@ -115,4 +115,24 @@ p {
   .page_wrapper {
     width: 70vw;
   }
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  h4,
+  .h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
 }

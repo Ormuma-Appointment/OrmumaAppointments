@@ -3,7 +3,7 @@ import styles from "./StoreCard.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { storage } from "../../../firebase/firebase";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 
 function StoreCard({ data }) {
   const [image, setImage] = useState();

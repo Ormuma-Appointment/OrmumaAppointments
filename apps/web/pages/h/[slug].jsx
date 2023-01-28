@@ -1,8 +1,7 @@
 import styles from "../../ui/page_styles/Home.module.css";
 import Head from "next/head";
-import RoundImage from "../../ui/components/RoundImage/RoundImage";
+import Image from "next/image";
 import Button from "../../ui/components/Button/Button";
-import Logo from "../../ui/components/assets/placeholderLogo.png";
 import OpeningHours from "../../ui/components/OpeningHours/OpeningHours";
 import ContactCard from "../../ui/components/ContactCard/ContactCard";
 import AddressCard from "../../ui/components/AddressCard/AddressCard";
@@ -12,6 +11,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useContext } from "react";
 import { db } from "../../firebase/firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
+import { ref, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase/firebase";
 
 export default function Web() {
   const [loading, setLoading] = useState(true);
@@ -35,6 +36,20 @@ export default function Web() {
   useEffect(() => {
     getData();
   }, []);
+  const [image, setImage] = useState();
+  useEffect(() => {
+    if (storeID) {
+      const imageLocation = ref(storage, `images/stores/${storeID}`);
+
+      getDownloadURL(ref(imageLocation))
+        .then((url) => {
+          setImage(url);
+        })
+        .catch((error) => {
+          // Handle any errors
+        });
+    }
+  }, [storeID]);
 
   function handleBookingClick() {
     if (storeID) {
@@ -55,22 +70,30 @@ export default function Web() {
             <title>{storeData.name} | PeachOasis</title>
             <meta
               name="description"
-              content={`Buche deinen nächsten Termin bei ${storeData.name} über PeachOasis`}
+              content={`Buche deinen nächsten Termin bei ${storeData.name} über Salounge`}
               key="desc"
             />
           </Head>
           <div className={styles.welcome}>
-            <h1>Termin buchen bei {storeData.name}</h1>
-            <RoundImage alt="Nice Image" image={Logo} initialWidth={200} />
-
-            <Button
-              icon={calendar}
-              size="medium"
-              variant="primary"
-              onClick={handleBookingClick}
-            >
-              Termin buchen
-            </Button>
+            <div className={styles.header}>
+              <h1>Termin buchen bei {storeData.name}</h1>
+              <Button
+                icon={calendar}
+                size="medium"
+                variant="primary"
+                onClick={handleBookingClick}
+              >
+                Termin buchen
+              </Button>
+            </div>
+            <div className={styles.image_container}>
+              <Image
+                alt="Nice Image"
+                src={image}
+                fill
+                className={styles.image}
+              />
+            </div>
           </div>
           <div className={styles.info}>
             <h2>Mehr über uns</h2>

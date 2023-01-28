@@ -1,18 +1,37 @@
-import React from "react";
-import Button from "../Button/Button";
+import React, { useEffect, useState } from "react";
 import styles from "./StoreCard.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import placeholder from "../assets/salon-placeholder.jpeg";
+import { storage } from "../../../firebase/firebase";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 function StoreCard({ data }) {
+  const [image, setImage] = useState();
+  useEffect(() => {
+    const imageLocation = ref(storage, `images/stores/${data.id}`);
+
+    getDownloadURL(ref(imageLocation))
+      .then((url) => {
+        console.log(url);
+        setImage(url);
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+  }, []);
   return (
     <div className={`container ${styles.container}`}>
       <Link href={`/h/${data.data.slug}`}>
-        <Image
-          src={data.data.photo ? data.data.photo : placeholder}
-          alt={`Salon: ${data.data.name}`}
-        ></Image>
+        <div className={styles.image}>
+          <Image
+            src={image}
+            alt={`Salon: ${data.data.name}`}
+            layout="fill"
+            objectFit="cover"
+            width={600}
+            height={300}
+          />
+        </div>
         <div className={styles.store}>
           <h3>{data.data.name}</h3>
           <div className={styles.address}>

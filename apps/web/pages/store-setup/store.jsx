@@ -15,19 +15,31 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
 import { db } from "../../firebase/firebase";
+import { storage } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
 
 const StoreSetup = () => {
+  const [imageUpload, setImageUpload] = useState(null);
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
   const { currentUser, adminStoreID } = useAuthContext();
   const [times, setTimes] = useState(workingTimes);
   const router = useRouter();
+  const [docRef, setDocRef] = useState(null);
 
+  function uploadImage(docRef) {
+    if (imageUpload === null) return;
+    const imageRef = ref(storage, `images/stores/${docRef}`);
+    uploadBytes(imageRef, imageUpload)
+      .then(() => console.log("Image uploaded!"))
+      .catch(() => console.log(err));
+  }
   const handleSubmit = async (e, path) => {
     e.preventDefault();
+
     let storeObj = {
       name: e.target.name.value,
       slug: e.target.url?.value || salonData.slug,
@@ -49,6 +61,7 @@ const StoreSetup = () => {
     if (hasData) {
       // update firebase data if page was loaded with existing store data
       hasData && (await updateDoc(doc(db, "stores", adminStoreID), storeObj));
+      uploadImage(adminStoreID);
     } else {
       // setup data in firebase
       try {
@@ -56,6 +69,7 @@ const StoreSetup = () => {
         await setDoc(doc(db, "users", currentUser.uid, "stores", docRef.id), {
           storeID: docRef.id,
         });
+        uploadImage(docRef.id);
       } catch (err) {
         console.error(err);
       }
@@ -87,6 +101,7 @@ const StoreSetup = () => {
     getData();
   }, [currentUser, adminStoreID]);
 
+  //create store slug
   function handleNameChange(e) {
     let value = e.target.value.toLowerCase().replaceAll(" ", "-");
     setSlug(value);
@@ -239,7 +254,12 @@ const StoreSetup = () => {
                     <label>Logo:*</label>
                   </div>
                   <div className={styles.col70}>
-                    <Input type="file" name="photo" id="logo" />
+                    <Input
+                      type="file"
+                      name="photo"
+                      id="logo"
+                      onChange={(e) => setImageUpload(e.target.files[0])}
+                    />
                   </div>
                 </div>
               </div>

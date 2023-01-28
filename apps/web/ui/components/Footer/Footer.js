@@ -9,8 +9,6 @@ function Footer() {
     <div className={styles.container}>
       <div className={styles.pagewidth}>
         <div>
-          {/* <p className={styles.link}>Impressum</p>
-          <p className={styles.link}>Datenschutz</p> */}
           <Link href="/register-admin" className={styles.link}>
             Partner werden
           </Link>

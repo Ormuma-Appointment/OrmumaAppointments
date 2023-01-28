@@ -3,12 +3,11 @@ import CardContainer from "../CardContainer/CardContainer";
 import RoundImage from "../RoundImage/RoundImage";
 import styles from "./AccountCard.module.css";
 import { useAuthContext } from "../../../context/AuthContext";
-import placeHolder from "../assets/placeholder-profile.jpeg";
 
 function AccountCard({
   name = "Andrea Hallo",
   email = "testtest@test.de",
-  image = placeHolder,
+  image = "/placeholder-profile.jpeg",
 }) {
   const { currentUser } = useAuthContext();
   return (

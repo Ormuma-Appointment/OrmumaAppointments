@@ -13,6 +13,7 @@ html {
 }
 body {
   background-color: var(--background);
+  font-weight: 300;
 }
 
 .grid_main_wrapper {
@@ -32,20 +33,20 @@ body {
 /*Here general roles for the font - the size should not change but the color can*/
 h1 {
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 400;
   color: var(--primary-color-font);
   margin-bottom: 1rem;
 }
 
 h2 {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 400;
   color: var(--primary-color-font);
 }
 
 h3 {
   font-size: 1.125rem;
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 1rem;
 }
 

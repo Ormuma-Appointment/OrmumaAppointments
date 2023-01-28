@@ -40,7 +40,7 @@ export default function Web() {
         <h1>Unsere Partner</h1>
         <div className={styles.stores}>
           {stores.map((el, index) => {
-            return <StoreCard key={index} data={el} />;
+            return <StoreCard key={index} data={el} setLoading={setLoading} />;
           })}
         </div>
       </div>

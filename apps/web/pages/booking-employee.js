@@ -76,7 +76,7 @@ const BookingEmployee = () => {
         ]}
         current={1}
       />
-      <h1>Wähle eine*n Mitarbeiter*In</h1>
+      <h1>Mitarbeiter*In wählen</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
           <h4>Mitarbeiter</h4>

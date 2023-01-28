@@ -20,11 +20,15 @@
 }
 .row_small {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   font-size: small;
   color: var(--danger-color);
   height: 0.7rem;
+  margin-bottom: 1rem;
+}
+.row_small .col70 {
+margin-top: -1rem;
 }
 .adresse,
 .opening {
@@ -76,6 +80,12 @@
   .row {
     flex-direction: row;
   }
+  .row_small {
+    flex-direction: row;
+  }
+  .row_small .col70 {
+    margin-top: inherit;
+    }
   .col30 {
     float: left;
     width: 20%;

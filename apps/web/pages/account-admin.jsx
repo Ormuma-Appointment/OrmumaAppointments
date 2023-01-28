@@ -134,7 +134,7 @@ const AccountAdmin = () => {
           <div className={styles.row}>
             <div className={styles.column}>
               <div className={styles.header}>
-                <h3>Salon Übersicht </h3>{" "}
+                <h2>Salon Übersicht </h2>{" "}
                 <Link href="/store-setup/store" className={styles.edit}>
                   <Edit className={styles.icon} />
                   bearbeiten
@@ -207,7 +207,7 @@ const AccountAdmin = () => {
               </CardContainer>
             </div>
             <div className={styles.column}>
-              <h3>Terminübersicht heute</h3>
+              <h2>Terminübersicht heute</h2>
               {todaysAppointments.map((el, index) => {
                 return (
                   <AppointmentCard
@@ -224,7 +224,7 @@ const AccountAdmin = () => {
           </div>
           <div className={styles.employee_container}>
             <div className={styles.header}>
-              <h3>Salon Mitarbeiter*Innen</h3>
+              <h2>Salon Mitarbeiter*Innen</h2>
               <Link href="/store-setup/team" className={styles.edit}>
                 <Edit className={styles.icon} />
                 bearbeiten

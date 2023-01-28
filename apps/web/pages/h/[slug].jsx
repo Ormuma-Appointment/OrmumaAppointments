@@ -13,6 +13,7 @@ import { db } from "../../firebase/firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
+import { Parallax } from "react-scroll-parallax";
 
 export default function Web() {
   const [loading, setLoading] = useState(true);
@@ -86,14 +87,14 @@ export default function Web() {
                 Termin buchen
               </Button>
             </div>
-            <div className={styles.image_container}>
+            <Parallax translateY={[-30, 10]} className={styles.image_container}>
               <Image
                 alt="Nice Image"
                 src={image}
                 fill
                 className={styles.image}
               />
-            </div>
+            </Parallax>
           </div>
           <div className={styles.info}>
             <h2>Mehr über uns</h2>

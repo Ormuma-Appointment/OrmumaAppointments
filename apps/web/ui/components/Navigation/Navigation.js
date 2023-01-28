@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Navigation.module.css";
-import logo from "../assets/logo.png";
 import Logout from "../assets/logout.svg";
 import AccountIcon from "../assets/account.svg";
 import Button from "../Button/Button";
@@ -37,7 +36,7 @@ function Navigation(props) {
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
         <Image
-          src={logo}
+          src="/logo.png"
           alt="logo"
           className={styles.logoImage}
           height={50}

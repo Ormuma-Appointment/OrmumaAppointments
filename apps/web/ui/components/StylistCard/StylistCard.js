@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styles from "./StylistCard.module.css";
 import CardContainer from "../CardContainer/CardContainer";
 import RoundImage from "../RoundImage/RoundImage";
-import placeHolder from "../assets/placeholder-profile.jpeg";
+// import placeHolder from "../assets/placeholder-profile.jpeg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 function StylistCard({
-  image = placeHolder,
+  image = "/placeholder-profile.jpeg",
   name,
   description,
   index,

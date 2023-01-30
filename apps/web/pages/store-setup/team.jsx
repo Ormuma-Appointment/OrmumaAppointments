@@ -37,7 +37,7 @@ function TeamSetup() {
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(undefined);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
-  const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
+  const [employeeFirebaseIDs, setEmployeeFirebaseIDs] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
 
   // get services from Store Collection services
@@ -82,13 +82,17 @@ function TeamSetup() {
         idsTemp.push(doc.id);
       });
       setSalonEmployees(employeesTemp);
-      setEmployeeFirebaseID(idsTemp);
+      setEmployeeFirebaseIDs(idsTemp);
     }
     setLoading(false);
   }
   useEffect(() => {
     getEmployeeData();
   }, [adminStoreID]);
+
+  useEffect(() => {
+    console.log(employeeFirebaseIDs);
+  }, [employeeFirebaseIDs]);
 
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
@@ -441,6 +445,7 @@ function TeamSetup() {
               <EmployeeOverview
                 employees={salonEmployees}
                 setEmployeeIndex={setEmployeeIndex}
+                employeeFirebaseIDs={employeeFirebaseIDs}
               />
             </div>
           </div>

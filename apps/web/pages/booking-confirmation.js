@@ -7,6 +7,7 @@ import Button from "../ui/components/Button/Button";
 import AppointmentConfirmation from "../ui/components/AppointmentConfirmation/AppointmentConfirmation";
 import { BookingContext } from "../context/BookingContext";
 import { useRouter } from "next/router";
+import { useAuthContext } from "../context/AuthContext";
 
 const BookingConfirmation = () => {
   const [confirmed, setConfirmed] = useState(false);
@@ -14,13 +15,22 @@ const BookingConfirmation = () => {
   const { chosenService, chosen, chosenSlot, storeID, slotToString } =
     useContext(BookingContext);
 
+  const { currentUser } = useAuthContext();
+
+  let user = {
+    id: currentUser.uid,
+    name: currentUser.displayName,
+  };
+
+  console.log("currentUser", user);
+
   const handleBookingConfirmation = () => {
     setConfirmed(!confirmed);
   };
 
   const router = useRouter();
 
-  let event = { ...chosen, ...chosenService, ...chosenSlot }; // => have to go to collection events
+  let event = { ...chosen, ...chosenService, ...chosenSlot, ...user }; // => have to go to collection events
 
   /*1. We have to send the event inside collection events
   looking like that 
@@ -35,6 +45,7 @@ const BookingConfirmation = () => {
       service:"cut",
       slot:['11:00', '11:45'],
       start: "11:00" 
+      user: currentuserid
     }
   ]
   2. We have to send the date and the slot inside the employee appointements:

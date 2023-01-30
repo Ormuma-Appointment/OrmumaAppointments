@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import ProtectedRoutes from "../route/ProtectedRoutes";
 import { BookingContextProvider } from "../context/BookingContext";
 import AdminProtectedRoutes from "../route/AdminProtectedRoutes";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const noAuthRequired = [
   "/",
@@ -32,6 +33,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const Router = useRouter();
 
   return (
+  <ParallaxProvider>
     <AuthContextProvider>
       <BookingContextProvider>
         <div className="grid_main_wrapper">
@@ -56,5 +58,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </div>
       </BookingContextProvider>
     </AuthContextProvider>
+    </ParallaxProvider>
   );
 }

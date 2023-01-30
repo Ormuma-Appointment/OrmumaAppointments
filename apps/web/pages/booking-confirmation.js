@@ -64,7 +64,7 @@ const BookingConfirmation = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1 className={styles.center}>Your booking confirmation</h1>
+      <h2 className={styles.center}>Your booking confirmation</h2>
       {confirmed ? (
         <>
           <AppointmentConfirmation />

@@ -13,6 +13,7 @@ import { db } from "../firebase/firebase";
 import {
   collection,
   doc,
+  addDoc,
   setDoc,
   getDoc,
   getDocs,
@@ -37,6 +38,7 @@ const BookingConfirmation = () => {
 
   let event = { ...chosen, ...chosenService, ...chosenSlot, ...user }; // => have to go to collection events
 
+  let momentDate = moment(chosenSlot.date).format("YYYY-MM-DD");
   async function handleBookingConfirmation(e) {
     e.preventDefault();
     setConfirmed(!confirmed);
@@ -47,8 +49,6 @@ const BookingConfirmation = () => {
   }
 
   const router = useRouter();
-
-  let momentDate = moment(chosenSlot.date).format("YYYY-MM-DD");
 
   let appointments = {
     "2023-02-05": [

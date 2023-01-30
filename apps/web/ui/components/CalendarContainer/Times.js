@@ -7,7 +7,7 @@ const Times = (props) => {
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
 
-  const { chosenService, selectedEmployee, setChosenSlot } =
+  const { chosenService, selectedEmployee, setChosenSlot, eventData } =
     useContext(BookingContext);
 
   const displayInfo = (e) => {
@@ -17,6 +17,11 @@ const Times = (props) => {
 
   let selectedDay = props.date.getDay();
 
+  console.log("eventData", eventData);
+  let filteredEventData = eventData.filter((event) =>
+    console.log("HERE", event.date.toDate(), props.date)
+  );
+  console.log("filteredEventData", filteredEventData);
   //let selectedDay = props.date.split("").slice(0, 2).join("");
   //console.log(selectedDay);
   // const x = {

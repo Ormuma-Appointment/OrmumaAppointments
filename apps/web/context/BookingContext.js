@@ -104,7 +104,7 @@ export const BookingContextProvider = ({ children }) => {
     getEvent();
   }, [chosen, storeID]);
 
-  console.log("eventData", eventData);
+  //console.log("eventData", eventData);
 
   //console.log("SELECTED EMPLOYEE", selectedEmployee);
   //console.log("SELECTED SLOT", chosenSlot);
@@ -125,6 +125,7 @@ export const BookingContextProvider = ({ children }) => {
     <BookingContext.Provider
       value={{
         serviceList,
+        eventData,
         employeeData,
         chosenService,
         setChosenService,

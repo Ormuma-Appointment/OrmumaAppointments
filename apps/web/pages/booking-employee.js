@@ -59,7 +59,7 @@ const BookingEmployee = () => {
 
   const filteredEmployees = filterEmployees(chosenService);
 
-  console.log("FILTERED EMPLOYEE", employeeData);
+  console.log("FILTERED EMPLOYEE", filteredEmployees);
 
   //console.log(selectedService);
   //console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
@@ -110,7 +110,6 @@ const BookingEmployee = () => {
           employees={employeeData.filter((el) =>
             filteredEmployees.includes(el.name)
           )}
-          employeeFirebaseIDs={0}
         />
       </div>
     </div>

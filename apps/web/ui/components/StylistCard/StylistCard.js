@@ -13,15 +13,15 @@ function StylistCard({
   description,
   index,
   setEmployeeIndex,
-  employeeFirebaseIDs,
+  id,
   ...rest
 }) {
   const router = useRouter();
   const [currentPathA] = useState(router.pathname);
   const [imageShown, setImageShow] = useState(image);
   useEffect(() => {
-    if (employeeFirebaseIDs) {
-      const imageLocation = ref(storage, `images/team/${employeeFirebaseIDs}`);
+    if (id) {
+      const imageLocation = ref(storage, `images/team/${id}`);
 
       getDownloadURL(ref(imageLocation))
         .then((url) => {

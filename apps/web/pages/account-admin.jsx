@@ -105,6 +105,7 @@ const AccountAdmin = () => {
   // get Employees for Employee-Listing from Firebase
   const [salonEmployees, setSalonEmployees] = useState(salon.employees);
   const [employeeIndex, setEmployeeIndex] = useState(0);
+
   async function getEmployeeData() {
     if (adminStoreID) {
       let employeesTemp = [];
@@ -114,7 +115,7 @@ const AccountAdmin = () => {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
-        employeesTemp.push(doc.data());
+        employeesTemp.push({ id: doc.id, ...doc.data() });
       });
       setSalonEmployees(employeesTemp);
     }

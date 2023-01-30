@@ -19,10 +19,14 @@ import {
   updateDoc,
   collection,
 } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
+import short from "short-uuid";
 
 function TeamSetup() {
   const { currentUser, adminStoreID } = useAuthContext();
+  const [imageUpload, setImageUpload] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [hasData, setHasData] = useState(false);
@@ -33,7 +37,7 @@ function TeamSetup() {
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(undefined);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
-  const [employeeFirebaseID, setEmployeeFirebaseID] = useState([]);
+  const [employeeFirebaseIDs, setEmployeeFirebaseIDs] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
 
   // get services from Store Collection services
@@ -72,19 +76,23 @@ function TeamSetup() {
         collection(db, "stores", adminStoreID, "employeeList")
       );
       querySnapshot.forEach((doc) => {
+        const el = { id: doc.id, ...doc.data() };
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
-        employeesTemp.push(doc.data());
+        employeesTemp.push(el);
         idsTemp.push(doc.id);
       });
       setSalonEmployees(employeesTemp);
-      setEmployeeFirebaseID(idsTemp);
+      setEmployeeFirebaseIDs(idsTemp);
     }
     setLoading(false);
   }
   useEffect(() => {
     getEmployeeData();
   }, [adminStoreID]);
+  useEffect(() => {
+    console.log(salonEmployees);
+  }, [salonEmployees]);
 
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
@@ -157,14 +165,20 @@ function TeamSetup() {
         ),
         employee
       );
+      uploadImage(employeeFirebaseID[employeeIndex]);
     } else {
+      let uuid = short.generate();
       const res = await setDoc(
-        doc(db, "stores", adminStoreID, "employeeList", employee.name),
+        doc(db, "stores", adminStoreID, "employeeList", uuid),
         employee
       );
+      uploadImage(uuid);
     }
-    // reload page and clear all fields
-    router.reload(window.location.pathname);
+
+    if (imageUpload === null) {
+      // reloads page and clears all fields
+      router.reload(window.location.pathname);
+    }
   }
 
   function handleBackClick(e, path) {
@@ -195,7 +209,20 @@ function TeamSetup() {
     e.preventDefault();
     setServices(dbServices);
   }
-
+  function uploadImage(docRef) {
+    if (imageUpload === null) return;
+    const imageRef = ref(storage, `images/team/${docRef}`);
+    uploadBytes(imageRef, imageUpload)
+      .then(() => {
+        console.log("Image uploaded!");
+        // reloads page and clears all fields
+        router.reload(window.location.pathname);
+      })
+      .catch(() => console.log(err));
+  }
+  useEffect(() => {
+    console.log(imageUpload);
+  }, [imageUpload]);
   if (!loading) {
     return (
       <div>
@@ -321,7 +348,12 @@ function TeamSetup() {
                       <label>Stylist*Innenfoto:</label>
                     </div>
                     <div className={styles.col70}>
-                      <Input type="file" name="photo" id="logo" />
+                      <Input
+                        type="file"
+                        name="photo"
+                        id="logo"
+                        onChange={(e) => setImageUpload(e.target.files[0])}
+                      />
                     </div>
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import styles from "./StoreCard.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { storage } from "../../../firebase/firebase";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 
 function StoreCard({ data }) {
   const [image, setImage] = useState();
@@ -12,7 +12,6 @@ function StoreCard({ data }) {
 
     getDownloadURL(ref(imageLocation))
       .then((url) => {
-        console.log(url);
         setImage(url);
       })
       .catch((error) => {
@@ -23,14 +22,16 @@ function StoreCard({ data }) {
     <div className={`container ${styles.container}`}>
       <Link href={`/h/${data.data.slug}`}>
         <div className={styles.image}>
-          <Image
-            src={image}
-            alt={`Salon: ${data.data.name}`}
-            layout="fill"
-            objectFit="cover"
-            width={600}
-            height={300}
-          />
+          {image && (
+            <Image
+              src={image}
+              alt={`Salon: ${data.data.name}`}
+              layout="fill"
+              width={600}
+              height={300}
+              priority
+            />
+          )}
         </div>
         <div className={styles.store}>
           <h3>{data.data.name}</h3>

@@ -251,7 +251,7 @@ const StoreSetup = () => {
                 </div>
                 <div className={styles.row}>
                   <div className={styles.col30}>
-                    <label>Logo:*</label>
+                    <label>Salon-Foto:*</label>
                   </div>
                   <div className={styles.col70}>
                     <Input

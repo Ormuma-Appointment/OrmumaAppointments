@@ -16,6 +16,7 @@ export const BookingContextProvider = ({ children }) => {
   const [serviceList, setServiceList] = useState({});
   const [employeeData, setEmployeeData] = useState([]);
   const [selectedEmployee, setSelectedEmployeeData] = useState({});
+  const [eventData, setEventData] = useState([]);
   const [chosenService, setChosenService] = useState(null);
   const [chosen, setChosen] = useState(null);
   const [chosenSlot, setChosenSlot] = useState(null);
@@ -82,9 +83,28 @@ export const BookingContextProvider = ({ children }) => {
     }
   }
 
+  const getEvent = async () => {
+    if (chosen !== undefined && chosen !== null) {
+      const docRef = collection(db, "stores", storeID, "events");
+
+      const docSnap = await getDocs(docRef);
+      docSnap.forEach((doc) => {
+        const el = doc.data();
+        console.log("El", el.employee, chosen.employee);
+        if (el.employee === chosen.employee) {
+          setEventData((prev) => [...prev, el]);
+        }
+        SetIsLoading(false);
+      });
+    }
+  };
+
   useEffect(() => {
     getEmployee();
+    getEvent();
   }, [chosen, storeID]);
+
+  //console.log("eventData", eventData);
 
   //console.log("SELECTED EMPLOYEE", selectedEmployee);
   //console.log("SELECTED SLOT", chosenSlot);
@@ -105,6 +125,7 @@ export const BookingContextProvider = ({ children }) => {
     <BookingContext.Provider
       value={{
         serviceList,
+        eventData,
         employeeData,
         chosenService,
         setChosenService,

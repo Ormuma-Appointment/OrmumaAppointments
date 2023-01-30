@@ -16,7 +16,7 @@
 }
 .welcome h1 {
   margin: auto;
-  text-shadow: 4px 4px 10px white;
+  text-shadow: 6px 6px 6px white;
 }
 .welcome button {
   margin: auto;
@@ -31,7 +31,8 @@
 }
 .image {
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.4;
+  border-bottom: 5px solid var(--primary-color);
 }
 .info {
   width: 100%;

@@ -91,10 +91,6 @@ function TeamSetup() {
   }, [adminStoreID]);
 
   useEffect(() => {
-    console.log(employeeFirebaseIDs);
-  }, [employeeFirebaseIDs]);
-
-  useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
     setSelectedEmployee(salonEmployees[employeeIndex]);
     setShowServices(true);

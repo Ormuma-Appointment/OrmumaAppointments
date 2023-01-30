@@ -13,6 +13,7 @@ function EmployeeOverview({ employees, setEmployeeIndex }) {
             name={el.name}
             description={el.description}
             setEmployeeIndex={setEmployeeIndex}
+            id={employees[index].id}
           />
         );
       })}

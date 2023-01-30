@@ -35,7 +35,7 @@ const StoreSetup = () => {
     const imageRef = ref(storage, `images/stores/${docRef}`);
     uploadBytes(imageRef, imageUpload)
       .then(() => console.log("Image uploaded!"))
-      .catch(() => console.log(err));
+      .catch(() => console.log("Hello from err", err));
   }
   const handleSubmit = async (e, path) => {
     e.preventDefault();

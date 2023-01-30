@@ -45,7 +45,7 @@ export const BookingContextProvider = ({ children }) => {
 
       const docSnap = await getDocs(docRef);
       docSnap.forEach((doc) => {
-        const el = doc.data();
+        const el = { id: doc.id, ...doc.data() };
         // console.log(doc.id, " => ", doc.data());
         setEmployeeData((prev) => [...prev, el]);
         SetIsLoading(false);
@@ -81,7 +81,7 @@ export const BookingContextProvider = ({ children }) => {
       console.log("Mully is the best");
     }
   }
-  
+
   useEffect(() => {
     getEmployee();
   }, [chosen, storeID]);

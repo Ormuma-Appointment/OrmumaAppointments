@@ -90,11 +90,11 @@ export const BookingContextProvider = ({ children }) => {
       const docSnap = await getDocs(docRef);
       docSnap.forEach((doc) => {
         const el = doc.data();
-        console.log("El", el.employee);
-        // console.log(doc.id, " => ", doc.data());
-        setEventData((prev) => [...prev, el]);
+        console.log("El", el.employee, chosen.employee);
+        if (el.employee === chosen.employee) {
+          setEventData((prev) => [...prev, el]);
+        }
         SetIsLoading(false);
-        // empArray.push(el);
       });
     }
   };

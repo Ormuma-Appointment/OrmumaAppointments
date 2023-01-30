@@ -76,9 +76,10 @@ function TeamSetup() {
         collection(db, "stores", adminStoreID, "employeeList")
       );
       querySnapshot.forEach((doc) => {
+        const el = { id: doc.id, ...doc.data() };
         // doc.data() is never undefined for query doc snapshots
         // console.log(doc.id, " => ", doc.data());
-        employeesTemp.push(doc.data());
+        employeesTemp.push(el);
         idsTemp.push(doc.id);
       });
       setSalonEmployees(employeesTemp);
@@ -89,6 +90,9 @@ function TeamSetup() {
   useEffect(() => {
     getEmployeeData();
   }, [adminStoreID]);
+  useEffect(() => {
+    console.log(salonEmployees);
+  }, [salonEmployees]);
 
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
@@ -441,7 +445,6 @@ function TeamSetup() {
               <EmployeeOverview
                 employees={salonEmployees}
                 setEmployeeIndex={setEmployeeIndex}
-                employeeFirebaseIDs={employeeFirebaseIDs}
               />
             </div>
           </div>

@@ -7,6 +7,18 @@ import Button from "../ui/components/Button/Button";
 import AppointmentConfirmation from "../ui/components/AppointmentConfirmation/AppointmentConfirmation";
 import { BookingContext } from "../context/BookingContext";
 import { useRouter } from "next/router";
+import { useAuthContext } from "../context/AuthContext";
+import moment from "moment";
+import { db } from "../firebase/firebase";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 const BookingConfirmation = () => {
   const [confirmed, setConfirmed] = useState(false);
@@ -14,14 +26,48 @@ const BookingConfirmation = () => {
   const { chosenService, chosen, chosenSlot, storeID, slotToString } =
     useContext(BookingContext);
 
-  const handleBookingConfirmation = () => {
-    setConfirmed(!confirmed);
+  const { currentUser } = useAuthContext();
+
+  let user = {
+    id: currentUser.uid,
+    name: currentUser.displayName,
   };
+
+  console.log("currentUser", user);
+
+  let event = { ...chosen, ...chosenService, ...chosenSlot, ...user }; // => have to go to collection events
+
+  async function handleBookingConfirmation(e) {
+    e.preventDefault();
+    setConfirmed(!confirmed);
+
+    const newEventRef = doc(collection(db, "stores", storeID, "events"));
+
+    await setDoc(newEventRef, event);
+  }
 
   const router = useRouter();
 
-  let event = { ...chosen, ...chosenService, ...chosenSlot }; // => have to go to collection events
+  let momentDate = moment(chosenSlot.date).format("YYYY-MM-DD");
 
+  let appointments = {
+    "2023-02-05": [
+      ["10:00", "10:30 "],
+      ["10:30", "11:00"],
+    ],
+    "2023-01-25": [["10:00", "10:30"]],
+  };
+
+  console.log("moment date: " + momentDate);
+
+  if (appointments[momentDate] === undefined) {
+    console.log("date not there");
+    appointments[momentDate] = [chosenSlot.slot];
+  } else {
+    appointments[momentDate].push(chosenSlot.slot);
+  }
+
+  console.log("New appointments", appointments);
   /*1. We have to send the event inside collection events
   looking like that 
   events =  [
@@ -35,14 +81,25 @@ const BookingConfirmation = () => {
       service:"cut",
       slot:['11:00', '11:45'],
       start: "11:00" 
+      user: currentuserid
     }
   ]
   2. We have to send the date and the slot inside the employee appointements:
    inside collection employee add something loking like : 
   appointment : {}
   when I have a new event => 
+
+appointments : [
+  {id: date,
+  appointment : [{id: appointmentid,
+    slot: [startTime, endTime]
+  }, ]}
+]
+
   appointments : {
-    date: [[startTime, endTime]]
+    date: [{id: ijdijd,
+      slot: [startTime, endTime]
+    }]
   }
   if new event at the same date = >
   appointments : {

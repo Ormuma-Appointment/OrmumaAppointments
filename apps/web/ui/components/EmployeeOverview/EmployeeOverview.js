@@ -2,7 +2,11 @@ import React from "react";
 import styles from "./EmployeeOverview.module.css";
 import StylistCard from "../StylistCard/StylistCard";
 
-function EmployeeOverview({ employees, setEmployeeIndex }) {
+function EmployeeOverview({
+  employees,
+  setEmployeeIndex,
+  employeeFirebaseIDs,
+}) {
   return (
     <div className={styles.employees}>
       {employees.map((el, index) => {
@@ -13,6 +17,7 @@ function EmployeeOverview({ employees, setEmployeeIndex }) {
             name={el.name}
             description={el.description}
             setEmployeeIndex={setEmployeeIndex}
+            employeeFirebaseIDs={employeeFirebaseIDs[index]}
           />
         );
       })}

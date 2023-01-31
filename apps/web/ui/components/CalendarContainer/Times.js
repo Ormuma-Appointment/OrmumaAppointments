@@ -16,6 +16,7 @@ const Times = (props) => {
   };
 
   let selectedDay = props.date.getDay();
+  console.log("COUCOU", selectedDay, selectedEmployee);
 
   console.log("eventData", eventData);
   let filteredEventData = eventData.filter((event) =>
@@ -38,7 +39,7 @@ const Times = (props) => {
   // inside x change the number dynamicly with the day of the week
 
   //check in the appointment of the employee if already have appoinment on this date, if yes add them to the break time
-
+  console.log("heyyy", selectedEmployee.workingTime[selectedDay].breakStart);
   const x = {
     nextSlot: chosenService.duration,
     breakTime: [
@@ -57,11 +58,16 @@ const Times = (props) => {
   let endTime = moment(x.endTime, "HH:mm");
 
   function isInBreak(slotTime, breakTimes) {
-    return breakTimes.some((br) => {
-      return (
-        slotTime >= moment(br[0], "HH:mm") && slotTime < moment(br[1], "HH:mm")
-      );
-    });
+    if (breakTimes !== null) {
+      return breakTimes.some((br) => {
+        return (
+          slotTime >= moment(br[0], "HH:mm") &&
+          slotTime < moment(br[1], "HH:mm")
+        );
+      });
+    } else {
+      console.log("coucou");
+    }
   }
 
   let times = [];

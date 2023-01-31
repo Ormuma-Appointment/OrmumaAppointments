@@ -22,7 +22,6 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
     let target_name = e.target.name;
     let weekday = target_name.split("_")[0];
     let start_end = target_name.split("_")[1];
-    // find which day needs to be updated
 
     // find day using index and correct timeslot to paste  selected input in
     setTimes((prev) =>
@@ -57,7 +56,8 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   return (
     <div className={styles.container}>
       {openDays.map((el, index) => {
-        console.log(times.find((item) => item.label === el));
+        let rowToUpdate = times.findIndex((item) => item.label === el);
+
         return (
           <div key={index}>
             <div
@@ -69,12 +69,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                 time={start}
                 day={el}
                 hasData={hasData}
-                value={
-                  localHasData
-                    ? localTimes[times.findIndex((item) => item.label === el)]
-                        .start
-                    : "-"
-                }
+                value={localHasData ? localTimes[rowToUpdate].start : "-"}
               />
               <SelectElement
                 time={end}

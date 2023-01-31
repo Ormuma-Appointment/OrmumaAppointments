@@ -161,11 +161,11 @@ function TeamSetup() {
           "stores",
           adminStoreID,
           "employeeList",
-          employeeFirebaseID[employeeIndex]
+          employeeFirebaseIDs[employeeIndex]
         ),
         employee
       );
-      uploadImage(employeeFirebaseID[employeeIndex]);
+      uploadImage(employeeFirebaseIDs[employeeIndex]);
     } else {
       let uuid = short.generate();
       const res = await setDoc(

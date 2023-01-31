@@ -16,34 +16,7 @@ const Times = (props) => {
   };
 
   let selectedDay = props.date.getDay();
-  //console.log("COUCOU", selectedDay, selectedEmployee);
 
-  //console.log("eventData", eventData);
-  //  let filteredEventData = eventData.filter((event) =>
-  //    console.log(
-  //      "HERE",
-  //      moment(event.date.toDate()).format("YYYY-MM-DD") ===
-  //        moment(props.date).format("YYYY-MM-DD")
-  //    )
-  //  );
-  //  console.log("filteredEventData", filteredEventData);
-  //let selectedDay = props.date.split("").slice(0, 2).join("");
-  //console.log(selectedDay);
-  // const x = {
-  //   nextSlot: 45,
-  //   breakTime: [
-  //     ["11:00", "14:00"],
-  //     ["16:00", "18:00"],
-  //   ],
-  //   startTime: "8:00",
-  //   endTime: "20:00",
-  // };
-
-  //check with the date selected which date of the week is selected
-  // inside x change the number dynamicly with the day of the week
-
-  //check in the appointment of the employee if already have appoinment on this date, if yes add them to the break time
-  //console.log("heyyy", selectedEmployee.workingTime[selectedDay].breakStart);
   const x = {
     nextSlot: chosenService.duration,
     breakTime: [
@@ -61,15 +34,11 @@ const Times = (props) => {
       moment(event.date.toDate()).format("YYYY-MM-DD") ===
       moment(props.date).format("YYYY-MM-DD")
     ) {
-      //console.log("Break", x.breakTime);
-      //console.log("slot", event.slot);
       x.breakTime.push(event.slot);
     }
   });
 
   console.log("x", x);
-
-  //console.log(selectedEmployee);
 
   let slotTime = moment(x.startTime, "HH:mm");
   let endTime = moment(x.endTime, "HH:mm");
@@ -96,10 +65,6 @@ const Times = (props) => {
   }
 
   const eventTime = (startTime, duration) => {
-    //date with start time in milliseconds
-    // result + duration in milliseconds
-    // trznsforme the result in date and time again
-
     const endTime = moment(startTime, "HH🇲🇲")
       .add(duration, "minutes")
       .format("HH:mm");
@@ -107,16 +72,6 @@ const Times = (props) => {
   };
 
   let endTimeSlot = eventTime(event, chosenService.duration);
-  //console.log("EVENNNNT", endTimeSlot);
-  //let momentEvent = moment(event);
-  //console.log("start time", momentEvent.add(2, "hours"));
-
-  //const endEventTime = moment(event, "HH:ss")
-  //  .add(chosenService.duration, "minutes")
-  //  .format("HH:mm");
-
-  // console.log(endEventTime, "endEventTime");
-  //console.log("serivce duration", chosenService.duration);
 
   let selectedSlot = {
     slot: [event, endTimeSlot],
@@ -129,7 +84,6 @@ const Times = (props) => {
 
   useEffect(() => {
     if (event) {
-      // console.log("ICI", eventTime(event, chosenService.duration));
       setChosenSlot(selectedSlot);
     }
   }, [event]);

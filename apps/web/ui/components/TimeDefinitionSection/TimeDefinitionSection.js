@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./TimeDefinitionSection.module.css";
 import SelectElement from "../SelectElement/SelectElement";
-import { collection } from "firebase/firestore";
-import { connectAuthEmulator } from "firebase/auth";
 
 function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   const [localTimes, setLocalTimes] = useState(times);
@@ -20,32 +18,15 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   let breakStart = "breakStart";
   let breakEnd = "breakEnd";
 
-  function handleChange(e) {
+  function handleChange(e, el) {
     let target_name = e.target.name;
     let weekday = target_name.split("_")[0];
     let start_end = target_name.split("_")[1];
-    // find which day needs to be updated
-    let index;
-    if (weekday === "Mo") {
-      index = 1;
-    } else if (weekday === "Di") {
-      index = 2;
-    } else if (weekday === "Mi") {
-      index = 3;
-    } else if (weekday === "Do") {
-      index = 4;
-    } else if (weekday === "Fr") {
-      index = 5;
-    } else if (weekday === "Sa") {
-      index = 6;
-    } else if (weekday === "So") {
-      index = 0;
-    }
 
-    //find day using index and correct timeslot to paste  selected input in
+    // find day using index and correct timeslot to paste  selected input in
     setTimes((prev) =>
       prev.map((time) => {
-        if (time.day !== index) {
+        if (time.label !== weekday) {
           return time;
         } else if (start_end === "start") {
           return {
@@ -75,34 +56,54 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   return (
     <div className={styles.container}>
       {openDays.map((el, index) => {
+        let rowToUpdate = times.findIndex((item) => item.label === el);
+
         return (
           <div key={index}>
-            <div className={styles.input_group} onChange={handleChange}>
+            <div
+              className={styles.input_group}
+              onChange={(e) => handleChange(e, el)}
+            >
               <p>{el}</p>
               <SelectElement
                 time={start}
                 day={el}
                 hasData={hasData}
-                value={localHasData ? localTimes[index].start : "-"}
+                value={localHasData ? localTimes[rowToUpdate].start : "-"}
               />
               <SelectElement
                 time={end}
                 day={el}
                 hasData={hasData}
-                value={localHasData ? localTimes[index].end : "-"}
+                value={
+                  localHasData
+                    ? localTimes[times.findIndex((item) => item.label === el)]
+                        .end
+                    : "-"
+                }
               />
               <p>Pause</p>
               <SelectElement
                 time={breakStart}
                 day={el}
                 hasData={hasData}
-                value={localHasData ? localTimes[index].breakStart : "-"}
+                value={
+                  localHasData
+                    ? localTimes[times.findIndex((item) => item.label === el)]
+                        .breakStart
+                    : "-"
+                }
               />
               <SelectElement
                 time={breakEnd}
                 day={el}
                 hasData={hasData}
-                value={localHasData ? localTimes[index].breakEnd : "-"}
+                value={
+                  localHasData
+                    ? localTimes[times.findIndex((item) => item.label === el)]
+                        .breakEnd
+                    : "-"
+                }
               />
             </div>
           </div>

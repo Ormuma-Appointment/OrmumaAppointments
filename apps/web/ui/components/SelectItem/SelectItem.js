@@ -15,6 +15,7 @@ function SelectItem(props) {
     plus,
     edit,
     selected,
+    employeeId,
     ...rest
   } = props;
 
@@ -27,6 +28,7 @@ function SelectItem(props) {
         employee,
         price,
         duration,
+        employeeId,
       });
     }
   };

@@ -57,7 +57,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     handleRead();
   }, [storeID]);
-  console.log(chosen, "chosen");
+  //console.log(chosen, "chosen");
 
   async function getEmployee() {
     if (chosen !== undefined && chosen !== null) {

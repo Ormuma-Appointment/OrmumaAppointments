@@ -16,13 +16,17 @@ const Times = (props) => {
   };
 
   let selectedDay = props.date.getDay();
-  console.log("COUCOU", selectedDay, selectedEmployee);
+  //console.log("COUCOU", selectedDay, selectedEmployee);
 
-  console.log("eventData", eventData);
-  let filteredEventData = eventData.filter((event) =>
-    console.log("HERE", event.date.toDate(), props.date)
-  );
-  console.log("filteredEventData", filteredEventData);
+  //console.log("eventData", eventData);
+  //  let filteredEventData = eventData.filter((event) =>
+  //    console.log(
+  //      "HERE",
+  //      moment(event.date.toDate()).format("YYYY-MM-DD") ===
+  //        moment(props.date).format("YYYY-MM-DD")
+  //    )
+  //  );
+  //  console.log("filteredEventData", filteredEventData);
   //let selectedDay = props.date.split("").slice(0, 2).join("");
   //console.log(selectedDay);
   // const x = {
@@ -39,7 +43,7 @@ const Times = (props) => {
   // inside x change the number dynamicly with the day of the week
 
   //check in the appointment of the employee if already have appoinment on this date, if yes add them to the break time
-  console.log("heyyy", selectedEmployee.workingTime[selectedDay].breakStart);
+  //console.log("heyyy", selectedEmployee.workingTime[selectedDay].breakStart);
   const x = {
     nextSlot: chosenService.duration,
     breakTime: [
@@ -51,6 +55,19 @@ const Times = (props) => {
     startTime: selectedEmployee.workingTime[selectedDay].start,
     endTime: selectedEmployee.workingTime[selectedDay].end,
   };
+
+  eventData.forEach((event) => {
+    if (
+      moment(event.date.toDate()).format("YYYY-MM-DD") ===
+      moment(props.date).format("YYYY-MM-DD")
+    ) {
+      //console.log("Break", x.breakTime);
+      //console.log("slot", event.slot);
+      x.breakTime.push(event.slot);
+    }
+  });
+
+  console.log("x", x);
 
   //console.log(selectedEmployee);
 

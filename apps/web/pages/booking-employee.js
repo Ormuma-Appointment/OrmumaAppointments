@@ -54,12 +54,12 @@ const BookingEmployee = () => {
         );
       });
     });
-    return filteredEmployees.map((employee) => employee.name);
+    return filteredEmployees.map((employee) => [employee.id, employee.name]);
   }
 
   const filteredEmployees = filterEmployees(chosenService);
 
-  console.log("FILTERED EMPLOYEE", filteredEmployees);
+  //console.log("FILTERED EMPLOYEE", filteredEmployees);
 
   //console.log(selectedService);
   //console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
@@ -85,7 +85,8 @@ const BookingEmployee = () => {
               return (
                 <SelectItem
                   plus
-                  employee={employee}
+                  employee={employee[1]}
+                  employeeId={employee[0]}
                   key={id}
                   setSelected={setSelected}
                 />

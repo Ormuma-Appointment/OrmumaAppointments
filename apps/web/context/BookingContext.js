@@ -66,7 +66,7 @@ export const BookingContextProvider = ({ children }) => {
         "stores",
         storeID,
         "employeeList",
-        chosen && chosen.employee
+        chosen && chosen.employeeId
       );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {

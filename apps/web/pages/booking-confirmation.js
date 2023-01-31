@@ -34,10 +34,7 @@ const BookingConfirmation = () => {
     name: currentUser.displayName,
   };
 
-  console.log("currentUser", user);
-
   let event = { ...chosen, ...chosenService, ...chosenSlot, ...user }; // => have to go to collection events
-
   let momentDate = moment(chosenSlot.date).format("YYYY-MM-DD");
   async function handleBookingConfirmation(e) {
     e.preventDefault();
@@ -58,7 +55,7 @@ const BookingConfirmation = () => {
     "2023-01-25": [["10:00", "10:30"]],
   };
 
-  console.log("moment date: " + momentDate);
+  // console.log("moment date: " + momentDate);
 
   if (appointments[momentDate] === undefined) {
     console.log("date not there");
@@ -67,7 +64,7 @@ const BookingConfirmation = () => {
     appointments[momentDate].push(chosenSlot.slot);
   }
 
-  console.log("New appointments", appointments);
+  /// console.log("New appointments", appointments);
   /*1. We have to send the event inside collection events
   looking like that 
   events =  [

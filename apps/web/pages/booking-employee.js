@@ -11,8 +11,6 @@ import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import { useRouter } from "next/router";
 
 const BookingEmployee = () => {
-  //  const [isLoading, SetIsLoading] = useState(true);
-  //const [employees, setEmployees] = useState([]);
   const [selected, setSelected] = useState(null);
   const {
     employeeData,
@@ -40,9 +38,6 @@ const BookingEmployee = () => {
     }
   }, [storeID]);
 
-  //
-  // const selectedService = router.query;
-  //
   function filterEmployees(selected) {
     let filteredEmployees = employeeData.filter((employee) => {
       return employee.services.some((category) => {
@@ -58,11 +53,6 @@ const BookingEmployee = () => {
   }
 
   const filteredEmployees = filterEmployees(chosenService);
-
-  //console.log("FILTERED EMPLOYEE", filteredEmployees);
-
-  //console.log(selectedService);
-  //console.log("CHOSEN SERVICE FROM EMPLOYEE", chosenService);
 
   setChosen(selected);
 

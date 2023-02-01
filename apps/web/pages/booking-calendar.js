@@ -40,10 +40,11 @@ const BookingCalendar = () => {
       });
       setChosen({
         employee: query.employee,
+        employeeId: query.employeeId,
       });
     }
   }, [storeID]);
-
+  console.log(chosen);
   function handleBookingClick() {
     router.push("/booking-confirmation");
   }

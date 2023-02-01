@@ -1,9 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
-import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
-import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import CalendarContainer from "../ui/components/CalendarContainer/CalendarContainer";
 import { BookingContext } from "../context/BookingContext";
@@ -42,13 +40,10 @@ const BookingCalendar = () => {
       });
     }
   }, [storeID]);
-  console.log(chosen);
+
   function handleBookingClick() {
     router.push("/booking-confirmation");
   }
-  //const [selectedTime, setSelectedTime] = useState(null);
-
-  //WE HAVE TO FIND A LOGIC HERE - maybe with moment.js
 
   return (
     <div className={styles.pageContainer}>

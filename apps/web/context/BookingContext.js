@@ -1,14 +1,6 @@
-import React, { createContext, useEffect, useState, useContext } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
-import {
-  collection,
-  doc,
-  setDoc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
@@ -43,24 +35,22 @@ export const BookingContextProvider = ({ children }) => {
   const handleRead = async () => {
     if (storeID) {
       const docRef = collection(db, "stores", storeID, "employeeList");
-
       const docSnap = await getDocs(docRef);
       docSnap.forEach((doc) => {
         const el = { id: doc.id, ...doc.data() };
         // console.log(doc.id, " => ", doc.data());
         setEmployeeData((prev) => [...prev, el]);
         SetIsLoading(false);
-        // empArray.push(el);
       });
     }
   };
   useEffect(() => {
     handleRead();
   }, [storeID]);
-  //console.log(chosen, "chosen");
 
   async function getEmployee() {
-    if (chosen !== undefined && chosen !== null) {
+    console.log(chosen);
+    if (chosen !== undefined && chosen !== null && storeID) {
       const docRef = doc(
         db,
         "stores",
@@ -84,7 +74,7 @@ export const BookingContextProvider = ({ children }) => {
   }
 
   const getEvent = async () => {
-    if (chosen !== undefined && chosen !== null) {
+    if (chosen !== undefined && chosen !== null && storeID) {
       const docRef = collection(db, "stores", storeID, "events");
       const docSnap = await getDocs(docRef);
       let temp = [];
@@ -93,9 +83,7 @@ export const BookingContextProvider = ({ children }) => {
         // console.log("El", el.employee, chosen.employee);
         if (el.employee === chosen.employee) {
           console.log("eventData", eventData);
-          // setEventData((prev) => [...prev, el]);
           temp.push(el);
-          // setEventData((prev) => [...prev, el]);
         }
         setEventData(temp);
         SetIsLoading(false);
@@ -107,11 +95,6 @@ export const BookingContextProvider = ({ children }) => {
     getEmployee();
     getEvent();
   }, [chosen, storeID]);
-
-  //console.log("eventData", eventData);
-
-  //console.log("SELECTED EMPLOYEE", selectedEmployee);
-  //console.log("SELECTED SLOT", chosenSlot);
 
   let slotToString = "";
 

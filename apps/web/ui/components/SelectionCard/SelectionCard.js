@@ -42,6 +42,7 @@ const SelectionCard = (props) => {
             duration: chosenService.duration,
             price: chosenService.price,
             employee: chosen.employee,
+            employeeId: chosen.employeeId,
           },
         });
       } else {

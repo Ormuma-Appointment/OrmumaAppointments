@@ -1,4 +1,14 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { db } from "../firebase/firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
 import calendar from "../ui/components/assets/calendar.svg";
@@ -7,9 +17,64 @@ import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
 import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import { useRouter } from "next/router";
+import moment from "moment";
 
 const Account = () => {
   const router = useRouter();
+  const [eventsData, setEventsData] = useState([]);
+  const [passtEvents, setPasstEvents] = useState([]);
+  const [nextEvents, setNextEvents] = useState([]);
+  const [isLoading, SetIsLoading] = useState(true);
+
+  const { currentUser } = useAuthContext();
+
+  let user = {
+    userId: currentUser.uid,
+    userName: currentUser.displayName,
+  };
+
+  console.log(user);
+
+  let currentMomentDate = moment(new Date()).format("YYYY-MM-DD");
+
+  const getEvent = async () => {
+    const q = query(
+      collection(db, "events"),
+      where("UserId", "==", user.userId)
+    );
+    const docSnap = await getDocs(q);
+    let temp = [];
+    let passtEvents = [];
+    let nextEvents = [];
+    docSnap.forEach((doc) => {
+      const el = doc.data();
+      console.log("El", el);
+      temp.push(el);
+
+      setEventsData(temp);
+
+      // console.log(
+      //   currentMomentDate <= moment(el.date.toDate()).format("YYYY-MM-DD")
+      // );
+      if (currentMomentDate <= moment(el.date.toDate()).format("YYYY-MM-DD")) {
+        nextEvents.push(el);
+      } else {
+        passtEvents.push(el);
+      }
+      setNextEvents(nextEvents);
+      setPasstEvents(passtEvents);
+      SetIsLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    getEvent();
+  }, [user.userId]);
+
+  console.log("eventsData", eventsData);
+  console.log("nextEvents", nextEvents);
+  console.log("pastEvents", passtEvents);
+
   const pastAppointments = [
     {
       customer: "Andrea Berg",
@@ -28,7 +93,7 @@ const Account = () => {
           icon={calendar}
           size="medium"
           variant="primary"
-          onClick={() => router.push("/booking-service")}
+          onClick={() => router.push("/")}
         >
           Termin buchen
         </Button>

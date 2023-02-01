@@ -31,7 +31,7 @@
 }
 
 .pageContainer > div {
-  margin: 2rem auto;
+  margin: 2rem;
 }
 
 /*Tablet */
@@ -51,7 +51,7 @@
 
 @media screen and (min-width: 1320px) {
   .pageContainer {
-    width: 80%;
+    width: 100%;
     padding: 3rem 0 10rem;
     display: flex;
     flex-direction: column;

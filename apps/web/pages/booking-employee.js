@@ -54,6 +54,8 @@ const BookingEmployee = () => {
 
   const filteredEmployees = filterEmployees(chosenService);
 
+  console.log(employeeData, filteredEmployees);
+
   setChosen(selected);
 
   return (
@@ -99,7 +101,9 @@ const BookingEmployee = () => {
         <h2>Unsere Mitarbeiter</h2>
         <EmployeeOverview
           employees={employeeData.filter((el) =>
-            filteredEmployees.includes(el.name)
+            filteredEmployees.map((employee) => {
+              employee.includes(el.name);
+            })
           )}
         />
       </div>

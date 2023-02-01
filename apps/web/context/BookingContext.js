@@ -1,6 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
-import { collection, doc, getDoc, getDocs, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
@@ -49,7 +56,6 @@ export const BookingContextProvider = ({ children }) => {
   }, [storeID]);
 
   async function getEmployee() {
-    console.log(chosen);
     if (chosen !== undefined && chosen !== null && storeID) {
       const docRef = doc(
         db,
@@ -77,13 +83,14 @@ export const BookingContextProvider = ({ children }) => {
     if (chosen !== undefined && chosen !== null && storeID) {
       const q = query(
         collection(db, "events"),
-        where("storeId", "==", storeID)
+        where("storeID", "==", storeID)
       );
       const docSnap = await getDocs(q);
       let temp = [];
       docSnap.forEach((doc) => {
         const el = doc.data();
-        // console.log("El", el.employee, chosen.employee);
+        console.log(el);
+        console.log("El", el.employeeId, chosen.employeeId);
         if (el.employee === chosen.employee) {
           console.log("eventData", eventData);
           temp.push(el);

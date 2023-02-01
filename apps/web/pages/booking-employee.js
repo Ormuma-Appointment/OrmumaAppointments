@@ -3,8 +3,6 @@ import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
-import { db } from "../firebase/firebase";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { BookingContext } from "../context/BookingContext";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
@@ -34,6 +32,7 @@ const BookingEmployee = () => {
         duration: query.duration,
         price: query.price,
         category: query.category,
+        storeID: storeID,
       });
     }
   }, [storeID]);

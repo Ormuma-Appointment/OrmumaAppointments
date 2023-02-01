@@ -22,10 +22,8 @@ const BookingCalendar = () => {
     storeID,
     slotToString,
   } = useContext(BookingContext);
-
-  //console.log("chosen slot from calendar", chosenSlot);
-
   const router = useRouter();
+
   const query = router.query;
   if (!storeID) {
     setStoreID(query.storeid);

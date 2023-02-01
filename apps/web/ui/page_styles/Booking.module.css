@@ -1,14 +1,21 @@
-.bookingContainer {
+.bookingContainer,
+.uniqueContainer {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.bookingContainer > * {
+.bookingContainer > *,
+.uniqueContainer > * {
   width: 100%;
   padding: 1rem;
 }
-
+.uniqueContainer > * {
+  max-width: 35rem;
+  margin: 0 auto;
+  align-self: center;
+}
 .bookingContainer .selectItemText {
   font-size: 0.8rem;
   margin-bottom: 1rem;
@@ -17,17 +24,11 @@
 
 .buttonsContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   justify-content: space-evenly;
 }
 .buttonsContainer button {
   margin-bottom: 1rem;
-}
-
-.uniqueContainer {
-  justify-content: center;
-  margin: auto;
-  width: 80%;
 }
 
 .center {
@@ -41,16 +42,13 @@
 
 /*Tablet */
 @media screen and (min-width: 700px) {
-  .bookingContainer {
+  .bookingContainer,
+  .uniqueContainer {
     flex-direction: row;
     align-items: flex-start;
   }
   .bookingContainer > * {
     width: 48.5%;
-  }
-
-  .uniqueContainer {
-    width: 100%;
   }
 }
 

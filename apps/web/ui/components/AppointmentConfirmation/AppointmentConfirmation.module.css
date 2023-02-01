@@ -1,5 +1,10 @@
 .confirmationContainer {
   text-align: center;
-  padding: 4rem;
+  padding: 2rem;
+}
+.confirmationContainer p {
   margin-bottom: 2rem;
+}
+.confirmationContainer p b {
+  color: var(--primary-color);
 }

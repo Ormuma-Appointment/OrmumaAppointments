@@ -14,7 +14,6 @@ const SelectionCard = (props) => {
   const { storeID, chosenService, chosen } = useContext(BookingContext);
 
   function handleBookingClick() {
-    console.log(router.pathname);
     if (router.pathname === "/booking-service") {
       if (storeID) {
         router.push({

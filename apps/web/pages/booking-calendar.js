@@ -43,7 +43,6 @@ const BookingCalendar = () => {
   function handleBookingClick() {
     router.push("/booking-confirmation");
   }
-  console.log("chosenService", chosenService);
 
   return (
     <div className={styles.pageContainer}>

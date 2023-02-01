@@ -89,10 +89,9 @@ export const BookingContextProvider = ({ children }) => {
       let temp = [];
       docSnap.forEach((doc) => {
         const el = doc.data();
-        console.log(el);
-        console.log("El", el.employeeId, chosen.employeeId);
+        // console.log("El", el.employeeId, chosen.employeeId);
         if (el.employee === chosen.employee) {
-          console.log("eventData", eventData);
+          // console.log("eventData", eventData);
           temp.push(el);
         }
         setEventData(temp);

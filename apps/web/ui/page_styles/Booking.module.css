@@ -52,6 +52,7 @@
 @media screen and (min-width: 1320px) {
   .pageContainer {
     width: 80%;
+    margin: auto;
     padding: 3rem 0 10rem;
     display: flex;
     flex-direction: column;

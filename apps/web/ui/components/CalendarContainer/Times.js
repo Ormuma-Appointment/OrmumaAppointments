@@ -80,7 +80,6 @@ const Times = (props) => {
     duration: chosenService.duration,
     end: endTimeSlot,
   };
-  console.log("selectedSlot", selectedSlot);
 
   useEffect(() => {
     if (event) {
@@ -90,9 +89,9 @@ const Times = (props) => {
 
   return (
     <div className={styles.times}>
-      {times.map((times) => {
+      {times.map((times, index) => {
         return (
-          <div>
+          <div key={index}>
             <button onClick={(e) => displayInfo(e)}> {times} </button>
           </div>
         );

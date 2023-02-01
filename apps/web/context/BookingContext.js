@@ -86,14 +86,18 @@ export const BookingContextProvider = ({ children }) => {
   const getEvent = async () => {
     if (chosen !== undefined && chosen !== null) {
       const docRef = collection(db, "stores", storeID, "events");
-
       const docSnap = await getDocs(docRef);
+      let temp = [];
       docSnap.forEach((doc) => {
         const el = doc.data();
-        console.log("El", el.employee, chosen.employee);
+        // console.log("El", el.employee, chosen.employee);
         if (el.employee === chosen.employee) {
-          setEventData((prev) => [...prev, el]);
+          console.log("eventData", eventData);
+          // setEventData((prev) => [...prev, el]);
+          temp.push(el);
+          // setEventData((prev) => [...prev, el]);
         }
+        setEventData(temp);
         SetIsLoading(false);
       });
     }

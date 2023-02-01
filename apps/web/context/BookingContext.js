@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, where } from "firebase/firestore";
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
@@ -75,8 +75,11 @@ export const BookingContextProvider = ({ children }) => {
 
   const getEvent = async () => {
     if (chosen !== undefined && chosen !== null && storeID) {
-      const docRef = collection(db, "stores", storeID, "events");
-      const docSnap = await getDocs(docRef);
+      const q = query(
+        collection(db, "events"),
+        where("storeId", "==", storeID)
+      );
+      const docSnap = await getDocs(q);
       let temp = [];
       docSnap.forEach((doc) => {
         const el = doc.data();

@@ -16,10 +16,10 @@ function SelectItem(props) {
     edit,
     selected,
     employeeId,
+    setSelected,
+    storeID,
     ...rest
   } = props;
-
-  const setSelected = props.setSelected;
 
   const handleSelected = () => {
     if (plus) {
@@ -29,6 +29,7 @@ function SelectItem(props) {
         price,
         duration,
         employeeId,
+        storeID,
       });
     }
   };

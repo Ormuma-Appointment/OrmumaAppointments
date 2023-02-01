@@ -53,9 +53,6 @@ const BookingEmployee = () => {
   }
 
   const filteredEmployees = filterEmployees(chosenService);
-
-  console.log(employeeData, filteredEmployees);
-
   setChosen(selected);
 
   return (
@@ -81,6 +78,7 @@ const BookingEmployee = () => {
                   employeeId={employee[0]}
                   key={id}
                   setSelected={setSelected}
+                  storeID={storeID}
                 />
               );
             })

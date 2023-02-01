@@ -32,9 +32,7 @@ const BookingConfirmation = () => {
   async function handleBookingConfirmation(e) {
     e.preventDefault();
     setConfirmed(!confirmed);
-
-    const newEventRef = doc(collection(db, "stores", storeID, "events"));
-
+    const newEventRef = doc(collection(db, "events"));
     await setDoc(newEventRef, event);
   }
 

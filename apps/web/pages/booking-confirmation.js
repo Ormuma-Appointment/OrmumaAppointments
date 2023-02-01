@@ -23,8 +23,8 @@ const BookingConfirmation = () => {
   const { currentUser } = useAuthContext();
 
   let user = {
-    id: currentUser.uid,
-    name: currentUser.displayName,
+    UserId: currentUser.uid,
+    UserName: currentUser.displayName,
   };
 
   let event = { ...chosen, ...chosenService, ...chosenSlot, ...user }; // => have to go to collection events

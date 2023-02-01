@@ -57,7 +57,6 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
     <div className={styles.container}>
       {openDays.map((el, index) => {
         let rowToUpdate = times.findIndex((item) => item.label === el);
-
         return (
           <div key={index}>
             <div
@@ -70,6 +69,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                 day={el}
                 hasData={hasData}
                 value={localHasData ? localTimes[rowToUpdate].start : "-"}
+                label="Start"
               />
               <SelectElement
                 time={end}
@@ -81,8 +81,9 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                         .end
                     : "-"
                 }
+                label="Ende"
               />
-              <p>Pause</p>
+              <p>Pause:</p>
               <SelectElement
                 time={breakStart}
                 day={el}
@@ -93,6 +94,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                         .breakStart
                     : "-"
                 }
+                label="P.Start"
               />
               <SelectElement
                 time={breakEnd}
@@ -104,6 +106,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                         .breakEnd
                     : "-"
                 }
+                label="P.Ende"
               />
             </div>
           </div>

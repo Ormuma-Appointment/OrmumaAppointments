@@ -6,10 +6,6 @@
 .setUpForm {
   width: 100%;
 }
-
-.setUpForm label {
-  color: var(--primary-color);
-}
 .intro {
   margin-bottom: 3rem;
 }
@@ -28,7 +24,7 @@
   margin-bottom: 1rem;
 }
 .row_small .col70 {
-margin-top: -1rem;
+  margin-top: -1rem;
 }
 .adresse,
 .opening {
@@ -85,7 +81,7 @@ margin-top: -1rem;
   }
   .row_small .col70 {
     margin-top: inherit;
-    }
+  }
   .col30 {
     float: left;
     width: 20%;

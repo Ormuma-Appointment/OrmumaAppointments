@@ -13,10 +13,6 @@
   width: 95vw;
 }
 
-.container label {
-  color: var(--primary-color);
-}
-
 .row {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SelectElement.module.css";
 
-function SelectElement({ day, time, value }) {
+function SelectElement({ day, time, value, label }) {
   const [localValue, setLocalValue] = useState(value);
 
   useEffect(() => {
@@ -51,6 +51,7 @@ function SelectElement({ day, time, value }) {
 
   return (
     <div className={styles.container}>
+      <label>{label}</label>
       <select
         name={`${day}_${time}`}
         id="time"

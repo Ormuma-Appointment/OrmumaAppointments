@@ -1,5 +1,4 @@
 import styles from "./SelectionCard.module.css";
-import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
 import { useRouter } from "next/router";
@@ -15,7 +14,6 @@ const SelectionCard = (props) => {
   const { storeID, chosenService, chosen } = useContext(BookingContext);
 
   function handleBookingClick() {
-    console.log(router.pathname);
     if (router.pathname === "/booking-service") {
       if (storeID) {
         router.push({

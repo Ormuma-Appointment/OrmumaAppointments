@@ -17,7 +17,11 @@
 
 .buttonsContainer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+}
+.buttonsContainer button {
+  margin-bottom: 1rem;
 }
 
 .uniqueContainer {
@@ -32,6 +36,7 @@
 
 .pageContainer > div {
   margin: 2rem auto;
+  width: 100%;
 }
 
 /*Tablet */

@@ -1,3 +1,11 @@
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  where,
+  query,
+} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import styles from "../ui/page_styles/AccountAdmin.module.css";
 import AppointmentCard from "../ui/components/AppointmentCard/AppointmentCard";
@@ -7,13 +15,16 @@ import Link from "next/link";
 import Edit from "../ui/components/assets/edit.svg";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../firebase/firebase";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import Button from "../ui/components/Button/Button";
 import { useRouter } from "next/router";
+import moment from "moment";
 
 const AccountAdmin = () => {
   const router = useRouter();
+  const [passtEvents, setPasstEvents] = useState([]);
+  const [nextEvents, setNextEvents] = useState([]);
+  const [todayEvents, setTodayEvents] = useState([]);
   const salon = {
     openingHours: [
       {
@@ -48,43 +59,6 @@ const AccountAdmin = () => {
     ],
   };
 
-  const todaysAppointments = [
-    {
-      customer: "Andrea Berg",
-      date: "03.01.2023",
-      service: "Haar kurz, schneiden, waschen",
-      stylist: "Jochen Lambatz",
-      time: "11:30-12:00",
-    },
-    {
-      customer: "Andrea Berg",
-      date: "03.01.2023",
-      service: "Haar kurz, schneiden, waschen",
-      stylist: "Jochen Lambatz",
-      time: "11:30-12:00",
-    },
-    {
-      customer: "Andrea Berg",
-      date: "03.01.2023",
-      service: "Haar kurz, schneiden, waschen",
-      stylist: "Jochen Lambatz",
-      time: "11:30-12:00",
-    },
-    {
-      customer: "Andrea Berg",
-      date: "03.01.2023",
-      service: "Haar kurz, schneiden, waschen",
-      stylist: "Jochen Lambatz",
-      time: "11:30-12:00",
-    },
-    {
-      customer: "Andrea Berg",
-      date: "03.01.2023",
-      service: "Haar kurz, schneiden, waschen",
-      stylist: "Jochen Lambatz",
-      time: "11:30-12:00",
-    },
-  ];
   // get salon data for salon overview from Firebase
   const { currentUser, adminStoreID } = useAuthContext();
   const [salonData, setSalonData] = useState(salon);
@@ -120,11 +94,47 @@ const AccountAdmin = () => {
       setSalonEmployees(employeesTemp);
     }
   }
+
+  //get events
+  let currentMomentDate = moment(new Date()).format("YYYY-MM-DD");
+  const getEvent = async () => {
+    const q = query(
+      collection(db, "events"),
+      where("storeID", "==", adminStoreID)
+    );
+    const docSnap = await getDocs(q);
+    let passtEvents = [];
+    let nextEvents = [];
+    let todayEvents = [];
+    docSnap.forEach((doc) => {
+      const el = doc.data();
+      if (currentMomentDate === moment(el.date.toDate()).format("YYYY-MM-DD")) {
+        todayEvents.push(el);
+      } else if (
+        currentMomentDate < moment(el.date.toDate()).format("YYYY-MM-DD")
+      ) {
+        nextEvents.push(el);
+      } else {
+        passtEvents.push(el);
+      }
+      setTodayEvents(todayEvents);
+      setNextEvents(nextEvents);
+      setPasstEvents(passtEvents);
+      setIsLoading(false);
+    });
+  };
+
   useEffect(() => {
     getSalonData();
     getEmployeeData();
+    getEvent();
     setIsLoading(false);
   }, [adminStoreID]);
+
+  console.log("today", todayEvents);
+  console.log("next", nextEvents);
+  console.log("passt", passtEvents);
+
   if (!isLoading) {
     if (adminStoreID) {
       return (
@@ -209,15 +219,30 @@ const AccountAdmin = () => {
             </div>
             <div className={styles.column}>
               <h2>Terminübersicht heute</h2>
-              {todaysAppointments.map((el, index) => {
+              {todayEvents.map((event, id) => {
+                let date = moment(event.date.toDate()).format("YYYY-MM-DD");
                 return (
                   <AppointmentCard
-                    customer={el.name}
-                    key={index}
-                    date={el.date}
-                    service={el.service}
-                    stylist={el.stylist}
-                    time={el.time}
+                    customer={event.userName}
+                    key={id}
+                    date={date}
+                    service={event.service}
+                    stylist={event.employee}
+                    time={`${event.slot[0]} - ${event.slot[1]}`}
+                  />
+                );
+              })}
+              <h2>Die nächsten Termine</h2>
+              {nextEvents.slice(0, 5).map((event, id) => {
+                let date = moment(event.date.toDate()).format("YYYY-MM-DD");
+                return (
+                  <AppointmentCard
+                    customer={event.userName}
+                    key={id}
+                    date={date}
+                    service={event.service}
+                    stylist={event.employee}
+                    time={`${event.slot[0]} - ${event.slot[1]}`}
                   />
                 );
               })}

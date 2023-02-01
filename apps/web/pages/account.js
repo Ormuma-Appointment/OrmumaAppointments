@@ -21,7 +21,6 @@ import moment from "moment";
 
 const Account = () => {
   const router = useRouter();
-  const [eventsData, setEventsData] = useState([]);
   const [passtEvents, setPasstEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
   const [isLoading, SetIsLoading] = useState(true);

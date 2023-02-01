@@ -35,7 +35,7 @@ const BookingConfirmation = () => {
     const newEventRef = doc(collection(db, "events"));
     await setDoc(newEventRef, event);
   }
-
+  console.log("chosenService", chosenService);
   console.log("EVENNNT", event);
 
   return (

@@ -1,5 +1,4 @@
 import styles from "./SelectionCard.module.css";
-import Link from "next/link";
 import SelectItem from "../SelectItem/SelectItem";
 import Button from "../Button/Button";
 import { useRouter } from "next/router";

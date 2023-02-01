@@ -40,22 +40,13 @@ const Account = () => {
   const getEvent = async () => {
     const q = query(
       collection(db, "events"),
-      where("UserId", "==", user.userId)
+      where("userId", "==", user.userId)
     );
     const docSnap = await getDocs(q);
-    let temp = [];
     let passtEvents = [];
     let nextEvents = [];
     docSnap.forEach((doc) => {
       const el = doc.data();
-      console.log("El", el);
-      temp.push(el);
-
-      setEventsData(temp);
-
-      // console.log(
-      //   currentMomentDate <= moment(el.date.toDate()).format("YYYY-MM-DD")
-      // );
       if (currentMomentDate <= moment(el.date.toDate()).format("YYYY-MM-DD")) {
         nextEvents.push(el);
       } else {
@@ -70,20 +61,6 @@ const Account = () => {
   useEffect(() => {
     getEvent();
   }, [user.userId]);
-
-  console.log("eventsData", eventsData);
-  console.log("nextEvents", nextEvents);
-  console.log("pastEvents", passtEvents);
-
-  const pastAppointments = [
-    {
-      customer: "Andrea Berg",
-      date: "03.01.2023",
-      service: "Haar kurz, schneiden, waschen",
-      stylist: "Jochen Lambatz",
-      time: "11:30-12:00",
-    },
-  ];
 
   return (
     <div className={styles.container}>
@@ -111,27 +88,36 @@ const Account = () => {
       <div className={styles.appointments}>
         <div className={styles.appointment_box}>
           <h3>Mein nächster Termin</h3>
-          <AppointmentCard
-            cancel
-            customer="Andrea Berg"
-            date="03.01.2023"
-            service="Haar kurz, schneiden, waschen"
-            stylist="Jochen Lambatz"
-            time="11:30-12:00"
-          />
+          {nextEvents.map((event, id) => {
+            console.log(event);
+            let date = moment(event.date.toDate()).format("YYYY-MM-DD");
+            return (
+              <AppointmentCard
+                key={id}
+                cancel
+                customer={event.userName}
+                date={date}
+                service={event.service}
+                stylist={event.employee}
+                time={`${event.slot[0]} - ${event.slot[1]}`}
+              />
+            );
+          })}
         </div>
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
-            {pastAppointments.map((el, index) => {
+            {passtEvents.map((event, id) => {
+              console.log(event);
+              let date = moment(event.date.toDate()).format("YYYY-MM-DD");
               return (
                 <AppointmentCard
-                  customer={el.name}
-                  key={index}
-                  date={el.date}
-                  service={el.service}
-                  stylist={el.stylist}
-                  time={el.time}
+                  key={id}
+                  customer={event.userName}
+                  date={date}
+                  service={event.service}
+                  stylist={event.employee}
+                  time={`${event.slot[0]} - ${event.slot[1]}`}
                 />
               );
             })}

@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
-import Link from "next/link";
 import Button from "../ui/components/Button/Button";
 import AppointmentConfirmation from "../ui/components/AppointmentConfirmation/AppointmentConfirmation";
 import { BookingContext } from "../context/BookingContext";
@@ -34,35 +33,44 @@ const BookingConfirmation = () => {
     setConfirmed(!confirmed);
     const newEventRef = doc(collection(db, "events"));
     await setDoc(newEventRef, event);
+
+    router.push("/booking-confirmation");
   }
 
-  // console.log("EVENNNT", event);
+  console.log("EVENNNT", event);
 
   return (
     <div className={styles.pageContainer}>
       <h2 className={styles.center}>Your booking confirmation</h2>
       {confirmed ? (
         <>
-          <AppointmentConfirmation />
+          <AppointmentConfirmation
+            employee={event.employee}
+            name={event.name}
+            start={event.start}
+            date={event.date}
+          />
           <div className={styles.buttonsContainer}>
-            <Button icon="" size="medium" variant="danger">
-              <Link
-                href="/booking-confirmation"
-                onClick={handleBookingConfirmation}
-              >
-                Cancel
-              </Link>
+            <Button
+              icon=""
+              size="medium"
+              variant="primary"
+              onClick={() => router.push("/")}
+            >
+              Home
             </Button>
-            <Button icon="" size="medium" variant="primary">
-              <Link href="/">Home</Link>
-            </Button>
-            <Button icon="" size="medium" variant="primary">
-              <Link href="/account">My account</Link>
+            <Button
+              icon=""
+              size="medium"
+              variant="primary"
+              onClick={() => router.push("/account")}
+            >
+              Zum Account
             </Button>
           </div>
         </>
       ) : (
-        <div className={`${styles.bookingContainer} ${styles.uniqueContainer}`}>
+        <div className={`${styles.uniqueContainer}`}>
           <CardContainer>
             {" "}
             <h4>Ihre Auswahl</h4>
@@ -85,15 +93,15 @@ const BookingConfirmation = () => {
                 size="medium"
                 variant="danger"
               >
-                Go back
+                zurück
               </Button>
-              <Button icon="" size="medium" variant="primary">
-                <Link
-                  href="/booking-confirmation"
-                  onClick={handleBookingConfirmation}
-                >
-                  Confirm
-                </Link>
+              <Button
+                icon=""
+                size="medium"
+                variant="primary"
+                onClick={handleBookingConfirmation}
+              >
+                Buchung bestätigen
               </Button>
             </div>
           </CardContainer>

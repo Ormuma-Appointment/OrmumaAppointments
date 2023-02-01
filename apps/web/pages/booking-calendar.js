@@ -27,18 +27,17 @@ const BookingCalendar = () => {
     setStoreID(query.storeid);
   }
   useEffect(() => {
-    if (!chosenService) {
-      setChosenService({
-        service: query.service,
-        duration: query.duration,
-        price: query.price,
-        category: query.category,
-      });
-      setChosen({
-        employee: query.employee,
-        employeeId: query.employeeId,
-      });
-    }
+    setChosenService({
+      service: query.service,
+      duration: query.duration,
+      price: query.price,
+      category: query.category,
+      storeID: storeID,
+    });
+    setChosen({
+      employee: query.employee,
+      employeeId: query.employeeId,
+    });
   }, [storeID]);
 
   function handleBookingClick() {

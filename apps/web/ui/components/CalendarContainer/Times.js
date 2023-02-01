@@ -73,6 +73,8 @@ const Times = (props) => {
 
   let endTimeSlot = eventTime(event, chosenService.duration);
 
+  console.log(event, "times event start");
+
   let selectedSlot = {
     slot: [event, endTimeSlot],
     start: event,

@@ -40,9 +40,9 @@ function transformToCorrectFormat(arr) {
   return Object.values(result);
 }
 
+// check if opening times are structured correctly
 function checkWorkingHours(days) {
   let invalidDays = [];
-
   for (let day of days) {
     if (
       day.start === null &&
@@ -52,14 +52,14 @@ function checkWorkingHours(days) {
     ) {
       continue;
     }
-
     if (day.start === null || day.end === null) {
       invalidDays.push(day.label);
       continue;
     }
-
-    if (day.breakStart && day.breakEnd) {
+    if (day.breakStart || day.breakEnd) {
       if (
+        day.breakStart === null ||
+        day.breakEnd === null ||
         day.breakStart >= day.breakEnd ||
         day.breakStart <= day.start ||
         day.breakEnd >= day.end
@@ -68,12 +68,10 @@ function checkWorkingHours(days) {
         continue;
       }
     }
-
     if (day.start >= day.end) {
       invalidDays.push(day.label);
     }
   }
-
   return invalidDays;
 }
 

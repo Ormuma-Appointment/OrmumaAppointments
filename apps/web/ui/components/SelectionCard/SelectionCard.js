@@ -50,7 +50,7 @@ const SelectionCard = (props) => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h4>Ihre Auswahl</h4>
       {step === "service" && (
         <>

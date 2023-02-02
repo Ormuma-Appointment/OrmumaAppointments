@@ -2,11 +2,11 @@
   padding: 3rem 1.5rem;
   width: 95vw;
 }
-.page_container h1{
+.page_container h1 {
   text-align: center;
 }
-.page_container h2{
-  margin-bottom: 1rem ;
+.page_container h2 {
+  margin-bottom: 1rem;
 }
 .page_container_empty {
   display: flex;
@@ -92,8 +92,14 @@
   border-top: 1px solid #ccc;
 }
 
+.noEvent {
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 @media screen and (min-width: 760px) {
-  .page_container h1{
+  .page_container h1 {
     text-align: left;
   }
   .row {

@@ -40,6 +40,32 @@ function transformToCorrectFormat(arr) {
   return Object.values(result);
 }
 
+function checkWorkingHours(days) {
+  let invalidDays = [];
+
+  for (let day of days) {
+    if (day.start === null || day.end === null) {
+      invalidDays.push(day.label);
+      continue;
+    }
+    if (day.breakStart && day.breakEnd) {
+      if (
+        day.breakStart >= day.breakEnd ||
+        day.breakStart <= day.start ||
+        day.breakEnd >= day.end
+      ) {
+        invalidDays.push(day.label);
+        continue;
+      }
+    }
+    if (day.start >= day.end) {
+      invalidDays.push(day.label);
+    }
+  }
+
+  return invalidDays;
+}
+
 function TeamSetup() {
   const { currentUser, adminStoreId } = useAuthContext();
   const [imageUpload, setImageUpload] = useState(null);
@@ -157,6 +183,10 @@ function TeamSetup() {
       description: e.target.description.value,
       workingTime: times,
     };
+    if (checkWorkingHours(times)[0]) {
+      alert("Etwas scheint nicht zu stimmen");
+      return;
+    }
 
     if (hasData) {
       await updateDoc(

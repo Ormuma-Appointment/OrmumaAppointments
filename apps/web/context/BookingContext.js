@@ -23,13 +23,6 @@ export const BookingContextProvider = ({ children }) => {
   const [chosenSlot, setChosenSlot] = useState(null);
   const [isLoading, SetIsLoading] = useState(true);
 
-  const { currentUser } = useAuthContext();
-
-  let user = {
-    userId: currentUser.uid,
-    userName: currentUser.displayName,
-  };
-
   async function getData() {
     if (storeId) {
       const docRef = doc(db, "stores", storeId, "services", "serviceList");
@@ -109,6 +102,18 @@ export const BookingContextProvider = ({ children }) => {
     }
   };
 
+  const { currentUser } = useAuthContext();
+
+  let user;
+  useEffect(() => {
+    if (currentUser) {
+      user = {
+        userId: currentUser.uid,
+        userName: currentUser.displayName,
+      };
+    }
+  }, [currentUser]);
+
   //get client event to add them as well to breakTime
   const getClientEvent = async () => {
     const q = query(
@@ -128,9 +133,11 @@ export const BookingContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getEmployee();
-    getEvent();
-    getClientEvent();
+    if (currentUser) {
+      getEmployee();
+      getEvent();
+      getClientEvent();
+    }
   }, [chosen, storeId]);
 
   //console.log("clientEventsData", clientEventsData);

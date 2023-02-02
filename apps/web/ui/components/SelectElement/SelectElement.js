@@ -61,7 +61,7 @@ function SelectElement({ day, time, value, label }) {
       >
         {data.map((el, index) => {
           return (
-            <option key={index} value={el}>
+            <option key={index} value={el === "-" ? null : el}>
               {el}
             </option>
           );

@@ -98,30 +98,34 @@ const AccountAdmin = () => {
   //get events
   let currentMomentDate = moment(new Date()).format("YYYY-MM-DD");
   const getEvent = async () => {
-    const q = query(
-      collection(db, "events"),
-      where("storeId", "==", adminStoreId)
-    );
-    const docSnap = await getDocs(q);
-    let passtEvents = [];
-    let nextEvents = [];
-    let todayEvents = [];
-    docSnap.forEach((doc) => {
-      const el = doc.data();
-      if (currentMomentDate === moment(el.date.toDate()).format("YYYY-MM-DD")) {
-        todayEvents.push(el);
-      } else if (
-        currentMomentDate < moment(el.date.toDate()).format("YYYY-MM-DD")
-      ) {
-        nextEvents.push(el);
-      } else {
-        passtEvents.push(el);
-      }
-      setTodayEvents(todayEvents);
-      setNextEvents(nextEvents);
-      setPasstEvents(passtEvents);
-      setIsLoading(false);
-    });
+    if (adminStoreId !== undefined && adminStoreId !== null && adminStoreId) {
+      const q = query(
+        collection(db, "events"),
+        where("storeId", "==", adminStoreId)
+      );
+      const docSnap = await getDocs(q);
+      let passtEvents = [];
+      let nextEvents = [];
+      let todayEvents = [];
+      docSnap.forEach((doc) => {
+        const el = doc.data();
+        if (
+          currentMomentDate === moment(el.date.toDate()).format("YYYY-MM-DD")
+        ) {
+          todayEvents.push(el);
+        } else if (
+          currentMomentDate < moment(el.date.toDate()).format("YYYY-MM-DD")
+        ) {
+          nextEvents.push(el);
+        } else {
+          passtEvents.push(el);
+        }
+        setTodayEvents(todayEvents);
+        setNextEvents(nextEvents);
+        setPasstEvents(passtEvents);
+        setIsLoading(false);
+      });
+    }
   };
 
   useEffect(() => {
@@ -219,33 +223,43 @@ const AccountAdmin = () => {
             </div>
             <div className={styles.column}>
               <h2>Terminübersicht heute</h2>
-              {todayEvents.map((event, id) => {
-                let date = moment(event.date.toDate()).format("YYYY-MM-DD");
-                return (
-                  <AppointmentCard
-                    customer={event.clientName}
-                    key={id}
-                    date={date}
-                    service={event.service}
-                    stylist={event.employee}
-                    time={`${event.slot[0]} - ${event.slot[1]}`}
-                  />
-                );
-              })}
+              {todayEvents.length > 0 ? (
+                todayEvents.map((event, id) => {
+                  let date = moment(event.date.toDate()).format("YYYY-MM-DD");
+                  return (
+                    <AppointmentCard
+                      customer={event.clientName}
+                      key={id}
+                      date={date}
+                      service={event.service}
+                      stylist={event.employee}
+                      time={`${event.slot[0]} - ${event.slot[1]}`}
+                    />
+                  );
+                })
+              ) : (
+                <div className={styles.noEvent}>Noch kein Termin heute</div>
+              )}
               <h2>Die nächsten Termine</h2>
-              {nextEvents.slice(0, 5).map((event, id) => {
-                let date = moment(event.date.toDate()).format("YYYY-MM-DD");
-                return (
-                  <AppointmentCard
-                    customer={event.clientName}
-                    key={id}
-                    date={date}
-                    service={event.service}
-                    stylist={event.employee}
-                    time={`${event.slot[0]} - ${event.slot[1]}`}
-                  />
-                );
-              })}
+              {nextEvents.length > 0 ? (
+                nextEvents.slice(0, 5).map((event, id) => {
+                  let date = moment(event.date.toDate()).format("YYYY-MM-DD");
+                  return (
+                    <AppointmentCard
+                      customer={event.clientName}
+                      key={id}
+                      date={date}
+                      service={event.service}
+                      stylist={event.employee}
+                      time={`${event.slot[0]} - ${event.slot[1]}`}
+                    />
+                  );
+                })
+              ) : (
+                <div className={styles.noEvent}>
+                  Noch keine geplanten Termine in den nächsten Tagen
+                </div>
+              )}
             </div>
           </div>
           <div className={styles.employee_container}>

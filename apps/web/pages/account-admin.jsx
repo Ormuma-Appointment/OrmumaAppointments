@@ -223,7 +223,7 @@ const AccountAdmin = () => {
                 let date = moment(event.date.toDate()).format("YYYY-MM-DD");
                 return (
                   <AppointmentCard
-                    customer={event.userName}
+                    customer={event.clientName}
                     key={id}
                     date={date}
                     service={event.service}
@@ -237,7 +237,7 @@ const AccountAdmin = () => {
                 let date = moment(event.date.toDate()).format("YYYY-MM-DD");
                 return (
                   <AppointmentCard
-                    customer={event.userName}
+                    customer={event.clientName}
                     key={id}
                     date={date}
                     service={event.service}

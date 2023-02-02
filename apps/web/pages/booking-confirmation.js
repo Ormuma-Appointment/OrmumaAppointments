@@ -21,12 +21,12 @@ const BookingConfirmation = () => {
   const [confirmed, setConfirmed] = useState(false);
   const { currentUser } = useAuthContext();
 
-  let user = {
-    userId: currentUser.uid,
-    userName: currentUser.displayName,
+  let client = {
+    clientId: currentUser.uid,
+    clientName: currentUser.displayName,
   };
 
-  let event = { ...chosen, ...chosenService, ...chosenSlot, ...user }; // => have to go to collection events
+  let event = { ...chosen, ...chosenService, ...chosenSlot, ...client }; // => have to go to collection events
 
   async function handleBookingConfirmation(e) {
     e.preventDefault();

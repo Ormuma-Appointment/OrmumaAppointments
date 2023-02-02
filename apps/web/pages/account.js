@@ -39,7 +39,7 @@ const Account = () => {
   const getEvent = async () => {
     const q = query(
       collection(db, "events"),
-      where("userId", "==", user.userId)
+      where("clientId", "==", user.userId)
     );
     const docSnap = await getDocs(q);
     let passtEvents = [];
@@ -94,7 +94,7 @@ const Account = () => {
               <AppointmentCard
                 key={id}
                 cancel
-                customer={event.userName}
+                customer={event.clientName}
                 date={date}
                 service={event.service}
                 stylist={event.employee}
@@ -112,7 +112,7 @@ const Account = () => {
               return (
                 <AppointmentCard
                   key={id}
-                  customer={event.userName}
+                  customer={event.clientName}
                   date={date}
                   service={event.service}
                   stylist={event.employee}

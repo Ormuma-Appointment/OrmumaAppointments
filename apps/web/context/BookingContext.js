@@ -103,44 +103,44 @@ export const BookingContextProvider = ({ children }) => {
   };
 
   const { currentUser } = useAuthContext();
-
   let user;
-  useEffect(() => {
-    if (currentUser) {
-      user = {
-        userId: currentUser.uid,
-        userName: currentUser.displayName,
-      };
-    }
-  }, [currentUser]);
+  if (currentUser) {
+    user = {
+      userId: currentUser.uid,
+      userName: currentUser.displayName,
+    };
+  }
 
   //get client event to add them as well to breakTime
   const getClientEvent = async () => {
-    const q = query(
-      collection(db, "events"),
-      where("clientId", "==", user.userId)
-    );
-    const docSnap = await getDocs(q);
-    let temp = [];
-    docSnap.forEach((doc) => {
-      const el = doc.data();
+    if (user !== undefined && user !== null && user) {
+      const q = query(
+        collection(db, "events"),
+        where("clientId", "==", user.userId)
+      );
+      const docSnap = await getDocs(q);
+      let temp = [];
+      docSnap.forEach((doc) => {
+        const el = doc.data();
 
-      temp.push(el);
+        temp.push(el);
 
-      setClientEventsData(temp);
-      SetIsLoading(false);
-    });
+        setClientEventsData(temp);
+        SetIsLoading(false);
+      });
+    }
   };
 
   useEffect(() => {
-    if (currentUser) {
-      getEmployee();
-      getEvent();
-      getClientEvent();
-    }
+    getEmployee();
+    getEvent();
   }, [chosen, storeId]);
 
-  //console.log("clientEventsData", clientEventsData);
+  useEffect(() => {
+    getClientEvent();
+  }, [currentUser]);
+
+  console.log("clientEventsData", clientEventsData);
 
   let slotToString = "";
 

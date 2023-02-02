@@ -4,12 +4,9 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
-import Button from "../ui/components/Button/Button";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
-import { admin } from "./data-sample";
-import { db } from "../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import Down from "../ui/components/assets/down.svg";
 
 const BookingService = () => {
   const [isOpenStyle, setIsOpenStyle] = useState(false);
@@ -69,11 +66,13 @@ const BookingService = () => {
                     onClick={handleOpenStyle}
                     key={id}
                     value={id}
-                    className="h4"
+                    className={`h4 ${styles.button}`}
                   >
                     {service.category.charAt(0).toUpperCase() +
                       service.category.slice(1)}{" "}
-                    <i className="fa-solid fa-play"></i>
+                    <div>
+                      <Down />
+                    </div>
                   </button>
 
                   {service.services.map((el, index) => {

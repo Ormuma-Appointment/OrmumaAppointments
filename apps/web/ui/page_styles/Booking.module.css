@@ -21,6 +21,9 @@
   margin-bottom: 1rem;
   text-align: center;
 }
+.bookingContainer h4 {
+  padding-top: 1rem;
+}
 
 .buttonsContainer {
   display: flex;
@@ -36,8 +39,31 @@
 }
 
 .pageContainer > div {
-  margin: 2rem auto;
+  margin: 0 auto;
   width: 100%;
+}
+.button {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button:first-of-type {
+  border-top: none;
+}
+.button div {
+  padding-left: 1rem;
+  width: 2rem;
+  height: 2rem;
+  pointer-events: none;
+}
+.button div svg {
+  height: 100%;
+  filter: var(--icon-filter);
 }
 
 /*Tablet */

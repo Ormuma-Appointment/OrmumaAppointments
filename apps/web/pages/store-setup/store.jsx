@@ -36,8 +36,10 @@ function checkWorkingHours(days) {
       invalidDays.push(day.label);
       continue;
     }
-    if (day.breakStart && day.breakEnd) {
+    if (day.breakStart || day.breakEnd) {
       if (
+        day.breakStart === null ||
+        day.breakEnd === null ||
         day.breakStart >= day.breakEnd ||
         day.breakStart <= day.start ||
         day.breakEnd >= day.end
@@ -92,9 +94,13 @@ const StoreSetup = () => {
       openingHours: times,
     };
     console.log(times);
-    if (checkWorkingHours(times)[0]) {
+    let corruptDays = checkWorkingHours(times);
+    if (corruptDays[0]) {
+      console.log(corruptDays);
       alert(
-        "Bitte überprüfen Sie die angegebenen Arbeitszeiten. Die Startzeit muss immer vor der Schließzeit liegen und die Pausenzeiten innerhalb der Start- und Schließzeiten."
+        `Bitte überprüfen Sie die angegebenen Arbeitszeiten am ${corruptDays.map(
+          (el) => el
+        )}. Die Startzeit muss immer vor der Schließzeit liegen und die Pausenzeiten innerhalb der Start- und Schließzeiten.`
       );
       return;
     }

@@ -17,6 +17,8 @@ const CalendarContainer = () => {
           onChange={setDate}
           value={date}
           onClickDay={() => setShowTime(true)}
+          minDate={new Date()}
+          maxDetail="month"
         />
       </div>
       {date.length > 0 ? (

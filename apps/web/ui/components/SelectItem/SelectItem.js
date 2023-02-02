@@ -44,8 +44,8 @@ function SelectItem(props) {
       <div className={price ? styles.serviceRight : styles.rightIconOnly}>
         {price && (
           <div className={styles.serviceDetails}>
-            <p className={styles.servicePrice}>{price}</p>
-            <p className={styles.serviceDuration}>{duration}</p>
+            <p className={styles.servicePrice}>{price} €</p>
+            <p className={styles.serviceDuration}>{duration} mins</p>
           </div>
         )}
         {plus && (

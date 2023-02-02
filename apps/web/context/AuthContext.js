@@ -36,6 +36,8 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
+  console.log(currentUser);
+
   const isLoggedIn = (currentUser) => {
     if (currentUser) {
       return true;

@@ -135,9 +135,9 @@ const AccountAdmin = () => {
     setIsLoading(false);
   }, [adminStoreId]);
 
-  console.log("today", todayEvents);
-  console.log("next", nextEvents);
-  console.log("passt", passtEvents);
+  // console.log("today", todayEvents);
+  // console.log("next", nextEvents);
+  // console.log("passt", passtEvents);
 
   if (!isLoading) {
     if (adminStoreId) {

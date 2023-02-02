@@ -9,7 +9,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   useEffect(() => {
     setLocalTimes((prev) => times);
   }, [times]);
-  console.log(times);
+
   useEffect(() => {
     setLocalHasData((prev) => hasData);
   }, [hasData]);

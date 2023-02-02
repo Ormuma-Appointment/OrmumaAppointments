@@ -32,22 +32,22 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
         } else if (start_end === "start") {
           return {
             ...time,
-            start: e.target.value,
+            start: e.target.value === "-" ? null : e.target.value,
           };
         } else if (start_end === "end") {
           return {
             ...time,
-            end: e.target.value,
+            end: e.target.value === "-" ? null : e.target.value,
           };
         } else if (start_end === "breakStart") {
           return {
             ...time,
-            breakStart: e.target.value,
+            breakStart: e.target.value === "-" ? null : e.target.value,
           };
         } else if (start_end === "breakEnd") {
           return {
             ...time,
-            breakEnd: e.target.value,
+            breakEnd: e.target.value === "-" ? null : e.target.value,
           };
         }
       })

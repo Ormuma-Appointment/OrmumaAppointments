@@ -11,15 +11,15 @@ const SelectionCard = (props) => {
   const setSelected = props.setSelected;
   const service = props.service;
   const router = useRouter();
-  const { storeID, chosenService, chosen } = useContext(BookingContext);
+  const { storeId, chosenService, chosen } = useContext(BookingContext);
 
   function handleBookingClick() {
     if (router.pathname === "/booking-service") {
-      if (storeID) {
+      if (storeId) {
         router.push({
           pathname: "/booking-employee",
           query: {
-            storeid: storeID,
+            storeid: storeId,
             service: chosenService.service,
             category: chosenService.category,
             duration: chosenService.duration,
@@ -30,11 +30,11 @@ const SelectionCard = (props) => {
         router.push("/booking-employee");
       }
     } else if (router.pathname === "/booking-employee") {
-      if (storeID) {
+      if (storeId) {
         router.push({
           pathname: "/booking-calendar",
           query: {
-            storeid: storeID,
+            storeid: storeId,
             service: chosenService.service,
             category: chosenService.category,
             duration: chosenService.duration,

@@ -11,7 +11,7 @@ import {
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
-  const [storeID, setStoreID] = useState(undefined);
+  const [storeId, setStoreId] = useState(undefined);
   const [serviceList, setServiceList] = useState({});
   const [employeeData, setEmployeeData] = useState([]);
   const [selectedEmployee, setSelectedEmployeeData] = useState({});
@@ -22,8 +22,8 @@ export const BookingContextProvider = ({ children }) => {
   const [isLoading, SetIsLoading] = useState(true);
 
   async function getData() {
-    if (storeID) {
-      const docRef = doc(db, "stores", storeID, "services", "serviceList");
+    if (storeId) {
+      const docRef = doc(db, "stores", storeId, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data());
@@ -37,11 +37,11 @@ export const BookingContextProvider = ({ children }) => {
   }
   useEffect(() => {
     getData();
-  }, [storeID]);
+  }, [storeId]);
 
   const handleRead = async () => {
-    if (storeID) {
-      const docRef = collection(db, "stores", storeID, "employeeList");
+    if (storeId) {
+      const docRef = collection(db, "stores", storeId, "employeeList");
       const docSnap = await getDocs(docRef);
       docSnap.forEach((doc) => {
         const el = { id: doc.id, ...doc.data() };
@@ -53,14 +53,14 @@ export const BookingContextProvider = ({ children }) => {
   };
   useEffect(() => {
     handleRead();
-  }, [storeID]);
+  }, [storeId]);
 
   async function getEmployee() {
-    if (chosen !== undefined && chosen !== null && storeID) {
+    if (chosen !== undefined && chosen !== null && storeId) {
       const docRef = doc(
         db,
         "stores",
-        storeID,
+        storeId,
         "employeeList",
         chosen && chosen.employeeId
       );
@@ -80,10 +80,10 @@ export const BookingContextProvider = ({ children }) => {
   }
 
   const getEvent = async () => {
-    if (chosen !== undefined && chosen !== null && storeID) {
+    if (chosen !== undefined && chosen !== null && storeId) {
       const q = query(
         collection(db, "events"),
-        where("storeID", "==", storeID)
+        where("storeId", "==", storeId)
       );
       const docSnap = await getDocs(q);
       let temp = [];
@@ -103,7 +103,7 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     getEmployee();
     getEvent();
-  }, [chosen, storeID]);
+  }, [chosen, storeId]);
 
   let slotToString = "";
 
@@ -131,8 +131,8 @@ export const BookingContextProvider = ({ children }) => {
         setChosenSlot,
         isLoading,
         selectedEmployee,
-        setStoreID,
-        storeID,
+        setStoreId,
+        storeId,
         slotToString,
       }}
     >

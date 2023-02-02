@@ -17,12 +17,12 @@ const BookingService = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [event, setEvent] = useState(selected);
   const router = useRouter();
-  const { storeID, setStoreID, serviceList, setChosenService, isLoading } =
+  const { storeId, setStoreId, serviceList, setChosenService, isLoading } =
     useContext(BookingContext);
   const query = router.query;
 
-  if (!storeID) {
-    setStoreID(query.storeid);
+  if (!storeId) {
+    setStoreId(query.storeid);
   }
 
   const handleOpenStyle = (e) => {
@@ -39,7 +39,7 @@ const BookingService = () => {
         duration: selected.duration,
         price: selected.price,
         category: selectedCategory,
-        storeID: storeID,
+        storeId: storeId,
       };
       setEvent(selectedService);
     }

@@ -1,15 +1,8 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { auth } from "../firebase/firebase";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  getIdTokenResult,
-  getIdToken,
-  signOut,
-} from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { db } from "../firebase/firebase";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 
 export const AuthContext = createContext();
@@ -80,33 +73,6 @@ export const AuthContextProvider = ({ children }) => {
       setAdminStoreId(idsTemp[0]);
     }
   }
-
-  // const getUserClaims = async (uid) => {
-  //   const endpoint = `https://us-central1-appointment---web-app.cloudfunctions.net/getUserClaims`;
-  //   const data = { uid };
-  //   const options = {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     headers: { "Content-Type": "application/json" },
-  //   };
-
-  //   try {
-  //     const response = await fetch(endpoint, options);
-  //     const json = await response.json();
-  //     if (json.claims) {
-  //       // Handle success
-  //       if (json.claims.admin) {
-  //         setIsAdmin(true);
-  //       }
-  //     } else {
-  //       // Handle error
-  //       console.log(json.error);
-  //     }
-  //   } catch (err) {
-  //     // Handle error
-  //     console.log(err);
-  //   }
-  // };
 
   useEffect(() => {
     if (currentUser) {

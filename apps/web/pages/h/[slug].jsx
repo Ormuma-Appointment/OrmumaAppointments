@@ -20,7 +20,7 @@ export default function Web() {
   const router = useRouter();
   const { slug } = router.query;
   const [storeData, setStoreData] = useState(undefined);
-  const { setStoreID, storeID } = useContext(BookingContext);
+  const { setStoreId, storeId } = useContext(BookingContext);
 
   async function getData() {
     const q = query(collection(db, "stores"), where("slug", "==", slug));
@@ -28,7 +28,7 @@ export default function Web() {
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       // console.log(doc.id, " => ", doc.data());
-      setStoreID(doc.id);
+      setStoreId(doc.id);
       setStoreData(doc.data());
     });
     setLoading(false);
@@ -39,8 +39,8 @@ export default function Web() {
   }, []);
   const [image, setImage] = useState();
   useEffect(() => {
-    if (storeID) {
-      const imageLocation = ref(storage, `images/stores/${storeID}`);
+    if (storeId) {
+      const imageLocation = ref(storage, `images/stores/${storeId}`);
 
       getDownloadURL(ref(imageLocation))
         .then((url) => {
@@ -50,13 +50,13 @@ export default function Web() {
           // Handle any errors
         });
     }
-  }, [storeID]);
+  }, [storeId]);
 
   function handleBookingClick() {
-    if (storeID) {
+    if (storeId) {
       router.push({
         pathname: "/booking-service",
-        query: { storeid: storeID },
+        query: { storeid: storeId },
       });
     } else {
       router.push("/booking-service");

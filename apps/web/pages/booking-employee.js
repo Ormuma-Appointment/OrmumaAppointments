@@ -16,14 +16,14 @@ const BookingEmployee = () => {
     chosenService,
     setChosenService,
     isLoading,
-    storeID,
-    setStoreID,
+    storeId,
+    setStoreId,
   } = useContext(BookingContext);
 
   const router = useRouter();
   const query = router.query;
-  if (!storeID) {
-    setStoreID(query.storeid);
+  if (!storeId) {
+    setStoreId(query.storeid);
   }
   useEffect(() => {
     if (!chosenService) {
@@ -32,10 +32,10 @@ const BookingEmployee = () => {
         duration: query.duration,
         price: query.price,
         category: query.category,
-        storeID: storeID,
+        storeId: storeId,
       });
     }
-  }, [storeID]);
+  }, [storeId]);
 
   function filterEmployees(selected) {
     let filteredEmployees = employeeData.filter((employee) => {
@@ -77,7 +77,7 @@ const BookingEmployee = () => {
                   employeeId={employee[0]}
                   key={id}
                   setSelected={setSelected}
-                  storeID={storeID}
+                  storeId={storeId}
                 />
               );
             })

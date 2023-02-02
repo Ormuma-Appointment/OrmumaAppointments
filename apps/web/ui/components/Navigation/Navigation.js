@@ -13,7 +13,7 @@ import Link from "next/link";
 function Navigation(props) {
   const router = useRouter();
 
-  const { currentUser, logOut, isAdmin, adminStoreID } = useAuthContext();
+  const { currentUser, logOut, isAdmin, adminStoreId } = useAuthContext();
   const {
     customer_logged_out,
     customer_logged_in,
@@ -55,7 +55,7 @@ function Navigation(props) {
                   router.push({
                     pathname: "/booking-service",
                     query: {
-                      storeid: adminStoreID,
+                      storeid: adminStoreId,
                     },
                   })
                 }

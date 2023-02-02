@@ -25,7 +25,7 @@ const StoreSetup = () => {
   const [salonData, setSalonData] = useState([]);
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { currentUser, adminStoreID } = useAuthContext();
+  const { currentUser, adminStoreId } = useAuthContext();
   const [times, setTimes] = useState(workingTimes);
   const router = useRouter();
   const [docRef, setDocRef] = useState(null);
@@ -60,14 +60,14 @@ const StoreSetup = () => {
     };
     if (hasData) {
       // update firebase data if page was loaded with existing store data
-      hasData && (await updateDoc(doc(db, "stores", adminStoreID), storeObj));
-      uploadImage(adminStoreID);
+      hasData && (await updateDoc(doc(db, "stores", adminStoreId), storeObj));
+      uploadImage(adminStoreId);
     } else {
       // setup data in firebase
       try {
         const docRef = await addDoc(collection(db, "stores"), storeObj);
         await setDoc(doc(db, "users", currentUser.uid, "stores", docRef.id), {
-          storeID: docRef.id,
+          storeId: docRef.id,
         });
         uploadImage(docRef.id);
       } catch (err) {
@@ -80,8 +80,8 @@ const StoreSetup = () => {
   // load existing information, for editing purposes
   const [slug, setSlug] = useState(undefined);
   async function getData() {
-    if ((currentUser, adminStoreID)) {
-      const docRef = doc(db, "stores", adminStoreID);
+    if ((currentUser, adminStoreId)) {
+      const docRef = doc(db, "stores", adminStoreId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data());
@@ -99,7 +99,7 @@ const StoreSetup = () => {
 
   useEffect(() => {
     getData();
-  }, [currentUser, adminStoreID]);
+  }, [currentUser, adminStoreId]);
 
   //create store slug
   function handleNameChange(e) {

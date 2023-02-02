@@ -194,7 +194,9 @@ function TeamSetup() {
     };
     if (checkWorkingHours(times)[0]) {
       alert(
-        "Bitte überprüfen Sie die angegebenen Arbeitszeiten. Die Startzeit muss immer vor der Schließzeit liegen und die Pausenzeiten innerhalb der Start- und Schließzeiten."
+        `Bitte überprüfen Sie die angegebenen Arbeitszeiten am ${corruptDays.map(
+          (el) => el
+        )}. Die Startzeit muss immer vor der Schließzeit liegen und die Pausenzeiten innerhalb der Start- und Schließzeiten.`
       );
       return;
     }

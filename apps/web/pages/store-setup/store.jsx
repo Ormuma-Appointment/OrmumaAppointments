@@ -20,6 +20,39 @@ import { db } from "../../firebase/firebase";
 import { storage } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
 
+// check if opening times are structured correctly
+function checkWorkingHours(days) {
+  let invalidDays = [];
+  for (let day of days) {
+    if (
+      day.start === null &&
+      day.end === null &&
+      day.breakStart === null &&
+      day.breakEnd === null
+    ) {
+      continue;
+    }
+    if (day.start === null || day.end === null) {
+      invalidDays.push(day.label);
+      continue;
+    }
+    if (day.breakStart && day.breakEnd) {
+      if (
+        day.breakStart >= day.breakEnd ||
+        day.breakStart <= day.start ||
+        day.breakEnd >= day.end
+      ) {
+        invalidDays.push(day.label);
+        continue;
+      }
+    }
+    if (day.start >= day.end) {
+      invalidDays.push(day.label);
+    }
+  }
+  return invalidDays;
+}
+
 const StoreSetup = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [salonData, setSalonData] = useState([]);
@@ -58,6 +91,13 @@ const StoreSetup = () => {
       },
       openingHours: times,
     };
+    console.log(times);
+    if (checkWorkingHours(times)[0]) {
+      alert(
+        "Bitte überprüfen Sie die angegebenen Arbeitszeiten. Die Startzeit muss immer vor der Schließzeit liegen und die Pausenzeiten innerhalb der Start- und Schließzeiten."
+      );
+      return;
+    }
     if (hasData) {
       // update firebase data if page was loaded with existing store data
       hasData && (await updateDoc(doc(db, "stores", adminStoreId), storeObj));

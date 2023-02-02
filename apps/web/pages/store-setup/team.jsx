@@ -44,10 +44,20 @@ function checkWorkingHours(days) {
   let invalidDays = [];
 
   for (let day of days) {
+    if (
+      day.start === null &&
+      day.end === null &&
+      day.breakStart === null &&
+      day.breakEnd === null
+    ) {
+      continue;
+    }
+
     if (day.start === null || day.end === null) {
       invalidDays.push(day.label);
       continue;
     }
+
     if (day.breakStart && day.breakEnd) {
       if (
         day.breakStart >= day.breakEnd ||
@@ -58,6 +68,7 @@ function checkWorkingHours(days) {
         continue;
       }
     }
+
     if (day.start >= day.end) {
       invalidDays.push(day.label);
     }
@@ -183,10 +194,12 @@ function TeamSetup() {
       description: e.target.description.value,
       workingTime: times,
     };
-    // if (checkWorkingHours(times)[0]) {
-    //   alert("Etwas scheint nicht zu stimmen");
-    //   return;
-    // }
+    if (checkWorkingHours(times)[0]) {
+      alert(
+        "Bitte überprüfen Sie die angegebenen Arbeitszeiten. Die Startzeit muss immer vor der Schließzeit liegen und die Pausenzeiten innerhalb der Start- und Schließzeiten."
+      );
+      return;
+    }
 
     if (hasData) {
       await updateDoc(

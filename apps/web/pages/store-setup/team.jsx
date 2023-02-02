@@ -37,7 +37,7 @@ function TeamSetup() {
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(undefined);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
-  const [employeeFirebaseIDs, setEmployeeFirebaseIDs] = useState([]);
+  const [employeeFirebaseIds, setEmployeeFirebaseIds] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
 
   // get services from Store Collection services
@@ -83,7 +83,7 @@ function TeamSetup() {
         idsTemp.push(doc.id);
       });
       setSalonEmployees(employeesTemp);
-      setEmployeeFirebaseIDs(idsTemp);
+      setEmployeeFirebaseIds(idsTemp);
     }
     setLoading(false);
   }
@@ -161,11 +161,11 @@ function TeamSetup() {
           "stores",
           adminStoreId,
           "employeeList",
-          employeeFirebaseIDs[employeeIndex]
+          employeeFirebaseIds[employeeIndex]
         ),
         employee
       );
-      uploadImage(employeeFirebaseIDs[employeeIndex]);
+      uploadImage(employeeFirebaseIds[employeeIndex]);
     } else {
       let uuid = short.generate();
       const res = await setDoc(

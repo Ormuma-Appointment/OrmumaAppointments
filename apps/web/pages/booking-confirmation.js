@@ -11,7 +11,7 @@ import { db } from "../firebase/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
 const BookingConfirmation = () => {
-  const { chosenService, chosen, chosenSlot, slotToString } =
+  const { chosenService, chosen, chosenSlot, slotToString, storeId } =
     useContext(BookingContext);
   const router = useRouter();
   if (chosenSlot) {
@@ -20,6 +20,7 @@ const BookingConfirmation = () => {
   }
   const [confirmed, setConfirmed] = useState(false);
   const { currentUser } = useAuthContext();
+  const [storeName, setStoreName] = useState(undefined);
 
   let client = {
     clientId: currentUser.uid,

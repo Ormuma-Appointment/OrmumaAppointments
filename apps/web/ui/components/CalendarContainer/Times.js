@@ -7,8 +7,13 @@ const Times = (props) => {
   const [event, setEvent] = useState(null);
   const [info, setInfo] = useState(false);
 
-  const { chosenService, selectedEmployee, setChosenSlot, eventData } =
-    useContext(BookingContext);
+  const {
+    chosenService,
+    selectedEmployee,
+    setChosenSlot,
+    eventData,
+    clientEventsData,
+  } = useContext(BookingContext);
 
   const displayInfo = (e) => {
     setInfo(true);
@@ -30,6 +35,15 @@ const Times = (props) => {
   };
 
   eventData.forEach((event) => {
+    if (
+      moment(event.date.toDate()).format("YYYY-MM-DD") ===
+      moment(props.date).format("YYYY-MM-DD")
+    ) {
+      x.breakTime.push(event.slot);
+    }
+  });
+
+  clientEventsData.forEach((event) => {
     if (
       moment(event.date.toDate()).format("YYYY-MM-DD") ===
       moment(props.date).format("YYYY-MM-DD")

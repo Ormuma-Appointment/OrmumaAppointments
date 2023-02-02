@@ -65,7 +65,7 @@ const Times = (props) => {
   }
 
   const eventTime = (startTime, duration) => {
-    const endTime = moment(startTime, "HH🇲🇲")
+    const endTime = moment(startTime, "HH:mm")
       .add(duration, "minutes")
       .format("HH:mm");
     return endTime;
@@ -82,6 +82,8 @@ const Times = (props) => {
     duration: chosenService.duration,
     end: endTimeSlot,
   };
+
+  console.log("selected slot from times", selectedSlot);
 
   useEffect(() => {
     if (event) {

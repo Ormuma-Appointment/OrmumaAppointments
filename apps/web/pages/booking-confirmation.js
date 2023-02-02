@@ -11,7 +11,7 @@ import { db } from "../firebase/firebase";
 import { collection, doc, setDoc } from "firebase/firestore";
 
 const BookingConfirmation = () => {
-  const { chosenService, chosen, chosenSlot, storeId, slotToString } =
+  const { chosenService, chosen, chosenSlot, slotToString } =
     useContext(BookingContext);
   const router = useRouter();
   if (chosenSlot) {

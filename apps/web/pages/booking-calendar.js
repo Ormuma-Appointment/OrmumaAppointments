@@ -16,15 +16,15 @@ const BookingCalendar = () => {
     setChosenSlot,
     setChosen,
     setChosenService,
-    setStoreID,
-    storeID,
+    setStoreId,
+    storeId,
     slotToString,
   } = useContext(BookingContext);
   const router = useRouter();
 
   const query = router.query;
-  if (!storeID) {
-    setStoreID(query.storeid);
+  if (!storeId) {
+    setStoreId(query.storeid);
   }
   useEffect(() => {
     setChosenService({
@@ -32,13 +32,13 @@ const BookingCalendar = () => {
       duration: query.duration,
       price: query.price,
       category: query.category,
-      storeID: storeID,
+      storeId: storeId,
     });
     setChosen({
       employee: query.employee,
       employeeId: query.employeeId,
     });
-  }, [storeID]);
+  }, [storeId]);
 
   function handleBookingClick() {
     router.push("/booking-confirmation");

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -8,10 +8,10 @@ import { BookingContext } from "../context/BookingContext";
 import { useRouter } from "next/router";
 import { useAuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 
 const BookingConfirmation = () => {
-  const { chosenService, chosen, chosenSlot, storeID, slotToString } =
+  const { chosenService, chosen, chosenSlot, slotToString, storeId } =
     useContext(BookingContext);
   const router = useRouter();
   if (chosenSlot) {
@@ -20,13 +20,38 @@ const BookingConfirmation = () => {
   }
   const [confirmed, setConfirmed] = useState(false);
   const { currentUser } = useAuthContext();
+  const [storeName, setStoreName] = useState(undefined);
 
   let client = {
     clientId: currentUser.uid,
     clientName: currentUser.displayName,
   };
 
-  let event = { ...chosen, ...chosenService, ...chosenSlot, ...client }; // => have to go to collection events
+  async function getStoreName(storeId) {
+    if (storeId) {
+      const docRef = doc(db, "stores", storeId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        // console.log("Document data:", docSnap.data().name);
+        setStoreName(docSnap.data().name);
+      } else {
+        console.log("No such document!");
+      }
+    }
+  }
+  useEffect(() => {
+    if (storeId) {
+      getStoreName(storeId);
+    }
+  }, [storeId]);
+
+  let event = {
+    ...chosen,
+    ...chosenService,
+    ...chosenSlot,
+    ...client,
+    storeName,
+  }; // => have to go to collection events
 
   async function handleBookingConfirmation(e) {
     e.preventDefault();

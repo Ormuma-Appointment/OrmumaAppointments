@@ -17,14 +17,14 @@ function ServiceSetup() {
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
   const router = useRouter();
-  const { currentUser, adminStoreID } = useAuthContext();
+  const { currentUser, adminStoreId } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
 
   async function getDBServices() {
-    if (currentUser && adminStoreID) {
-      const docRef = doc(db, "stores", adminStoreID, "services", "serviceList");
+    if (currentUser && adminStoreId) {
+      const docRef = doc(db, "stores", adminStoreId, "services", "serviceList");
 
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -58,7 +58,7 @@ function ServiceSetup() {
 
   useEffect(() => {
     getDBServices();
-  }, [currentUser, adminStoreID]);
+  }, [currentUser, adminStoreId]);
 
   function handleCatSubmit(e) {
     e.preventDefault();
@@ -79,14 +79,14 @@ function ServiceSetup() {
     }
     if (hasData) {
       await updateDoc(
-        doc(db, "stores", adminStoreID, "services", "serviceList"),
+        doc(db, "stores", adminStoreId, "services", "serviceList"),
         {
           serviceObj,
         }
       );
     } else {
       const res = await setDoc(
-        doc(db, "stores", adminStoreID, "services", "serviceList"),
+        doc(db, "stores", adminStoreId, "services", "serviceList"),
         {
           serviceObj,
         }

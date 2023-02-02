@@ -25,7 +25,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import short from "short-uuid";
 
 function TeamSetup() {
-  const { currentUser, adminStoreID } = useAuthContext();
+  const { currentUser, adminStoreId } = useAuthContext();
   const [imageUpload, setImageUpload] = useState(null);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -37,13 +37,13 @@ function TeamSetup() {
   const [salonEmployees, setSalonEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(undefined);
   const [employeeIndex, setEmployeeIndex] = useState(undefined);
-  const [employeeFirebaseIDs, setEmployeeFirebaseIDs] = useState([]);
+  const [employeeFirebaseIds, setEmployeeFirebaseIds] = useState([]);
   const [noSelected, setNoSelected] = useState(false);
 
   // get services from Store Collection services
   async function getDBServices() {
-    if ((currentUser, adminStoreID)) {
-      const docRef = doc(db, "stores", adminStoreID, "services", "serviceList");
+    if ((currentUser, adminStoreId)) {
+      const docRef = doc(db, "stores", adminStoreId, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         // console.log("Document data:", docSnap.data().serviceObj);
@@ -65,15 +65,15 @@ function TeamSetup() {
   }
   useEffect(() => {
     getDBServices();
-  }, [adminStoreID]);
+  }, [adminStoreId]);
   // get all Employees from Firebase
 
   async function getEmployeeData() {
-    if ((currentUser, adminStoreID)) {
+    if ((currentUser, adminStoreId)) {
       let employeesTemp = [];
       let idsTemp = [];
       const querySnapshot = await getDocs(
-        collection(db, "stores", adminStoreID, "employeeList")
+        collection(db, "stores", adminStoreId, "employeeList")
       );
       querySnapshot.forEach((doc) => {
         const el = { id: doc.id, ...doc.data() };
@@ -83,13 +83,13 @@ function TeamSetup() {
         idsTemp.push(doc.id);
       });
       setSalonEmployees(employeesTemp);
-      setEmployeeFirebaseIDs(idsTemp);
+      setEmployeeFirebaseIds(idsTemp);
     }
     setLoading(false);
   }
   useEffect(() => {
     getEmployeeData();
-  }, [adminStoreID]);
+  }, [adminStoreId]);
   useEffect(() => {
     console.log(salonEmployees);
   }, [salonEmployees]);
@@ -159,17 +159,17 @@ function TeamSetup() {
         doc(
           db,
           "stores",
-          adminStoreID,
+          adminStoreId,
           "employeeList",
-          employeeFirebaseIDs[employeeIndex]
+          employeeFirebaseIds[employeeIndex]
         ),
         employee
       );
-      uploadImage(employeeFirebaseIDs[employeeIndex]);
+      uploadImage(employeeFirebaseIds[employeeIndex]);
     } else {
       let uuid = short.generate();
       const res = await setDoc(
-        doc(db, "stores", adminStoreID, "employeeList", uuid),
+        doc(db, "stores", adminStoreId, "employeeList", uuid),
         employee
       );
       uploadImage(uuid);

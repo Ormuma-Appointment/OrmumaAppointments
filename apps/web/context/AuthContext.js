@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadStoreId, setLoadStoreId] = useState(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (user) => {
@@ -24,7 +25,6 @@ export const AuthContextProvider = ({ children }) => {
           await user.getIdTokenResult()
         ).claims.admin;
         setCurrentUser(user);
-        console.log(isAdmin);
         setIsAdmin(idTokenResult);
       } // console.log(user);
       setLoading(false);
@@ -35,8 +35,6 @@ export const AuthContextProvider = ({ children }) => {
       unsub();
     };
   }, []);
-
-  console.log(currentUser);
 
   const isLoggedIn = (currentUser) => {
     if (currentUser) {
@@ -49,7 +47,7 @@ export const AuthContextProvider = ({ children }) => {
     signOut(a)
       .then(() => {
         setCurrentUser(null);
-        console.log("logged out");
+        // console.log("logged out");
         setIsAdmin(false);
         router.push("/");
       })
@@ -62,7 +60,9 @@ export const AuthContextProvider = ({ children }) => {
   const [adminStoreId, setAdminStoreId] = useState(undefined);
   const [inStoreSetupProcess, setInStoreSetupProcess] = useState(undefined);
   async function getStore() {
+    console.log("Hi from getStore!");
     if (currentUser) {
+      console.log("Hi from User is there!");
       let idsTemp = [];
       const querySnapshot = await getDocs(
         collection(db, "users", currentUser.uid, "stores")
@@ -80,7 +80,7 @@ export const AuthContextProvider = ({ children }) => {
     if (currentUser) {
       getStore();
     }
-  }, [currentUser]);
+  }, [currentUser, isAdmin, loadStoreId]);
 
   return (
     <AuthContext.Provider
@@ -93,6 +93,7 @@ export const AuthContextProvider = ({ children }) => {
         isAdmin,
         inStoreSetupProcess,
         setInStoreSetupProcess,
+        setLoadStoreId,
       }}
     >
       {loading ? null : children}

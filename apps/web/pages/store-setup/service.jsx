@@ -17,7 +17,7 @@ function ServiceSetup() {
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
   const router = useRouter();
-  const { currentUser, adminStoreId } = useAuthContext();
+  const { currentUser, adminStoreId, setLoadStoreId } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
@@ -58,6 +58,7 @@ function ServiceSetup() {
 
   useEffect(() => {
     getDBServices();
+    setLoadStoreId((prev) => !prev);
   }, [currentUser, adminStoreId]);
 
   function handleCatSubmit(e) {
@@ -71,12 +72,14 @@ function ServiceSetup() {
   // handle continue and save button click
   async function handleContinueClick(e, path) {
     e.preventDefault();
+
     let serviceObj;
     if (data[0]) {
       serviceObj = data;
     } else {
       serviceObj = dbServices;
     }
+
     if (hasData) {
       await updateDoc(
         doc(db, "stores", adminStoreId, "services", "serviceList"),

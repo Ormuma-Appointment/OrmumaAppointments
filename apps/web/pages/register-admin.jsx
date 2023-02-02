@@ -76,9 +76,9 @@ function RegisterAdmin() {
       const response = await fetch(endpoint, options);
       const json = await response.json();
       if (json.message) {
-        console.log("User has been made an admin", json.message);
+        // console.log("User has been made an admin", json.message);
       } else {
-        console.log("making the user an admin has failed");
+        // console.log("making the user an admin has failed");
       }
     } catch (err) {
       console.log("making the user an admin has failed", err);

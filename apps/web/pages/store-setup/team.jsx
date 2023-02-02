@@ -3,11 +3,8 @@ import { workingTimes } from "../data-sample";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
-import Input from "../../ui/components/InputField/Input";
 import TimeDefinitionSection from "../../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../../ui/components/Button/Button";
-import RadioSelectElement from "../../ui/components/RadioSelectElement/RadioSelectElement";
-import Minus from "../../ui/components/assets/minus.svg";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../../firebase/firebase";
@@ -23,6 +20,51 @@ import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import { useAuthContext } from "../../context/AuthContext";
 import short from "short-uuid";
+import EmployeePersonalDetailsForm from "../../ui/components/StoreSetupForms/EmployeePersonalDetailsForm";
+import EmployeeServicesForm from "../../ui/components/StoreSetupForms/EmployeeServicesForm";
+function transformToCorrectFormat(arr) {
+  let result = {};
+  arr.forEach((item) => {
+    let parts = item.split("  -  ");
+    let category = parts[0];
+    let service = parts[1];
+    if (!result[category]) {
+      result[category] = {
+        category: category,
+        services: [{ service: service }],
+      };
+    } else {
+      result[category].services.push({ service: service });
+    }
+  });
+  return Object.values(result);
+}
+
+function checkWorkingHours(days) {
+  let invalidDays = [];
+
+  for (let day of days) {
+    if (day.start === null || day.end === null) {
+      invalidDays.push(day.label);
+      continue;
+    }
+    if (day.breakStart && day.breakEnd) {
+      if (
+        day.breakStart >= day.breakEnd ||
+        day.breakStart <= day.start ||
+        day.breakEnd >= day.end
+      ) {
+        invalidDays.push(day.label);
+        continue;
+      }
+    }
+    if (day.start >= day.end) {
+      invalidDays.push(day.label);
+    }
+  }
+
+  return invalidDays;
+}
 
 function TeamSetup() {
   const { currentUser, adminStoreId } = useAuthContext();
@@ -90,9 +132,6 @@ function TeamSetup() {
   useEffect(() => {
     getEmployeeData();
   }, [adminStoreId]);
-  useEffect(() => {
-    console.log(salonEmployees);
-  }, [salonEmployees]);
 
   useEffect(() => {
     if (employeeIndex || employeeIndex === 0) setHasData(true);
@@ -107,25 +146,6 @@ function TeamSetup() {
       setTimes(selectedEmployee.workingTime);
     }
   }, [selectedEmployee]);
-
-  function transformArray(arr) {
-    let result = {};
-    arr.forEach((item) => {
-      let parts = item.split("  -  ");
-      let category = parts[0];
-      let service = parts[1];
-      if (!result[category]) {
-        result[category] = {
-          category: category,
-          services: [{ service: service }],
-        };
-      } else {
-        result[category].services.push({ service: service });
-      }
-    });
-    return Object.values(result);
-  }
-
   function reverseTransform(obj) {
     let result = [];
     obj.forEach((item) => {
@@ -135,7 +155,17 @@ function TeamSetup() {
     });
     return result;
   }
-
+  function uploadImage(docRef) {
+    if (imageUpload === null) return;
+    const imageRef = ref(storage, `images/team/${docRef}`);
+    uploadBytes(imageRef, imageUpload)
+      .then(() => {
+        console.log("Image uploaded!");
+        // reloads page and clears all fields
+        router.reload(window.location.pathname);
+      })
+      .catch(() => console.log(err));
+  }
   async function handleFormSubmit(e) {
     e.preventDefault();
     let employee = {
@@ -149,10 +179,14 @@ function TeamSetup() {
       },
       telephone: e.target.telephone.value,
       photo: e.target.photo.value,
-      services: transformArray(services),
+      services: transformToCorrectFormat(services),
       description: e.target.description.value,
       workingTime: times,
     };
+    // if (checkWorkingHours(times)[0]) {
+    //   alert("Etwas scheint nicht zu stimmen");
+    //   return;
+    // }
 
     if (hasData) {
       await updateDoc(
@@ -172,7 +206,7 @@ function TeamSetup() {
         doc(db, "stores", adminStoreId, "employeeList", uuid),
         employee
       );
-      uploadImage(uuid);
+      uploadImage(uuid, imageUpload);
     }
 
     if (imageUpload === null) {
@@ -185,44 +219,13 @@ function TeamSetup() {
     e.preventDefault();
     router.push(path);
   }
-  function handleRemoveClick(index) {
-    setServices((prev) => prev.filter((elem, i) => i !== index));
-  }
 
-  function handleCancelClick(e) {
-    e.preventDefault();
-    if (hasData) {
-      setServices(reverseTransform(selectedEmployee.services));
-    } else {
-      if (dbServices) {
-        setServices(dbServices);
-      }
-    }
-  }
   useEffect(() => {
     if (!showServices) {
       setServices(dbServices);
     }
   }, [showServices]);
 
-  function handleLoadClick(e) {
-    e.preventDefault();
-    setServices(dbServices);
-  }
-  function uploadImage(docRef) {
-    if (imageUpload === null) return;
-    const imageRef = ref(storage, `images/team/${docRef}`);
-    uploadBytes(imageRef, imageUpload)
-      .then(() => {
-        console.log("Image uploaded!");
-        // reloads page and clears all fields
-        router.reload(window.location.pathname);
-      })
-      .catch(() => console.log(err));
-  }
-  useEffect(() => {
-    console.log(imageUpload);
-  }, [imageUpload]);
   if (!loading) {
     return (
       <div>
@@ -234,130 +237,18 @@ function TeamSetup() {
         <CardContainer>
           <div className={styles.container}>
             <form action="" onSubmit={handleFormSubmit}>
-              <div className={styles.intro}>
+              <div>
                 Um eine Person hinzuzufügen, füllen Sie bitte die unten
                 stehenden Felder aus. Sobald Sie auf "Person speichern" klicken,
                 wird diese unten auftauchen. Keine persönlichen Daten, werden
                 für Kund*Innen sichtbar sein. <br />
                 Klicken Sie auf "Person speichern", um alle Daten zu speichern.
               </div>
-              <div className={styles.form}>
-                <div className={styles.setUpInfos}>
-                  <div className={styles.row}>
-                    <div className={styles.col30}>
-                      <label>Name:*</label>
-                    </div>
-                    <div className={styles.col70}>
-                      <Input
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Name"
-                        defaultValue={hasData ? selectedEmployee.name : ""}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className={`${styles.row} ${styles.adresse}`}>
-                    <div className={styles.col30}>
-                      <label>Adresse:</label>
-                    </div>
-                    <div className={styles.col70}>
-                      <div className={`${styles.row} ${styles.city}`}>
-                        <div className={styles.col70}>
-                          <Input
-                            type="text"
-                            name="street"
-                            id="street"
-                            defaultValue={
-                              hasData ? selectedEmployee.adress.street : ""
-                            }
-                            placeholder="Straße"
-                          />
-                        </div>{" "}
-                        <div className={styles.col30}>
-                          <Input
-                            type="number"
-                            name="number"
-                            id="number"
-                            defaultValue={
-                              hasData ? selectedEmployee.adress.number : ""
-                            }
-                            placeholder="Nummer"
-                          />
-                        </div>{" "}
-                      </div>
-                      <div className={`${styles.row} ${styles.city}`}>
-                        <div className={styles.col50}>
-                          <Input
-                            type="text"
-                            name="postalCode"
-                            id="postalCode"
-                            defaultValue={
-                              hasData ? selectedEmployee.adress.postalCode : ""
-                            }
-                            placeholder="Postleitzahl"
-                          />
-                        </div>
-                        <div className={styles.col50}>
-                          <Input
-                            type="text"
-                            name="city"
-                            id="city"
-                            defaultValue={
-                              hasData ? selectedEmployee.adress.city : ""
-                            }
-                            placeholder="Stadt"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.row}>
-                    <div className={styles.col30}>
-                      <label>Telefon:</label>
-                    </div>
-                    <div className={styles.col70}>
-                      <Input
-                        type="tel"
-                        name="telephone"
-                        id="telephone"
-                        defaultValue={hasData ? selectedEmployee.telephone : ""}
-                        placeholder="Telefonnummer"
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.row}>
-                    <div className={styles.col30}>
-                      <label>Beschreibung:</label>
-                    </div>
-                    <div className={styles.col70}>
-                      <Input
-                        type="text"
-                        name="description"
-                        id="description"
-                        defaultValue={
-                          hasData ? selectedEmployee.description : ""
-                        }
-                        placeholder="z.B. Farbspezialistin, Balayage, ... "
-                      />
-                    </div>
-                  </div>
-                  <div className={styles.row}>
-                    <div className={styles.col30}>
-                      <label>Stylist*Innenfoto:</label>
-                    </div>
-                    <div className={styles.col70}>
-                      <Input
-                        type="file"
-                        name="photo"
-                        id="logo"
-                        onChange={(e) => setImageUpload(e.target.files[0])}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <EmployeePersonalDetailsForm
+                hasData={hasData}
+                selectedEmployee={selectedEmployee}
+                setImageUpload={setImageUpload}
+              />
               <div className={styles.setUpOpenings}>
                 <div className={`${styles.row} ${styles.opening}`}>
                   <div className={styles.col30}>
@@ -373,60 +264,18 @@ function TeamSetup() {
                   </div>
                 </div>
               </div>
-              <div className={styles.employee_services}>
-                <div>
-                  <label className={styles.col50} htmlFor="all_service">
-                    Bietet diese Person alle Services an?
-                  </label>
-                  <div className={styles.col50}>
-                    <RadioSelectElement
-                      name="services_done"
-                      labels={["ja", "nein"]}
-                      setShowServices={setShowServices}
-                      hasData={hasData}
-                      setNoSelected={setNoSelected}
-                      noSelected={noSelected}
-                    />
-                  </div>
-                </div>
-                {showServices && (
-                  <>
-                    <label className={styles.small_label} htmlFor="all_service">
-                      Lösche Services, die von dieser Person nicht angeboten
-                      werden. Sie werden nur für diese Person gelöscht.
-                    </label>
-                    <div className={styles.cat_box}>
-                      {services.map((el, index) => {
-                        return (
-                          <div key={index} className={styles.pill}>
-                            {el}
-                            <Minus
-                              className={styles.icon}
-                              onClick={() => handleRemoveClick(index)}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className={styles.button_group}>
-                      <Button
-                        size="xsmall"
-                        variant="invisible"
-                        onClick={handleLoadClick}
-                      >
-                        Alle Services des Salons laden
-                      </Button>
-                      <Button
-                        size="xsmall"
-                        variant="invisible"
-                        onClick={handleCancelClick}
-                      >
-                        Änderungen rückgängig machen
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </div>
+              <EmployeeServicesForm
+                setShowServices={setShowServices}
+                showServices={showServices}
+                setNoSelected={setNoSelected}
+                noSelected={noSelected}
+                setServices={setServices}
+                services={services}
+                hasData={hasData}
+                dbServices={dbServices}
+                selectedEmployee={selectedEmployee}
+                reverseTransform={reverseTransform}
+              />
               <div className={styles.footer}>
                 <Button
                   size="medium"

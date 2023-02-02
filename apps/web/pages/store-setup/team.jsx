@@ -5,8 +5,6 @@ import styles from "../../ui/page_styles/TeamSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
 import TimeDefinitionSection from "../../ui/components/TimeDefinitionSection/TimeDefinitionSection";
 import Button from "../../ui/components/Button/Button";
-import RadioSelectElement from "../../ui/components/RadioSelectElement/RadioSelectElement";
-import Minus from "../../ui/components/assets/minus.svg";
 import { useRouter } from "next/router";
 import EmployeeOverview from "../../ui/components/EmployeeOverview/EmployeeOverview";
 import { db } from "../../firebase/firebase";
@@ -131,7 +129,7 @@ function TeamSetup() {
     });
     return result;
   }
-  function uploadImage(docRef, imageUpload) {
+  function uploadImage(docRef) {
     if (imageUpload === null) return;
     const imageRef = ref(storage, `images/team/${docRef}`);
     uploadBytes(imageRef, imageUpload)
@@ -209,7 +207,7 @@ function TeamSetup() {
         <CardContainer>
           <div className={styles.container}>
             <form action="" onSubmit={handleFormSubmit}>
-              <div className={styles.intro}>
+              <div>
                 Um eine Person hinzuzufügen, füllen Sie bitte die unten
                 stehenden Felder aus. Sobald Sie auf "Person speichern" klicken,
                 wird diese unten auftauchen. Keine persönlichen Daten, werden
@@ -248,60 +246,6 @@ function TeamSetup() {
                 selectedEmployee={selectedEmployee}
                 reverseTransform={reverseTransform}
               />
-              {/* <div className={styles.employee_services}>
-                <div>
-                  <label className={styles.col50} htmlFor="all_service">
-                    Bietet diese Person alle Services an?
-                  </label>
-                  <div className={styles.col50}>
-                    <RadioSelectElement
-                      name="services_done"
-                      labels={["ja", "nein"]}
-                      setShowServices={setShowServices}
-                      hasData={hasData}
-                      setNoSelected={setNoSelected}
-                      noSelected={noSelected}
-                    />
-                  </div>
-                </div>
-                {showServices && (
-                  <>
-                    <label className={styles.small_label} htmlFor="all_service">
-                      Lösche Services, die von dieser Person nicht angeboten
-                      werden. Sie werden nur für diese Person gelöscht.
-                    </label>
-                    <div className={styles.cat_box}>
-                      {services.map((el, index) => {
-                        return (
-                          <div key={index} className={styles.pill}>
-                            {el}
-                            <Minus
-                              className={styles.icon}
-                              onClick={() => handleRemoveClick(index)}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className={styles.button_group}>
-                      <Button
-                        size="xsmall"
-                        variant="invisible"
-                        onClick={handleLoadClick}
-                      >
-                        Alle Services des Salons laden
-                      </Button>
-                      <Button
-                        size="xsmall"
-                        variant="invisible"
-                        onClick={handleCancelClick}
-                      >
-                        Änderungen rückgängig machen
-                      </Button>
-                    </div>
-                  </>
-                )}
-              </div> */}
               <div className={styles.footer}>
                 <Button
                   size="medium"

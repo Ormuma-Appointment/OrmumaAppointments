@@ -183,10 +183,10 @@ function TeamSetup() {
       description: e.target.description.value,
       workingTime: times,
     };
-    if (checkWorkingHours(times)[0]) {
-      alert("Etwas scheint nicht zu stimmen");
-      return;
-    }
+    // if (checkWorkingHours(times)[0]) {
+    //   alert("Etwas scheint nicht zu stimmen");
+    //   return;
+    // }
 
     if (hasData) {
       await updateDoc(

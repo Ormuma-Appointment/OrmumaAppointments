@@ -60,12 +60,12 @@ const AccountAdmin = () => {
   };
 
   // get salon data for salon overview from Firebase
-  const { currentUser, adminStoreID } = useAuthContext();
+  const { currentUser, adminStoreId } = useAuthContext();
   const [salonData, setSalonData] = useState(salon);
   const [isLoading, setIsLoading] = useState(true);
   async function getSalonData() {
-    if (adminStoreID) {
-      const docRef = doc(db, "stores", adminStoreID);
+    if (adminStoreId) {
+      const docRef = doc(db, "stores", adminStoreId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         //console.log("Document data:", docSnap.data());
@@ -81,10 +81,10 @@ const AccountAdmin = () => {
   const [employeeIndex, setEmployeeIndex] = useState(0);
 
   async function getEmployeeData() {
-    if (adminStoreID) {
+    if (adminStoreId) {
       let employeesTemp = [];
       const querySnapshot = await getDocs(
-        collection(db, "stores", adminStoreID, "employeeList")
+        collection(db, "stores", adminStoreId, "employeeList")
       );
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
@@ -100,7 +100,7 @@ const AccountAdmin = () => {
   const getEvent = async () => {
     const q = query(
       collection(db, "events"),
-      where("storeID", "==", adminStoreID)
+      where("storeId", "==", adminStoreId)
     );
     const docSnap = await getDocs(q);
     let passtEvents = [];
@@ -129,14 +129,14 @@ const AccountAdmin = () => {
     getEmployeeData();
     getEvent();
     setIsLoading(false);
-  }, [adminStoreID]);
+  }, [adminStoreId]);
 
   console.log("today", todayEvents);
   console.log("next", nextEvents);
   console.log("passt", passtEvents);
 
   if (!isLoading) {
-    if (adminStoreID) {
+    if (adminStoreId) {
       return (
         <div className={styles.page_container}>
           <div>

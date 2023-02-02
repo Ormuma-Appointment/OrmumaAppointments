@@ -17,7 +17,7 @@ function SelectItem(props) {
     selected,
     employeeId,
     setSelected,
-    storeID,
+    storeId,
     ...rest
   } = props;
 
@@ -29,7 +29,7 @@ function SelectItem(props) {
         price,
         duration,
         employeeId,
-        storeID,
+        storeId,
       });
     }
   };

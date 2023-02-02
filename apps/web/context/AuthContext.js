@@ -63,8 +63,8 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  // add storeID to context
-  const [adminStoreID, setAdminStoreID] = useState(undefined);
+  // add storeId to context
+  const [adminStoreId, setAdminStoreId] = useState(undefined);
   const [inStoreSetupProcess, setInStoreSetupProcess] = useState(undefined);
   async function getStore() {
     if (currentUser) {
@@ -77,7 +77,7 @@ export const AuthContextProvider = ({ children }) => {
         // console.log(doc.id, " => ", doc.data());
         idsTemp.push(doc.id);
       });
-      setAdminStoreID(idsTemp[0]);
+      setAdminStoreId(idsTemp[0]);
     }
   }
 
@@ -121,7 +121,7 @@ export const AuthContextProvider = ({ children }) => {
         setCurrentUser,
         isLoggedIn,
         logOut,
-        adminStoreID,
+        adminStoreId,
         isAdmin,
         inStoreSetupProcess,
         setInStoreSetupProcess,

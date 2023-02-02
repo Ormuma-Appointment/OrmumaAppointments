@@ -8,6 +8,7 @@ import {
   where,
   query,
 } from "firebase/firestore";
+import { useAuthContext } from "../context/AuthContext";
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {
@@ -16,10 +17,18 @@ export const BookingContextProvider = ({ children }) => {
   const [employeeData, setEmployeeData] = useState([]);
   const [selectedEmployee, setSelectedEmployeeData] = useState({});
   const [eventData, setEventData] = useState([]);
+  const [clientEventsData, setClientEventsData] = useState([]);
   const [chosenService, setChosenService] = useState(null);
   const [chosen, setChosen] = useState(null);
   const [chosenSlot, setChosenSlot] = useState(null);
   const [isLoading, SetIsLoading] = useState(true);
+
+  const { currentUser } = useAuthContext();
+
+  let user = {
+    userId: currentUser.uid,
+    userName: currentUser.displayName,
+  };
 
   async function getData() {
     if (storeId) {
@@ -100,10 +109,31 @@ export const BookingContextProvider = ({ children }) => {
     }
   };
 
+  //get client event to add them as well to breakTime
+  const getClientEvent = async () => {
+    const q = query(
+      collection(db, "events"),
+      where("clientId", "==", user.userId)
+    );
+    const docSnap = await getDocs(q);
+    let temp = [];
+    docSnap.forEach((doc) => {
+      const el = doc.data();
+
+      temp.push(el);
+
+      setClientEventsData(temp);
+      SetIsLoading(false);
+    });
+  };
+
   useEffect(() => {
     getEmployee();
     getEvent();
+    getClientEvent();
   }, [chosen, storeId]);
+
+  //console.log("clientEventsData", clientEventsData);
 
   let slotToString = "";
 
@@ -122,6 +152,7 @@ export const BookingContextProvider = ({ children }) => {
       value={{
         serviceList,
         eventData,
+        clientEventsData,
         employeeData,
         chosenService,
         setChosenService,

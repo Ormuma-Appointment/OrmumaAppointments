@@ -1,13 +1,3 @@
-.breadcrumb {
-  margin-bottom: 1rem;
-}
-.arrows {
-  font-size: 0.75rem;
-}
-.current_breadcrumb {
-  color: var(--primary-color);
-  font-weight: bold;
-}
 .container {
   padding: 3rem 1.5rem;
   width: 95vw;
@@ -19,22 +9,15 @@
   align-items: center;
 }
 
-.adresse,
 .opening {
   display: flex;
   align-items: flex-start;
 }
 
 .col30,
-.col70,
-.col50 {
+.col70 {
   width: 100%;
   margin-top: 1rem;
-}
-
-.setUpInfos {
-  border-bottom: 1px solid #ccc;
-  padding: 0 0 5rem;
 }
 
 .setUpOpenings {
@@ -43,50 +26,6 @@
   border-bottom: 1px solid #ccc;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 5rem;
-}
-
-.employee_services {
-  margin-top: 1rem;
-  padding: 0 0 5rem;
-  display: flex;
-  flex-direction: column;
-}
-.cat_box {
-  display: block;
-  width: 100%;
-  background-color: white;
-  border-width: 1px;
-  border-style: solid;
-  padding: 1rem;
-  border-color: #c0cad5;
-  border-radius: 5px;
-}
-.pill {
-  background-color: var(--primary-color-light);
-  color: white;
-  display: inline-block;
-  padding: 0.5rem 1.5rem;
-  border-radius: 30px;
-  margin: 0.5rem;
-}
-.icon {
-  width: 1rem;
-  margin-left: 1rem;
-  display: inline;
-  filter: invert(12%) sepia(98%) saturate(5906%) hue-rotate(356deg)
-    brightness(99%) contrast(119%);
-  cursor: pointer;
-}
-.employee_services button {
-  align-self: flex-end;
-}
-.small_label {
-  margin-top: 3rem;
-}
 .employee_container {
   margin-top: 3rem;
   padding-top: 3rem;
@@ -111,29 +50,12 @@
     width: 20%;
     margin-top: 1rem;
   }
-  .col50 {
-    float: left;
-    width: 20%;
-    margin-top: 1rem;
-  }
   .col70 {
     float: left;
     width: 80%;
     margin-top: 1rem;
   }
-  .col50 {
-    float: left;
-    width: 49%;
-    margin-top: 1rem;
-  }
-  .col50:first-child {
-    margin-right: 2%;
-  }
   .col70:first-child {
     margin-right: 2%;
-  }
-  .button_group {
-    display: flex;
-    justify-content: flex-end;
   }
 }

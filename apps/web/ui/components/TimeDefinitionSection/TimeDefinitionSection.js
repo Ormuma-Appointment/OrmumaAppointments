@@ -4,11 +4,12 @@ import SelectElement from "../SelectElement/SelectElement";
 
 function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   const [localTimes, setLocalTimes] = useState(times);
+  const [localHasData, setLocalHasData] = useState(hasData);
+
   useEffect(() => {
     setLocalTimes((prev) => times);
   }, [times]);
 
-  const [localHasData, setLocalHasData] = useState(hasData);
   useEffect(() => {
     setLocalHasData((prev) => hasData);
   }, [hasData]);
@@ -18,7 +19,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
   let breakStart = "breakStart";
   let breakEnd = "breakEnd";
 
-  function handleChange(e, el) {
+  function handleChange(e) {
     let target_name = e.target.name;
     let weekday = target_name.split("_")[0];
     let start_end = target_name.split("_")[1];

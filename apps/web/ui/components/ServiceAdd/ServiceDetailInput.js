@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./ServiceAdd.module.css";
 import Minus from "../assets/minus.svg";
 
+function setTwoNumberDecimal(e) {
+  e.target.value = parseFloat(e.target.value).toFixed(2);
+}
+
 function ServiceDetailInput({
   name,
   categories,
@@ -11,13 +15,13 @@ function ServiceDetailInput({
   setRemove,
 }) {
   const [duration, setDuration] = useState(
-    servicesDetails ? servicesDetails.duration : "15 mins"
+    servicesDetails ? servicesDetails.duration : ""
   );
   const [category, setCategory] = useState(
     servicesDetails ? servicesDetails.category : categories[0]
   );
   const [waiting, setWaiting] = useState(
-    servicesDetails ? servicesDetails.waiting : "0 mins"
+    servicesDetails ? servicesDetails.waiting : ""
   );
   const [price, setPrice] = useState(
     servicesDetails ? servicesDetails.price : ""
@@ -25,10 +29,11 @@ function ServiceDetailInput({
 
   useEffect(() => {
     setCategory(servicesDetails ? servicesDetails.category : categories[0]);
-    setDuration(servicesDetails ? servicesDetails.duration : "15 mins");
-    setWaiting(servicesDetails ? servicesDetails.waiting : "0 mins");
+    setDuration(servicesDetails ? servicesDetails.duration : "");
+    setWaiting(servicesDetails ? servicesDetails.waiting : "");
     setPrice(servicesDetails ? servicesDetails.price : "");
   }, [servicesDetails]);
+
   return (
     <div className={styles.group}>
       <div>{name}</div>
@@ -80,9 +85,14 @@ function ServiceDetailInput({
       <input
         name="price"
         value={price}
-        onChange={(e) => setPrice(e.target.value)}
+        type="number"
+        step="0.01"
+        onChange={(e) => {
+          setPrice(e.target.value);
+        }}
+        onBlur={(e) => setTwoNumberDecimal(e)}
         className={styles.select_things}
-      ></input>
+      />
       <div className={styles.delete}>
         <Minus
           className={styles.icon}

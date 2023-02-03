@@ -4,8 +4,37 @@ import CardContainer from "../CardContainer/CardContainer";
 import Person from "../assets/account.svg";
 import Cut from "../assets/scissors.svg";
 import Button from "../Button/Button";
+import { db } from "../../../firebase/firebase";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  where,
+  query,
+  deleteDoc,
+} from "firebase/firestore";
+import { useRouter } from "next/router";
+function AppointmentCard({
+  date,
+  time,
+  stylist,
+  customer,
+  service,
+  cancel,
+  id,
+}) {
+  const router = useRouter();
+  const handleCancel = (e) => {
+    console.log("handleCancel", e.target.id);
+  };
 
-function AppointmentCard({ date, time, stylist, customer, service, cancel }) {
+  const deleteEvent = async (e) => {
+    e.preventDefault();
+    await deleteDoc(doc(db, "events", id));
+    router.push("/account");
+  };
+
   return (
     <CardContainer>
       <div className={styles.container}>
@@ -14,7 +43,12 @@ function AppointmentCard({ date, time, stylist, customer, service, cancel }) {
             {date} / {time}
           </div>
           {cancel ? (
-            <Button icon="" size="xsmall" variant="danger">
+            <Button
+              onClick={deleteEvent}
+              icon=""
+              size="xsmall"
+              variant="danger"
+            >
               absagen
             </Button>
           ) : (

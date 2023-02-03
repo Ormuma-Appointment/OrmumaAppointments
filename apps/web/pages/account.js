@@ -23,6 +23,7 @@ const Account = () => {
   const router = useRouter();
   const [passtEvents, setPasstEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
+  const [cancelEvent, setCancelEvent] = useState({});
   const [isLoading, SetIsLoading] = useState(true);
 
   const { currentUser } = useAuthContext();
@@ -45,7 +46,7 @@ const Account = () => {
     let passtEvents = [];
     let nextEvents = [];
     docSnap.forEach((doc) => {
-      const el = doc.data();
+      const el = { id: doc.id, ...doc.data() };
       if (currentMomentDate <= moment(el.date.toDate()).format("YYYY-MM-DD")) {
         nextEvents.push(el);
       } else {
@@ -60,6 +61,8 @@ const Account = () => {
   useEffect(() => {
     getEvent();
   }, [user.userId]);
+
+  console.log("nextEvents", nextEvents);
 
   return (
     <div className={styles.container}>
@@ -99,6 +102,7 @@ const Account = () => {
                 service={event.service}
                 stylist={event.employee}
                 time={`${event.slot[0]} - ${event.slot[1]}`}
+                id={event.id}
               />
             );
           })}

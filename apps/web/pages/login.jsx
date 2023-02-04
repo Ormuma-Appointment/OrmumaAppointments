@@ -9,7 +9,6 @@ import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
 
 function Login() {
-  const [salonName, setSalonName] = useState("Natur Friseur");
   const [err, setErr] = useState(false);
   const router = useRouter();
 
@@ -49,8 +48,10 @@ function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h1>Willkommen bei {salonName}</h1>
-        <p>Logge dich ein, um alle Funktionen nutzen zu können</p>
+        <h1>Willkommen bei Salounge</h1>
+        <p>
+          Logge dich ein, um Termine bei deinem Lieblingssalon buchen zu können.
+        </p>
       </div>
       <form className={styles.form} onSubmit={handleLoginSubmit}>
         <Input

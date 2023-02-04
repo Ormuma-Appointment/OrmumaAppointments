@@ -1,5 +1,5 @@
 import StylistCard from "./StylistCard";
-import placeHolder from "../assets/placeholder-profile.jpeg";
+import placeHolder from "../assets/placeholder-profile.png";
 
 export default {
   title: "Components/StylistCard",

@@ -22,6 +22,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import short from "short-uuid";
 import EmployeePersonalDetailsForm from "../../ui/components/StoreSetupForms/EmployeePersonalDetailsForm";
 import EmployeeServicesForm from "../../ui/components/StoreSetupForms/EmployeeServicesForm";
+import { browserBack } from "../../ui/functions/browserBack";
 function transformToCorrectFormat(arr) {
   let result = {};
   arr.forEach((item) => {
@@ -228,11 +229,6 @@ function TeamSetup() {
     }
   }
 
-  function handleBackClick(e, path) {
-    e.preventDefault();
-    router.push(path);
-  }
-
   useEffect(() => {
     if (!showServices) {
       setServices(dbServices);
@@ -265,7 +261,7 @@ function TeamSetup() {
               <div className={styles.setUpOpenings}>
                 <div className={`${styles.row} ${styles.opening}`}>
                   <div className={styles.col30}>
-                    <label>Öffnungszeiten:*</label>
+                    <label>Arbeitszeiten:*</label>
                   </div>
                   <div className={styles.col70}>
                     <TimeDefinitionSection
@@ -293,7 +289,9 @@ function TeamSetup() {
                 <Button
                   size="medium"
                   variant="danger"
-                  onClick={(e) => handleBackClick(e, "/store-setup/service")}
+                  onClick={(e) =>
+                    browserBack(e, "/store-setup/service", router)
+                  }
                 >
                   zurück
                 </Button>

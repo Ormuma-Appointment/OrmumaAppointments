@@ -8,7 +8,7 @@ import { storage } from "../../../firebase/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
 function StylistCard({
-  image = "/placeholder-profile.jpeg",
+  image = "/placeholder-profile.png",
   name,
   description,
   index,

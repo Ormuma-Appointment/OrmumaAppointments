@@ -56,7 +56,7 @@ const SelectionCard = (props) => {
         <>
           <div>
             {!selected && (
-              <p className={styles.selectItemText}>Select a service</p>
+              <p className={styles.selectItemText}>Wähle einen Service</p>
             )}
             <div onClick={() => setSelected(null)}>
               {selected && (
@@ -71,7 +71,6 @@ const SelectionCard = (props) => {
           </div>
           <div className={styles.buttonsContainer}>
             <Button
-              icon=""
               size="medium"
               variant="danger"
               onClick={() => router.back()}
@@ -81,7 +80,6 @@ const SelectionCard = (props) => {
 
             {selected && (
               <Button
-                icon=""
                 size="medium"
                 variant="primary"
                 onClick={() => handleBookingClick()}
@@ -101,7 +99,7 @@ const SelectionCard = (props) => {
               service={service?.service}
             />
             {!selected && (
-              <p className={styles.selectItemText}>Select a employee</p>
+              <p className={styles.selectItemText}>Wähle einen Mitarbeiter</p>
             )}
             <div onClick={() => setSelected(null)}>
               {selected && <SelectItem employee={selected.employee} minus />}

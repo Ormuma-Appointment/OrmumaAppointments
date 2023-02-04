@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { useAuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+import Input from "../ui/components/InputField/Input";
 
 const BookingConfirmation = () => {
   const { chosenService, chosen, chosenSlot, slotToString, storeId } =
@@ -19,13 +20,12 @@ const BookingConfirmation = () => {
     router.back();
   }
   const [confirmed, setConfirmed] = useState(false);
-  const { currentUser } = useAuthContext();
+  const { currentUser, isAdmin } = useAuthContext();
   const [storeName, setStoreName] = useState(undefined);
-
-  let client = {
-    clientId: currentUser.uid,
-    clientName: currentUser.displayName,
-  };
+  const [client, setClient] = useState({
+    clientName: isAdmin ? currentUser.displayName : null,
+    clientId: isAdmin ? currentUser.uid : null,
+  });
 
   async function getStoreName(storeId) {
     if (storeId) {
@@ -51,7 +51,7 @@ const BookingConfirmation = () => {
     ...chosenSlot,
     ...client,
     storeName,
-  }; // => have to go to collection events
+  };
 
   async function handleBookingConfirmation(e) {
     e.preventDefault();
@@ -62,30 +62,26 @@ const BookingConfirmation = () => {
     router.push("/booking-confirmation");
   }
 
-  console.log("EVENNNT", event);
-
   return (
     <div className={styles.pageContainer}>
-      <h2 className={styles.center}>Your booking confirmation</h2>
+      <h1 className={styles.center}>Ihre Buchungsbestätigung</h1>
       {confirmed ? (
         <>
           <AppointmentConfirmation
             employee={event.employee}
-            name={event.name}
+            store={event.storeName}
             start={event.start}
             date={event.date}
           />
           <div className={styles.buttonsContainer}>
             <Button
-              icon=""
               size="medium"
               variant="primary"
               onClick={() => router.push("/")}
             >
-              Home
+              Zur Startseite
             </Button>
             <Button
-              icon=""
               size="medium"
               variant="primary"
               onClick={() => router.push("/account")}
@@ -97,8 +93,31 @@ const BookingConfirmation = () => {
       ) : (
         <div className={`${styles.uniqueContainer}`}>
           <CardContainer>
-            {" "}
             <h4>Ihre Auswahl</h4>
+            {isAdmin && (
+              <div>
+                <Input
+                  placeholder="Name der Kunden"
+                  onChange={(e) =>
+                    setClient({
+                      ...client,
+                      clientName: e.target.value,
+                      clientId: null,
+                    })
+                  }
+                />
+                <Input
+                  placeholder="Email / Telefonnummer"
+                  onChange={(e) =>
+                    setClient({
+                      ...client,
+                      clientContact: e.target.value,
+                      clientId: null,
+                    })
+                  }
+                />
+              </div>
+            )}
             <div>
               {chosenService && (
                 <SelectItem
@@ -114,14 +133,12 @@ const BookingConfirmation = () => {
             <div className={styles.buttonsContainer}>
               <Button
                 onClick={() => router.back()}
-                icon=""
                 size="medium"
                 variant="danger"
               >
                 zurück
               </Button>
               <Button
-                icon=""
                 size="medium"
                 variant="primary"
                 onClick={handleBookingConfirmation}

@@ -80,7 +80,6 @@ const BookingCalendar = () => {
           </div>
           <div className={styles.buttonsContainer}>
             <Button
-              icon=""
               size="medium"
               variant="danger"
               onClick={() => router.back()}
@@ -89,7 +88,6 @@ const BookingCalendar = () => {
             </Button>
             {chosenSlot && (
               <Button
-                icon=""
                 size="medium"
                 variant="primary"
                 onClick={() => handleBookingClick()}

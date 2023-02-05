@@ -46,8 +46,8 @@ export default function Web() {
         .then((url) => {
           setImage(url);
         })
-        .catch((error) => {
-          // Handle any errors
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, [storeId]);

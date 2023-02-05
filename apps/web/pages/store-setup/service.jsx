@@ -10,14 +10,15 @@ import Minus from "../../ui/components/assets/minus.svg";
 import { db } from "../../firebase/firebase";
 import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { useAuthContext } from "../../context/AuthContext";
+import { browserBack } from "../../ui/functions/browserBack";
 
 function ServiceSetup() {
+  const { currentUser, adminStoreId, setLoadStoreId } = useAuthContext();
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
   const [data, setData] = useState([]);
-  const router = useRouter();
-  const { currentUser, adminStoreId, setLoadStoreId } = useAuthContext();
   const [dbServices, setDbServices] = useState([]);
   const [servicesDetails, setServicesDetails] = useState([]);
   const [hasData, setHasData] = useState(false);
@@ -65,6 +66,7 @@ function ServiceSetup() {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
   }
+
   function handleRemoveCatClick(index) {
     setCategories((prev) => prev.filter((elem, i) => i !== index));
   }
@@ -95,12 +97,6 @@ function ServiceSetup() {
         }
       );
     }
-    router.push(path);
-  }
-
-  // handle back button click
-  function handleBackClick(e, path) {
-    e.preventDefault();
     router.push(path);
   }
 
@@ -162,7 +158,7 @@ function ServiceSetup() {
               <Button
                 size="medium"
                 variant="danger"
-                onClick={(e) => handleBackClick(e, "/store-setup/store")}
+                onClick={(e) => browserBack(e, "/store-setup/store", router)}
               >
                 zurück
               </Button>

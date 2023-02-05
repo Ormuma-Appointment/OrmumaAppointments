@@ -16,6 +16,9 @@
   margin: 0 auto;
   align-self: center;
 }
+.uniqueContainer input {
+  margin-bottom: 1rem;
+}
 .bookingContainer .selectItemText {
   font-size: 0.8rem;
   margin-bottom: 1rem;
@@ -32,6 +35,7 @@
 }
 .buttonsContainer button {
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 .center {

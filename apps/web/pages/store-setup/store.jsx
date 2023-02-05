@@ -80,7 +80,7 @@ const StoreSetup = () => {
       slug: e.target.url?.value || salonData.slug,
       photo: e.target.photo.value,
       contact: {
-        email: currentUser.email,
+        email: e.target.email.value,
         telephone: e.target.telephone.value,
         website: e.target.website.value,
       },
@@ -277,6 +277,21 @@ const StoreSetup = () => {
                       id="telephone"
                       defaultValue={hasData ? salonData.contact.telephone : ""}
                       placeholder="Telefonnummer"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.col30}>
+                    <label>Emailadresse (für Updates):*</label>
+                  </div>
+                  <div className={styles.col70}>
+                    <Input
+                      type="email"
+                      name="email"
+                      id="email"
+                      defaultValue={hasData ? salonData.contact.email : ""}
+                      placeholder="Emailadresse"
                       required
                     />
                   </div>

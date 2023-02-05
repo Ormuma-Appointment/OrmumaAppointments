@@ -1,16 +1,17 @@
 import CardContainer from "../CardContainer/CardContainer";
 import styles from "./AppointmentConfirmation.module.css";
 
-const AppointmentConfirmation = ({ employee, name, start, date }) => {
+const AppointmentConfirmation = ({ employee, store, start, date }) => {
   let newDate = new Date(date);
   let shownDate = newDate.toLocaleDateString("de-DE");
+  console.log();
   return (
     <CardContainer>
       <div className={styles.confirmationContainer}>
         <h4>Buchung abgeschlossen!</h4>
         <p>
           Du hast erfolgreich deinen Termin bei <b>{employee}</b> im Salon{" "}
-          <b>{name}</b> am <b>{shownDate}</b> um
+          <b>{store}</b> am <b>{shownDate}</b> um
           <b> {start}Uhr</b> gebucht.
         </p>
         <p>

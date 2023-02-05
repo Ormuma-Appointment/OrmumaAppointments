@@ -1,8 +1,4 @@
-import { useRouter } from "next/router";
-
-const router = useRouter();
-
-export function browserBack(e, path) {
+export function browserBack(e, path, router) {
   e.preventDefault();
   router.push(path);
 }

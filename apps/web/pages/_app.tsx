@@ -33,31 +33,31 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const Router = useRouter();
 
   return (
-  <ParallaxProvider>
-    <AuthContextProvider>
-      <BookingContextProvider>
-        <div className="grid_main_wrapper">
-          <Navigation customer_logged_out />
-          <div className="page_wrapper">
-            {noAuthRequired.includes(Router.pathname) ? (
-              <Component {...pageProps} />
-            ) : customerAuthRequired.includes(Router.pathname) ? (
-              <ProtectedRoutes>
+    <ParallaxProvider>
+      <AuthContextProvider>
+        <BookingContextProvider>
+          <div className="grid_main_wrapper">
+            <Navigation customer_logged_out />
+            <div className="page_wrapper">
+              {noAuthRequired.includes(Router.pathname) ? (
                 <Component {...pageProps} />
-              </ProtectedRoutes>
-            ) : (
-              <AdminProtectedRoutes>
-                <Component {...pageProps} />
-              </AdminProtectedRoutes>
-            )}
+              ) : customerAuthRequired.includes(Router.pathname) ? (
+                <ProtectedRoutes>
+                  <Component {...pageProps} />
+                </ProtectedRoutes>
+              ) : (
+                <AdminProtectedRoutes>
+                  <Component {...pageProps} />
+                </AdminProtectedRoutes>
+              )}
+            </div>
+            <PageOverviewTemp />
           </div>
-          <PageOverviewTemp />{" "}
-        </div>
-        <div className="grid_footer">
-          <Footer />
-        </div>
-      </BookingContextProvider>
-    </AuthContextProvider>
+          <div className="grid_footer">
+            <Footer />
+          </div>
+        </BookingContextProvider>
+      </AuthContextProvider>
     </ParallaxProvider>
   );
 }

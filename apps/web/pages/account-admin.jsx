@@ -251,10 +251,7 @@ const AccountAdmin = () => {
               <h2>Die nächsten Termine</h2>
               {nextEvents.length > 0 ? (
                 nextEvents
-                  .sort((a, b) => {
-                    moment(a.date.toDate()).format("YYYY-MM-DD") -
-                      moment(b.date.toDate()).format("YYYY-MM-DD");
-                  })
+                  .sort((a, b) => a.date.seconds - b.date.seconds)
                   .map((event, id) => {
                     let date = moment(event.date.toDate()).format("YYYY-MM-DD");
                     return (

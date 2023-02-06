@@ -14,6 +14,7 @@ import { getDocs, collection, query, where } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import { Parallax } from "react-scroll-parallax";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Web() {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ export default function Web() {
   const { slug } = router.query;
   const [storeData, setStoreData] = useState(undefined);
   const { setStoreId, storeId } = useContext(BookingContext);
+  const { isAdmin } = useContext(AuthContext);
 
   async function getData() {
     const q = query(collection(db, "stores"), where("slug", "==", slug));
@@ -78,14 +80,16 @@ export default function Web() {
           <div className={styles.welcome}>
             <div className={styles.header}>
               <h1>Termin buchen bei {storeData.name}</h1>
-              <Button
-                icon={calendar}
-                size="medium"
-                variant="primary"
-                onClick={handleBookingClick}
-              >
-                Termin buchen
-              </Button>
+              {!isAdmin && (
+                <Button
+                  icon={calendar}
+                  size="medium"
+                  variant="primary"
+                  onClick={handleBookingClick}
+                >
+                  Termin buchen
+                </Button>
+              )}
             </div>
             <Parallax translateY={[-30, 10]} className={styles.image_container}>
               {image && (

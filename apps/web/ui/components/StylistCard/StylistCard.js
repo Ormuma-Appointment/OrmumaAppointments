@@ -14,18 +14,17 @@ function StylistCard({
   index,
   setEmployeeIndex,
   id,
-  ...rest
 }) {
   const router = useRouter();
   const [currentPathA] = useState(router.pathname);
-  const [imageShown, setImageShow] = useState(image);
+  const [imageShown, setImageShown] = useState(image);
   useEffect(() => {
     if (id) {
       const imageLocation = ref(storage, `images/team/${id}`);
 
       getDownloadURL(ref(imageLocation))
         .then((url) => {
-          setImageShow(url);
+          setImageShown(url);
         })
         .catch((error) => {
           // Handle any errors

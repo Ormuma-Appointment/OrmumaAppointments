@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Down from "../ui/components/assets/down.svg";
 
 const BookingService = () => {
+  const [loading, setLoading] = useState(true);
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -18,9 +19,10 @@ const BookingService = () => {
     useContext(BookingContext);
   const query = router.query;
 
-  if (!storeId) {
+  useEffect(() => {
     setStoreId(query.storeid);
-  }
+    setLoading(false);
+  }, []);
 
   const handleOpenStyle = (e) => {
     setIsOpenStyle(true);
@@ -43,6 +45,7 @@ const BookingService = () => {
   }, [selected]);
 
   setChosenService(event);
+  console.log("serviceList", serviceList);
 
   return (
     <div className={styles.pageContainer}>
@@ -57,7 +60,7 @@ const BookingService = () => {
       <h1>Service wählen</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
-          {!isLoading ? (
+          {!loading && serviceList.serviceObj && !isLoading ? (
             serviceList.serviceObj.map((service, id) => {
               return (
                 <>

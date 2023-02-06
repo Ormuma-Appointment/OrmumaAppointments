@@ -10,17 +10,10 @@ import { auth } from "../../../firebase/firebase";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-function Navigation(props) {
+function Navigation() {
   const router = useRouter();
 
   const { currentUser, logOut, isAdmin, adminStoreId } = useAuthContext();
-  const {
-    customer_logged_out,
-    customer_logged_in,
-    admin_logged_in,
-    admin_logged_out,
-    ...rest
-  } = props;
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 

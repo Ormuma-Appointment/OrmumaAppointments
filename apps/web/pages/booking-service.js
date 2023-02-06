@@ -4,26 +4,25 @@ import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
 import SelectionCard from "../ui/components/SelectionCard/SelectionCard";
 import { BookingContext } from "../context/BookingContext";
-import { AuthContext } from "../context/AuthContext";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import { useRouter } from "next/router";
 import Down from "../ui/components/assets/down.svg";
-import { auth } from "../firebase/firebase";
 
 const BookingService = () => {
+  const [loading, setLoading] = useState(true);
   const [isOpenStyle, setIsOpenStyle] = useState(false);
   const [selected, setSelected] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [event, setEvent] = useState(selected);
   const router = useRouter();
-  const { isAdmin } = useContext(AuthContext);
   const { storeId, setStoreId, serviceList, setChosenService, isLoading } =
     useContext(BookingContext);
   const query = router.query;
 
-  if (!storeId) {
+  useEffect(() => {
     setStoreId(query.storeid);
-  }
+    setLoading(false);
+  }, []);
 
   const handleOpenStyle = (e) => {
     setIsOpenStyle(true);
@@ -61,7 +60,7 @@ const BookingService = () => {
       <h1>Service wählen</h1>
       <div className={styles.bookingContainer}>
         <CardContainer>
-          {serviceList.serviceObj && !isLoading ? (
+          {!loading && serviceList.serviceObj && !isLoading ? (
             serviceList.serviceObj.map((service, id) => {
               return (
                 <>

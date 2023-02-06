@@ -3,7 +3,6 @@ import styles from "./EmployeeOverview.module.css";
 import StylistCard from "../StylistCard/StylistCard";
 
 function EmployeeOverview({ employees, setEmployeeIndex }) {
-  console.log(employees);
   return (
     <div className={styles.employees}>
       {employees.map((el, index) => {

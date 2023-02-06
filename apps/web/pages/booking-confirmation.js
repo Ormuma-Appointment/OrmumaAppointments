@@ -23,8 +23,8 @@ const BookingConfirmation = () => {
   const { currentUser, isAdmin } = useAuthContext();
   const [storeName, setStoreName] = useState(undefined);
   const [client, setClient] = useState({
-    clientName: isAdmin ? currentUser.displayName : null,
-    clientId: isAdmin ? currentUser.uid : null,
+    clientName: isAdmin ? null : currentUser.displayName,
+    clientId: isAdmin ? null : currentUser.uid,
   });
 
   async function getStoreName(storeId) {

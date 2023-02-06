@@ -86,7 +86,9 @@ const BookingConfirmation = () => {
             <Button
               size="medium"
               variant="primary"
-              onClick={() => router.push("/account")}
+              onClick={() =>
+                router.push(isAdmin ? "/account-admin" : "/account")
+              }
             >
               Zum Account
             </Button>

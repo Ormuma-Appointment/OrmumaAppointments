@@ -25,14 +25,11 @@ function AppointmentCard({
   id,
 }) {
   const router = useRouter();
-  const handleCancel = (e) => {
-    console.log("handleCancel", e.target.id);
-  };
 
   const deleteEvent = async (e) => {
     e.preventDefault();
     await deleteDoc(doc(db, "events", id));
-    router.push("/account");
+    window.location.reload(false);
   };
 
   return (

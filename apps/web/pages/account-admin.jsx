@@ -25,6 +25,7 @@ const AccountAdmin = () => {
   const [passtEvents, setPasstEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
   const [todayEvents, setTodayEvents] = useState([]);
+  const [reload, setReload] = useState(false);
   const salon = {
     openingHours: [
       {
@@ -108,7 +109,7 @@ const AccountAdmin = () => {
       let nextEvents = [];
       let todayEvents = [];
       docSnap.forEach((doc) => {
-        const el = doc.data();
+        const el = { id: doc.id, ...doc.data() };
         if (
           currentMomentDate === moment(el.date.toDate()).format("YYYY-MM-DD")
         ) {
@@ -135,9 +136,15 @@ const AccountAdmin = () => {
     setIsLoading(false);
   }, [adminStoreId]);
 
+  useEffect(() => {
+    getEvent();
+  }, [reload]);
+
   // console.log("today", todayEvents);
   // console.log("next", nextEvents);
   // console.log("passt", passtEvents);
+
+  console.log(nextEvents);
 
   if (!isLoading) {
     if (adminStoreId) {
@@ -234,6 +241,7 @@ const AccountAdmin = () => {
                       service={event.service}
                       stylist={event.employee}
                       time={`${event.slot[0]} - ${event.slot[1]}`}
+                      id={event.id}
                     />
                   );
                 })
@@ -242,19 +250,27 @@ const AccountAdmin = () => {
               )}
               <h2>Die nächsten Termine</h2>
               {nextEvents.length > 0 ? (
-                nextEvents.slice(0, 5).map((event, id) => {
-                  let date = moment(event.date.toDate()).format("YYYY-MM-DD");
-                  return (
-                    <AppointmentCard
-                      customer={event.clientName}
-                      key={id}
-                      date={date}
-                      service={event.service}
-                      stylist={event.employee}
-                      time={`${event.slot[0]} - ${event.slot[1]}`}
-                    />
-                  );
-                })
+                nextEvents
+                  .sort((a, b) => {
+                    moment(a.date.toDate()).format("YYYY-MM-DD") -
+                      moment(b.date.toDate()).format("YYYY-MM-DD");
+                  })
+                  .map((event, id) => {
+                    let date = moment(event.date.toDate()).format("YYYY-MM-DD");
+                    return (
+                      <AppointmentCard
+                        cancel
+                        customer={event.clientName}
+                        key={id}
+                        date={date}
+                        service={event.service}
+                        stylist={event.employee}
+                        time={`${event.slot[0]} - ${event.slot[1]}`}
+                        id={event.id}
+                        setReload={setReload}
+                      />
+                    );
+                  })
               ) : (
                 <div className={styles.noEvent}>
                   Noch keine geplanten Termine in den nächsten Tagen

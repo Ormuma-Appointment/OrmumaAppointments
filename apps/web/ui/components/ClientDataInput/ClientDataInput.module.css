@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+}
+.select {
+  border-color: #c0cad5;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1rem;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+}

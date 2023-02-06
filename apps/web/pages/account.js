@@ -23,8 +23,8 @@ const Account = () => {
   const router = useRouter();
   const [passtEvents, setPasstEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
-  const [cancelEvent, setCancelEvent] = useState({});
   const [isLoading, SetIsLoading] = useState(true);
+  const [reload, setReload] = useState(false);
 
   const { currentUser } = useAuthContext();
 
@@ -61,6 +61,10 @@ const Account = () => {
   useEffect(() => {
     getEvent();
   }, [user.userId]);
+
+  useEffect(() => {
+    getEvent();
+  }, [reload]);
 
   console.log("nextEvents", nextEvents);
 
@@ -103,6 +107,7 @@ const Account = () => {
                 stylist={event.employee}
                 time={`${event.slot[0]} - ${event.slot[1]}`}
                 id={event.id}
+                setReload={setReload}
               />
             );
           })}

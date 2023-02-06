@@ -5,15 +5,7 @@ import Person from "../assets/account.svg";
 import Cut from "../assets/scissors.svg";
 import Button from "../Button/Button";
 import { db } from "../../../firebase/firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  where,
-  query,
-  deleteDoc,
-} from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 function AppointmentCard({
   date,
@@ -24,7 +16,7 @@ function AppointmentCard({
   cancel,
   id,
 }) {
-  const router = useRouter();
+  //const router = useRouter();
 
   const deleteEvent = async (e) => {
     e.preventDefault();

@@ -9,37 +9,6 @@ function ClientDataInput({ setClient, clients, client }) {
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.radioGroup}
-        onChange={(e) => console.log(e.target.value)}
-      >
-        <label htmlFor="new">
-          <input type="radio" id="new" name="newOrGuest" value="new" checked />{" "}
-          Neukunde
-        </label>
-
-        <label htmlFor="guest">
-          <input
-            type="radio"
-            id="guest"
-            name="newOrGuest"
-            value="guest"
-            checked
-          />{" "}
-          Bestandskunde (Gast)
-        </label>
-
-        <label htmlFor="account">
-          <input
-            type="radio"
-            id="account"
-            name="newOrGuest"
-            value="account"
-            checked
-          />{" "}
-          Bestandskunde (Account)
-        </label>
-      </div>
       <div>
         {clients && (
           <select
@@ -47,7 +16,7 @@ function ClientDataInput({ setClient, clients, client }) {
             onChange={handleClientSelect}
             className={styles.select}
           >
-            <option value="" selected>
+            <option value="newCustomer" selected>
               Bestandskunden wählen?
             </option>
             {clients.map((el, index) => {

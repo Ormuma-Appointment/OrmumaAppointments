@@ -81,6 +81,8 @@ export const BookingContextProvider = ({ children }) => {
     }
   }
 
+  console.log("chosen", chosen);
+
   const getEvent = async () => {
     if (chosen !== undefined && chosen !== null && storeId) {
       const q = query(

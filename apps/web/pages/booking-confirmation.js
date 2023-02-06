@@ -53,6 +53,8 @@ const BookingConfirmation = () => {
     storeName,
   };
 
+  console.log("event from confirmation", event);
+
   async function handleBookingConfirmation(e) {
     e.preventDefault();
     setConfirmed(!confirmed);

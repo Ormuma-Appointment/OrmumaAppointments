@@ -108,7 +108,7 @@ const AccountAdmin = () => {
       let nextEvents = [];
       let todayEvents = [];
       docSnap.forEach((doc) => {
-        const el = doc.data();
+        const el = { id: doc.id, ...doc.data() };
         if (
           currentMomentDate === moment(el.date.toDate()).format("YYYY-MM-DD")
         ) {
@@ -138,6 +138,8 @@ const AccountAdmin = () => {
   // console.log("today", todayEvents);
   // console.log("next", nextEvents);
   // console.log("passt", passtEvents);
+
+  console.log(nextEvents);
 
   if (!isLoading) {
     if (adminStoreId) {
@@ -234,6 +236,7 @@ const AccountAdmin = () => {
                       service={event.service}
                       stylist={event.employee}
                       time={`${event.slot[0]} - ${event.slot[1]}`}
+                      id={event.id}
                     />
                   );
                 })
@@ -246,12 +249,14 @@ const AccountAdmin = () => {
                   let date = moment(event.date.toDate()).format("YYYY-MM-DD");
                   return (
                     <AppointmentCard
+                      cancel
                       customer={event.clientName}
                       key={id}
                       date={date}
                       service={event.service}
                       stylist={event.employee}
                       time={`${event.slot[0]} - ${event.slot[1]}`}
+                      id={event.id}
                     />
                   );
                 })

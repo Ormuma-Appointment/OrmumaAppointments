@@ -1,13 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  where,
-  query,
-} from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
@@ -23,7 +16,6 @@ const Account = () => {
   const router = useRouter();
   const [passtEvents, setPasstEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
-  const [isLoading, SetIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
 
   const { currentUser } = useAuthContext();
@@ -54,7 +46,6 @@ const Account = () => {
       }
       setNextEvents(nextEvents);
       setPasstEvents(passtEvents);
-      SetIsLoading(false);
     });
   };
 

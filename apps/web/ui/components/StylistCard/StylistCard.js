@@ -39,7 +39,7 @@ function StylistCard({
       <Link href={`${currentPathA}/#top`} scroll={false}>
         <div
           className={styles.container}
-          onClick={() => setEmployeeIndex(index)}
+          onClick={() => isClickable && setEmployeeIndex(index)}
         >
           <div className={styles.image}>
             <RoundImage alt={name} image={imageShown} initialWidth={100} />

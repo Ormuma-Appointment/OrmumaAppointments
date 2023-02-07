@@ -45,7 +45,6 @@ const BookingService = () => {
   }, [selected]);
 
   setChosenService(event);
-  console.log("serviceList", serviceList);
 
   return (
     <div className={styles.pageContainer}>

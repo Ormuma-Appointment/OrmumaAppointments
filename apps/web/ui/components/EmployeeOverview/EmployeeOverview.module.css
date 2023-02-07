@@ -15,7 +15,7 @@
 @media screen and (min-width: 760px) {
   .employees {
     margin-top: 2rem;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: row;
   }
   .employees > div {

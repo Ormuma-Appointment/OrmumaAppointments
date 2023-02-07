@@ -4,7 +4,6 @@ import Button from "../ui/components/Button/Button";
 import Input from "../ui/components/InputField/Input";
 import Link from "next/link";
 import styles from "../ui/page_styles/Register.module.css";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -43,8 +42,6 @@ function Register() {
         // otherwise a new userr is created
         setErr(false);
         const res = await createUserWithEmailAndPassword(auth, email, password);
-
-        console.log(res);
         // a new user inside the users collection
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,
@@ -54,9 +51,7 @@ function Register() {
         await updateProfile(res.user, {
           displayName,
         });
-        router.push("/account");
-        // the user is redirected to the home page once the registration form is submited
-        // using the useRouter hook from next as oppose to the useNavigate from react router dom
+        router.push("/registration-confirmation");
       }
     } catch (e) {
       setErr(true);
@@ -66,7 +61,7 @@ function Register() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h1>Willkommen bei {salonName}</h1>
+        <h1>Willkommen</h1>
         <p>Registriere dich, um alle Funktionen nutzen zu können</p>
       </div>
       <form className={styles.form} onSubmit={handleRegistrationSubmit}>

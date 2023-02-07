@@ -8,8 +8,16 @@ import { BookingContext } from "../context/BookingContext";
 import { useRouter } from "next/router";
 import { useAuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
-import { collection, doc, setDoc, getDoc } from "firebase/firestore";
-import Input from "../ui/components/InputField/Input";
+import {
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import ClientDataInput from "../ui/components/ClientDataInput/ClientDataInput";
 
 const BookingConfirmation = () => {
   const { chosenService, chosen, chosenSlot, slotToString, storeId } =
@@ -22,6 +30,7 @@ const BookingConfirmation = () => {
   const [confirmed, setConfirmed] = useState(false);
   const { currentUser, isAdmin } = useAuthContext();
   const [storeName, setStoreName] = useState(undefined);
+  const [clients, setClients] = useState(undefined);
   const [client, setClient] = useState({
     clientName: isAdmin ? null : currentUser.displayName,
     clientId: isAdmin ? null : currentUser.uid,
@@ -39,9 +48,36 @@ const BookingConfirmation = () => {
       }
     }
   }
+
+  async function getStoreClients(storeId) {
+    const q = query(collection(db, "events"), where("storeId", "==", storeId));
+    const docSnap = await getDocs(q);
+    let clients = [];
+    docSnap.forEach((doc) => {
+      const el = doc.data();
+      // console.log("El", el.employeeId, chosen.employeeId);
+      // console.log("eventData", eventData);
+      if (
+        !clients.find(
+          (elem) =>
+            elem.clientName === el.clientName && elem.clientId === el.clientId
+        )
+      ) {
+        clients.push({
+          clientId: el.clientId,
+          clientName: el.clientName,
+          clientContact: el.clientContact,
+        });
+      }
+    });
+    setClients(clients);
+  }
   useEffect(() => {
     if (storeId) {
       getStoreName(storeId);
+    }
+    if (isAdmin && storeId) {
+      getStoreClients(storeId);
     }
   }, [storeId]);
 
@@ -53,7 +89,7 @@ const BookingConfirmation = () => {
     storeName,
   };
 
-  console.log("event from confirmation", event);
+  // console.log("event from confirmation", event);
 
   async function handleBookingConfirmation(e) {
     e.preventDefault();
@@ -99,28 +135,11 @@ const BookingConfirmation = () => {
           <CardContainer>
             <h4>Ihre Auswahl</h4>
             {isAdmin && (
-              <div>
-                <Input
-                  placeholder="Name der Kunden"
-                  onChange={(e) =>
-                    setClient({
-                      ...client,
-                      clientName: e.target.value,
-                      clientId: null,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Email / Telefonnummer"
-                  onChange={(e) =>
-                    setClient({
-                      ...client,
-                      clientContact: e.target.value,
-                      clientId: null,
-                    })
-                  }
-                />
-              </div>
+              <ClientDataInput
+                clients={clients}
+                client={client}
+                setClient={setClient}
+              />
             )}
             <div>
               {chosenService && (

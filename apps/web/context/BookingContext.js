@@ -28,11 +28,9 @@ export const BookingContextProvider = ({ children }) => {
       const docRef = doc(db, "stores", storeId, "services", "serviceList");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
         setServiceList(docSnap.data());
         SetIsLoading(false);
       } else {
-        // doc.data() will be undefined in this case
         console.log("No such document!");
       }
     }
@@ -47,7 +45,6 @@ export const BookingContextProvider = ({ children }) => {
       const docSnap = await getDocs(docRef);
       docSnap.forEach((doc) => {
         const el = { id: doc.id, ...doc.data() };
-        // console.log(doc.id, " => ", doc.data());
         setEmployeeData((prev) => [...prev, el]);
         SetIsLoading(false);
       });
@@ -68,16 +65,13 @@ export const BookingContextProvider = ({ children }) => {
       );
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
         setSelectedEmployeeData(docSnap.data());
         SetIsLoading(false);
       } else {
-        // doc.data() will be undefined in this case
         console.log("No such document!");
-        // setSelectedEmployeeData("Oriane is the best");
       }
     } else {
-      // console.log("Mully is the best");
+      console.log("No such document!");
     }
   }
 
@@ -91,9 +85,7 @@ export const BookingContextProvider = ({ children }) => {
       let temp = [];
       docSnap.forEach((doc) => {
         const el = doc.data();
-        // console.log("El", el.employeeId, chosen.employeeId);
         if (el.employee === chosen.employee) {
-          // console.log("eventData", eventData);
           temp.push(el);
         }
         setEventData(temp);
@@ -176,4 +168,3 @@ export const BookingContextProvider = ({ children }) => {
     </BookingContext.Provider>
   );
 };
-// };

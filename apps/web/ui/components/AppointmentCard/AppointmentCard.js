@@ -17,12 +17,9 @@ function AppointmentCard({
   id,
   setReload,
 }) {
-  //const router = useRouter();
-
   const deleteEvent = async (e) => {
     e.preventDefault();
     await deleteDoc(doc(db, "events", id));
-    //window.location.reload(false);
     setReload((prev) => !prev);
   };
 

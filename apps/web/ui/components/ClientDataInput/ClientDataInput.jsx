@@ -7,9 +7,9 @@ function ClientDataInput({ setClient, clients, client }) {
   const [clientType, setClientType] = useState("new");
   const [selectedClient, setselectedClient] = useState(undefined);
   const [clientName, setClientName] = useState(undefined);
-  const [clientContact, setClientContact] = useState(undefined);
+  const [clientEmail, setclientEmail] = useState(undefined);
+  const [clientTelephone, setClientTelephone] = useState(undefined);
   function handleClientSelect(e) {
-    console.log(e.target.value);
     setselectedClient(
       clients.filter((el) => el.clientName === e.target.value)[0]
     );
@@ -17,8 +17,11 @@ function ClientDataInput({ setClient, clients, client }) {
   useEffect(() => {
     if (selectedClient) {
       setClientName(selectedClient.clientName);
-      setClientContact(
-        selectedClient.clientContact ? selectedClient.clientContact : ""
+      setclientEmail(
+        selectedClient.clientEmail ? selectedClient.clientEmail : ""
+      );
+      setClientTelephone(
+        selectedClient.clientTelephone ? selectedClient.clientTelephone : ""
       );
       setClient(selectedClient);
     }
@@ -27,7 +30,8 @@ function ClientDataInput({ setClient, clients, client }) {
   function onChangeValue(event) {
     setClientType(event.target.value);
     setClientName("");
-    setClientContact("");
+    setclientEmail("");
+    setClientTelephone("");
   }
   console.log(client);
   return (
@@ -43,7 +47,6 @@ function ClientDataInput({ setClient, clients, client }) {
           Neukunde
         </label>
         <label>
-          {" "}
           <input
             type="radio"
             value="returning"
@@ -75,7 +78,6 @@ function ClientDataInput({ setClient, clients, client }) {
               setClient({
                 ...client,
                 clientName: e.target.value,
-                clientId: null,
               });
               setClientName(e.target.value);
             }}
@@ -83,16 +85,26 @@ function ClientDataInput({ setClient, clients, client }) {
           />
         )}
         <Input
-          placeholder="Email / Telefonnummer"
+          placeholder="Email"
           onChange={(e) => {
             setClient({
               ...client,
-              clientContact: e.target.value,
-              clientId: null,
+              clientEmail: e.target.value,
             });
-            setClientContact(e.target.value);
+            setclientEmail(e.target.value);
           }}
-          value={clientContact}
+          value={clientEmail}
+        />
+        <Input
+          placeholder="Telefonnummer"
+          onChange={(e) => {
+            setClient({
+              ...client,
+              clientTelephone: e.target.value,
+            });
+            setClientTelephone(e.target.value);
+          }}
+          value={clientTelephone}
         />
       </div>
     </div>

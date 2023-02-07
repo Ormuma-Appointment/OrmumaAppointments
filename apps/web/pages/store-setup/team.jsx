@@ -118,8 +118,8 @@ function TeamSetup() {
   useEffect(() => {
     getDBServices();
   }, [adminStoreId]);
-  // get all Employees from Firebase
 
+  // get all Employees from Firebase
   async function getEmployeeData() {
     if ((currentUser, adminStoreId)) {
       let employeesTemp = [];
@@ -144,10 +144,12 @@ function TeamSetup() {
   }, [adminStoreId]);
 
   useEffect(() => {
-    if (employeeIndex || employeeIndex === 0) setHasData(true);
-    setSelectedEmployee(salonEmployees[employeeIndex]);
-    setShowServices(true);
-    setNoSelected(true);
+    if (employeeIndex) {
+      if (employeeIndex || employeeIndex === 0) setHasData(true);
+      setSelectedEmployee(salonEmployees[employeeIndex]);
+      setShowServices(true);
+      setNoSelected(true);
+    }
   }, [employeeIndex]);
 
   useEffect(() => {

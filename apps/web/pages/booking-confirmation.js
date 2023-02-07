@@ -60,7 +60,11 @@ const BookingConfirmation = () => {
       // console.log("El", el.employeeId, chosen.employeeId);
       // console.log("eventData", eventData);
       if (!clients.find((elem) => elem.clientId === el.clientId)) {
-        clients.push({ clientId: el.clientId, clientName: el.clientName });
+        clients.push({
+          clientId: el.clientId,
+          clientName: el.clientName,
+          clientContact: el.clientContact,
+        });
       }
     });
     setClients(clients);

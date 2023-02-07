@@ -11,7 +11,7 @@
   width: 100%;
   margin-bottom: 1rem;
 }
-.select option:first-child {
+.select option[value="newCustomer"] {
   color: #c0cad5;
 }
 .radioGroup {

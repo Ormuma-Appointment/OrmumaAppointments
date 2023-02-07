@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { workingTimes } from "../data-sample";
+import { workingTimes } from "../../ui/data/data-sample";
 import styles from "../../ui/page_styles/StoreSetup.module.css";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";

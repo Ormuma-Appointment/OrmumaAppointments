@@ -9,7 +9,6 @@ import Input from "../ui/components/InputField/Input";
 import { useAuthContext } from "../context/AuthContext";
 
 function Login() {
-  const [err, setErr] = useState(false);
   const router = useRouter();
 
   const { currentUser, setCurrentUser, isAdmin } = useAuthContext();
@@ -26,7 +25,7 @@ function Login() {
 
     try {
       // if (currentUser) {
-      setErr(false);
+
       const res = await signInWithEmailAndPassword(auth, email, password);
       // Signed in
 
@@ -40,7 +39,6 @@ function Login() {
         router.push("/account");
       }
     } catch (e) {
-      setErr(true);
       console.error("somthing is wrong ", e);
     }
   };

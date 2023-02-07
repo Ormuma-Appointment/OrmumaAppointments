@@ -4,7 +4,6 @@ import Input from "../InputField/Input";
 import { useEffect } from "react";
 
 function ClientDataInput({ setClient, clients, client }) {
-  const [clientType, setClientType] = useState("new");
   const [selectedClient, setselectedClient] = useState(undefined);
   const [clientName, setClientName] = useState(undefined);
   const [clientEmail, setclientEmail] = useState(undefined);
@@ -27,37 +26,11 @@ function ClientDataInput({ setClient, clients, client }) {
     }
   }, [selectedClient]);
 
-  function onChangeValue(event) {
-    setClientType(event.target.value);
-    setClientName("");
-    setclientEmail("");
-    setClientTelephone("");
-  }
   console.log(client);
   return (
     <div className={styles.container}>
-      <div div className={styles.radioGroup} onChange={onChangeValue}>
-        <label>
-          <input
-            type="radio"
-            value="new"
-            name="isNew"
-            checked={clientType === "new"}
-          />{" "}
-          Neukunde
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="returning"
-            name="isNew"
-            checked={clientType === "returning"}
-          />{" "}
-          Bestandskunde
-        </label>
-      </div>
       <div>
-        {clients && clientType === "returning" && (
+        {clients && (
           <select
             type="select"
             onChange={handleClientSelect}
@@ -71,7 +44,7 @@ function ClientDataInput({ setClient, clients, client }) {
             })}
           </select>
         )}
-        {clientType === "new" && (
+        {
           <Input
             placeholder="Name des Kunden"
             onChange={(e) => {
@@ -83,7 +56,7 @@ function ClientDataInput({ setClient, clients, client }) {
             }}
             value={clientName}
           />
-        )}
+        }
         <Input
           placeholder="Email"
           onChange={(e) => {

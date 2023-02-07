@@ -32,6 +32,13 @@ function ClientDataInput({ setClient, clients, client }) {
   }
 
   function handleNameChange(e) {
+    if (
+      !clients.find((el) =>
+        el.clientName?.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    ) {
+      resetClient();
+    }
     if (e.target.value.length > 2) {
       setFilteredClients(
         clients.filter((el) =>

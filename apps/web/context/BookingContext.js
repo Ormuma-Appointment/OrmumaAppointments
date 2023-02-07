@@ -51,6 +51,7 @@ export const BookingContextProvider = ({ children }) => {
     }
   };
   useEffect(() => {
+    setEmployeeData([]);
     handleRead();
   }, [storeId]);
 

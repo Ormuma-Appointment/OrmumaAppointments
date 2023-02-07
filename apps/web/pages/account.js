@@ -1,13 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  where,
-  query,
-} from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
 import { useAuthContext } from "../context/AuthContext";
 import styles from "../ui/page_styles/Account.module.css";
 import Button from "../ui/components/Button/Button";
@@ -21,9 +14,8 @@ import moment from "moment";
 
 const Account = () => {
   const router = useRouter();
-  const [passtEvents, setPasstEvents] = useState([]);
+  const [pastEvents, setPasstEvents] = useState([]);
   const [nextEvents, setNextEvents] = useState([]);
-  const [isLoading, SetIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
 
   const { currentUser } = useAuthContext();
@@ -32,8 +24,6 @@ const Account = () => {
     userId: currentUser.uid,
     userName: currentUser.displayName,
   };
-
-  console.log(user);
 
   let currentMomentDate = moment(new Date()).format("YYYY-MM-DD");
 
@@ -54,7 +44,6 @@ const Account = () => {
       }
       setNextEvents(nextEvents);
       setPasstEvents(passtEvents);
-      SetIsLoading(false);
     });
   };
 
@@ -65,8 +54,6 @@ const Account = () => {
   useEffect(() => {
     getEvent();
   }, [reload]);
-
-  console.log("nextEvents", nextEvents);
 
   return (
     <div className={styles.container}>
@@ -95,7 +82,6 @@ const Account = () => {
         <div className={styles.appointment_box}>
           <h3>Mein nächster Termin</h3>
           {nextEvents.map((event, id) => {
-            console.log(event);
             let date = moment(event.date.toDate()).format("YYYY-MM-DD");
             return (
               <AppointmentCard
@@ -115,12 +101,13 @@ const Account = () => {
         <div className={styles.appointment_box}>
           <h3>Mein vergangenen Termin(e)</h3>
           <div>
-            {passtEvents.map((event, id) => {
-              console.log(event);
+            {pastEvents.map((event, id) => {
+              console.log("recent event", event);
               let date = moment(event.date.toDate()).format("YYYY-MM-DD");
               return (
                 <AppointmentCard
                   key={id}
+                  event={event}
                   customer={event.clientName}
                   date={date}
                   service={event.service}

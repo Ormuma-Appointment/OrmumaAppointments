@@ -16,13 +16,21 @@ function AppointmentCard({
   cancel,
   id,
   setReload,
+  event,
 }) {
+  const router = useRouter();
+
   const deleteEvent = async (e) => {
     e.preventDefault();
     await deleteDoc(doc(db, "events", id));
     setReload((prev) => !prev);
   };
 
+  function handleBookAgain() {
+    router.push(
+      `/booking-calendar?storeid=${event.storeId}&service=${event.service}&category=${event.category}&duration=${event.duration}&price=${event.price}&employee=${event.employee}&employeeId=${event.employeeId}`
+    );
+  }
   return (
     <CardContainer>
       <div className={styles.container}>
@@ -40,7 +48,12 @@ function AppointmentCard({
               absagen
             </Button>
           ) : (
-            <Button icon="" size="xsmall" variant="primary">
+            <Button
+              icon=""
+              size="xsmall"
+              variant="primary"
+              onClick={handleBookAgain}
+            >
               erneut buchen
             </Button>
           )}

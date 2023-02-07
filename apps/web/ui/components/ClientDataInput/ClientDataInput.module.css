@@ -18,3 +18,18 @@
   display: flex;
   flex-direction: column;
 }
+.suggestions {
+  position: absolute;
+  margin-top: -1rem;
+  background-color: #fff;
+  width: 61vw;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+.suggestions li {
+  cursor: pointer;
+  padding: 1rem;
+}
+.suggestions li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

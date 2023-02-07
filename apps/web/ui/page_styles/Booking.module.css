@@ -70,8 +70,6 @@
   height: 100%;
   filter: var(--icon-filter);
 }
-.suggestions {
-}
 
 /*Tablet */
 @media screen and (min-width: 700px) {

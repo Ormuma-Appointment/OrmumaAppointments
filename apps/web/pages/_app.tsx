@@ -18,7 +18,6 @@ const noAuthRequired = [
   "/register-admin",
   "/registration-confirmation",
 ];
-const loggedIn = ["/"];
 const customerAuthRequired = [
   "/account",
   "/booking-service",

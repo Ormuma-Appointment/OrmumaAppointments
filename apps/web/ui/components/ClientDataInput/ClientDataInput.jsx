@@ -5,9 +5,9 @@ import { useEffect } from "react";
 
 function ClientDataInput({ setClient, clients, client }) {
   const [selectedClient, setselectedClient] = useState(undefined);
-  const [clientName, setClientName] = useState(undefined);
-  const [clientEmail, setClientEmail] = useState(undefined);
-  const [clientTelephone, setClientTelephone] = useState(undefined);
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [clientTelephone, setClientTelephone] = useState("");
   const [filteredClients, setFilteredClients] = useState(undefined);
   const [showSearchSuggest, setShowSearchSuggest] = useState(true);
 
@@ -86,7 +86,6 @@ function ClientDataInput({ setClient, clients, client }) {
     }
   }, [selectedClient]);
 
-  console.log(client);
   return (
     <div className={styles.container}>
       <div>

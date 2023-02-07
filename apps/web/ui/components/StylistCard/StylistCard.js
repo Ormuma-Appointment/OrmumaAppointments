@@ -8,7 +8,7 @@ import { storage } from "../../../firebase/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
 function StylistCard({
-  image = "/placeholder-profile.png",
+  image = "/placeholder-profile.jpeg",
   name,
   description,
   index,
@@ -30,7 +30,7 @@ function StylistCard({
           // Handle any errors
         });
     }
-  }, []);
+  }, [id]);
   return (
     <CardContainer>
       <Link href={`${currentPathA}/#top`} scroll={false}>

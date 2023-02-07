@@ -17,7 +17,6 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import Input from "../ui/components/InputField/Input";
 import ClientDataInput from "../ui/components/ClientDataInput/ClientDataInput";
 
 const BookingConfirmation = () => {
@@ -32,7 +31,6 @@ const BookingConfirmation = () => {
   const { currentUser, isAdmin } = useAuthContext();
   const [storeName, setStoreName] = useState(undefined);
   const [clients, setClients] = useState(undefined);
-  const [isReturning, setIsReturning] = useState(true);
   const [client, setClient] = useState({
     clientName: isAdmin ? null : currentUser.displayName,
     clientId: isAdmin ? null : currentUser.uid,
@@ -59,7 +57,12 @@ const BookingConfirmation = () => {
       const el = doc.data();
       // console.log("El", el.employeeId, chosen.employeeId);
       // console.log("eventData", eventData);
-      if (!clients.find((elem) => elem.clientId === el.clientId)) {
+      if (
+        !clients.find(
+          (elem) =>
+            elem.clientName === el.clientName && elem.clientId === el.clientId
+        )
+      ) {
         clients.push({
           clientId: el.clientId,
           clientName: el.clientName,

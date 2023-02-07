@@ -14,6 +14,7 @@
 .info {
   display: flex;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 .icon {
   filter: var(--icon-filter-blackish);

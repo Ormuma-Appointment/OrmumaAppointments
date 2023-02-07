@@ -94,6 +94,7 @@ const Account = () => {
                 time={`${event.slot[0]} - ${event.slot[1]}`}
                 id={event.id}
                 setReload={setReload}
+                event={event}
               />
             );
           })}

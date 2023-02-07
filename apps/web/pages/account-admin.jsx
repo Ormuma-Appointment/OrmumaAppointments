@@ -140,12 +140,6 @@ const AccountAdmin = () => {
     getEvent();
   }, [reload]);
 
-  // console.log("today", todayEvents);
-  // console.log("next", nextEvents);
-  // console.log("passt", passtEvents);
-
-  console.log(nextEvents);
-
   if (!isLoading) {
     if (adminStoreId) {
       return (
@@ -269,6 +263,7 @@ const AccountAdmin = () => {
                         time={`${event.slot[0]} - ${event.slot[1]}`}
                         id={event.id}
                         setReload={setReload}
+                        event={event}
                       />
                     );
                   })

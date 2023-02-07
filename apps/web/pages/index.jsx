@@ -21,8 +21,6 @@ export default function Web() {
     const q = query(collection(db, "stores"), where("slug", "!=", null));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
       temp.push({ data: doc.data(), id: doc.id });
     });
 

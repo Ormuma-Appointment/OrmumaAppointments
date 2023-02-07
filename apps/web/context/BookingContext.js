@@ -74,14 +74,12 @@ export const BookingContextProvider = ({ children }) => {
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
-        setSelectedEmployeeData("Oriane is the best");
+        // setSelectedEmployeeData("Oriane is the best");
       }
     } else {
-      console.log("Mully is the best");
+      // console.log("Mully is the best");
     }
   }
-
-  console.log("chosen", chosen);
 
   const getEvent = async () => {
     if (chosen !== undefined && chosen !== null && storeId) {
@@ -141,8 +139,6 @@ export const BookingContextProvider = ({ children }) => {
   useEffect(() => {
     getClientEvent();
   }, [currentUser]);
-
-  console.log("clientEventsData", clientEventsData);
 
   let slotToString = "";
 

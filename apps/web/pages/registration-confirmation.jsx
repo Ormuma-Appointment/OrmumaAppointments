@@ -7,10 +7,7 @@ function RegistrationConfirmation() {
     <CardContainer>
       <div className={styles.container}>
         <h1>Danke für deine Anmeldung</h1>
-        <p>
-          Um deinen Salon einzurichten, musst du noch ein paar Schritte hinter
-          dich bringen.
-        </p>
+        <p>Bald kannst du die Funktionen unserer Webseite nutzen.</p>
         <p>Aber zunächst prüfe deine Emails und bestätige deine Anmeldung!</p>
       </div>
     </CardContainer>

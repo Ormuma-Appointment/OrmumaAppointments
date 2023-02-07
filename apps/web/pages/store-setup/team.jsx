@@ -144,11 +144,11 @@ function TeamSetup() {
   }, [adminStoreId]);
 
   useEffect(() => {
-    if (employeeIndex) {
-      if (employeeIndex || employeeIndex === 0) setHasData(true);
+    if (employeeIndex !== undefined) {
       setSelectedEmployee(salonEmployees[employeeIndex]);
       setShowServices(true);
       setNoSelected(true);
+      if (employeeIndex || employeeIndex === 0) setHasData(true);
     }
   }, [employeeIndex]);
 
@@ -307,6 +307,7 @@ function TeamSetup() {
               <EmployeeOverview
                 employees={salonEmployees}
                 setEmployeeIndex={setEmployeeIndex}
+                isClickable={true}
               />
             </div>
           </div>

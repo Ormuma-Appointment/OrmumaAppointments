@@ -9,44 +9,52 @@ function ClientDataInput({ setClient, clients, client }) {
   const [clientEmail, setClientEmail] = useState(undefined);
   const [clientTelephone, setClientTelephone] = useState(undefined);
   const [filteredClients, setFilteredClients] = useState(undefined);
+  const [showSearchSuggest, setShowSearchSuggest] = useState(true);
+
   function handleClientSelect(e) {
     setselectedClient(
       clients.filter((el) => el.clientName === e.target.value)[0]
     );
   }
 
+  function resetClient() {
+    setFilteredClients([]);
+    setClient({
+      ...client,
+      clientName: null,
+      clientEmail: null,
+      clientTelephone: null,
+      clientId: null,
+    });
+    setClientTelephone("");
+    setClientEmail("");
+    setShowSearchSuggest(false);
+  }
+
   function handleNameChange(e) {
     if (e.target.value.length > 2) {
       setFilteredClients(
         clients.filter((el) =>
-          el.clientName.toLowerCase().includes(e.target.value.toLowerCase())
+          el.clientName?.toLowerCase().includes(e.target.value.toLowerCase())
         )
       );
-    } //else if (e.target.value.length === 0) {
-    //   setClient({
-    //     ...client,
-    //     clientName: null,
-    //     clientEmail: null,
-    //     clientTelephone: null,
-    //     clientId: null,
-    //   });
-    // }
-    else {
-      setFilteredClients([]);
+      setShowSearchSuggest(true);
       setClient({
         ...client,
-        clientName: null,
+        clientName: e.target.value,
         clientEmail: null,
         clientTelephone: null,
         clientId: null,
       });
+    } else {
+      resetClient();
     }
-
     setClientName(e.target.value);
   }
 
   function handleClientSelect(el) {
     setClientName(el.clientName);
+    setShowSearchSuggest(false);
     setClientTelephone(el.clientTelephone ? el.clientTelephone : "");
     setClientEmail(el.clientEmail ? el.clientEmail : "");
     setClient({
@@ -57,6 +65,7 @@ function ClientDataInput({ setClient, clients, client }) {
       clientId: el.clientId,
     });
   }
+
   useEffect(() => {
     if (selectedClient) {
       setClientName(selectedClient.clientName);
@@ -79,7 +88,7 @@ function ClientDataInput({ setClient, clients, client }) {
           onChange={handleNameChange}
           value={clientName}
         />
-        {filteredClients && (
+        {showSearchSuggest && filteredClients && filteredClients[0] && (
           <ul className={styles.suggestions}>
             {filteredClients.map((el, index) => {
               return (

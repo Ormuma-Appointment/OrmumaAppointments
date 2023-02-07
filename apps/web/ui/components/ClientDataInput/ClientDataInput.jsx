@@ -8,6 +8,7 @@ function ClientDataInput({ setClient, clients, client }) {
   const [selectedClient, setselectedClient] = useState(undefined);
   const [clientName, setClientName] = useState(undefined);
   const [clientEmail, setclientEmail] = useState(undefined);
+  const [clientTelephone, setClientTelephone] = useState(undefined);
   function handleClientSelect(e) {
     setselectedClient(
       clients.filter((el) => el.clientName === e.target.value)[0]
@@ -19,6 +20,9 @@ function ClientDataInput({ setClient, clients, client }) {
       setclientEmail(
         selectedClient.clientEmail ? selectedClient.clientEmail : ""
       );
+      setClientTelephone(
+        selectedClient.clientTelephone ? selectedClient.clientTelephone : ""
+      );
       setClient(selectedClient);
     }
   }, [selectedClient]);
@@ -27,6 +31,7 @@ function ClientDataInput({ setClient, clients, client }) {
     setClientType(event.target.value);
     setClientName("");
     setclientEmail("");
+    setClientTelephone("");
   }
   console.log(client);
   return (
@@ -73,7 +78,6 @@ function ClientDataInput({ setClient, clients, client }) {
               setClient({
                 ...client,
                 clientName: e.target.value,
-                clientId: null,
               });
               setClientName(e.target.value);
             }}
@@ -81,16 +85,26 @@ function ClientDataInput({ setClient, clients, client }) {
           />
         )}
         <Input
-          placeholder="Email / Telefonnummer"
+          placeholder="Email"
           onChange={(e) => {
             setClient({
               ...client,
               clientEmail: e.target.value,
-              clientId: null,
             });
             setclientEmail(e.target.value);
           }}
           value={clientEmail}
+        />
+        <Input
+          placeholder="Telefonnummer"
+          onChange={(e) => {
+            setClient({
+              ...client,
+              clientTelephone: e.target.value,
+            });
+            setClientTelephone(e.target.value);
+          }}
+          value={clientTelephone}
         />
       </div>
     </div>

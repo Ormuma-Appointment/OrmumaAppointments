@@ -64,6 +64,7 @@ const BookingConfirmation = () => {
           clientId: el.clientId,
           clientName: el.clientName,
           clientEmail: el.clientEmail,
+          clientTelephone: el.clientTelephone,
         });
       }
     });

@@ -1,15 +1,7 @@
 import styles from "../ui/page_styles/Index.module.css";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
-import {
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  collection,
-  where,
-} from "firebase/firestore";
+import { getDocs, query, collection, where } from "firebase/firestore";
 import StoreCard from "../ui/components/StoreCard/StoreCard";
 
 export default function Web() {

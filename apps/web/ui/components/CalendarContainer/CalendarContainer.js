@@ -8,6 +8,11 @@ const CalendarContainer = () => {
   const [date, setDate] = useState(new Date());
   //3. store the initial value of showtime as false
   const [showTime, setShowTime] = useState(false);
+
+  //let today = new Date();
+  let today = new Date();
+  let stamp = today.setDate(today.getDate() + 1);
+  let tomorrow = new Date(stamp);
   return (
     <div className={styles.app}>
       <div className={styles.calendarContainer}>
@@ -17,7 +22,7 @@ const CalendarContainer = () => {
           onChange={setDate}
           value={date}
           onClickDay={() => setShowTime(true)}
-          minDate={new Date()}
+          minDate={tomorrow}
           maxDetail="month"
         />
       </div>

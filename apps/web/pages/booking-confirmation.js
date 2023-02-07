@@ -63,7 +63,7 @@ const BookingConfirmation = () => {
         clients.push({
           clientId: el.clientId,
           clientName: el.clientName,
-          clientContact: el.clientContact,
+          clientEmail: el.clientEmail,
         });
       }
     });

@@ -7,9 +7,8 @@ function ClientDataInput({ setClient, clients, client }) {
   const [clientType, setClientType] = useState("new");
   const [selectedClient, setselectedClient] = useState(undefined);
   const [clientName, setClientName] = useState(undefined);
-  const [clientContact, setClientContact] = useState(undefined);
+  const [clientEmail, setclientEmail] = useState(undefined);
   function handleClientSelect(e) {
-    console.log(e.target.value);
     setselectedClient(
       clients.filter((el) => el.clientName === e.target.value)[0]
     );
@@ -17,8 +16,8 @@ function ClientDataInput({ setClient, clients, client }) {
   useEffect(() => {
     if (selectedClient) {
       setClientName(selectedClient.clientName);
-      setClientContact(
-        selectedClient.clientContact ? selectedClient.clientContact : ""
+      setclientEmail(
+        selectedClient.clientEmail ? selectedClient.clientEmail : ""
       );
       setClient(selectedClient);
     }
@@ -27,7 +26,7 @@ function ClientDataInput({ setClient, clients, client }) {
   function onChangeValue(event) {
     setClientType(event.target.value);
     setClientName("");
-    setClientContact("");
+    setclientEmail("");
   }
   console.log(client);
   return (
@@ -43,7 +42,6 @@ function ClientDataInput({ setClient, clients, client }) {
           Neukunde
         </label>
         <label>
-          {" "}
           <input
             type="radio"
             value="returning"
@@ -87,12 +85,12 @@ function ClientDataInput({ setClient, clients, client }) {
           onChange={(e) => {
             setClient({
               ...client,
-              clientContact: e.target.value,
+              clientEmail: e.target.value,
               clientId: null,
             });
-            setClientContact(e.target.value);
+            setclientEmail(e.target.value);
           }}
-          value={clientContact}
+          value={clientEmail}
         />
       </div>
     </div>

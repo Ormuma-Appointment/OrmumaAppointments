@@ -52,20 +52,25 @@ const BookingConfirmation = () => {
     const q = query(collection(db, "events"), where("storeId", "==", storeId));
     const docSnap = await getDocs(q);
     let clients = [];
+
     docSnap.forEach((doc) => {
       const el = doc.data();
-      if (
-        !clients.find(
-          (elem) =>
-            elem.clientName === el.clientName && elem.clientId === el.clientId
-        )
-      ) {
+      const existingClient = clients.find(
+        (elem) =>
+          elem.clientName === el.clientName && elem.clientId === el.clientId
+      );
+      if (!existingClient) {
         clients.push({
           clientId: el.clientId,
           clientName: el.clientName,
           clientEmail: el.clientEmail,
           clientTelephone: el.clientTelephone,
+          date: el.date,
         });
+      } else if (el.date.seconds > existingClient.date.seconds) {
+        existingClient.clientEmail = el.clientEmail;
+        existingClient.clientTelephone = el.clientTelephone;
+        existingClient.date = el.date;
       }
     });
     setClients(clients);

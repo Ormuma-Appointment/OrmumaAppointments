@@ -15,7 +15,6 @@ function ClientDataInput({ setClient, clients, client }) {
     setselectedClient(
       clients.filter((el) => el.clientName === e.target.value)[0]
     );
-    console.log(clients);
   }
 
   function resetClient() {

@@ -32,7 +32,6 @@ function StylistCard({
         });
     }
   }, [id]);
-  console.log("employee clickable", isClickable);
 
   return (
     <CardContainer>

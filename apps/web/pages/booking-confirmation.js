@@ -41,7 +41,6 @@ const BookingConfirmation = () => {
       const docRef = doc(db, "stores", storeId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data().name);
         setStoreName(docSnap.data().name);
       } else {
         console.log("No such document!");
@@ -55,8 +54,6 @@ const BookingConfirmation = () => {
     let clients = [];
     docSnap.forEach((doc) => {
       const el = doc.data();
-      // console.log("El", el.employeeId, chosen.employeeId);
-      // console.log("eventData", eventData);
       if (
         !clients.find(
           (elem) =>
@@ -89,14 +86,11 @@ const BookingConfirmation = () => {
     storeName,
   };
 
-  // console.log("event from confirmation", event);
-
   async function handleBookingConfirmation(e) {
     e.preventDefault();
     setConfirmed(!confirmed);
     const newEventRef = doc(collection(db, "events"));
     await setDoc(newEventRef, event);
-
     router.push("/booking-confirmation");
   }
 

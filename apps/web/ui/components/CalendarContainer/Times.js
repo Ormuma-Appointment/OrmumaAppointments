@@ -52,8 +52,6 @@ const Times = (props) => {
     }
   });
 
-  console.log("x", x);
-
   let slotTime = moment(x.startTime, "HH:mm");
   let endTime = moment(x.endTime, "HH:mm");
 
@@ -65,8 +63,6 @@ const Times = (props) => {
           slotTime < moment(br[1], "HH:mm")
         );
       });
-    } else {
-      console.log("coucou");
     }
   }
 
@@ -87,8 +83,6 @@ const Times = (props) => {
 
   let endTimeSlot = eventTime(event, chosenService.duration);
 
-  console.log(event, "times event start");
-
   let selectedSlot = {
     slot: [event, endTimeSlot],
     start: event,
@@ -96,8 +90,6 @@ const Times = (props) => {
     duration: chosenService.duration,
     end: endTimeSlot,
   };
-
-  console.log("selected slot from times", selectedSlot);
 
   useEffect(() => {
     if (event) {

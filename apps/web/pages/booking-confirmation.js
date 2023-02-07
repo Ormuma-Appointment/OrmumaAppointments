@@ -110,6 +110,7 @@ const BookingConfirmation = () => {
             store={event.storeName}
             start={event.start}
             date={event.date}
+            client={event.clientName}
           />
           <div className={styles.buttonsContainer}>
             <Button

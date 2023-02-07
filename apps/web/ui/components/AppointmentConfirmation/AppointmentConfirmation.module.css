@@ -5,6 +5,6 @@
 .confirmationContainer p {
   margin-bottom: 2rem;
 }
-.confirmationContainer p b {
+.confirmationContainer b {
   color: var(--primary-color);
 }

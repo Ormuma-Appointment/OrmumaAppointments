@@ -6,17 +6,61 @@ import { useEffect } from "react";
 function ClientDataInput({ setClient, clients, client }) {
   const [selectedClient, setselectedClient] = useState(undefined);
   const [clientName, setClientName] = useState(undefined);
-  const [clientEmail, setclientEmail] = useState(undefined);
+  const [clientEmail, setClientEmail] = useState(undefined);
   const [clientTelephone, setClientTelephone] = useState(undefined);
+  const [filteredClients, setFilteredClients] = useState(undefined);
   function handleClientSelect(e) {
     setselectedClient(
       clients.filter((el) => el.clientName === e.target.value)[0]
     );
   }
+
+  function handleNameChange(e) {
+    if (e.target.value.length > 2) {
+      setFilteredClients(
+        clients.filter((el) =>
+          el.clientName.toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      );
+    } //else if (e.target.value.length === 0) {
+    //   setClient({
+    //     ...client,
+    //     clientName: null,
+    //     clientEmail: null,
+    //     clientTelephone: null,
+    //     clientId: null,
+    //   });
+    // }
+    else {
+      setFilteredClients([]);
+      setClient({
+        ...client,
+        clientName: null,
+        clientEmail: null,
+        clientTelephone: null,
+        clientId: null,
+      });
+    }
+
+    setClientName(e.target.value);
+  }
+
+  function handleClientSelect(el) {
+    setClientName(el.clientName);
+    setClientTelephone(el.clientTelephone ? el.clientTelephone : "");
+    setClientEmail(el.clientEmail ? el.clientEmail : "");
+    setClient({
+      ...client,
+      clientName: el.clientName,
+      clientEmail: el.clientEmail,
+      clientTelephone: el.clientTelephone,
+      clientId: el.clientId,
+    });
+  }
   useEffect(() => {
     if (selectedClient) {
       setClientName(selectedClient.clientName);
-      setclientEmail(
+      setClientEmail(
         selectedClient.clientEmail ? selectedClient.clientEmail : ""
       );
       setClientTelephone(
@@ -30,33 +74,22 @@ function ClientDataInput({ setClient, clients, client }) {
   return (
     <div className={styles.container}>
       <div>
-        {clients && (
-          <select
-            type="select"
-            onChange={handleClientSelect}
-            className={styles.select}
-          >
-            <option value="newCustomer" selected>
-              Bestandskunden wählen?
-            </option>
-            {clients.map((el, index) => {
-              return <option key={index}>{el.clientName}</option>;
+        <Input
+          placeholder="Name des Kunden"
+          onChange={handleNameChange}
+          value={clientName}
+        />
+        {filteredClients && (
+          <ul className={styles.suggestions}>
+            {filteredClients.map((el, index) => {
+              return (
+                <li key={index} onClick={() => handleClientSelect(el)}>
+                  {el.clientName}
+                </li>
+              );
             })}
-          </select>
+          </ul>
         )}
-        {
-          <Input
-            placeholder="Name des Kunden"
-            onChange={(e) => {
-              setClient({
-                ...client,
-                clientName: e.target.value,
-              });
-              setClientName(e.target.value);
-            }}
-            value={clientName}
-          />
-        }
         <Input
           placeholder="Email"
           onChange={(e) => {
@@ -64,7 +97,7 @@ function ClientDataInput({ setClient, clients, client }) {
               ...client,
               clientEmail: e.target.value,
             });
-            setclientEmail(e.target.value);
+            setClientEmail(e.target.value);
           }}
           value={clientEmail}
         />

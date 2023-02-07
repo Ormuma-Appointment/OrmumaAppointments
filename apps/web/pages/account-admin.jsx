@@ -231,20 +231,24 @@ const AccountAdmin = () => {
             <div className={styles.column}>
               <h2>Terminübersicht heute</h2>
               {todayEvents.length > 0 ? (
-                todayEvents.map((event, id) => {
-                  let date = moment(event.date.toDate()).format("YYYY-MM-DD");
-                  return (
-                    <AppointmentCard
-                      customer={event.clientName}
-                      key={id}
-                      date={date}
-                      service={event.service}
-                      stylist={event.employee}
-                      time={`${event.slot[0]} - ${event.slot[1]}`}
-                      id={event.id}
-                    />
-                  );
-                })
+                todayEvents
+                  .sort((a, b) => a.date.seconds - b.date.seconds)
+                  .map((event, id) => {
+                    let date = moment(event.date.toDate()).format("YYYY-MM-DD");
+                    return (
+                      <AppointmentCard
+                        cancel
+                        customer={event.clientName}
+                        key={id}
+                        date={date}
+                        service={event.service}
+                        stylist={event.employee}
+                        time={`${event.slot[0]} - ${event.slot[1]}`}
+                        id={event.id}
+                        setReload={setReload}
+                      />
+                    );
+                  })
               ) : (
                 <div className={styles.noEvent}>Noch kein Termin heute</div>
               )}

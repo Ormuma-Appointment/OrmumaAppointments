@@ -14,6 +14,7 @@ function StylistCard({
   index,
   setEmployeeIndex,
   id,
+  isClickable,
 }) {
   const router = useRouter();
   const [currentPathA] = useState(router.pathname);
@@ -31,6 +32,8 @@ function StylistCard({
         });
     }
   }, [id]);
+  console.log("employee clickable", isClickable);
+
   return (
     <CardContainer>
       <Link href={`${currentPathA}/#top`} scroll={false}>

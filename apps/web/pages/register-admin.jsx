@@ -4,7 +4,6 @@ import Button from "../ui/components/Button/Button";
 import Input from "../ui/components/InputField/Input";
 import Link from "next/link";
 import styles from "../ui/page_styles/Register.module.css";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -42,7 +41,7 @@ function RegisterAdmin() {
         // otherwise a new userr is created
         setErr(false);
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(res);
+
         // a new user inside the users collection
         await setDoc(doc(db, "users", res.user.uid), {
           uid: res.user.uid,

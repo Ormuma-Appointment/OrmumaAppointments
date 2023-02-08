@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.input {
+  font-size: var(--medium-font);
+  display: block;
+  background-color: white;
+  border-width: 1px;
+  border-style: solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-color: #c0cad5;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 5rem;
+}
+.container label {
+  position: absolute;
+  background-color: white;
+  color: grey;
+  font-size: small;
+  margin-top: -0.6rem;
+  margin-left: 0.5rem;
+  padding: 0 0.1rem;
+}

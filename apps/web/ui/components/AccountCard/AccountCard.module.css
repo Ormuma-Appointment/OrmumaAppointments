@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+}
+.round {
+  width: 20vh;
+  height: 20vh;
+  background-color: aquamarine;
+  border-radius: 50%;
+}
+.info {
+  margin-left: 2rem;
+}
+.icon {
+  height: 1rem;
+  align-self: flex-start;
+  justify-self: flex-end;
+}

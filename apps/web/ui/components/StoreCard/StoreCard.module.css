@@ -1,0 +1,20 @@
+.container {
+  max-width: 30rem;
+  overflow: hidden;
+  width: 95vw;
+}
+.image {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 2/1.2;
+  border-bottom: 0.25rem solid var(--primary-color);
+}
+
+.store {
+  padding: 1.5rem 2rem;
+}
+@media screen and (min-width: 760px) {
+  .container {
+    width: 100%;
+  }
+}

@@ -1,0 +1,15 @@
+.container {
+  padding: 7rem 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.container h1 {
+  color: var(--primary-color);
+}
+.container p:nth-last-of-type(1) {
+  font-weight: bold;
+  margin-top: 1rem;
+}

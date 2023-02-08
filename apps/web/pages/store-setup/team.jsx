@@ -247,7 +247,7 @@ function TeamSetup() {
         <h1 id="top">Team Konfigurieren</h1>
         <CardContainer>
           <div className={styles.container}>
-            <form action="" onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmit}>
               <div>
                 Um eine Person hinzuzufügen, füllen Sie bitte die unten
                 stehenden Felder aus. Sobald Sie auf "Person speichern" klicken,

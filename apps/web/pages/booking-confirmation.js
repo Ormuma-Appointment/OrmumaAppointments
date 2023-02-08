@@ -102,9 +102,9 @@ const BookingConfirmation = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <h1 className={styles.center}>Ihre Buchungsbestätigung</h1>
       {confirmed ? (
         <>
+          <h1 className={styles.center}>Ihre Buchungsbestätigung</h1>
           <AppointmentConfirmation
             employee={event.employee}
             store={event.storeName}
@@ -132,46 +132,49 @@ const BookingConfirmation = () => {
           </div>
         </>
       ) : (
-        <div className={`${styles.uniqueContainer}`}>
-          <CardContainer>
-            <h4>Ihre Auswahl</h4>
-            {isAdmin && (
-              <ClientDataInput
-                clients={clients}
-                client={client}
-                setClient={setClient}
-              />
-            )}
-            <div>
-              {chosenService && (
-                <SelectItem
-                  service={chosenService.service}
-                  duration={chosenService.duration}
-                  price={chosenService.price}
+        <>
+          <h1 className={styles.center}>Buchungsübersicht</h1>
+          <div className={`${styles.uniqueContainer}`}>
+            <CardContainer>
+              <h4>Ihre Auswahl</h4>
+              {isAdmin && (
+                <ClientDataInput
+                  clients={clients}
+                  client={client}
+                  setClient={setClient}
                 />
               )}
+              <div>
+                {chosenService && (
+                  <SelectItem
+                    service={chosenService.service}
+                    duration={chosenService.duration}
+                    price={chosenService.price}
+                  />
+                )}
 
-              {chosen && <SelectItem employee={chosen.employee} />}
-              {chosenSlot && <SelectItem date={slotToString} />}
-            </div>
-            <div className={styles.buttonsContainer}>
-              <Button
-                onClick={() => router.back()}
-                size="medium"
-                variant="danger"
-              >
-                zurück
-              </Button>
-              <Button
-                size="medium"
-                variant="primary"
-                onClick={handleBookingConfirmation}
-              >
-                Buchung bestätigen
-              </Button>
-            </div>
-          </CardContainer>
-        </div>
+                {chosen && <SelectItem employee={chosen.employee} />}
+                {chosenSlot && <SelectItem date={slotToString} />}
+              </div>
+              <div className={styles.buttonsContainer}>
+                <Button
+                  onClick={() => router.back()}
+                  size="medium"
+                  variant="danger"
+                >
+                  zurück
+                </Button>
+                <Button
+                  size="medium"
+                  variant="primary"
+                  onClick={handleBookingConfirmation}
+                >
+                  Buchung bestätigen
+                </Button>
+              </div>
+            </CardContainer>
+          </div>
+        </>
       )}
     </div>
   );

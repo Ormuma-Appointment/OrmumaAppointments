@@ -1,0 +1,17 @@
+.breadcrumb {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.one_breadcrumb {
+  margin: auto 0.5rem;
+}
+.current_breadcrumb {
+  color: var(--primary-color);
+  font-weight: bold;
+  margin: auto 0.5rem;
+}
+.arrows {
+  font-size: 0.75rem;
+}

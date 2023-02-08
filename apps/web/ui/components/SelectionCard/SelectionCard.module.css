@@ -1,0 +1,14 @@
+.container h4 {
+  padding-top: 1rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.selectItemText {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}

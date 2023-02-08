@@ -1,0 +1,115 @@
+.container {
+  padding: 3rem 1.5rem;
+  width: 95vw;
+}
+
+.setUpForm {
+  width: 100%;
+}
+.intro {
+  margin-bottom: 3rem;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.row_small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: small;
+  color: var(--danger-color);
+  height: 0.7rem;
+  margin-bottom: 1rem;
+}
+.row_small .col70 {
+  margin-top: -1rem;
+}
+.adresse,
+.opening {
+  display: flex;
+  align-items: flex-start;
+}
+
+.col30,
+.col70,
+.col50 {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.setUpInfos {
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 5rem;
+}
+
+.setUpOpenings {
+  margin-top: 1rem;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5rem;
+}
+.breadcrumb {
+  margin-bottom: 1rem;
+}
+.arrows {
+  font-size: 0.75rem;
+}
+.current_breadcrumb {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+@media screen and (min-width: 760px) {
+  .container {
+    width: 90vw;
+    margin: auto;
+    padding: 4rem;
+  }
+  .setUpForm {
+    padding: 4rem auto;
+  }
+  .row {
+    flex-direction: row;
+  }
+  .row_small {
+    flex-direction: row;
+  }
+  .row_small .col70 {
+    margin-top: inherit;
+  }
+  .col30 {
+    float: left;
+    width: 20%;
+    margin-top: 1rem;
+  }
+
+  .col70 {
+    float: left;
+    width: 80%;
+    margin-top: 1rem;
+  }
+
+  .col50 {
+    float: left;
+    width: 49%;
+    margin-top: 1rem;
+  }
+
+  .col50:first-child {
+    margin-right: 2%;
+  }
+  .col70:first-child {
+    margin-right: 2%;
+  }
+}
+
+@media screen and (min-width: 1060px) {
+  .container {
+    width: 70vw;
+  }
+}

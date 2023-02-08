@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5vw;
+  height: 5rem;
+  top: 0;
+  position: sticky;
+  background-color: var(--background);
+  z-index: 2;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+.logo {
+  height: 100%;
+}
+.logoImage {
+  height: auto;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.right {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  height: 1.5rem;
+  padding-left: 1.5rem;
+  filter: var(--icon-filter);
+  cursor: pointer;
+}
+.loggedOut {
+  display: flex;
+}
+
+.loggedOut button {
+  margin: 0 0.5rem;
+}
+
+@media screen and (min-width: 1060px) {
+  .container {
+    padding: 1rem 10vw;
+  }
+}

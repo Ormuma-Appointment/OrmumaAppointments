@@ -1,0 +1,35 @@
+.container {
+  width: 100%;
+}
+.select {
+  border-color: #c0cad5;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1rem;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.select option[value="newCustomer"] {
+  color: #c0cad5;
+}
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+}
+.suggestions {
+  position: absolute;
+  margin-top: -1rem;
+  background-color: #fff;
+  width: 61vw;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+.suggestions li {
+  cursor: pointer;
+  padding: 1rem;
+}
+.suggestions li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

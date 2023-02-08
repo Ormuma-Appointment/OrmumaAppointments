@@ -57,18 +57,18 @@ function AppointmentCard({
             <Customers className={styles.icon} />
             {customer && (
               <p>
-                {customer} {!event.clientId && <>(Gast)</>}
+                {customer} {!event?.clientId && <>(Gast)</>}
               </p>
             )}
           </div>
         )}
 
-        {isAdmin && (event.clientTelephone || event.clientEmail) && (
+        {isAdmin && (event?.clientTelephone || event?.clientEmail) && (
           <div className={styles.info}>
             <Contact className={styles.icon} />
-            {event.clientEmail && <p> {event.clientEmail}</p>}
-            {event.clientEmail && event.clientTelephone && "/"}
-            {event.clientTelephone && <p> {event.clientTelephone}</p>}
+            {event?.clientEmail && <p> {event?.clientEmail}</p>}
+            {event?.clientEmail && event?.clientTelephone && "/"}
+            {event?.clientTelephone && <p> {event?.clientTelephone}</p>}
           </div>
         )}
         <div className={styles.info}>

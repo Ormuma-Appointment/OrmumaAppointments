@@ -195,7 +195,9 @@ function TeamSetup() {
       description: e.target.description.value,
       workingTime: times,
     };
-    if (checkWorkingHours(times)[0]) {
+    let corruptDays = checkWorkingHours(times);
+    if (corruptDays[0]) {
+      console.log(corruptDays);
       alert(
         `Bitte überprüfen Sie die angegebenen Arbeitszeiten am ${corruptDays.map(
           (el) => el

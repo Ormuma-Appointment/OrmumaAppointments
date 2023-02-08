@@ -93,7 +93,7 @@ const StoreSetup = () => {
       },
       openingHours: times,
     };
-    console.log(times);
+
     let corruptDays = checkWorkingHours(times);
     if (corruptDays[0]) {
       console.log(corruptDays);

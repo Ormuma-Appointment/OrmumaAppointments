@@ -1,0 +1,95 @@
+.bookingContainer,
+.uniqueContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.bookingContainer > *,
+.uniqueContainer > * {
+  width: 100%;
+  padding: 1rem;
+}
+.uniqueContainer > * {
+  max-width: 35rem;
+  margin: 0 auto;
+  align-self: center;
+}
+.uniqueContainer input {
+  margin-bottom: 1rem;
+}
+.bookingContainer .selectItemText {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.bookingContainer h4 {
+  padding-top: 1rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-evenly;
+}
+.buttonsContainer button {
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.pageContainer > div {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.button {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button:first-of-type {
+  border-top: none;
+}
+.button div {
+  padding-left: 1rem;
+  width: 2rem;
+  height: 2rem;
+  pointer-events: none;
+}
+.button div svg {
+  height: 100%;
+  filter: var(--icon-filter);
+}
+
+/*Tablet */
+@media screen and (min-width: 700px) {
+  .bookingContainer,
+  .uniqueContainer {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .bookingContainer > * {
+    width: 48.5%;
+  }
+}
+
+@media screen and (min-width: 1320px) {
+  .pageContainer {
+    width: 80%;
+    margin: auto;
+    padding: 3rem 0 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

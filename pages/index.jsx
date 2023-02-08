@@ -37,6 +37,14 @@ export default function Web() {
   if (!loading) {
     return (
       <div className={styles.container}>
+        <Head>
+          <title>Salounge</title>
+          <meta
+            name="description"
+            content={`Buche deinen nächsten Termin mit Salounge`}
+            key="desc"
+          />
+        </Head>
         <h1>Unsere Partner</h1>
         <div className={styles.stores}>
           {stores.map((el, index) => {

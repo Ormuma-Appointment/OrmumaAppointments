@@ -22,7 +22,7 @@
   position: absolute;
   margin-top: -1rem;
   background-color: #fff;
-  width: 61vw;
+  width: 20rem;
   border-radius: 0 0 var(--border-radius) var(--border-radius);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
@@ -32,4 +32,9 @@
 }
 .suggestions li:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+@media screen and (min-width: 760px) {
+  .suggestions {
+    width: 33rem;
+  }
 }

@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import styles from "./CalendarContainer.module.css";
 import moment from "moment";
 import { BookingContext } from "../../../context/BookingContext";
+import Link from "next/link";
 
 const Times = (props) => {
   const [event, setEvent] = useState(null);
@@ -102,7 +103,14 @@ const Times = (props) => {
       {times.map((times, index) => {
         return (
           <div key={index}>
-            <button onClick={(e) => displayInfo(e)}> {times} </button>
+            <Link
+              href={window.screen.availWidth < 760 ? "#overview" : ""}
+              scroll={false}
+              onClick={(e) => displayInfo(e)}
+            >
+              {" "}
+              {times}{" "}
+            </Link>
           </div>
         );
       })}

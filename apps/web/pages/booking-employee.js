@@ -7,6 +7,7 @@ import { BookingContext } from "../context/BookingContext";
 import EmployeeOverview from "../ui/components/EmployeeOverview/EmployeeOverview";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const BookingEmployee = () => {
   const [selected, setSelected] = useState(null);
@@ -71,28 +72,31 @@ const BookingEmployee = () => {
           {!isLoading ? (
             filteredEmployees.map((employee, id) => {
               return (
-                <SelectItem
-                  plus
-                  employee={employee[1]}
-                  employeeId={employee[0]}
-                  key={id}
-                  setSelected={setSelected}
-                  storeId={storeId}
-                />
+                <Link href="#overview" scroll={false}>
+                  <SelectItem
+                    plus
+                    employee={employee[1]}
+                    employeeId={employee[0]}
+                    key={id}
+                    setSelected={setSelected}
+                    storeId={storeId}
+                  />
+                </Link>
               );
             })
           ) : (
             <div>Is loading</div>
           )}
         </CardContainer>
-        <CardContainer>
+
+        <div className="container" id="overview">
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
             service={chosenService}
             step="employee"
           />
-        </CardContainer>
+        </div>
       </div>
       <div>
         <h2>Unsere Mitarbeiter</h2>

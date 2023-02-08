@@ -7,6 +7,7 @@ import { BookingContext } from "../context/BookingContext";
 import BreadCrumb from "../ui/components/BreadCrumb/BreadCrumb";
 import { useRouter } from "next/router";
 import Down from "../ui/components/assets/down.svg";
+import Link from "next/link";
 
 const BookingService = () => {
   const [loading, setLoading] = useState(true);
@@ -81,17 +82,19 @@ const BookingService = () => {
                     if (service.category === selectedCategory) {
                       return (
                         isOpenStyle && (
-                          <SelectItem
-                            duration={el.duration}
-                            plus
-                            price={el.price}
-                            service={el.service}
-                            key={index}
-                            setSelected={setSelected}
-                            onClick={() =>
-                              setSelected({ price, service, duration })
-                            }
-                          />
+                          <Link href="#overview" scroll={false}>
+                            <SelectItem
+                              duration={el.duration}
+                              plus
+                              price={el.price}
+                              service={el.service}
+                              key={index}
+                              setSelected={setSelected}
+                              onClick={() =>
+                                setSelected({ price, service, duration })
+                              }
+                            />
+                          </Link>
                         )
                       );
                     }
@@ -103,14 +106,14 @@ const BookingService = () => {
             <div>Is loading</div>
           )}
         </CardContainer>
-        <CardContainer>
+        <div className="container" id="overview">
           <SelectionCard
             selected={selected}
             setSelected={setSelected}
             category={selectedCategory}
             step="service"
           />
-        </CardContainer>
+        </div>
       </div>
     </div>
   );

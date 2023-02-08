@@ -60,7 +60,7 @@ const BookingCalendar = () => {
           <h4>Calendar</h4>
           <CalendarContainer />
         </CardContainer>
-        <CardContainer>
+        <div className="container" id="overview">
           <h4>Ihre Auswahl</h4>
           <div>
             <SelectItem
@@ -96,7 +96,7 @@ const BookingCalendar = () => {
               </Button>
             )}
           </div>
-        </CardContainer>
+        </div>
       </div>
     </div>
   );

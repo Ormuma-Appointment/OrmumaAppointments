@@ -114,7 +114,6 @@ const SelectionCard = (props) => {
             >
               zurück
             </Button>
-
             {selected && (
               <Button
                 size="medium"

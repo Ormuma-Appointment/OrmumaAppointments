@@ -82,7 +82,12 @@ const BookingService = () => {
                     if (service.category === selectedCategory) {
                       return (
                         isOpenStyle && (
-                          <Link href="#overview" scroll={false}>
+                          <Link
+                            href={
+                              window.screen.availWidth < 760 ? "#overview" : ""
+                            }
+                            scroll={false}
+                          >
                             <SelectItem
                               duration={el.duration}
                               plus

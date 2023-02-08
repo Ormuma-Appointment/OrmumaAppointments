@@ -3,13 +3,13 @@
   margin: 0 auto;
   width: 100%;
 }
-.times{
+.times {
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.times button {
+.times a {
   display: block;
   background-color: var(--primary-color-light);
   color: white;

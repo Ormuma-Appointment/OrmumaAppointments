@@ -70,7 +70,7 @@ export default function Web() {
       return (
         <div className={styles.container}>
           <Head>
-            <title>{storeData.name} | PeachOasis</title>
+            <title>{storeData.name} | Salounge</title>
             <meta
               name="description"
               content={`Buche deinen nächsten Termin bei ${storeData.name} über Salounge`}

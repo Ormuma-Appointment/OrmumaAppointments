@@ -34,7 +34,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <AuthContextProvider>
         <BookingContextProvider>
           <div className="grid_main_wrapper">
-            <Navigation customer_logged_out />
+
+            <Navigation />
+
             <div className="page_wrapper">
               {noAuthRequired.includes(Router.pathname) ? (
                 <Component {...pageProps} />

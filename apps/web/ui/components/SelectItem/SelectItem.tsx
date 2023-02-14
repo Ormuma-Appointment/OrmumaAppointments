@@ -4,22 +4,42 @@ import Plus from "../assets/plus.svg";
 import Edit from "../assets/edit.svg";
 import Minus from "../assets/minus.svg";
 
-function SelectItem(props) {
-  const {
-    service,
-    employee,
-    date,
-    minus,
-    price,
-    duration,
-    plus,
-    edit,
-    selected,
-    employeeId,
-    setSelected,
-    storeId,
-    ...rest
-  } = props;
+interface SelectItemProps {
+  service: string | undefined; //
+  employee: string | undefined; // 
+  date: string | undefined; // 
+  price: number | undefined; //
+  duration: number | undefined; // 
+  minus: boolean | undefined; //
+  plus: boolean | undefined; // 
+  edit: boolean | undefined; // 
+  employeeId: string | undefined; // 
+  storeId: string | undefined;
+  selected: string;
+  setSelected: React.Dispatch<React.SetStateAction<{
+    employee: string | undefined;
+    employeeId: string | undefined;
+    storeId: string | undefined;
+    service: string | undefined;
+    price: number | undefined;
+    duration: number | undefined;
+  }>>
+  ;
+}
+
+const SelectItem: React.FC<SelectItemProps> = ({
+  service,
+  employee,
+  date,
+  minus,
+  price,
+  duration,
+  plus,
+  edit,
+  employeeId,
+  setSelected,
+  storeId}) => {
+ 
 
   const handleSelected = () => {
     if (plus) {
@@ -35,7 +55,7 @@ function SelectItem(props) {
   };
   return (
     <div
-      className={`${styles.service_container} ${selected && styles.selected}`}
+      className={styles.service_container}
       onClick={handleSelected}
     >
       <div className={styles.serviceName}>

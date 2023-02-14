@@ -21,7 +21,6 @@ const BookingEmployee = () => {
     setStoreId,
   } = useContext(BookingContext);
 
-  console.log(window.screen.availWidth);
   const router = useRouter();
   const query = router.query;
   if (!storeId) {
@@ -76,6 +75,7 @@ const BookingEmployee = () => {
                 <Link
                   href={window.screen.availWidth < 760 ? "#overview" : ""}
                   scroll={false}
+                  key={id}
                 >
                   <SelectItem
                     plus

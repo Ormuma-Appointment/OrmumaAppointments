@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./StoreCard.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { getImages } from "../../functions/getImages";
 
 function StoreCard({ data }) {
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     let requestUrl = `images/stores/${data.id}`;

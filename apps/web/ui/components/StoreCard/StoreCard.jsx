@@ -15,7 +15,7 @@ function StoreCard({ data }) {
         setImage(url);
       })
       .catch((error) => {
-        // Handle any errors
+        console.error(error);
       });
   }, []);
   return (

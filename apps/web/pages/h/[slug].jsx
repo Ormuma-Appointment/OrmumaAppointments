@@ -15,6 +15,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import { Parallax } from "react-scroll-parallax";
 import { AuthContext } from "../../context/AuthContext";
+import { getImages } from "ui/functions/getImages";
 
 export default function Web() {
   const [loading, setLoading] = useState(true);
@@ -42,27 +43,16 @@ export default function Web() {
   const [image, setImage] = useState();
   useEffect(() => {
     if (storeId) {
-      const imageLocation = ref(storage, `images/stores/${storeId}`);
-
-      getDownloadURL(ref(imageLocation))
-        .then((url) => {
-          setImage(url);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      let requestUrl = `images/stores/${storeId}`;
+      getImages(requestUrl).then((resp) => setImage(resp));
     }
   }, [storeId]);
 
   function handleBookingClick() {
-    if (storeId) {
-      router.push({
-        pathname: "/booking-service",
-        query: { storeid: storeId },
-      });
-    } else {
-      router.push("/booking-service");
-    }
+    router.push({
+      pathname: "/booking-service",
+      query: { storeid: storeId },
+    });
   }
 
   if (!loading) {

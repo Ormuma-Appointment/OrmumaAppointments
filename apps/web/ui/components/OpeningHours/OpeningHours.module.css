@@ -11,6 +11,8 @@
   display: flex;
   justify-content: space-between;
   font-weight: lighter;
+  margin-bottom: 0.5rem;
+  
 }
 .day div {
   display: flex;

@@ -3,6 +3,9 @@
   overflow: hidden;
   width: 95vw;
 }
+.container a {
+  color: black
+}
 .image {
   overflow: hidden;
   width: 100%;

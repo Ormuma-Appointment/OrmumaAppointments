@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ServiceAdd.module.css";
-import Input from "../InputField/Input";
 import Button from "../Button/Button";
+import InputButtonGroup from "../InputButtonGroup/InputButtonGroup";
 import Trash from "../assets/trash.svg";
 import ServiceDetailInput from "./ServiceDetailInput";
+import { handleFormSubmit } from "./handleFormSubmit";
 
 function ServiceAdd({
   setData,
@@ -13,31 +14,10 @@ function ServiceAdd({
   servicesDetails,
   setServicesDetails,
 }) {
-  function handleServiceSubmit(e) {
+  function handleElementSubmit(e) {
     e.preventDefault();
     setServices((prev) => [...prev, e.target.service.value]);
   }
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    let newServices = services.reduce((result, service, index) => {
-      let category = e.target.category[index].value;
-      let duration = Number(e.target.duration[index].value);
-      let waiting = Number(e.target.waiting[index].value);
-      let price = Number(e.target.price[index].value);
-
-      let serviceData = { service, price, duration, waiting };
-      let categoryData = result.find((cat) => cat.category === category);
-      if (!categoryData) {
-        categoryData = { category, services: [] };
-        result.push(categoryData);
-      }
-      categoryData.services.push(serviceData);
-      return result;
-    }, []);
-    setData(newServices);
-  }
-  // console.log(servicesDetails);
 
   const [indexToRemove, setIndexToRemove] = useState(undefined);
   const [remove, setRemove] = useState(false);
@@ -57,12 +37,11 @@ function ServiceAdd({
     <>
       <div className={styles.service_cat}>
         <h3>2. Services erstellen</h3>
-        <form className={styles.input_group} onSubmit={handleServiceSubmit}>
-          <Input placeholder="Service hinzufügen ..." name="service" />{" "}
-          <Button icon="" size="medium" variant="secondary">
-            + hinzufügen
-          </Button>
-        </form>
+        <InputButtonGroup
+          handleElementSubmit={handleElementSubmit}
+          placeholder="Service hinzufügen ..."
+          name="service"
+        />
         <div className={styles.service_list}>
           <div className={styles.group}>
             <div>Name</div>
@@ -74,7 +53,10 @@ function ServiceAdd({
               <Trash className={styles.icon} />
             </div>
           </div>
-          <form action="" onSubmit={handleFormSubmit}>
+          <form
+            action=""
+            onSubmit={(e) => setData(handleFormSubmit(e, services))}
+          >
             {services.map((el, index) => {
               return (
                 <ServiceDetailInput

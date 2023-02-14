@@ -4,7 +4,6 @@ import CardContainer from "../CardContainer/CardContainer";
 import RoundImage from "../RoundImage/RoundImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
-// import { getImages } from "./getImages";
 import { getImages } from "../../functions/getImages";
 
 interface StylistCardProps {
@@ -31,8 +30,8 @@ const StylistCard: React.FC<StylistCardProps> = ({
 
   useEffect(() => {
     if (id) {
-      let url;
-      getImages(id).then((resp) => setImageShown(resp));
+      let requestUrl = `images/team/${id}`
+      getImages(requestUrl).then((resp) => setImageShown(resp));
     }
   }, [id]);
 

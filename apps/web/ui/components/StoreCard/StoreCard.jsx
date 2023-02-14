@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./StoreCard.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { storage } from "../../../firebase/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
+import { getImages } from "../../functions/getImages";
 
 function StoreCard({ data }) {
-  const [image, setImage] = useState();
-  useEffect(() => {
-    const imageLocation = ref(storage, `images/stores/${data.id}`);
+  const [image, setImage] = useState("");
 
-    getDownloadURL(ref(imageLocation))
-      .then((url) => {
-        setImage(url);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  useEffect(() => {
+    let requestUrl = `images/stores/${data.id}`;
+    getImages(requestUrl).then((resp) => setImage(resp));
+  }, [data]);
+
   return (
     <div className={`container ${styles.container}`}>
       <Link href={`/h/${data.data.slug}`}>

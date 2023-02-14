@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SelectElement.module.css";
 
-function SelectElement({ day, time, value, label }) {
-  const [localValue, setLocalValue] = useState(value);
+interface SelectElementProps {
+  day: string;
+  time: string; 
+  label: string; 
+  selectedTime: string | null; 
+}
 
+const SelectElement: React.FC<SelectElementProps> =({ day, time, selectedTime, label }) => {
+  const [localValue, setLocalValue] = useState(selectedTime);
   useEffect(() => {
-    setLocalValue(value);
-  }, [value]);
+    setLocalValue(selectedTime);
+  }, [selectedTime]);
 
-  const [data] = useState([
+  const data = [
     "-",
     "06:00",
     "06:30",
@@ -47,7 +53,7 @@ function SelectElement({ day, time, value, label }) {
     "23:00",
     "23:30",
     "00:00",
-  ]);
+  ];
 
   return (
     <div className={styles.container}>
@@ -57,11 +63,11 @@ function SelectElement({ day, time, value, label }) {
         id="time"
         className={styles.input}
         value={localValue ? localValue : ""}
-        onChange={(e) => setLocalValue((prev) => e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setLocalValue((prev) => e.target.value)}
       >
         {data.map((el, index) => {
           return (
-            <option key={index} value={el === "-" ? null : el}>
+            <option key={index} value={el === "-" ? undefined : el}>
               {el}
             </option>
           );

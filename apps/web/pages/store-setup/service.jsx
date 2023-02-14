@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
-import Input from "../../ui/components/InputField/Input";
 import Button from "../../ui/components/Button/Button";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../../ui/page_styles/ServiceSetup.module.css";
@@ -11,6 +10,7 @@ import { db } from "../../firebase/firebase";
 import { doc, setDoc, updateDoc, getDoc } from "firebase/firestore";
 import { useAuthContext } from "../../context/AuthContext";
 import { browserBack } from "../../ui/functions/browserBack";
+import InputButtonGroup from "ui/components/InputButtonGroup/InputButtonGroup";
 
 function ServiceSetup() {
   const { currentUser, adminStoreId, setLoadStoreId } = useAuthContext();
@@ -62,7 +62,7 @@ function ServiceSetup() {
     setLoadStoreId((prev) => !prev);
   }, [currentUser, adminStoreId]);
 
-  function handleCatSubmit(e) {
+  function handleElementSubmit(e) {
     e.preventDefault();
     setCategories((prev) => [...prev, e.target.category.value]);
   }
@@ -126,12 +126,11 @@ function ServiceSetup() {
             </div>
             <div className={styles.service_cat}>
               <h3>1. Service Kategorien erstellen</h3>
-              <form className={styles.input_group} onSubmit={handleCatSubmit}>
-                <Input placeholder="Kategorie hinzufügen ..." name="category" />{" "}
-                <Button icon="" size="medium" variant="secondary">
-                  + hinzufügen
-                </Button>
-              </form>
+              <InputButtonGroup
+                handleElementSubmit={handleElementSubmit}
+                placeholder="Kategorie hinzufügen ..."
+                name="category"
+              />
               <div className={styles.cat_box}>
                 {categories.map((el, index) => {
                   return (

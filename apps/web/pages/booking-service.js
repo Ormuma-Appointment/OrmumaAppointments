@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import CardContainer from "../ui/components/CardContainer/CardContainer";
 import styles from "../ui/page_styles/Booking.module.css";
 import SelectItem from "../ui/components/SelectItem/SelectItem";
@@ -63,11 +63,10 @@ const BookingService = () => {
           {!loading && serviceList.serviceObj && !isLoading ? (
             serviceList.serviceObj.map((service, id) => {
               return (
-                <>
+                <React.Fragment key={id}>
                   <button
                     type="button"
                     onClick={handleOpenStyle}
-                    key={id}
                     value={id}
                     className={`h4 ${styles.button}`}
                   >
@@ -104,7 +103,7 @@ const BookingService = () => {
                       );
                     }
                   })}
-                </>
+                </React.Fragment>
               );
             })
           ) : (

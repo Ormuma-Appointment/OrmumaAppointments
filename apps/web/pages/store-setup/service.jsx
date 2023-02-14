@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CardContainer from "../../ui/components/CardContainer/CardContainer";
-import Input from "../../ui/components/InputField/Input";
 import Button from "../../ui/components/Button/Button";
 import BreadCrumb from "../../ui/components/BreadCrumb/BreadCrumb";
 import styles from "../../ui/page_styles/ServiceSetup.module.css";

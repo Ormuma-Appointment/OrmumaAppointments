@@ -4,10 +4,19 @@ import CardContainer from "../CardContainer/CardContainer";
 import RoundImage from "../RoundImage/RoundImage";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { storage } from "../../../firebase/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
+// import { getImages } from "./getImages";
+import { getImages } from "../../functions/getImages";
 
-function StylistCard({
+interface StylistCardProps {
+  image: string | undefined;
+  name: string;
+  description: string | undefined;
+  index: number;
+  setEmployeeIndex: React.Dispatch<React.SetStateAction<number>>;
+  id: string;
+  isClickable: boolean;
+}
+const StylistCard: React.FC<StylistCardProps> = ({
   image = "/placeholder-profile.jpeg",
   name,
   description,
@@ -15,27 +24,21 @@ function StylistCard({
   setEmployeeIndex,
   id,
   isClickable,
-}) {
+}) => {
   const router = useRouter();
-  const [currentPathA] = useState(router.pathname);
+  const [currentPath] = useState(router.pathname);
   const [imageShown, setImageShown] = useState(image);
+
   useEffect(() => {
     if (id) {
-      const imageLocation = ref(storage, `images/team/${id}`);
-
-      getDownloadURL(ref(imageLocation))
-        .then((url) => {
-          setImageShown(url);
-        })
-        .catch((error) => {
-          // Handle any errors
-        });
+      let url;
+      getImages(id).then((resp) => setImageShown(resp));
     }
   }, [id]);
 
   return (
     <CardContainer>
-      <Link href={`${currentPathA}/#top`} scroll={false}>
+      <Link href={`${currentPath}/#top`} scroll={false}>
         <div
           className={styles.container}
           onClick={() => isClickable && setEmployeeIndex(index)}

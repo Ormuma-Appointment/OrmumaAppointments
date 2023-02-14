@@ -51,3 +51,4 @@ pnpm run dev
 ## Iterations / Improvements for the future
 - localization 
 - improved securtiy 
+- usage of Typescript

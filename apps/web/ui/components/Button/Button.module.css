@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
+  font-weight: 300;
 }
 .icon {
   padding-right: 8px;

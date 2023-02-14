@@ -5,7 +5,7 @@ export const StyledCalendar = styled(Calendar)`
   width: 700px; 
   max-width: 100%;
   background: white;
-  font-family: var(--base-font-family)
+  font-family: var(--base-font-family);
   line-height: 1.125em;
   padding: 0.5em;
 
@@ -40,12 +40,13 @@ export const StyledCalendar = styled(Calendar)`
     height: 44px;
     margin-bottom: 1rem;
     text-align: center;
-    
   }
   .react-calendar__navigation button {
-    min-width: 45px;
+    min-width: 60px;
     background: none;
     padding: 0.5rem 0.2rem; 
+    font-weight: 500;
+    font-size: 1rem;
   }
   .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
@@ -79,7 +80,6 @@ export const StyledCalendar = styled(Calendar)`
   }
   .react-calendar__month-view__days__day--neighboringMonth {
     color: #757575;
-    
   }
   .react-calendar__year-view .react-calendar__tile,
   .react-calendar__decade-view .react-calendar__tile,
@@ -91,6 +91,8 @@ export const StyledCalendar = styled(Calendar)`
     text-align: center;
     padding: 0.75em 0.5em;
     background: none;
+    font-weight: 300;
+    font-size: 1rem;
   }
   .react-calendar__tile:disabled {
     background-color: #f0f0f0;

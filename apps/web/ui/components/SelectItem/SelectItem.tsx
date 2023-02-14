@@ -40,7 +40,6 @@ const SelectItem: React.FC<SelectItemProps> = ({
   setSelected,
   storeId}) => {
  
-
   const handleSelected = () => {
     if (plus) {
       setSelected({

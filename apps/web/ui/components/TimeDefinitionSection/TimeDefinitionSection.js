@@ -69,14 +69,16 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                 time={start}
                 day={el}
                 hasData={hasData}
-                value={localHasData ? localTimes[rowToUpdate].start : "-"}
+                selectedTime={
+                  localHasData ? localTimes[rowToUpdate].start : "-"
+                }
                 label="Start"
               />
               <SelectElement
                 time={end}
                 day={el}
                 hasData={hasData}
-                value={
+                selectedTime={
                   localHasData
                     ? localTimes[times.findIndex((item) => item.label === el)]
                         .end
@@ -89,7 +91,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                 time={breakStart}
                 day={el}
                 hasData={hasData}
-                value={
+                selectedTime={
                   localHasData
                     ? localTimes[times.findIndex((item) => item.label === el)]
                         .breakStart
@@ -101,7 +103,7 @@ function TimeDefinitionSection({ openDays, setTimes, times, hasData }) {
                 time={breakEnd}
                 day={el}
                 hasData={hasData}
-                value={
+                selectedTime={
                   localHasData
                     ? localTimes[times.findIndex((item) => item.label === el)]
                         .breakEnd

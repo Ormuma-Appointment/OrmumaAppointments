@@ -22,7 +22,7 @@ function OpeningHours({ hours }) {
                     "Samstag",
                   ][el.day]
                 }
-              </p>{" "}
+              </p>
               <div>
                 {el.start ? (
                   <>

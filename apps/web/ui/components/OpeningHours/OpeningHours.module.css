@@ -1,5 +1,6 @@
 .container {
   padding: 2rem 2rem 3rem 1.5rem;
+  min-width: 20rem;
 }
 .container h3 {
   margin-bottom: 1rem;

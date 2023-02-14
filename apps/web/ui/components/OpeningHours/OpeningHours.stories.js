@@ -5,12 +5,12 @@ export default {
   component: OpeningHours,
   args: {
     hours: [
-      { day: "Monday", start: "08:00", end: "18:00" },
-      { day: "Tuesday", start: "08:00", end: "18:00" },
-      { day: "Wednesday", start: "08:00", end: "18:00" },
-      { day: "Thursday", start: "08:00", end: "18:00" },
-      { day: "Friday", start: "08:00", end: "18:00" },
-      { day: "Saturday", start: "08:00", end: "15:00" },
+      { day: 1, start: "08:00", end: "18:00" },
+      { day: 2, start: "08:00", end: "18:00" },
+      { day: 3, start: "08:00", end: "18:00" },
+      { day: 4, start: "08:00", end: "18:00" },
+      { day: 5, start: "08:00", end: "18:00" },
+      { day: 6, start: "08:00", end: "15:00" },
     ],
   },
 };

@@ -19,6 +19,7 @@ import { useAuthContext } from "../context/AuthContext";
 import Button from "../ui/components/Button/Button";
 import { useRouter } from "next/router";
 import moment from "moment";
+import OpeningHours from "ui/components/OpeningHours/OpeningHours";
 
 const AccountAdmin = () => {
   const router = useRouter();
@@ -189,35 +190,7 @@ const AccountAdmin = () => {
                     />
                   </div>
                   <div className={styles.opening_container}>
-                    <h3>Öffnungszeiten</h3>
-                    {salonData.openingHours.map((el, index) => {
-                      return (
-                        <div key={index} className={styles.day}>
-                          <p>
-                            {
-                              [
-                                "Sonntag",
-                                "Montag",
-                                "Dienstag",
-                                "Mittwoch",
-                                "Donnerstag",
-                                "Freitag",
-                                "Samstag",
-                              ][el.day]
-                            }
-                          </p>{" "}
-                          <div>
-                            {el.start ? (
-                              <>
-                                <p>{el.start}</p> - <p> {el.end}</p>
-                              </>
-                            ) : (
-                              <p>geschlossen</p>
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
+                    <OpeningHours hours={salonData.openingHours} />
                   </div>
                 </div>
               </CardContainer>

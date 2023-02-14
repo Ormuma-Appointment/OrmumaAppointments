@@ -27,13 +27,13 @@
     "babel-loader": "^8.3.0",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "require-from-string": "^2.0.2",
+    "storybook-react-context": "^0.6.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.5.2",
-    "webpack": "^5.75.0",
-    "prop-types": "^15.8.1"
-  },
-  "dependencies": {}
+    "webpack": "^5.75.0"
+  }
 }

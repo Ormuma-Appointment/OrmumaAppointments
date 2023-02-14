@@ -13,8 +13,7 @@ import Link from "next/link";
 function Navigation() {
   const router = useRouter();
 
-  const { currentUser, logOut, isAdmin, adminStoreId } = useAuthContext();
-
+  const { currentUser, isAdmin, adminStoreId } = useAuthContext();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {

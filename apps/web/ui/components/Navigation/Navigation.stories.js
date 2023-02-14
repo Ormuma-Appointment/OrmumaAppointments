@@ -7,4 +7,4 @@ export default {
 };
 
 const Template = (args) => <Navigation {...args} />;
-export const AdminLoggedOut = Template.bind({});
+export const Navigations = Template.bind({});

@@ -13,8 +13,7 @@ import Link from "next/link";
 function Navigation() {
   const router = useRouter();
 
-  const { currentUser, logOut, isAdmin, adminStoreId } = useAuthContext();
-
+  const { currentUser, isAdmin, adminStoreId, logOut } = useAuthContext();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -68,14 +67,14 @@ function Navigation() {
               onClick={() => router.push("/account")}
             />
           )}
-          <button
+
+          <Logout
+            className={styles.icon}
             onClick={() => {
               logOut(auth);
               router.push("/login");
             }}
-          >
-            <Logout className={styles.icon} />
-          </button>
+          />
         </div>
       )}
 

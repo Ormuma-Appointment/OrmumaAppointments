@@ -20,6 +20,7 @@
 .header {
   display: flex;
   justify-content: flex-start;
+  align-items: baseline;
 }
 .edit {
   display: flex;
@@ -53,6 +54,10 @@
 .address_container {
   display: flex;
   justify-content: space-between;
+}
+.address_container li{
+  list-style-type: none;
+  line-height: 1.5rem;
 }
 .address li:first-child {
   font-weight: bold;

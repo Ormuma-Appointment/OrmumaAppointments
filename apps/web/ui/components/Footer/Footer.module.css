@@ -21,6 +21,7 @@
 .link,
 .icon {
   margin: 0.5rem;
+  color: white;
 }
 .link:hover {
   text-shadow: 0px 0.5px 0.1px white;

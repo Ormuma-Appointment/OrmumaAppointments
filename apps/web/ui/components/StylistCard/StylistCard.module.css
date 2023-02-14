@@ -20,6 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  color: var(--primary-font)
 }
 .info h3 {
   flex-wrap: wrap;

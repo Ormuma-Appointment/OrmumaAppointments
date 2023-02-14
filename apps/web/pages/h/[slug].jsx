@@ -110,7 +110,9 @@ export default function Web() {
                 telephone={storeData.contact.telephone}
                 website={storeData.contact.website}
               />
-              <OpeningHours hours={storeData.openingHours} />
+              <div className="container">
+                <OpeningHours hours={storeData.openingHours} />
+              </div>
             </div>
             <div className={styles.info_row}>
               <AddressCard

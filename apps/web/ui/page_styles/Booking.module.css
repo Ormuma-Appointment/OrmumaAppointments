@@ -56,6 +56,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: none;
+  background-color: white;
+  font-size: 1rem;
 }
 .button:first-of-type {
   border-top: none;

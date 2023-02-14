@@ -7,6 +7,7 @@
   border-radius: var(--border-radius);
   margin: 1rem auto;
   transition: transform 0.2s; /* Animation */
+  color: var(--primary-font)
 }
 .service_container:hover {
   background-color: rgba(0, 0, 0, 0.05);

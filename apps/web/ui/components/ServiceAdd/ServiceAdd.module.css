@@ -34,6 +34,10 @@
 .group input,
 .heading {
   width: 5rem;
+  font-weight: 300;
+}
+.group select{
+  font-weight: 300;
 }
 
 .delete {

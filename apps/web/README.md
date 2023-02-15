@@ -1,30 +1,54 @@
-## Getting Started
+# Appointment Application
 
-First, run the development server:
+This application was built as the third project of the Wild Code School 20 week Full-Stack Developer program as a client project. 
 
-```bash
-yarn dev
+It is an appointment booking application targeting hair dresser salons.
+
+## Main features
+
+- appointment creation / management
+- user management
+- account creation
+- salon creation / editing incl. services & employees
+
+## Technologies used
+
+- NextJS
+- Firebase
+- Storybook
+
+## Running it
+- clone the repository
+```
+cd OrmumaAppointments
+pnpm install
+```
+### Preparation: install pnpm
+
+Follow - https://pnpm.io/installation
+
+### Preparation: create firebase account
+
+To run this app valid firebase credetials are necessary. Head to https://firebase.google.com/ to create an account and a project.
+We are using firebase storage and firebase cloud functions to assign a user an admin status - currently to use this an upgrade to the Firebase Blaze package is relevant.
+- create `env.local` file from `env.local.sample` file (apps/web)
+
+### Preparation: set cloud function
+- in `firebase-cloud-functions/.firebaserc` replace `appointment---web-app` with own firebase-projectId.
+
+### Preparation: get firebase CLI & deploy function
+1. Install Firebase CLI:  `npm install -g firebase-tools` 
+2. Log in to Firebase CLI: `firebase login`
+3. Navigate to folder `firebase-cloud-functions` in terminal
+4. Delploy function: `firebase deploy --only functions`
+
+### run the app locally
+```
+cd apps/web
+pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn/foundations/about-nextjs) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Iterations / Improvements for the future
+- localization 
+- improved securtiy 
+- usage of Typescript

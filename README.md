@@ -1,8 +1,9 @@
 # Appointment Application
 
-This application was built as the third project of the Wild Code School 20 week Full-Stack Developer program in collaboration with a client. Currently we are working on refactoring some of the code and on deploying the app.
-
+This application was built as the third project of the Wild Code School 20 week Full-Stack Developer program in collaboration with a client. 
 It is an appointment booking application targeting hair dresser salons.
+
+Currently we are working on refactoring some of the code and on deploying the app.
 
 ## Main features
 

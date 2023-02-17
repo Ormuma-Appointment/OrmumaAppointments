@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "./BreadCrumb.module.css";
 
-function BreadCrumb({ steps, current }) {
+interface BreadCrumbProps {
+  steps: string[];
+  current: number;
+}
+
+const BreadCrumb: React.FC<BreadCrumbProps> = ({ steps, current }) => {
   return (
     <div className={styles.breadcrumb}>
       {steps.map((el, index) => {
@@ -22,6 +27,6 @@ function BreadCrumb({ steps, current }) {
       })}
     </div>
   );
-}
+};
 
 export default BreadCrumb;

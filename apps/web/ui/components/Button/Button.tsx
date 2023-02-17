@@ -3,7 +3,13 @@ import styles from "./Button.module.css";
 import * as PropTypes from "prop-types";
 import CalendarAdd from "../assets/calendar_add.svg";
 
-function Button(props) {
+interface ButtonProps {
+  variant: string;
+  size: string;
+  icon: boolean;
+  children: any;
+}
+const Button: React.FC<ButtonProps> = (props) => {
   const {
     variant = "primary",
     size = "medium",
@@ -21,7 +27,7 @@ function Button(props) {
       {children}
     </button>
   );
-}
+};
 
 Button.propTypes = {
   size: PropTypes.oneOf(["xsmall", "small", "medium"]),

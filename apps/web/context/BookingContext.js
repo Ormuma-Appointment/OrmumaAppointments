@@ -8,7 +8,7 @@ import {
   where,
   query,
 } from "firebase/firestore";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "./AuthContext";
 
 export const BookingContext = createContext();
 export const BookingContextProvider = ({ children }) => {

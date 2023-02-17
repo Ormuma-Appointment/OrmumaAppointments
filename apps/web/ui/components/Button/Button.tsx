@@ -6,7 +6,7 @@ import CalendarAdd from "../assets/calendar_add.svg";
 interface ButtonProps {
   variant: string;
   size: string;
-  icon: boolean | undefined;
+  icon?: boolean | undefined;
   children: any;
 }
 const Button: React.FC<ButtonProps> = (props) => {

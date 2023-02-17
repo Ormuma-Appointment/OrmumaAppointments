@@ -23,6 +23,7 @@ const BookingService = () => {
   useEffect(() => {
     setStoreId(query.storeid);
     setLoading(false);
+    // eslint-disable-next-line
   }, []);
 
   const handleOpenStyle = (e) => {

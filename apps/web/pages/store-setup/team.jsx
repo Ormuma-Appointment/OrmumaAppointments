@@ -160,7 +160,7 @@ function TeamSetup() {
       setServices(reverseTransform(selectedEmployee.services));
       setTimes(selectedEmployee.workingTime);
     }
-    // eslint-disable-next-lines
+    // eslint-disable-next-line
   }, [selectedEmployee]);
   function reverseTransform(obj) {
     let result = [];
@@ -257,10 +257,11 @@ function TeamSetup() {
             <form onSubmit={handleFormSubmit}>
               <div>
                 Um eine Person hinzuzufügen, füllen Sie bitte die unten
-                stehenden Felder aus. Sobald Sie auf "Person speichern" klicken,
-                wird diese unten auftauchen. Keine persönlichen Daten, werden
-                für Kund*Innen sichtbar sein. <br />
-                Klicken Sie auf "Person speichern", um alle Daten zu speichern.
+                stehenden Felder aus. Sobald Sie auf &quot;Person
+                speichern&quot; klicken, wird diese unten auftauchen. Keine
+                persönlichen Daten, werden für Kund*Innen sichtbar sein. <br />
+                Klicken Sie auf &quot;Person speichern&quot;, um alle Daten zu
+                speichern.
               </div>
               <EmployeePersonalDetailsForm
                 hasData={hasData}

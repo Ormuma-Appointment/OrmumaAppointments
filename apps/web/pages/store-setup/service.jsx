@@ -60,6 +60,7 @@ function ServiceSetup() {
   useEffect(() => {
     getDBServices();
     setLoadStoreId((prev) => !prev);
+    // eslint-disable-next-line
   }, [currentUser, adminStoreId]);
 
   function handleElementSubmit(e) {

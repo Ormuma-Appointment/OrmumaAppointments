@@ -117,6 +117,7 @@ function TeamSetup() {
   }
   useEffect(() => {
     getDBServices();
+    // eslint-disable-next-line
   }, [adminStoreId]);
 
   // get all Employees from Firebase
@@ -141,6 +142,7 @@ function TeamSetup() {
   }
   useEffect(() => {
     getEmployeeData();
+    // eslint-disable-next-line
   }, [adminStoreId]);
 
   useEffect(() => {
@@ -150,6 +152,7 @@ function TeamSetup() {
       setNoSelected(true);
       if (employeeIndex || employeeIndex === 0) setHasData(true);
     }
+    // eslint-disable-next-line
   }, [employeeIndex]);
 
   useEffect(() => {
@@ -157,6 +160,7 @@ function TeamSetup() {
       setServices(reverseTransform(selectedEmployee.services));
       setTimes(selectedEmployee.workingTime);
     }
+    // eslint-disable-next-lines
   }, [selectedEmployee]);
   function reverseTransform(obj) {
     let result = [];
@@ -237,6 +241,7 @@ function TeamSetup() {
     if (!showServices) {
       setServices(dbServices);
     }
+    // eslint-disable-next-line
   }, [showServices]);
 
   if (!loading) {

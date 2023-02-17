@@ -49,10 +49,12 @@ const Account = () => {
 
   useEffect(() => {
     getEvent();
+    // eslint-disable-next-line
   }, [user.userId]);
 
   useEffect(() => {
     getEvent();
+    // eslint-disable-next-line
   }, [reload]);
 
   return (

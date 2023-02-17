@@ -39,6 +39,7 @@ export default function Web() {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, []);
   const [image, setImage] = useState();
   useEffect(() => {

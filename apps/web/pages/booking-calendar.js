@@ -38,6 +38,7 @@ const BookingCalendar = () => {
       employee: query.employee,
       employeeId: query.employeeId,
     });
+    // eslint-disable-next-line
   }, [storeId]);
 
   function handleBookingClick() {

@@ -82,6 +82,7 @@ const BookingConfirmation = () => {
     if (isAdmin && storeId) {
       getStoreClients(storeId);
     }
+    // eslint-disable-next-line
   }, [storeId]);
 
   let event = {

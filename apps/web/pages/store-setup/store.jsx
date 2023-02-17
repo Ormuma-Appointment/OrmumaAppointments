@@ -145,6 +145,7 @@ const StoreSetup = () => {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, [currentUser, adminStoreId]);
 
   //create store slug

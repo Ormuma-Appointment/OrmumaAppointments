@@ -135,10 +135,12 @@ const AccountAdmin = () => {
     getEmployeeData();
     getEvent();
     setIsLoading(false);
+    // eslint-disable-next-line
   }, [adminStoreId]);
 
   useEffect(() => {
     getEvent();
+    // eslint-disable-next-line
   }, [reload]);
 
   if (!isLoading) {

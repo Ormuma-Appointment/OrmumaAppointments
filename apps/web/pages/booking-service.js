@@ -43,6 +43,7 @@ const BookingService = () => {
       };
       setEvent(selectedService);
     }
+    // eslint-disable-next-line
   }, [selected]);
 
   setChosenService(event);

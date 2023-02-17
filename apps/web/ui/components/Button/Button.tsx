@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Button.module.css";
-import * as PropTypes from "prop-types";
+// import * as PropTypes from "prop-types";
 import CalendarAdd from "../assets/calendar_add.svg";
 
 interface ButtonProps {
@@ -29,8 +29,8 @@ const Button: React.FC<ButtonProps> = (props) => {
   );
 };
 
-Button.propTypes = {
-  size: PropTypes.oneOf(["xsmall", "small", "medium"]),
-};
+// Button.propTypes = {
+//   size: PropTypes.oneOf(["xsmall", "small", "medium"]),
+// };
 
 export default Button;

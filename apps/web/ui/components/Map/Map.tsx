@@ -7,7 +7,6 @@ interface MapProps {
   postalCode: string;
   city: string;
   country: string;
-  telephone: string;
 }
 
 const Map: React.FC<MapProps> = (props) => {
@@ -18,7 +17,6 @@ const Map: React.FC<MapProps> = (props) => {
     postalCode = "52064",
     city = "Aachen",
     country = "Deutschland",
-    telephone = "0241 / 70 98 99",
     ...rest
   } = props;
   return (

@@ -8,6 +8,7 @@ interface ButtonProps {
   size: string;
   icon?: boolean | undefined;
   children: any;
+  onClick: (event: React.MouseEvent) => void;
 }
 const Button: React.FC<ButtonProps> = (props) => {
   const {

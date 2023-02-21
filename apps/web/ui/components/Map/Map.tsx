@@ -1,6 +1,15 @@
 import React from "react";
 
-function Map(props) {
+interface MapProps {
+  name: string;
+  street: string;
+  number: number;
+  postalCode: string;
+  city: string;
+  country: string;
+}
+
+const Map: React.FC<MapProps> = (props) => {
   const {
     name = "Naturfriseur Aachen",
     street = "Habsburgerallee",
@@ -8,7 +17,6 @@ function Map(props) {
     postalCode = "52064",
     city = "Aachen",
     country = "Deutschland",
-    telephone = "0241 / 70 98 99",
     ...rest
   } = props;
   return (
@@ -22,6 +30,6 @@ function Map(props) {
       ></iframe>
     </div>
   );
-}
+};
 
 export default Map;

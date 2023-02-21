@@ -84,7 +84,7 @@ function ClientDataInput({ setClient, clients, client }) {
       );
       setClient(selectedClient);
     }
-  }, [selectedClient]);
+  }, [selectedClient, setClient]);
 
   return (
     <div className={styles.container}>

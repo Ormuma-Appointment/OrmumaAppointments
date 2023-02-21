@@ -3,7 +3,17 @@ import styles from "./ContactCard.module.css";
 import CardContainer from "../CardContainer/CardContainer";
 import InfoElement from "../InfoElement/InfoElement";
 
-function ContactCard({ email, website, telephone }) {
+interface ContactCardProps {
+  email: string;
+  website: string;
+  telephone: string;
+}
+
+const ContactCard: React.FC<ContactCardProps> = ({
+  email,
+  website,
+  telephone,
+}) => {
   return (
     <CardContainer>
       <div className={styles.container}>
@@ -13,6 +23,6 @@ function ContactCard({ email, website, telephone }) {
       </div>
     </CardContainer>
   );
-}
+};
 
 export default ContactCard;

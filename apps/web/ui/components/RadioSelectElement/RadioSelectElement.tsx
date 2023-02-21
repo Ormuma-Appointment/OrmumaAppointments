@@ -1,21 +1,31 @@
 import React, { useEffect } from "react";
 import styles from "./RadioSelectElement.module.css";
 
-function RadioSelectElement({
+interface RadioSelectElementProps {
+  labels: string[];
+  name: string;
+  hasData: boolean;
+  noSelected: boolean;
+  setShowServices: React.Dispatch<React.SetStateAction<boolean>>;
+  setNoSelected: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const RadioSelectElement: React.FC<RadioSelectElementProps> = ({
   labels,
   name,
-  setShowServices,
   hasData,
   noSelected,
+  setShowServices,
   setNoSelected,
-}) {
+}) => {
   useEffect(() => {
     if (hasData) {
       setShowServices(true);
     } else {
       setShowServices(false);
     }
-  }, [hasData]);
+  }, [hasData, setShowServices]);
+
   function handleChange(e) {
     let answer = e.target.value;
     if (answer === labels[1]) {
@@ -26,9 +36,10 @@ function RadioSelectElement({
       setNoSelected(false);
     }
   }
+
   return (
     <div className={styles.container}>
-      {labels.map((el, index) => {
+      {labels.map((el: string, index: number) => {
         return (
           <div
             key={index}
@@ -50,6 +61,6 @@ function RadioSelectElement({
       })}
     </div>
   );
-}
+};
 
 export default RadioSelectElement;

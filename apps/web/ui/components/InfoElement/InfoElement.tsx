@@ -8,9 +8,9 @@ import Internet from "../assets/internet.svg";
 interface InfoElementProps {
   infoHl: string;
   infoDetail: string;
-  email?: boolean | undefined;
-  phone?: boolean | undefined;
-  internet?: boolean | undefined;
+  email?: boolean;
+  phone?: boolean;
+  internet?: boolean;
 }
 
 const InfoElement: React.FC<InfoElementProps> = (props) => {

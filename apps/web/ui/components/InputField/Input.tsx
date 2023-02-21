@@ -3,7 +3,15 @@ import User from "../assets/account1.svg";
 import Email from "../assets/email.svg";
 import Password from "../assets/password.svg";
 
-function Input(props) {
+interface InputProps {
+  defaultValue?: string | number;
+  placeholder: string;
+  user?: boolean;
+  password?: boolean;
+  email?: boolean;
+}
+
+const Input: React.FC<InputProps> = (props) => {
   const { user, password, email, placeholder, defaultValue, ...rest } = props;
   return (
     <div className={styles.container}>
@@ -27,6 +35,6 @@ function Input(props) {
       />
     </div>
   );
-}
+};
 
 export default Input;

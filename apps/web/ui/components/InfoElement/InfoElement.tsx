@@ -5,7 +5,15 @@ import Email from "../assets/email.svg";
 import Phone from "../assets/phone.svg";
 import Internet from "../assets/internet.svg";
 
-function InfoElement(props) {
+interface InfoElementProps {
+  infoHl: string;
+  infoDetail: string;
+  email?: boolean | undefined;
+  phone?: boolean | undefined;
+  internet?: boolean | undefined;
+}
+
+const InfoElement: React.FC<InfoElementProps> = (props) => {
   const { infoHl, email, phone, internet, infoDetail, ...rest } = props;
 
   return (
@@ -22,6 +30,6 @@ function InfoElement(props) {
       <Right className={styles.arrow_icon} />
     </div>
   );
-}
+};
 
 export default InfoElement;

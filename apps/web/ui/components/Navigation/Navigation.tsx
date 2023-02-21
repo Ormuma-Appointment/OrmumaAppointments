@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./Navigation.module.css";
 import Logout from "../assets/logout.svg";

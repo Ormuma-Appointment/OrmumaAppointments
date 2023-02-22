@@ -26,7 +26,7 @@ const RadioSelectElement: React.FC<RadioSelectElementProps> = ({
     }
   }, [hasData, setShowServices]);
 
-  function handleChange(e) {
+  function handleChange(e: any) {
     let answer = e.target.value;
     if (answer === labels[1]) {
       setShowServices(true);

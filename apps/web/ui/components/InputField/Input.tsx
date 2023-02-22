@@ -6,6 +6,7 @@ import Password from "../assets/password.svg";
 interface InputProps {
   defaultValue?: string | number;
   placeholder: string;
+  name?: string;
   user?: boolean;
   password?: boolean;
   email?: boolean;

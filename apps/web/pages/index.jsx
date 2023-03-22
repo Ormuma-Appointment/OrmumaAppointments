@@ -29,7 +29,7 @@ export default function Web() {
     return (
       <div className={styles.container}>
         <Head>
-          <title>{storeData.name} | Salounge</title>
+          <title>Salounge</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta
             name="description"

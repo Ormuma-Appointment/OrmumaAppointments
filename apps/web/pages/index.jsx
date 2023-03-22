@@ -33,7 +33,8 @@ export default function Web() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta
             name="description"
-            content={`Buche deinen nächsten Termin über Salounge`}
+            property="og:description"
+            content="Buche deinen nächsten Termin über Salounge"
             key="desc"
           />
           <meta property="og:image" content="Ormuma appointments" />

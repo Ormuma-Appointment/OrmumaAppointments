@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase/firebase";
 import { getDocs, query, collection, where } from "firebase/firestore";
 import StoreCard from "../ui/components/StoreCard/StoreCard";
+import Head from "next/head";
 
 export default function Web() {
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,28 @@ export default function Web() {
   if (!loading) {
     return (
       <div className={styles.container}>
+        <Head>
+          <title>{storeData.name} | Salounge</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta
+            name="description"
+            content={`Buche deinen nächsten Termin über Salounge`}
+            key="desc"
+          />
+          <meta property="og:image" content="Ormuma appointments" />
+          <meta
+            name="title"
+            property="og:title"
+            content="Ormuma appointments"
+          />
+          <meta name="date.available" content="2023-03-22" />
+          {/*<meta
+              name="image"
+              property="og:image"
+              content=""
+            />*/}
+          <meta name="author" content="Marianne, Muly, Oriane" />
+        </Head>
         <h1>Unsere Partner</h1>
         <div className={styles.stores}>
           {stores.map((el, index) => {

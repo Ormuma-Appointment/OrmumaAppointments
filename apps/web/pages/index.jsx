@@ -33,16 +33,15 @@ export default function Web() {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta
             name="description"
-            property="og:description"
             content="Buche deinen nächsten Termin über Salounge"
             key="desc"
           />
-          <meta property="og:image" content="Ormuma appointments" />
           <meta
-            name="title"
-            property="og:title"
-            content="Ormuma appointments"
+            property="og:description"
+            content="Buche deinen nächsten Termin über Salounge"
           />
+          <meta property="og:image" content="Ormuma appointments" />
+          <meta property="og:title" content="Ormuma appointments" />
           <meta name="date.available" content="2023-03-22" />
           {/*<meta
               name="image"

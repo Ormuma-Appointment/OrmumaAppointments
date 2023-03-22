@@ -63,10 +63,27 @@ export default function Web() {
           <Head>
             <title>{storeData.name} | Salounge</title>
             <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <meta
               name="description"
               content={`Buche deinen nächsten Termin bei ${storeData.name} über Salounge`}
               key="desc"
             />
+            <meta property="og:image" content="Ormuma appointments" />
+            <meta
+              name="title"
+              property="og:title"
+              content="Ormuma appointments"
+            />
+            <meta name="date.available" content="2023-03-22" />
+            {/*<meta
+              name="image"
+              property="og:image"
+              content=""
+            />*/}
+            <meta name="author" content="Marianne, Muly, Oriane" />
           </Head>
           <div className={styles.welcome}>
             <div className={styles.header}>

@@ -3,7 +3,6 @@
 This application was built as the third project of the Wild Code School 20 week Full-Stack Developer program in collaboration with a client. 
 It is an appointment booking application targeting hair dresser salons.
 
-Currently we are working on refactoring some of the code and on deploying the app.
 
 ## Visit the live project page
 * go to https://ormuma-appointments-web.vercel.app/ 
@@ -12,14 +11,12 @@ Currently we are working on refactoring some of the code and on deploying the ap
   * admin user: test.admin@test.de PW: 123456
 
 ## Main features
-
 - appointment creation / management
 - user management
 - account creation
 - salon creation / editing incl. services & employees
 
 ## Technologies used
-
 - NextJS
 - Firebase
 - Storybook
@@ -59,3 +56,6 @@ pnpm run dev
 - localization 
 - improved securtiy 
 - usage of Typescript
+
+## Credits
+:raised_hands: Built and designed by [@MarianneH](https://github.com/MarianneH), [@mulybirish](https://github.com/mulybirish) & [@orianemgn](https://github.com/orianemgn/)

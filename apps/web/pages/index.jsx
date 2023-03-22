@@ -39,9 +39,18 @@ export default function Web() {
           <meta
             property="og:description"
             content="Buche deinen nächsten Termin über Salounge"
+            key="og-desc"
           />
-          <meta property="og:image" content="Ormuma appointments" />
-          <meta property="og:title" content="Ormuma appointments" />
+          <meta
+            property="og:image"
+            content="Ormuma appointments"
+            key="og-image"
+          />
+          <meta
+            property="og:title"
+            content="Ormuma appointments"
+            key="og-title"
+          />
           <meta name="date.available" content="2023-03-22" />
           {/*<meta
               name="image"

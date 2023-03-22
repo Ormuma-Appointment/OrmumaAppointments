@@ -5,6 +5,12 @@ It is an appointment booking application targeting hair dresser salons.
 
 Currently we are working on refactoring some of the code and on deploying the app.
 
+## Visit the live project page
+* go to https://ormuma-appointments-web.vercel.app/ 
+* test accounts: 
+  * normal user: emily@test.de PW: 123456
+  * admin user: test.admin@test.de PW: 123456
+
 ## Main features
 
 - appointment creation / management
